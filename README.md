@@ -1,10 +1,12 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze.
 The ATAT folder must be duplicated in /root & ~/ to run properly (this only needs to be done once and does not need to be updated).
+The path must be /root/ATAT alone; or it may be in /root/ATAT & ~/ATAT (DO NOT leave the expanded folder named "ATATv1.1_pub")
 You can have the ATAT folder in /root only if you wish; and you can run it from there.
 You do not have to run the script from /root if you place one copy of the ATAT folder in ~/ and one copy in /root.
 
-usage:chmod +x ~/ATAT/ATAT.sh
+usage:
+chmod +x ~/ATAT/ATAT.sh
 cd ATAT
 sudo ./ATAT.sh
 
