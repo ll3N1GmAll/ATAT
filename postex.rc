@@ -1,0 +1,15 @@
+post/windows/gather/arp_scanner
+post/windows/gather/cachedump
+post/windows/gather/checkvm
+post/windows/gather/credentials/gpp
+post/windows/gather/credentials/tortoisesvn
+post/windows/gather/credentials/winscp
+post/windows/gather/dnscache_dump
+post/windows/gather/enum_applications
+post/windows/gather/enum_chrome
+post/windows/gather/enum_ie
+post/windows/gather/enum_firefox
+post/windows/gather/enum_termserv
+post/windows/gather/enum_unattend
+post/windows/wlan/wlan_profile
+post/windows/gather/smart_hashdump
