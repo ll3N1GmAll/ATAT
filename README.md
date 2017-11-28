@@ -44,16 +44,16 @@ sudo ./ATAT.sh
 You MUST load your PORTS or IPs into their appropriate TXT files for options 6, 7, & 8 to work (one per line)!
 
 OPTION 6:
-/root/ATAT/Exploit/MultiTarget/MSF_targets.txt
+/root/ATAT/MSF_targets.txt
 
 OPTION 7:
-/root/ATAT/Exploit/MultiPort/MSF_target_ports.txt
+/root/ATAT/MSF_target_ports.txt
 
 OPTION 8:
-/root/ATAT/Auxiliary/MultiPort/MSF_AUX_target_ports.txt
+/root/ATAT/MSF_AUX_target_ports.txt
 
 OPTION 9:
-/root/ATAT/Exploit/MultiTarget/MSF_targets.txt
+/root/ATAT/MSF_targets.txt
 
 OPTION 10:
-/root/ATAT/Exploit/MultiTarget/MSF_targets.txt
+/root/ATAT/MSF_targets.txt
