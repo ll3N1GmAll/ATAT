@@ -1,8 +1,10 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze.
-v1.2 Changelog:
+v1.3 Changelog:
+Added support for linux post exploitation,
 Added support for Apache Struts exploits,
-Added support for JMXRMI exploitation,
+Added support for Java JMX exploitation,
+Added support for Java RMI exploitation,
 Added fully automated MSF Post Exploitation on all sessions acquired for the following post ex activities:
 - enumerate hosts
 - dump cached domain creds
@@ -19,6 +21,14 @@ Added fully automated MSF Post Exploitation on all sessions acquired for the fol
 - grab local settings and local accounts
 - dumps WPA PSK & WEP passwords
 - dumps passwords on the local windows system including domain accounts
+- dump .ssh directory for known hosts
+- gather OS environment variables
+- dump /etc/shadow
+- dump user list plus bash/mysql/vim/lastlog/sudoers history
+- enum packages, services, mounts, user list, bash
+- check for AV, rootkit, HIDS/HIPS, firewalls, etc
+- dump IPTables, interfaces, wifi info, open ports
+- collect config files for commonly installed apps and services
 
 The ATAT folder must be duplicated in /root & ~/ to run properly (this only needs to be done once and does not need to be updated).
 You can have the ATAT folder in /root only if you wish; and you can run it from there.
