@@ -47,7 +47,6 @@ All targets and/or ports must be added into their respective TXT files in /root 
 
 For post exploitation, you must enter each module (one per line) that you wish to run through any meterpreter shells spawned in the postex.rc file
 
-
 usage:
 
 chmod +x ~/ATAT/ATAT.sh
@@ -55,7 +54,6 @@ chmod +x ~/ATAT/ATAT.sh
 cd ATAT
 
 sudo ./ATAT.sh
-
 
 You MUST load your PORTS or IPs into their appropriate TXT files for options listed below to work (one per line)!
 
