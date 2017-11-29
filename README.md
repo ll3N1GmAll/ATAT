@@ -1,10 +1,16 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze.
+
 v1.3 Changelog:
+
 Added support for linux post exploitation,
+
 Added support for Apache Struts exploits,
+
 Added support for Java JMX exploitation,
+
 Added support for Java RMI exploitation,
+
 Added fully automated MSF Post Exploitation on all sessions acquired for the following post ex activities:
 - enumerate hosts
 - dump cached domain creds
@@ -38,8 +44,11 @@ All targets and/or ports must be added into their respective TXT files in /root 
 For post exploitation, you must enter each module (one per line) that you wish to run through any meterpreter shells spawned in the postex.rc file
 
 usage:
+
 chmod +x ~/ATAT/ATAT.sh
+
 cd ATAT
+
 sudo ./ATAT.sh
 
 You MUST load your PORTS or IPs into their appropriate TXT files for options listed below to work (one per line)!
