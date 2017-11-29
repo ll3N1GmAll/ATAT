@@ -74,3 +74,11 @@ OPTION 10:
 
 OPTION 11:
 /root/ATAT/MSF_targets.txt
+
+You MUST load your POST Modules into the "postex.rc" file in the following format and in the below path for them to work! (one per line)
+
+PATH:
+/root/ATAT/postex.rc
+
+Content:
+run /post/ex/module/to/run
