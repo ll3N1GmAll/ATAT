@@ -55,7 +55,7 @@ cd ATAT
 
 sudo ./ATAT.sh
 
-You MUST load your PORTS or IPs into their appropriate TXT files for options listed below to work (one per line)!
+You MUST load your PORTS or IPs into their appropriate TXT files for options listed below to work! (one per line)
 
 OPTION 6:
 /root/ATAT/MSF_targets.txt
