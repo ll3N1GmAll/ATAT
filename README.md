@@ -41,9 +41,6 @@ You can have the ATAT folder in /root only if you wish; and you can run it from 
 You do not have to run the script from /root if you place one copy of the ATAT folder in ~/ and one copy in /root. Then simply runing sudo ./ATAT.sh from ~/ATAT works sufficiently.
 All targets and/or ports must be added into their respective TXT files in /root as detailed below.
 
-For post exploitation, you must replace the contents of the '/usr/share/metasploit-framework/scripts/resource/multi_post.rc' file with what is contained in the 'multi_post.rc_replacement.txt' file. Then, from your listener window, after all of your sessions are in (after your attacks have completed) enter the following command without double quotes: "resource '/usr/share/metasploit-framework/scripts/resource/multi_post.rc'"
-- The path to the resource file at '/usr/share/metasploit-framework/scripts/resource/multi_post.rc' may be different depending on where your metasploit-framework install is located in your version of your OS.
-
 
 
 usage:
@@ -70,3 +67,6 @@ OPTION 10:
 
 OPTION 11:
 /root/ATAT/MSF_targets.txt
+
+For post exploitation, you must replace the contents of the '/usr/share/metasploit-framework/scripts/resource/multi_post.rc' file with what is contained in the 'multi_post.rc_replacement.txt' file. Then, from your listener window, after all of your sessions are in (after your attacks have completed) enter the following command without double quotes: "resource '/usr/share/metasploit-framework/scripts/resource/multi_post.rc'"
+- The path to the resource file at '/usr/share/metasploit-framework/scripts/resource/multi_post.rc' may be different depending on where your metasploit-framework install is located in your version of your OS.
