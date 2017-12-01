@@ -1,16 +1,10 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze.
-
 v1.3 Changelog:
-
 Added support for linux post exploitation,
-
 Added support for Apache Struts exploits,
-
 Added support for Java JMX exploitation,
-
 Added support for Java RMI exploitation,
-
 Added fully automated MSF Post Exploitation on all sessions acquired for the following post ex activities:
 - enumerate hosts
 - dump cached domain creds
@@ -37,22 +31,18 @@ Added fully automated MSF Post Exploitation on all sessions acquired for the fol
 - collect config files for commonly installed apps and services
 
 The ATAT folder must be duplicated in /root & ~/ to run properly unless you are on Kali or you are running logged in as root (this only needs to be done once and does not need to be updated).
-
 You can have the ATAT folder in /root only if you wish; and you can run it from there. (i.e., when logged in as root or in Kali)
-
 You do not have to run the script from /root if you place one copy of the ATAT folder in ~/ and one copy in /root. Then simply runing sudo ./ATAT.sh from ~/ATAT works sufficiently.
-
 All targets and/or ports must be added into their respective TXT files in /root as detailed below.
 
+For post exploitation, you must replace the contents of the '/usr/share/metasploit-framework/scripts/resource/multi_post.rc' file with what is contained in the 'multi_post.rc_replacement.txt' file. Then, from your listener window, after all of your sessions are in (after your attacks have completed) enter the following command without double quotes: "resource '/usr/share/metasploit-framework/scripts/resource/multi_post.rc'"
+- The path to the resource file at '/usr/share/metasploit-framework/scripts/resource/multi_post.rc' may be different depending on where your metasploit-framework install is located in your version of your OS.
 
-For post exploitation, you must enter each module (one per line) that you wish to run through any meterpreter shells spawned in the postex.rc file
+
 
 usage:
-
 chmod +x ~/ATAT/ATAT.sh
-
 cd ATAT
-
 sudo ./ATAT.sh
 
 You MUST load your PORTS or IPs into their appropriate TXT files for options listed below to work! (one per line)
