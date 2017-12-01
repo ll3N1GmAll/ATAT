@@ -1,10 +1,16 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze.
+
 v1.3 Changelog:
+
 Added support for linux post exploitation,
+
 Added support for Apache Struts exploits,
+
 Added support for Java JMX exploitation,
+
 Added support for Java RMI exploitation,
+
 Added fully automated MSF Post Exploitation on all sessions acquired for the following post ex activities:
 - enumerate hosts
 - dump cached domain creds
@@ -64,11 +70,3 @@ OPTION 10:
 
 OPTION 11:
 /root/ATAT/MSF_targets.txt
-
-You MUST load your POST Modules into the "postex.rc" file in the following format and in the below path for them to work! (one per line)
-
-PATH:
-/root/ATAT/postex.rc
-
-Content:
-run /post/ex/module/to/run
