@@ -55,9 +55,13 @@ All targets and/or ports must be added into their respective TXT files in /root 
 
 
 usage:
+
 chmod +x ~/ATAT/ATAT.sh
+
 cd ATAT
+
 sudo ./ATAT.sh
+
 
 You MUST load your PORTS or IPs into their appropriate TXT files for options listed below to work! (one per line)
 
