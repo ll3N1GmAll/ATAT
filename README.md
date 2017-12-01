@@ -79,6 +79,10 @@ OPTION 10:
 OPTION 11:
 /root/ATAT/MSF_targets.txt
 
-For post exploitation, you must place the ATAT_multi_post.rc file in the '/usr/share/metasploit-framework/scripts/resource/' directory. This must be done as root. Then, from your listener window, after all of your sessions are in (after your attacks have completed) enter the following command without double quotes: "resource '/usr/share/metasploit-framework/scripts/resource/ATAT_multi_post.rc'"
-- The path to the resource file folder at '/usr/share/metasploit-framework/scripts/resource/' may be different depending on where your metasploit-framework install is located in your version of your OS.
+For post exploitation,
 
+METHOD 1: 
+Launch your listener with menu option 2. The default post modules from postex.rc will run againt each meterpreter session you receive.
+
+METHOD 2: You must place the ATAT_multi_post.rc file in the '/usr/share/metasploit-framework/scripts/resource/' directory. This must be done as root. Then, from your listener window, after all of your sessions are in (after your attacks have completed) enter the following command without double quotes: "resource '/usr/share/metasploit-framework/scripts/resource/ATAT_multi_post.rc'"
+- The path to the resource file folder at '/usr/share/metasploit-framework/scripts/resource/' may be different depending on where your metasploit-framework install is located in your version of your OS.
