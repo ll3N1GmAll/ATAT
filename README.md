@@ -35,6 +35,17 @@ Added fully automated MSF Post Exploitation on all sessions acquired for the fol
 - check for AV, rootkit, HIDS/HIPS, firewalls, etc
 - dump IPTables, interfaces, wifi info, open ports
 - collect config files for commonly installed apps and services
+- grab arp table from target
+- enumerate the domain, domain users, and domain tokens
+- grab the host file
+- dump logged on users
+- dump MS product keys
+- steal VNC creds
+- enumerate services & shares on target
+- steal SNMP inforamtion
+- dump DNS cache
+- steal GPG credentials/certificates
+
 
 The ATAT folder must be duplicated in /root & ~/ to run properly unless you are on Kali or you are running logged in as root (this only needs to be done once and does not need to be updated).
 You can have the ATAT folder in /root only if you wish; and you can run it from there. (i.e., when logged in as root or in Kali)
