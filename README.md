@@ -45,6 +45,8 @@ Added fully automated MSF Post Exploitation on all sessions acquired for the fol
 - steal SNMP inforamtion
 - dump DNS cache
 - steal GPG credentials/certificates
+- grab the history of mounted USB devices
+- assess the target and suggest local exploits for privilege escalation or other operations
 
 
 The ATAT folder must be duplicated in /root & ~/ to run properly unless you are on Kali or you are running logged in as root (this only needs to be done once and does not need to be updated).
