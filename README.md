@@ -11,6 +11,8 @@ Added support for Java JMX exploitation,
 
 Added support for Java RMI exploitation,
 
+Added support for SNMP enumeration,
+
 Added fully automated MSF Post Exploitation on all sessions acquired for the following post ex activities:
 - enumerate hosts
 - dump cached domain creds
