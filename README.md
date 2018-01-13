@@ -87,6 +87,9 @@ OPTION 10:
 OPTION 11:
 /root/ATAT/MSF_targets.txt
 
+OPTION 12:
+/root/ATAT/MSF_targets.txt
+
 For post exploitation,
 
 METHOD 1: 
