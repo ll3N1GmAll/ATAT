@@ -1,6 +1,6 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze.
-v1.4
+v1.4.1
 Added support for linux post exploitation,
 Added support for Apache Struts exploits,
 Added support for Java JMX exploitation,
