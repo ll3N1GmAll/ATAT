@@ -1,11 +1,12 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze.
-v1.3.1 Changelog:
+v1.4
 Added support for linux post exploitation,
 Added support for Apache Struts exploits,
 Added support for Java JMX exploitation,
 Added support for Java RMI exploitation,
 Added support for load balancer detection,
+Added support for SSLScan,
 Added fully automated MSF Post Exploitation on all sessions acquired for the following post ex activities:
 - enumerate hosts
 - dump cached domain creds
@@ -79,6 +80,10 @@ OPTION 12:
 
 OPTION 13:
 /root/ATAT/MSF_targets.txt
+
+OPTION 14:
+/root/ATAT/MSF_targets.txt
+Results output to screen and ATAT/SSLScan_Results.txt
 
 For post exploitation,
 
