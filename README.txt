@@ -46,9 +46,11 @@ Added fully automated MSF Post Exploitation on all sessions acquired for the fol
 - assess the target and suggest local exploits for privilege escalation or other operations
 
 --- INSTRUCTIONS TO RUN THIS FROM /home/<profile>/ ---
-The ATAT folder must be duplicated in /root & ~/ to run properly unless you are on Kali or you are running logged in as root (this only needs to be done once and does not need to be updated).
+The ATAT folder must be duplicated in /root & ~/ to run properly unless you are on Kali or you are running logged in as root
+(this only needs to be done once and does not need to be updated).
 You can have the ATAT folder in /root only if you wish; and you can run it from there. (i.e., when logged in as root or in Kali)
-You do not have to run the script from /root if you place one copy of the ATAT folder in ~/ and one copy in /root. Then simply running sudo ./ATAT.sh from ~/ATAT works sufficiently.
+You do not have to run the script from /root if you place one copy of the ATAT folder in ~/ and one copy in /root. 
+Then simply running sudo ./ATAT.sh from ~/ATAT works sufficiently.
 All targets and/or ports must be added into their respective TXT files in /root as detailed below.
 
 
