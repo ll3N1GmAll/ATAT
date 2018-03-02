@@ -49,11 +49,12 @@ Added fully automated MSF Post Exploitation on all sessions acquired for the fol
 The ATAT folder must be duplicated in /root & ~/ to run properly unless you are on Kali (logged in as root) or you are running
 another distro logged in as root (duplicating this folder only needs to be done once and does not need to be updated ever).
 You then do not have to run the script from /root if you place one copy of the ATAT folder in ~/ and one copy in /root.
-Placing a copy of the ATAT folder in /root/ in this circumstance is only so you have the TXT files accessible by ATAT when it run as sudo.
-Then you simply run ATAT via sudo ./ATAT.sh from ~/ATAT.
-All targets and/or ports must be added into their respective TXT files in /root as detailed below.
+Placing a copy of the ATAT folder in /root/ in this circumstance is only so you have the TXT files 
+accessible by ATAT when it run as sudo. Then you simply run ATAT via sudo ./ATAT.sh from ~/ATAT.
+All targets and/or ports must be added into their respective TXT files in /root/ as referenced above and detailed below.
 Adding your targets/ports to the TXT files in ~/ATAT will not work under this setup
 *You can have the ATAT folder in /root only if you wish; and you can run it from there and disregard all of these instructions.*
+
 usage:
 chmod +x ~/ATAT/ATAT.sh
 cd ATAT
