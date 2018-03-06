@@ -810,7 +810,7 @@ done
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies\E[1;34m:::::"
 
 PS3='Enter your choice 2=QUIT: '
-options=("Dependencies" "DBD Installer" "Ming32 Manual Installer" "Quit")
+options=("Dependencies" "DBD Installer" "Mingw32 Manual Installer" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -889,7 +889,7 @@ do
 			sleep 3
 	fi
 			;;
-		"Ming32 Manual Installer")
+		"Mingw32 Manual Installer")
 			echo -e "\e[1;34m[*] Performing MingW32 Install...\e[0m\n"
 			wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mingw32/mingw32_4.2.1.dfsg-2ubuntu1_i386.deb && wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mingw32-binutils/mingw32-binutils_2.20-0.2ubuntu1_i386.deb && wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mingw32-runtime/mingw32-runtime_3.15.2-0ubuntu1_all.deb
 			sudo dpkg -i mingw32_4.2.1.dfsg-2ubuntu1_i386.deb && sudo dpkg -i mingw32-binutils_2.20-0.2ubuntu1_i386.deb && sudo dpkg -i mingw32-runtime_3.15.2-0ubuntu1_all.deb
