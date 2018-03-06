@@ -809,7 +809,7 @@ done
   # Accept upper or lowercase input.
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies\E[1;34m:::::"
 
-PS3='Enter your choice 2=QUIT: '
+PS3='Enter your choice 4=QUIT: '
 options=("Dependencies" "DBD Installer" "Mingw32 Manual Installer" "Quit")
 select opt in "${options[@]}"
 do
