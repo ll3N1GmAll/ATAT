@@ -109,6 +109,10 @@ This masscans all TCP ports for all targets at a reasonable rate (--rate 1000)
 Results output to screen and the ATAT folder in Open_Ports.txt.
 OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE, ALL OUTPUT FILES MUST BE DELETED OR CLEANED OUT PERIODICALLY TO GET RID OF PREVIOUS SCANS' RESULTS
 
+OPTION 16:
+Dependencies option will attempt to install the required dependencies for ATAT. If MingW32 fails you may need to enable Universe in your sources.list file; otherwise research how to get Mingw32 properly installed on your particular distro.
+DBD Installer option must be run on your attacker box in order to receive DBD reverse shells.
+
 For post exploitation,
 
 METHOD 1: 
