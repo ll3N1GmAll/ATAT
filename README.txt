@@ -8,7 +8,7 @@ Added support for linux post exploitation,
 Added support for load balancer detection,
 Added support for SSLScan,
 Added support for Masscan of all TCP ports,
-Added Android persistenct reverse Meterpreter APK builder,
+Added Android persistent reverse Meterpreter APK builder,
 Added DBD persistent backdoor builder by Skysploit,
 Added dependency checker by Skysploit,
 Added fully automated MSF Post Exploitation on all sessions acquired for the following post ex activities:
