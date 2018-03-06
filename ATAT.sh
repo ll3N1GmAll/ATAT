@@ -893,7 +893,7 @@ do
 			echo -e "\e[1;34m[*] Performing MingW32 Install...\e[0m\n"
 			wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mingw32/mingw32_4.2.1.dfsg-2ubuntu1_i386.deb && wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mingw32-binutils/mingw32-binutils_2.20-0.2ubuntu1_i386.deb && wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mingw32-runtime/mingw32-runtime_3.15.2-0ubuntu1_all.deb
 			sudo dpkg -i mingw32_4.2.1.dfsg-2ubuntu1_i386.deb && sudo dpkg -i mingw32-binutils_2.20-0.2ubuntu1_i386.deb && sudo dpkg -i mingw32-runtime_3.15.2-0ubuntu1_all.deb
-			apt-get install -f
+			apt-get install -f -y
 			sudo dpkg -i mingw32_4.2.1.dfsg-2ubuntu1_i386.deb && sudo dpkg -i mingw32-binutils_2.20-0.2ubuntu1_i386.deb && sudo dpkg -i mingw32-runtime_3.15.2-0ubuntu1_all.deb
 			sleep 3
 			echo -e "\e[1;32mDone! Returning to the Main Menu...\e[0m"
