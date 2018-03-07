@@ -175,7 +175,7 @@ echo -e "\E[1;34m===\e[97m[1] \e[90mPayload              \e[97m [Create MSFVenom
 tput sgr0                               # Reset colors to "normal."
 echo -e "\E[1;34m:::\e[97m[2] \e[32mListen               \e[97m [Start a Listener]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[3] \e[34mExploit              \e[97m [Drop into msfconsole]\E[1;34m"
+echo -e "\E[1;34m===\e[97m[3] \e[34mMsfconsole           \e[97m [Drop into msfconsole]\E[1;34m"
 tput sgr0
 echo -e "\E[1;34m:::\e[97m[4] \e[95mPersistence          \e[97m [Create a Persistence Method] \E[1;34m"
 tput sgr0
