@@ -271,8 +271,10 @@ EOF
             echo -e "\E[1;34m::::: \e[97mPayloads & RC Files Saved to ~/ATAT/\E[1;34m:::::"
             ;;
         "List_All")
-            xterm -e msfvenom -l &
-            ;;   
+            rm msfvenom_payloads.txt
+            msfvenom -l | tee msfvenom_payloads.txt
+            echo -e "\E[1;34m::::: \e[97mmsfvenom_payloads.txt Saved to ~/ATAT/\E[1;34m:::::"
+            ;;    
         "Quit")
             echo "Aufiederszehn" && break
             ;;
