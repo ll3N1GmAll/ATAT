@@ -456,7 +456,7 @@ done
   echo -e "\E[1;34m::::: \e[97mArmitage Launcher \E[1;34m:::::"
   echo "armitage should be in /opt/armitage"
   echo -e "\E[1;34m::::: \e[97mLaunching...\E[1;34m:::::"
-  xterm -e sudo java -jar /opt/armitage/armitage.jar & 
+  armitage 
 
 ;;
 
