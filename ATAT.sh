@@ -316,7 +316,6 @@ done
   # Accept upper or lowercase input.
   echo -e "\E[1;34m::::: \e[97mStarting Metasploit \E[1;34m:::::"
   msfconsole
-  use exploit/multi/handler  
 
 ;;
 
