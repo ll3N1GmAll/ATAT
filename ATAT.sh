@@ -322,9 +322,10 @@ done
   "4" | "4" )
 # Accept upper or lowercase input.
 echo -e "\E[1;34m::::: \e[97mPersistence Generator \E[1;34m:::::"
+echo -e "\E[1;34m::::: \e[97mBind Shells are a Work in Progress \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mThanks to Skysploit for the DBD Builder!! \E[1;34m:::::"
 PS3='Enter your choice 6=QUIT: '
-options=("Windows DBD Reverse Shell" "Windows DBD Bind Shell (Work In Progress)" "Linux/NetBSD/FreeBSD/OpenBSD DBD Reverse Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Bind Shell" "Android" "Quit")
+options=("Windows DBD Reverse Shell" "Windows DBD Bind Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Reverse Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Bind Shell" "Android" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -367,7 +368,7 @@ do
 				clear
 			fi
             ;;
-       "Windows DBD Bind Shell (Work In Progress)")
+       "Windows DBD Bind Shell")
         read -p "What port would you like the victim be listening on? " attackerport
 		echo ""
 		read -p "What would you like the shared secret to be on your secure connection? " attackersecret
