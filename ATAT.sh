@@ -31,7 +31,7 @@ echo -e "\E[1;34m::::::::::::::::\e[97mPayloads saved to ~/ATAT/\E[1;34m::::::::
 echo -e "\E[1;34m==========================================================="
 read -p "Press [Enter] key to Continue..."
 clear
-echo -e "\E[1;34m======================== \e[97mAttack Team Automation Tool \E[1;34m======================="
+echo -e "\E[1;34m======================= \e[97mAttack Team Automation Tool \E[1;34m======================"
 if [ 0 -le $secs ] && [ $secs -le 14 ];
 then
 cat << "EOF"
