@@ -869,7 +869,7 @@ do
 				echo -e "\e[1;34m[-] It doesn't appear that $i is installed on your system. Installing it now...\e[0m"
 				echo ""
 			if [ ! -z $(apt-get install -y "$i" | grep -o "E: Couldn") ]; then
-				echo -e "\e[1;31m[-] I had a hard time installing $i from the Kali-Linux repository.\e[0m"
+				echo -e "\e[1;31m[-] I had a hard time installing $i from the repository.\e[0m"
 				touch /tmp/ATAT/$i-fail.txt
 			else
 				dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
