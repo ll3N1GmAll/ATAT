@@ -1,6 +1,6 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze. Durandal backdoor builder created by Travis Weathers (Skysploit).
-v1.6
+v1.6.1
 Added support for Apache Struts exploits,
 Added support for Java JMX exploitation,
 Added support for Java RMI exploitation,
