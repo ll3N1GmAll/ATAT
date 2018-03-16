@@ -1,45 +1,45 @@
-run post/windows/gather/hashdump
-run post/windows/gather/cachedump
-run post/windows/gather/smart_hashdump
-run post/windows/gather/enum_tokens
-run post/windows/gather/enum_domain
-run post/windows/gather/enum_domain_group_users
-run post/windows/gather/enum_domain_tokens
-run post/windows/gather/enum_hostfile
-run post/windows/gather/enum_ie
-run post/windows/gather/enum_logged_on_users
-run post/windows/gather/enum_ms_product_keys
-run post/windows/gather/credentials/vnc
-run post/windows/gather/credentials/windows_autologin
-run post/windows/gather/checkvm
-run post/windows/gather/enum_applications
-run post/windows/gather/enum_services
-run post/windows/gather/enum_shares
-run post/windows/gather/enum_snmp
-run post/windows/gather/enum_devices
-run post/windows/gather/enum_powershell_env
-run post/windows/wlan/wlan_profile
-run post/windows/gather/arp_scanner
-run post/windows/gather/credentials/gpp
-run post/windows/gather/credentials/tortoisesvn
-run post/windows/gather/credentials/winscp
-run post/windows/gather/dnscache_dump
-run post/windows/gather/enum_chrome
-run post/windows/gather/enum_firefox
-run post/windows/gather/enum_termserv
-run post/windows/gather/enum_unattend
-run post/linux/gather/hashdump
-run post/osx/gather/hashdump
-run post/linux/gather/enum_network
-run post/linux/gather/enum_system
-run post/linux/gather/enum_users_history
-run post/linux/gather/checkvm
-run post/osx/gather/enum_osx
-run post/linux/gather/enum_configs
-run post/linux/gather/enum_protections
-run post/linux/gather/enum_runrs_history
-run post/multi/gather/env
-run post/multi/gather/gpg_creds
-run post/multi/gather/ssh_creds
-run post/multi/gather/firefox_creds
+post/windows/gather/hashdump
+post/windows/gather/cachedump
+post/windows/gather/smart_hashdump
+post/windows/gather/enum_tokens
+post/windows/gather/enum_domain
+post/windows/gather/enum_domain_group_users
+post/windows/gather/enum_domain_tokens
+post/windows/gather/enum_hostfile
+post/windows/gather/enum_ie
+post/windows/gather/enum_logged_on_users
+post/windows/gather/enum_ms_product_keys
+post/windows/gather/credentials/vnc
+post/windows/gather/credentials/windows_autologin
+post/windows/gather/checkvm
+post/windows/gather/enum_applications
+post/windows/gather/enum_services
+post/windows/gather/enum_shares
+post/windows/gather/enum_snmp
+post/windows/gather/enum_devices
+post/windows/gather/enum_powershell_env
+post/windows/wlan/wlan_profile
+post/windows/gather/arp_scanner
+post/windows/gather/credentials/gpp
+post/windows/gather/credentials/tortoisesvn
+post/windows/gather/credentials/winscp
+post/windows/gather/dnscache_dump
+post/windows/gather/enum_chrome
+post/windows/gather/enum_firefox
+post/windows/gather/enum_termserv
+post/windows/gather/enum_unattend
+post/linux/gather/hashdump
+post/osx/gather/hashdump
+post/linux/gather/enum_network
+post/linux/gather/enum_system
+post/linux/gather/enum_users_history
+post/linux/gather/checkvm
+post/osx/gather/enum_osx
+post/linux/gather/enum_configs
+post/linux/gather/enum_protections
+post/linux/gather/enum_resourcers_history
+post/multi/gather/env
+post/multi/gather/gpg_creds
+post/multi/gather/ssh_creds
+post/multi/gather/firefox_creds
 resource '/root/ATAT/ATAT_multi_post.rc'
