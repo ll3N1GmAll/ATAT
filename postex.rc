@@ -42,3 +42,4 @@ run post/multi/gather/env
 run post/multi/gather/gpg_creds
 run post/multi/gather/ssh_creds
 run post/multi/gather/firefox_creds
+resource '/root/ATAT/ATAT_multi_post.rc'
