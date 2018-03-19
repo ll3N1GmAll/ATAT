@@ -199,7 +199,7 @@ echo -e "\E[1;34m===\e[97m[13]\e[34mLoad Balance Detection\e[97m[Run LBD Against
 tput sgr0
 echo -e "\E[1;34m:::\e[97m[14]\e[95mMulti-Target SSLScan \e[97m [Run SSLScan Against Many Targets]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[15]\e[31mMasscan All TCP Ports \e[97m[Masscan all TCP Ports on Targets]   \E[1;34m"
+echo -e "\E[1;34m===\e[97m[15]\e[31mMasscan All TCP Ports \e[97m[Masscan all TCP Ports on Many Targets]   \E[1;34m"
 tput sgr0
 echo -e "\E[1;34m:::\e[97m[16]\e[90mDependency Checker    \e[97m[Check For Dependencies]   \E[1;34m"
 tput sgr0
