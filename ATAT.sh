@@ -1,7 +1,7 @@
 #!/bin/bash
 # ..................
 [[ `id -u` -eq 0 ]] || { echo -e "\e[31mMust be root to start your ATAT"; exit 1; }
-resize -s 30 60
+resize -s 150 150
 clear                                   # Clear the screen.
 SERVICE=service;
 secs=$(date '+%S');
