@@ -808,7 +808,7 @@ done
          
  echo -e "\E[1;34m::::: \e[97mMasscan All TCP Ports\E[1;34m:::::"
  
-PS3='Enter your choice 2=QUIT: '
+PS3='Enter your choice 3=QUIT: '
 options=("Run" "Resume" "Quit") # "Linux" "Mac" "Android" "List_All" "Quit")
 select opt in "${options[@]}"
 do
