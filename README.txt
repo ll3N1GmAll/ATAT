@@ -120,4 +120,4 @@ For post exploitation,
 METHOD 1: 
 Launch your listener with menu option 2. The default post modules from postex.rc will run againt each meterpreter session you receive.
 
-METHOD 2: If your loot files only contian headers; but no other loot data, then you must do the following: From your listener window, after all of your sessions are in (after your attacks have completed) hit enter to drop down to your handler prompt and then enter the following command without double quotes: "resource '/root/ATAT/ATAT_multi_post.rc'"
+METHOD 2: If your loot files in /root/.msf4/loot/ are incomplete or missing, then you must do the following: From your listener window, after all of your sessions are in (after your attacks have completed) hit enter to drop down to your handler prompt and then enter the following command without double quotes: "resource '/root/ATAT/ATAT_multi_post.rc'"
