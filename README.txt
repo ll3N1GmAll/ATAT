@@ -117,7 +117,6 @@ DBD Installer option must be run on your attacker box in order to receive DBD re
 
 For post exploitation,
 
-METHOD 1: 
-Launch your listener with menu option 2. The default post modules from postex.rc will run againt each meterpreter session you receive.
+METHOD 1: Launch your listener with menu option 2. ATAT will intelligently detect the appropriate post modules to run against each session you receive.  However, due to a bug in the MSF AutoRunScript feature you must do the following: From your listener window, after all of your sessions are in (after your attacks have completed) hit enter to drop down to your handler prompt and then enter the following command without double quotes: "resource '/root/ATAT/ATAT_multi_post.rc'" Check your loot files in /root/.msf4/loot/
 
-METHOD 2: If your loot files in /root/.msf4/loot/ are incomplete or missing, then you must do the following: From your listener window, after all of your sessions are in (after your attacks have completed) hit enter to drop down to your handler prompt and then enter the following command without double quotes: "resource '/root/ATAT/ATAT_multi_post.rc'"
+METHOD 2:This will be updated once the aforementioned feature has been fixed by Rapid7.
