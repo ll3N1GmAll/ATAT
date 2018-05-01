@@ -1,7 +1,7 @@
 ***RTFM***RTFM***RTFM***RTFM***
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze. Durandal backdoor builder created by Travis Weathers (Skysploit).
-v1.6.3
+v1.6.4
 Added support for Apache Struts/Tomcat/Etc. exploits,
 Added support for Java JMX exploitation,
 Added support for Java RMI exploitation,
@@ -10,7 +10,7 @@ Added support for load balancer detection,
 Added support for SSLScan,
 Added support for Masscan of all TCP ports,
 Added Android persistent reverse Meterpreter APK builder,
-Added DBD persistent backdoor builder by Skysploit,
+Added DBD persistent backdoor builder by Skysploit with enhanced persistence instructions,
 Added dependency checker by Skysploit,
 Added fully automated MSF Post Exploitation on all sessions acquired for the following post ex activities:
 - enumerate hosts
