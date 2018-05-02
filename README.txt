@@ -94,6 +94,11 @@ OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE
 
 OPTION 14:
 /root/ATAT/MSF_targets.txt
+Targets can be entered as just IPs/URLs for scanning on the default port 443; or you can enter colon delimited lists to specify the port to scan each target on as follows:
+1.2.3.4:22
+1.2.3.4:8443
+1.3.4.5:990
+1.3.4.5:547
 Results output to screen and the ATAT folder in SSLScan_Results.txt. All output is further processed and grouped into the following categories:
 RC4 findings in rc4.txt
 SSLv2 findings in sslv2.txt
