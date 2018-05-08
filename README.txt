@@ -120,6 +120,6 @@ Dependencies option will attempt to install the required dependencies for ATAT. 
 
 For post exploitation,
 
-METHOD 1: Launch your listener with menu option 2. ATAT will intelligently detect the appropriate post modules to run against each session you receive.  However, due to a bug in the MSF AutoRunScript feature you must do the following: From your listener window, after all of your sessions are in (after your attacks have completed) hit enter to drop down to your handler prompt and then enter the following command without double quotes: "resource '/root/ATAT/ATAT_multi_post.rc'" Check your loot files in /root/.msf4/loot/
+METHOD 1: Launch your listener with menu option 2. ATAT will intelligently detect the appropriate post modules to run against each session you receive.  However, due to a bug in the MSF AutoRunScript feature you must do the following: From your listener window, after all of your sessions are in (after your attacks have completed) hit enter to drop down to your msf expoit(multi/handler)> prompt and then enter the following command without double quotes: "resource '/root/ATAT/ATAT_multi_post.rc'" Check your loot files in /root/.msf4/loot/
 
 METHOD 2:This will be updated once the aforementioned feature has been fixed by Rapid7.
