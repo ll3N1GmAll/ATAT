@@ -2,14 +2,14 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze. Durandal backdoor builder created by Travis Weathers (Skysploit).
 
-v1.7
+v1.7.1
 Added support for Apache Struts/Tomcat/Etc. exploits,
 Added support for Java JMX exploitation,
 Added support for Java RMI exploitation,
 Added support for linux post exploitation,
 Added support for load balancer detection,
-Added support for SSLScan,
-Added support for Masscan of all TCP ports,
+Added support for SSLScan (automated via masscan results),
+Added support for Masscan of all TCP ports (informs SSLScan),
 Added Android persistent reverse Meterpreter APK builder,
 Added DBD persistent backdoor builder by Skysploit with enhanced persistence instructions,
 Added dependency checker by Skysploit,
@@ -91,7 +91,7 @@ Results output to screen and the ATAT folder in LBD_Results.txt.
 OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE, ALL OUTPUT FILES MUST BE DELETED OR CLEANED OUT PERIODICALLY TO GET RID OF PREVIOUS SCANS' RESULTS
 
 OPTION Multi-Target SSLScan:
-/root/ATAT/MSF_targets.txt 
+~/ATAT/~SSLScan_masscan_results.txt 
 Targets can be entered as just IPs/URLs for scanning on the default port 443; or you can enter colon delimited lists to specify the port to scan each target on as follows:
 1.2.3.4:22
 1.2.3.4:8443
@@ -105,12 +105,20 @@ Freak vuln findings in freak.txt
 Weak Cipher Findings in weak_ciphers.txt
 Expired Certificate Findings in expired_certs.txt
 SSL Certificate Details in ssl_certs.txt
+Masscan results also output to ~SSLScan_masscan_results.txt. This file contains all targets and discovered ports colon delimited one per line as above.
+SSLScan can be run automatically after running masscan to check for SSL issues on all discovered ports on every host in scope effortlessly.
 OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE, ALL OUTPUT FILES MUST BE DELETED OR CLEANED OUT PERIODICALLY TO GET RID OF PREVIOUS SCANS' RESULTS
 
 OPTION Masscan All TCP Ports:
 /root/ATAT/MSF_targets.txt
 This masscans all TCP ports for all targets at a reasonable rate (--rate 1000)
 Results output to screen and the ATAT folder in Open_Ports.txt.
+Masscan results also output to ~SSLScan_masscan_results.txt. This file contains all targets and discovered ports colon delimited one per line as follows:
+1.2.3.4:22
+1.2.3.4:8443
+1.3.4.5:990
+1.3.4.5:547
+SSLScan can be run automatically after running masscan to check for SSL issues on all discovered ports on every host in scope effortlessly.
 OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE, ALL OUTPUT FILES MUST BE DELETED OR CLEANED OUT PERIODICALLY TO GET RID OF PREVIOUS SCANS' RESULTS
 
 OPTION Dependency Checker:
