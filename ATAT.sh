@@ -279,7 +279,7 @@ EOF
             ./ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && break
+            echo "Aufiederszehn" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -312,7 +312,7 @@ do
             ./ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && break
+            echo "Aufiederszehn" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -534,7 +534,7 @@ do
             ./ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && break
+            echo "Aufiederszehn" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -692,7 +692,7 @@ do
             ./ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && break
+            echo "Aufiederszehn" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -825,7 +825,7 @@ select opt in "${options[@]}"
             ./ATAT.sh
             ;;
     "Quit")
-            echo "Aufiederszehn" && break
+            echo "Aufiederszehn" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -856,7 +856,7 @@ done
 #           echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Scanned\E[1;34m:::::"
 #           ;;
 #        "Quit")
-#            echo "Aufiederszehn" && break
+#            echo "Aufiederszehn" && exit 1
 #            ;;
 #        *) echo invalid option;;
 #    esac
@@ -928,7 +928,7 @@ do
 			echo -e "\n\e[1;34m[*] I see that DBD is already installed...\e[0m"
 			echo ""
 			sleep 3
-			echo "Aufiederszehn" && break
+			echo "Aufiederszehn" && ./ATAT.sh
 		else
 			echo -e "\e[1;34m[*] Performing DBD install...\e[0m\n"
 			clear
@@ -952,7 +952,7 @@ do
             ./ATAT.sh
             ;;
 		"Quit")
-            echo "Aufiederszehn" && break
+            echo "Aufiederszehn" && exit 1
             ;;
         *) echo invalid option;;
     esac
