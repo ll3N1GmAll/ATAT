@@ -1,0 +1,10 @@
+expired_certs.txt
+freak.txt
+heartbleed_targets.txt
+Open_Ports.txt
+rc4.txt
+ssl_certs.txt
+~SSLScan_masscan_results.txt
+~SSLScan_Results.txt
+sslv2.txt
+weak_ciphers.txt
