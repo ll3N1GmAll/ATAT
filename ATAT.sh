@@ -705,7 +705,7 @@ done
 echo -e "\E[1;34m::::: \e[97mScan All The Things!!\E[1;34m:::::"
 
 PS3='Enter your choice: ENTER=Options Menu | 6=Main Menu | 7=QUIT: '
-options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Masscan All TCP Ports" "Main Menu" "Quit")
+options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target Masscan of All TCP Ports" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -770,7 +770,7 @@ do
 	done
                 echo -e "\E[1;34m::::: \e[97mCheck ATAT Folder for results!\E[1;34m:::::"
             ;;
-    "Masscan All TCP Ports")
+    "Multi-Target Masscan of All TCP Ports")
  echo -e "\E[1;34m::::: \e[97mMasscan All TCP Ports\E[1;34m:::::"
  
 PS3='Enter your choice: ENTER=Options Menu | 4=Main Menu | 5=QUIT: '
@@ -792,7 +792,6 @@ select opt in "${options[@]}"
 	sed "/ /s/ /""/g" ~masscan_results3.txt >> ~SSLScan_masscan_results.txt
 	rm ~masscan_results*.txt
 	done
-#   rm $outputfile
             echo -e "\E[1;34m::::: \e[97mAll TCP Ports Have Been Scanned!\E[1;34m:::::"
             ;;
         "Options (enter manual targets for pause/resume support)")
@@ -805,7 +804,6 @@ select opt in "${options[@]}"
 	sed "/tcp on /s/tcp on /""/g" ~masscan_results2.txt >> ~masscan_results3.txt
 	sed "/ /s/ /""/g" ~masscan_results3.txt >> ~SSLScan_masscan_results.txt
 	rm ~masscan_results*.txt
-#   rm $outputfile
             echo -e "\E[1;34m::::: \e[97mAll TCP Ports Have Been Scanned!\E[1;34m:::::"
             ;;
         "Resume")
