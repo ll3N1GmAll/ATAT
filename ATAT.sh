@@ -990,9 +990,9 @@ do
 	echo -e "\E[1;34m::::: \e[97mLaunching Powershell Empire & RESTful API \E[1;34m:::::"
             ;;
         "Step 2 - Launch DeathStar")
-    python3 ~/DeathStar/DeathStar.py
     echo -e "\E[1;34m::::: \e[97mLaunching DeathStar \E[1;34m:::::"
-		    ;;
+    python3 ~/DeathStar/DeathStar.py
+    	    ;;
         "Main Menu")
            ./ATAT.sh
             ;;
