@@ -939,7 +939,7 @@ do
 			echo -e "\n\e[1;34m[*] I see that DBD is already installed...\e[0m"
 			echo ""
 			sleep 3
-			echo "Aufiederszehn" && ./ATAT.sh
+			echo "Aufiederszehn" && ~/ATAT/ATAT.sh
 		else
 			echo -e "\e[1;34m[*] Performing DBD install...\e[0m\n"
 			clear
