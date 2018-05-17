@@ -202,7 +202,7 @@ tput sgr0
 #tput sgr0
 echo -e "\E[1;34m:::\e[97m[8] \e[34mDependency Checker    \e[97m[Check For Dependencies]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[9] \e[95mPowershell Empire   \e[97m  [Pledge Your Allegiance to The Empire]   \E[1;34m"
+echo -e "\E[1;34m===\e[97m[9] \e[95mEmpire & DeathStar  \e[97m  [Pledge Your Allegiance to The Empire]   \E[1;34m"
 tput sgr0
 echo -e "\E[1;34m::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
 echo -e "\e[97m~~~~~~~~~~~~~~~~~~ \e[31mProps to rand0m1ze for the concept!\e[97m~~~~~~~~~~~~~~~~~~\e[31m"
