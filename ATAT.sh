@@ -985,10 +985,10 @@ do
     case $opt in
         "Step 1 - Launch Powershell Empire & RESTful API")
     # Start the Empire console & RESTful API
+	echo -e "\E[1;34m::::: \e[97mLaunching Powershell Empire & RESTful API \E[1;34m:::::"
 	cd ~/Empire && python empire --rest --username empireadmin --password Password123
 	cd ..
-	echo -e "\E[1;34m::::: \e[97mLaunching Powershell Empire & RESTful API \E[1;34m:::::"
-            ;;
+	        ;;
         "Step 2 - Launch DeathStar")
     echo -e "\E[1;34m::::: \e[97mLaunching DeathStar \E[1;34m:::::"
     python3 ~/DeathStar/DeathStar.py
