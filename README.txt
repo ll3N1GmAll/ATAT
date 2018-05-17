@@ -158,3 +158,5 @@ OPTION: Powershell Empire:
 THIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!!
 IF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!!
 Empire & DeathStar MUST be installed in /root/!!
+
+Step 1 must br run initially; after that you need to open another ATAT instance in a separate window and launch Step 2.
