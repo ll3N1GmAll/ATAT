@@ -51,7 +51,7 @@ Added fully automated MSF Post Exploitation on all sessions acquired for the fol
 - grab the history of mounted USB devices
 - assess the target and suggest local exploits for privilege escalation or other operations
 
---- INSTRUCTIONS TO RUN THIS FROM /home/<profile>/ instead of running as root ---
+--- INSTRUCTIONS TO RUN THIS FROM /home/<profile>/ instead of running as root (Doing this will break Empire & DeathStar functionality)---
 The ATAT folder must be duplicated in /root & ~/ to run properly unless you are on Kali (logged in as root) or you are running
 another distro logged in as root (duplicating this folder only needs to be done once and does not need to be updated ever).
 You then do not have to run the script from /root if you place one copy of the ATAT folder in ~/ and one copy in /root.

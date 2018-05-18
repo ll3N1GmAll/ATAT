@@ -277,7 +277,7 @@ EOF
             echo -e "\E[1;34m::::: \e[97mmsfvenom_payloads.txt Saved to ~/ATAT/\E[1;34m:::::"
             ;;   
         "Main Menu")
-            ./ATAT.sh
+            ~/ATAT/ATAT.sh
             ;;
         "Quit")
             echo "Aufiederszehn" && exit 1
@@ -310,7 +310,7 @@ do
             xterm -e msfconsole -r ~/Desktop/temp/meterpreter.rc &
             ;;
         "Main Menu")
-            ./ATAT.sh
+            ~/ATAT/ATAT.sh
             ;;
         "Quit")
             echo "Aufiederszehn" && exit 1
@@ -532,7 +532,7 @@ do
 			echo -e "\E[1;34m::::: \e[97mStart an android/meterpreter/reverse_https listener\E[1;34m:::::" 
             ;; 
         "Main Menu")
-            ./ATAT.sh
+            ~/ATAT/ATAT.sh
             ;;
         "Quit")
             echo "Aufiederszehn" && exit 1
@@ -690,7 +690,7 @@ do
             echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules\E[1;34m:::::"        
             ;;            
         "Main Menu")
-            ./ATAT.sh
+            ~/ATAT/ATAT.sh
             ;;
         "Quit")
             echo "Aufiederszehn" && exit 1
@@ -811,7 +811,7 @@ select opt in "${options[@]}"
     masscan --resume paused.conf
 			;;           
         "Main Menu")
-            ./ATAT.sh
+            ~/ATAT/ATAT.sh
             ;;
         "Quit")
             echo "Aufiederszehn" && exit 1
@@ -821,7 +821,7 @@ select opt in "${options[@]}"
 	done
 	        ;;
     "Main Menu")
-            ./ATAT.sh
+            ~/ATAT/ATAT.sh
             ;;
     "Quit")
             echo "Aufiederszehn" && exit 1
@@ -855,7 +855,7 @@ done
 #           echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Scanned\E[1;34m:::::"
 #           ;;
 #        "Main Menu")
-#           ./ATAT.sh
+#           ~/ATAT/ATAT.sh
 #           ;;
 #        "Quit")
 #            echo "Aufiederszehn" && exit 1
@@ -900,7 +900,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686"
+	reqs="gcc gcc-mingw-w64-i686 curl"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
@@ -960,7 +960,7 @@ do
 	fi
 			;;
 		"Main Menu")
-            ./ATAT.sh
+            ~/ATAT/ATAT.sh
             ;;
 		"Quit")
             echo "Aufiederszehn" && exit 1
@@ -994,7 +994,7 @@ do
     python3 ~/DeathStar/DeathStar.py
     	    ;;
         "Main Menu")
-           ./ATAT.sh
+           ~/ATAT/ATAT.sh
             ;;
         "Quit")
             echo "Aufiederszehn" && exit 1
