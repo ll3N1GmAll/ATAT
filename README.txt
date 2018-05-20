@@ -2,7 +2,7 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze. Durandal backdoor builder created by Travis Weathers (Skysploit).
 
-v1.8
+v1.9
 Added Powershell Empire & DeathStar Integration,
 Added support for Apache Struts/Tomcat/Etc. exploits,
 Added support for Java JMX exploitation,
@@ -154,9 +154,10 @@ Launch your listener with menu option 2. ATAT will intelligently detect the appr
 METHOD 2:
 This will be updated once the aforementioned feature has been fixed by Rapid7.
 
-OPTION: Powershell Empire:
+OPTION: Empire & DeathStar:
 THIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!!
 IF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!!
 Empire & DeathStar MUST be installed in /root/!!
+Only Launch DeathStar (Step 2) If Your Goal Is To Automate Domain Admin Credential Acquisition
 
-Step 1 must br run initially; after that you need to open another ATAT instance in a separate window and launch Step 2.
+Step 1 must br run initially; after that you need to open another ATAT instance in a separate window and launch Step 2 to use DeathStar for domain admin credential acquisition automation. Run Step 3 to get the auth token for PSE's REST API; this is required for all other PSE options to work.

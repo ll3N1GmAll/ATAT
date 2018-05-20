@@ -8,3 +8,5 @@ ssl_certs.txt
 ~SSLScan_Results.txt
 sslv2.txt
 weak_ciphers.txt
+paused.conf
+Open_Ports.txt
