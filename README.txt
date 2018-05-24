@@ -133,7 +133,7 @@ DBD reverse shells will self heal a dropped connection in 10 minute intervals. I
 WINDOWS:
 ATAT creates a taskmgnt.txt & winmgnt.txt for Windows DBD builder option payloads and places them in the /var/www/html/ directory before starting Apache on the attacker's machine (to host the payloads for access by the target machines). Both of these TXT files must be converted to EXE format once they have been transmitted to the target. Taskmgnt(nominally obfuscated PSEXEC) can be used to execute the winmgnt (DBD backdoor) so it is executed by a MS signed binary for more stealth/evasion. DBD itself is not currently flagged by any AV; but sometimes it is necessary to have your EXE run by a MS signed binary.
 Windows deployment instructions for reboot persistence:
-Option "DBD Reboot Persistence Generator - Windows" will create the following BAT file with all of these steps and places it here: ~/ATAT/DBD_reboot.bat
+Option "DBD Reboot Persistence Generator - Windows" will create the following BAT file with all of these steps and places it here: ~/ATAT/DBD_reboot.bat (You must have a SYSTEM shell, upload the BAT file to the %WINDIR%\System32\ directory, and run DBD_reboot.bat from the same directory)
 Now move the "taskmgnt.txt" & "winmgnt.txt" files to the target, rename & hide them, then launch backdoor with MS signed ofuscated PsExec.
 While this backdoor is self healing; it will not auto start at reboot. To get your shell back after a reboot, enter the following on the target (one command per line):
 
