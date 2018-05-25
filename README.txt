@@ -162,3 +162,6 @@ Empire & DeathStar MUST be installed in /root/!!
 Only Launch DeathStar (Step 2) If Your Goal Is To Automate Domain Admin Credential Acquisition
 
 Step 1 must br run initially; after that you need to open another ATAT instance in a separate window and launch Step 2 to use DeathStar for domain admin credential acquisition automation. Run Step 3 to get the auth token for PSE's REST API; this is required for all other PSE options to work.
+Step 3 MUST be run once (and only once for a single PSE install; meaning you only need to run it again if you uninstall/reinstall, or you are using ATAT's PSE options to hit a PSE install on a separate machine). This step grabs the permanent auth token for the PSE REST API. You must use the temporary auth token displayed in the PSE console at startup to run this process. After this step you will not longer need to worry about the API auth token (this is stored in plaintext in your ATAT directory, delete ~/ATAT/PSE_perm_token.txt after your operation and re-run step 3 at the begninning of each operation to enhance opsec).
+Post exploitation features are a work in progress!
+Better support and information for stagers will be provided as support for them grows.
