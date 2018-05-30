@@ -871,7 +871,7 @@ do
     case $opt in
 		"Powershell Empire & DeathStar")
 		git clone https://github.com/EmpireProject/Empire ~/Empire
-		cd ~/Empire/setup && chmod +x install.sh && pip install editorconfig && pip install hackersh && pip install wafw00f && pip install Markdown && pip install pysnmp && pip install jsbeautifier && ./install.sh && cd .. && chmod +x empire && cd ..
+		cd ~/Empire/setup && chmod +x install.sh && pip install editorconfig && pip install hackersh && pip install wafw00f && pip install Markdown && pip install pysnmp && pip install jsbeautifier && pip install mitmproxy && ./install.sh && cd .. && chmod +x empire && cd ..
 		git clone https://github.com/byt3bl33d3r/DeathStar ~/DeathStar
 		cd ~/DeathStar && pip install -r requirements.txt && pip3 install -r requirements.txt
 		cd ..
