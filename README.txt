@@ -184,4 +184,3 @@ hostapd_free_hapd_data: Interface wlan0 wasn't started
 5) Multi-Target Asleap Attack - Perform dictionary attack against all users captured by the HostAPD-WPE attack. (better for fewer targets because usernames aren't paired with passwords in the output file)
 OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE, ALL OUTPUT FILES MUST BE DELETED OR CLEANED OUT PERIODICALLY TO GET RID OF PREVIOUS OPERATION'S RESULTS
 6) Multi-Target John The Ripper Attack - Perform dictionary attack against all users captured by the HostAPD-WPE attack.
-OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE, ALL OUTPUT FILES MUST BE DELETED OR CLEANED OUT PERIODICALLY TO GET RID OF PREVIOUS OPERATION'S RESULTS

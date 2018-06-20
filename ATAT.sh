@@ -1222,7 +1222,7 @@ do
 	john --wordlist $wordlist $inputfile | tee  ~/ATAT/john_output.txt
 	cat ~/ATAT/john_output.txt >> ~/ATAT/john_cracked.txt
 	rm ~/ATAT/john_output.txt
-	john --show ~/ATAT/john_users.txt >> ~/ATAT/john_cracked.txt
+	john --show ~/ATAT/john_users.txt | tee ~/ATAT/john_cracked.txt
 	        echo -e "\E[1;34m::::: \e[97mJohn The Ripper Output & All Cracked Passwords Located in ~/ATAT/john_cracked.txt\E[1;34m:::::"
             ;;                   
         "Main Menu")
