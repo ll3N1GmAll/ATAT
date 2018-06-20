@@ -2,7 +2,8 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze. Durandal backdoor builder created by Travis Weathers (Skysploit).
 
-v1.9
+v1.9.3
+Added support for HostAPD-WPE, Asleap, & Airgeddon Integration,
 Added Powershell Empire & DeathStar Integration,
 Added support for Apache Struts/Tomcat/Etc. exploits,
 Added support for Java JMX exploitation,
@@ -155,7 +156,7 @@ Launch your listener with menu option 2. ATAT will intelligently detect the appr
 METHOD 2:
 This will be updated once the aforementioned feature has been fixed by Rapid7.
 
-OPTION: Empire & DeathStar:
+OPTION Empire & DeathStar:
 THIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!!
 IF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!!
 Empire & DeathStar MUST be installed in /root/!!
@@ -165,3 +166,22 @@ Step 1 must br run initially; after that you need to open another ATAT instance 
 Step 3 MUST be run once (and only once for a single PSE install; meaning you only need to run it again if you uninstall/reinstall, or you are using ATAT's PSE options to hit a PSE install on a separate machine). This step grabs the permanent auth token for the PSE REST API. You must use the temporary auth token displayed in the PSE console at startup to run this process. After this step you will not longer need to worry about the API auth token (this is stored in plaintext in your ATAT directory, delete ~/ATAT/PSE_perm_token.txt after your operation and re-run step 3 at the begninning of each operation to enhance opsec).
 Post exploitation features are a work in progress!
 Better support and information for stagers will be provided as support for them grows.
+
+OPTION Wireless Attacks:
+1) Remove Wireless NIC from Network Manager - Removes the NIC you wish to use in a HostAPD-WPE attack from being managed by NetworkManager. This is essential for the attack to work.
+2) Reset Wireless NIC for Network Manager Usage - Allows NetworkManager to manage your wireless NIC after your attack is complete. This allows you to join wireless networks and operate the wireless NIC normally.
+3) HostAPD-WPE Enterprise WiFi Fake RADIUS Server Attack - Performs HostAPD-WPE attack to capture enterprise WPA credentials for cracking with Asleap option.
+The RTL8187 or AWUS036H is, sadly, NOT supported. Also, your wireless chipset is likely not supported by HostAPD-WPE if you receive this error:
+Configuration file: /etc/hostapd-wpe/hostapd-wpe2.conf
+nl80211: Could not configure driver mode
+nl80211: deinit ifname=wlan0 disabled_11b_rates=0 
+nl80211 driver initialization failed. 
+wlan0: interface state UNINITIALIZED->DISABLED 
+wlan0: AP-DISABLED 
+hostapd_free_hapd_data: Interface wlan0 wasn't started
+
+4) Airgeddon - Launch airgeddon wireless script by v1s1t0r
+5) Multi-Target Asleap Attack - Perform dictionary attack against all users captured by the HostAPD-WPE attack. (better for fewer targets because usernames aren't paired with passwords in the output file)
+OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE, ALL OUTPUT FILES MUST BE DELETED OR CLEANED OUT PERIODICALLY TO GET RID OF PREVIOUS OPERATION'S RESULTS
+6) Multi-Target John The Ripper Attack - Perform dictionary attack against all users captured by the HostAPD-WPE attack.
+OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE, ALL OUTPUT FILES MUST BE DELETED OR CLEANED OUT PERIODICALLY TO GET RID OF PREVIOUS OPERATION'S RESULTS
