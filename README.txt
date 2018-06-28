@@ -2,8 +2,8 @@
 # ATAT
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze. Durandal backdoor builder created by Travis Weathers (Skysploit).
 
-v1.9.3
-Added support for HostAPD-WPE, Asleap, & Airgeddon Integration,
+v1.9.3.1
+Added support for HostAPD-WPE, Asleap, John the Ripper, & Airgeddon Integration,
 Added Powershell Empire & DeathStar Integration,
 Added support for Apache Struts/Tomcat/Etc. exploits,
 Added support for Java JMX exploitation,
@@ -52,7 +52,7 @@ Added fully automated MSF Post Exploitation on all sessions acquired for the fol
 - grab the history of mounted USB devices
 - assess the target and suggest local exploits for privilege escalation or other operations
 
---- INSTRUCTIONS TO RUN THIS FROM /home/<profile>/ instead of running as root (Doing this will break Empire & DeathStar functionality)---
+!!NOT RECOMMENDED!!--- INSTRUCTIONS TO RUN THIS FROM /home/<profile>/ instead of running as root (Doing this will break Empire & DeathStar functionality as well as some Wireless Attacks functionality)---
 The ATAT folder must be duplicated in /root & ~/ to run properly unless you are on Kali (logged in as root) or you are running
 another distro logged in as root (duplicating this folder only needs to be done once and does not need to be updated ever).
 You then do not have to run the script from /root if you place one copy of the ATAT folder in ~/ and one copy in /root.
@@ -60,7 +60,7 @@ Placing a copy of the ATAT folder in /root/ in this circumstance is only so you 
 accessible by ATAT when it run as sudo. Then you simply run ATAT via sudo ./ATAT.sh from ~/ATAT.
 All targets and/or ports must be added into their respective TXT files in /root/ as referenced above and detailed below.
 Adding your targets/ports to the TXT files in ~/ATAT will not work under this setup
-*You can have the ATAT folder in /root only if you wish; and you can run it from there and disregard all of these instructions.*
+*You can (and should) have the ATAT folder in /root only if you wish; and you can run it from there disregarding all of these instructions.*
 
 usage:
 chmod +x ~/ATAT/ATAT.sh
@@ -171,7 +171,7 @@ OPTION Wireless Attacks:
 1) Remove Wireless NIC from Network Manager - Removes the NIC you wish to use in a HostAPD-WPE attack from being managed by NetworkManager. This is essential for the attack to work.
 2) Reset Wireless NIC for Network Manager Usage - Allows NetworkManager to manage your wireless NIC after your attack is complete. This allows you to join wireless networks and operate the wireless NIC normally.
 3) HostAPD-WPE Enterprise WiFi Fake RADIUS Server Attack - Performs HostAPD-WPE attack to capture enterprise WPA credentials for cracking with Asleap option.
-The RTL8187 or AWUS036H is, sadly, NOT supported. Also, your wireless chipset is likely not supported by HostAPD-WPE if you receive this error:
+The RTL8187 or Alfa AWUS036H is, sadly, NOT supported. Also, your wireless chipset is likely not supported by HostAPD-WPE if you receive this error:
 Configuration file: /etc/hostapd-wpe/hostapd-wpe2.conf
 nl80211: Could not configure driver mode
 nl80211: deinit ifname=wlan0 disabled_11b_rates=0 
@@ -184,3 +184,4 @@ hostapd_free_hapd_data: Interface wlan0 wasn't started
 5) Multi-Target Asleap Attack - Perform dictionary attack against all users captured by the HostAPD-WPE attack. (better for fewer targets because usernames aren't paired with passwords in the output file)
 OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE, ALL OUTPUT FILES MUST BE DELETED OR CLEANED OUT PERIODICALLY TO GET RID OF PREVIOUS OPERATION'S RESULTS
 6) Multi-Target John The Ripper Attack - Perform dictionary attack against all users captured by the HostAPD-WPE attack.
+7) WiFi Jammer - *This Attack Is ILLEGAL If Not Conducted In A Controlled Environment That Is Free Of Networks That Are Not In Scope!! Use Responsibly & With Great Caution!* This is a an automated deauth attack that detects all access points & clients in range. This attack will hold down the 10 closest clients indefinitely. A Yagi is recommended for long range, more percise targeting.
