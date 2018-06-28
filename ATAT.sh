@@ -980,6 +980,13 @@ do
 		echo -e "\e[1;34m[*] If Airgeddon Workaround fails, manually navigate to https://github.com/v1s1t0r1sh3r3/airgeddon/tree/master/binaries/kali/ ...\e[0m\n"
 		echo -e "\e[1;34m[*] Download Current airgeddon_#.##-#_all.deb file, then run with e[31m dpkg -i airgeddon*.deb\e[97m...\e[0m\n"
 			;;
+		"WiFi Jammer Install")
+		git clone https://github.com/MisterBianco/wifijammer-ng ~/wifijammer-ng
+		cd ~/wifijammer-ng
+		pip install -r requirements.txt
+		chmod +x wifijammer.py && chmod +x wifijammer-ng.py
+		echo -e "\e[1;34m[*] Installing WiFiJammer-ng ...\e[0m\n"
+			;;
 		"Main Menu")
             ~/ATAT/ATAT.sh
             ;;
@@ -1160,8 +1167,8 @@ done
  echo -e "\E[1;34m::::: \e[97mOption 2 MUST Be Run AFTER Using The HostAPD-WPE Attack To Allow WLAN NIC To Function Normally\E[1;34m:::::"
  echo -e "\E[1;34m::::: \e[97m**WARNING** HostAPD-WPE Option Will *KILL ALL* Normal Network Connections For WLAN Interface Selected Until Option 2 Is Run!!\E[1;34m:::::"
  
-PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
-options=("Remove Wireless NIC from Network Manager" "Reset Wireless NIC for Network Manager Usage" "HostAPD-WPE Enterprise WiFi Fake RADIUS Server Attack" "Airgeddon" "Multi-Target Asleap Attack" "Multi-Target John The Ripper Attack" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 8=Main Menu | 9=QUIT: '
+options=("Remove Wireless NIC from Network Manager" "Reset Wireless NIC for Network Manager Usage" "HostAPD-WPE Enterprise WiFi Fake RADIUS Server Attack" "Airgeddon" "Multi-Target Asleap Attack" "Multi-Target John The Ripper Attack" "WiFi Jammer" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1232,7 +1239,14 @@ do
 	rm ~/ATAT/john_output.txt
 	john --show ~/ATAT/john_users.txt | tee ~/ATAT/john_cracked.txt
 	        echo -e "\E[1;34m::::: \e[97mJohn The Ripper Output & All Cracked Passwords Located in ~/ATAT/john_cracked.txt\E[1;34m:::::"
-            ;;                   
+            ;;  
+        "WiFi Jammer")
+    echo -e "\E[1;34m::::: \e[97mDeauth Attack - Automatically Detects ALL Access Points & Clients In Range\E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mThis Attack Will Hold Down the 10 Closest Clients Indefinitely\E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mThis Attack Is ILLEGAL If Not Conducted In A Controlled Environment That Is Free Of Networks That Are Not In Scope!! Use Responsibly & With Great Caution!\E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mUse Ctrl+C In XTerm Window to Stop Attack\E[1;34m:::::"
+	xterm -e python ~/wifijammer-ng/wifijammer.py -m 10 -p 15
+            ;;                 
         "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
