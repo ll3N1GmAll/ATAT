@@ -1023,7 +1023,7 @@ do
     python3 ~/DeathStar/DeathStar.py
     	    ;;
     	"Step 3 - Acquire PSE REST API Permanent Token")
-    outputfile=PSE_perm_token.txt
+    outputfile=~/ATAT/PSE_perm_token.txt
     read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE C2 Token (API Auth): ' usertoken;
     	curl --insecure -i https://$userlistener:$userport/api/admin/permanenttoken?token=$usertoken | tee ~/ATAT/PSE_perm_token_pre.txt
     	cat ~/ATAT/PSE_perm_token_pre.txt | egrep -o '([a-zA-Z0-9]{40})' > $outputfile
@@ -1116,8 +1116,10 @@ do
 		"Get Post Ex Results From PSE Agent")
     pseauthtoken=~/ATAT/PSE_perm_token.txt
     read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'PSE Agent to Poll: ' useragent; 
-	curl --insecure -i https://$userlistener:$userport/api/agents/$useragent/results?token=$(cat $pseauthtoken)	
-            echo -e "\E[1;34m::::: \e[97m$useragent Results Have Been Polled \E[1;34m:::::"
+	curl --insecure -i https://$userlistener:$userport/api/agents/$useragent/results?token=$(cat $pseauthtoken)	| tee ~/ATAT/agent_results_pre.txt
+	awk '{gsub(/\\n/,"\n")}1' ~/ATAT/agent_results_pre.txt >> ~/ATAT/agent_results.txt
+	rm ~/ATAT/agent_results_pre.txt
+            echo -e "\E[1;34m::::: \e[97mPSE Agent's Results Have Been Polled & Are Available In ~/ATAT/agent_results.txt\E[1;34m:::::"
 			;;
 		"Get PSE Stored Credentials")
     pseauthtoken=~/ATAT/PSE_perm_token.txt
@@ -1129,7 +1131,7 @@ do
     pseauthtoken=~/ATAT/PSE_perm_token.txt
     read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Listener to Kill): ' userlistener; 
 	curl --insecure -i https://$userlistener:$userport/api/listeners/$userlistener?token=$(cat $pseauthtoken) -X DELETE	
-            echo -e "\E[1;34m::::: \e[97m$userlistener Has Been Killed \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97m\E[1;34m"$userlistener"\E[1;34m Has Been Killed \E[1;34m:::::"
 			;;
 		"Kill All PSE Listeners")
 	pseauthtoken=~/ATAT/PSE_perm_token.txt
