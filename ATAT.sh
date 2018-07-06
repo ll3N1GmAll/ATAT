@@ -1117,8 +1117,9 @@ do
     pseauthtoken=~/ATAT/PSE_perm_token.txt
     read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'PSE Agent to Poll: ' useragent; 
 	curl --insecure -i https://$userlistener:$userport/api/agents/$useragent/results?token=$(cat $pseauthtoken)	| tee ~/ATAT/agent_results_pre.txt
-	awk '{gsub(/\\n/,"\n")}1' ~/ATAT/agent_results_pre.txt >> ~/ATAT/agent_results.txt
-	rm ~/ATAT/agent_results_pre.txt
+	awk '{gsub(/\\n/,"\n")}1' ~/ATAT/agent_results_pre.txt >> ~/ATAT/agent_results_pre1.txt
+	awk '{gsub(/\\r/,"\n")}1' ~/ATAT/agent_results_pre1.txt >> ~/ATAT/agent_results.txt
+	rm ~/ATAT/agent_results_pre*.txt
             echo -e "\E[1;34m::::: \e[97mPSE Agent's Results Have Been Polled & Are Available In ~/ATAT/agent_results.txt\E[1;34m:::::"
 			;;
 		"Get PSE Stored Credentials")
