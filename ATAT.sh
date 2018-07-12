@@ -1272,11 +1272,12 @@ do
 	        echo -e "\E[1;34m::::: \e[97mJohn The Ripper Output & All Cracked Passwords Located in ~/ATAT/john_cracked.txt\E[1;34m:::::"
             ;;  
         "WiFi Jammer")
+    read -p 'Set Blast Raduis: ' usertargets;
     echo -e "\E[1;34m::::: \e[97mDeauth Attack - Automatically Detects ALL Access Points & Clients In Range\E[1;34m:::::"
-    echo -e "\E[1;34m::::: \e[97mThis Attack Will Hold Down the 10 Closest Clients Indefinitely\E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mThis Attack Will Hold Down the \E[1;34m"$usertargets"\E[1;34m Closest Clients Indefinitely\E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mThis Attack Is ILLEGAL If Not Conducted In A Controlled Environment That Is Free Of Networks That Are Not In Scope!! Use Responsibly & With Great Caution!\E[1;34m:::::"
-    echo -e "\E[1;34m::::: \e[97mUse Ctrl+C In XTerm Window to Stop Attack\E[1;34m:::::"
-	xterm -e python ~/wifijammer-ng/wifijammer.py -m 10 -p 15
+    echo -e "\E[1;34m::::: \e[97mUse Ctrl+C In Jammer Window to Stop Attack\E[1;34m:::::"
+	python ~/wifijammer-ng/wifijammer.py -m $usertargets -p 15
             ;;                 
         "Main Menu")
             ~/ATAT/ATAT.sh
