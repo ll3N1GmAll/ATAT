@@ -740,8 +740,8 @@ done
          
 echo -e "\E[1;34m::::: \e[97mScan All The Things!!\E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 6=Main Menu | 7=QUIT: '
-options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target Masscan of All TCP Ports" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
+options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -841,6 +841,18 @@ select opt in "${options[@]}"
 	rm ~masscan_results*.txt
             echo -e "\E[1;34m::::: \e[97mAll TCP Ports Have Been Scanned!\E[1;34m:::::"
             ;;
+        "Bloodhound")
+        xterm -e neo4j console
+        xterm -e bloodhound
+        firefox http://localhost:7474
+			echo -e "\E[1;34m::::: \e[97mIn Firefox Interface\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mLogin to Neo4j Console With User:neo4j & Password:neo4j and Change Defalt Password\E[1;34m:::::"
+            echo ""
+            echo -e "\E[1;34m::::: \e[97mIn Bloodhound Interface\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter bolt://127.0.0.1:7687 in Database Field\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter neo4j In Username Field\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter Newly Created Password In Password Field Unless You Left It As Defalut Of neo4j\E[1;34m:::::"
+			;;
         "Resume")
     masscan --resume paused.conf
 			;;           
@@ -900,7 +912,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk"
+	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk bloodhound"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
