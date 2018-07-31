@@ -772,8 +772,8 @@ done
          
 echo -e "\E[1;34m::::: \e[97mScan All The Things!!\E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
-options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 8=Main Menu | 9=QUIT: '
+options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -821,6 +821,24 @@ do
             echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Processed!\E[1;34m:::::"
             ;;
     "Multi-Target SSLScan")
+	echo -e "\E[1;34m::::: \e[97mMulti-Target SSLScan\E[1;34m:::::"		
+	inputfile=~/ATAT/MSF_targets.txt
+	outputfile=SSLScan_Results.txt
+	for IP in $(cat $inputfile)
+	do
+	sslscan --no-failed --no-rejected --certificate-info --verbose $IP | tee $outputfile
+		
+	cat $outputfile | egrep "Testing|RC4" | grep -B1 RC4 >> rc4.txt
+	cat $outputfile | egrep "Testing|SSLv2" | grep -B1 SSLv2 >> sslv2.txt
+	cat $outputfile | egrep -B1 "Testing|SSLv3|TLSv1.0" >> heartbleed_targets.txt
+	cat $outputfile | egrep "Testing|EXP" | grep -B1 EXP >> freak.txt
+	cat $outputfile | egrep "Testing|40 |56 " | egrep -B1 "40 |56 " >> weak_ciphers.txt
+	cat $outputfile | egrep "Testing|After" | grep -B1 After >> expired_certs.txt
+	cat $outputfile | egrep "Testing|Certificate|Subject|Issuer|valid" | grep -B1 -A4 Certificate >> ssl_certs.txt
+	done
+                echo -e "\E[1;34m::::: \e[97mCheck ATAT Folder for results!\E[1;34m:::::"
+            ;;
+    "Multi-Target SSLScan - With Masscan Results")
 	echo -e "\E[1;34m::::: \e[97mMulti-Target SSLScan\E[1;34m:::::"		
 	inputfile=~SSLScan_masscan_results.txt
 	outputfile=~SSLScan_Results.txt
