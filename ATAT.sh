@@ -772,8 +772,8 @@ done
          
 echo -e "\E[1;34m::::: \e[97mScan All The Things!!\E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 8=Main Menu | 9=QUIT: '
-options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 9=Main Menu | 10=QUIT: '
+options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Extract All IP:Port Combos From Nmap Output For SSLScan Processing" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -928,6 +928,18 @@ select opt in "${options[@]}"
 			#echo -e "\E[1;34m::::: \e[97mIn /usr/share/neo4j/conf/neo4j.conf You Must Uncomment This Line: dbms.connectors.default_listen_address=0.0.0.0\E[1;34m:::::"
 			#echo -e "\E[1;34m::::: \e[97mThen Save /usr/share/neo4j/conf/neo4j.conf, Kill The 2 xterm Windows Opened By Running This Option & Re-Run This Option Again\E[1;34m:::::"
 			;;
+	"Extract All IP:Port Combos From Nmap Output For SSLScan Processing")
+	        echo -e "\E[1;34m::::: \e[97mNmap Output From \"Intense\" Scan Profiles Only\E[1;34m:::::"
+	read -p 'Enter Full Path Including File Name Of Nmap Output (/root/output.xml):' useroutput;
+	#cat $useroutput | egrep "Discovered open port" | grep -B1 open >> Open_Ports.txt
+	sed "/Discovered open port /s/Discovered open port /""/g" $useroutput > ~nmap_results1.txt
+	awk -F/ '{ print $2 ":" $1 }' ~nmap_results1.txt > ~nmap_results2.txt
+	sed "/tcp on /s/tcp on /""/g" ~nmap_results2.txt >> ~nmap_results3.txt
+	sed "/ /s/ /""/g" ~nmap_results3.txt >> ~nmap_results4.txt
+	grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\:[0-9]{1,5}' ~nmap_results4.txt >> SSLScan_nmap_results.txt
+	rm ~nmap_results*.txt
+            echo -e "\E[1;34m::::: \e[97mNmap Output Has Been Processed. Results Are In ~/ATAT/SSLScan_nmap_results.txt\E[1;34m:::::"
+            ;;
     "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
