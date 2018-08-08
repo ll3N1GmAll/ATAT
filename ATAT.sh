@@ -773,7 +773,7 @@ done
 echo -e "\E[1;34m::::: \e[97mScan All The Things!!\E[1;34m:::::"
 
 PS3='Enter your choice: ENTER=Options Menu | 10=Main Menu | 11=QUIT: '
-options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Extract All IP:Port Combos From Nmap Output For SSLScan Processing" "Main Menu" "Quit")
+options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target SSLScan - With Nmap Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Extract All IP:Port Combos From Nmap Output For SSLScan Processing" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
