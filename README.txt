@@ -92,6 +92,7 @@ OPTION Multi_target Java JMX & Multi-Target Java RMI:
 
 OPTION Multi-Target SNMP Enumeration:
 /root/ATAT/MSF_targets.txt
+Output saved to ~/ATAT/SNMP_logs.txt
 
 OPTION Multi-Target Load Balancer Detection:
 /root/ATAT/MSF_targets.txt
