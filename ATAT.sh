@@ -804,7 +804,7 @@ do
 	set COMMUNITY $userstring;\
 	set VERSION $userversion;\
 	run;\
-	exit"
+	exit" | tee -a ~/ATAT/SNMP_logs.txt
 	done
             echo -e "\E[1;34m::::: \e[97mAll Targets' SNMP Have Been Enumerated!\E[1;34m:::::"
             ;;
