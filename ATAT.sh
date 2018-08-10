@@ -191,9 +191,9 @@ echo -e "\E[1;34m===\e[97m[9] \e[95mEmpire & DeathStar  \e[97m  [Pledge Your All
 tput sgr0
 echo -e "\E[1;34m:::\e[97m[10]\e[31mWireless Attacks      \e[97m[Rule The Airwaves]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m:::\e[97m[11]\e[90mData Exfiltration     \e[97m[Loot & Profit]   \E[1;34m"
+echo -e "\E[1;34m===\e[97m[11]\e[90mData Exfiltration     \e[97m[Loot & Profit]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[0] \e[32mExit                  \e[97m[Exit ATAT]   \E[1;34m"
+echo -e "\E[1;34m:::\e[97m[0] \e[32mExit                  \e[97m[Exit ATAT]   \E[1;34m"
 tput sgr0
 #echo -e "\E[1;34m===\e[97m[13]\e[34mLoad Balance Detection\e[97m[Run LBD Against Many Targets]  \E[1;34m"
 #tput sgr0
