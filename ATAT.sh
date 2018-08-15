@@ -193,10 +193,10 @@ echo -e "\E[1;34m:::\e[97m[10]\e[31mWireless Attacks      \e[97m[Rule The Airwav
 tput sgr0
 echo -e "\E[1;34m===\e[97m[11]\e[90mData Exfiltration     \e[97m[Loot & Profit]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m:::\e[97m[0] \e[32mExit                  \e[97m[Exit ATAT]   \E[1;34m"
+echo -e "\E[1;34m:::\e[97m[00]\e[32mReset & Recharge      \e[97m[Remove All Scan Output To Lock A New Target]  \E[1;34m"
 tput sgr0
-#echo -e "\E[1;34m===\e[97m[13]\e[34mLoad Balance Detection\e[97m[Run LBD Against Many Targets]  \E[1;34m"
-#tput sgr0
+echo -e "\E[1;34m===\e[97m[0] \e[34mExit                  \e[97m[Exit ATAT]   \E[1;34m"
+tput sgr0
 #echo -e "\E[1;34m:::\e[97m[14]\e[95mMulti-Target SSLScan \e[97m [Run SSLScan Against Many Targets]   \E[1;34m"
 #tput sgr0
 #echo -e "\E[1;34m===\e[97m[15]\e[31mMasscan All TCP Ports \e[97m[Masscan all TCP Ports on Many Targets]   \E[1;34m"
@@ -1470,6 +1470,28 @@ do
     esac
 done 
   
+;;
+
+"00" | "00" ) 
+  echo -e "\E[1;34m::::: \e[97mReset & Recharge \E[1;34m:::::"
+  echo -e "\E[1;34m::::: \e[97mRemoving All Results From Prior Campaigns...\E[1;34m:::::"
+  echo -e "\E[1;34m::::: \e[97mThis Does NOT remove Any Password Cracking/Captured Hash Output\E[1;34m:::::"
+	sleep 15
+  rm ~/ATAT/SNMP_logs.txt
+  rm ~/ATAT/LBD_Results.txt
+  rm ~/ATAT/rc4.txt
+  rm ~/ATAT/sslv2.txt
+  rm ~/ATAT/heartbleed_targets.txt
+  rm ~/ATAT/freak.txt
+  rm ~/ATAT/weak_ciphers.txt
+  rm ~/ATAT/expired_certs.txt
+  rm ~/ATAT/ssl_certs.txt
+  rm ~/ATAT/~SSLScan_masscan_results.txt
+  rm ~/ATAT/SSLScan_nmap_results.txt
+  rm ~/ATAT/~SSLScan_Results.txt
+  rm ~/ATAT/Open_Ports.txt
+  ~/ATAT/ATAT.sh
+
 ;;
 
 "0" | "0" )
