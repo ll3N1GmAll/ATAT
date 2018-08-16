@@ -826,7 +826,7 @@ do
 	outputfile=SSLScan_Results.txt
 	for IP in $(cat $inputfile)
 	do
-	sslscan --no-failed --no-rejected --certificate-info --verbose $IP | tee $outputfile
+	sslscan --no-failed --no-rejected --certificate-info --verbose $IP | tee -a $outputfile
 		
 	cat $outputfile | egrep "Testing|RC4" | grep -B1 RC4 >> rc4.txt
 	cat $outputfile | egrep "Testing|SSLv2" | grep -B1 SSLv2 >> sslv2.txt
@@ -844,7 +844,7 @@ do
 	outputfile=~SSLScan_Results.txt
 	for IP in $(cat $inputfile)
 	do
-	sslscan --no-failed --no-rejected --certificate-info --verbose $IP | tee $outputfile
+	sslscan --no-failed --no-rejected --certificate-info --verbose $IP | tee -a $outputfile
 		
 	cat $outputfile | egrep "Testing|RC4" | grep -B1 RC4 >> rc4.txt
 	cat $outputfile | egrep "Testing|SSLv2" | grep -B1 SSLv2 >> sslv2.txt
@@ -862,7 +862,7 @@ do
 	outputfile=~SSLScan_Results.txt
 	for IP in $(cat $inputfile)
 	do
-	sslscan --no-failed --no-rejected --certificate-info --verbose $IP | tee $outputfile
+	sslscan --no-failed --no-rejected --certificate-info --verbose $IP | tee -a $outputfile
 		
 	cat $outputfile | egrep "Testing|RC4" | grep -B1 RC4 >> rc4.txt
 	cat $outputfile | egrep "Testing|SSLv2" | grep -B1 SSLv2 >> sslv2.txt
@@ -887,7 +887,7 @@ select opt in "${options[@]}"
 	outputfile=~masscan_results.txt
 	for IP in $(cat $inputfile)
 	do
-	masscan $IP -p0-65535 --rate 1000 | tee $outputfile
+	masscan $IP -p0-65535 --rate 1000 | tee -a $outputfile
 	cat $outputfile | egrep "Discovered open port" | grep -B1 open >> Open_Ports.txt
 	sed "/Discovered open port /s/Discovered open port /""/g" ~masscan_results.txt > ~masscan_results1.txt
 	awk -F/ '{ print $2 ":" $1 }' ~masscan_results1.txt > ~masscan_results2.txt
@@ -900,7 +900,7 @@ select opt in "${options[@]}"
         "Options (enter manual targets for pause/resume support)")
 	outputfile=~masscan_results.txt
 	read -p 'Enter Target IPs (space delimited):' usertargets;
-	masscan $usertargets -p0-65535 --rate 1000 | tee $outputfile
+	masscan $usertargets -p0-65535 --rate 1000 | tee -a $outputfile
 	cat $outputfile | egrep "Discovered open port" | grep -B1 open >> Open_Ports.txt
 	sed "/Discovered open port /s/Discovered open port /""/g" ~masscan_results.txt > ~masscan_results1.txt
 	awk -F/ '{ print $2 ":" $1 }' ~masscan_results1.txt > ~masscan_results2.txt
