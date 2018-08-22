@@ -193,7 +193,7 @@ echo -e "\E[1;34m:::\e[97m[10]\e[31mWireless Attacks      \e[97m[Rule The Airwav
 tput sgr0
 echo -e "\E[1;34m===\e[97m[11]\e[90mData Exfiltration     \e[97m[Loot & Profit]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m:::\e[97m[00]\e[32mReset & Recharge      \e[97m[Remove All Scan Output To Lock A New Target]  \E[1;34m"
+echo -e "\E[1;34m:::\e[97m[00]\e[32mReset & Recharge      \e[97m[Wipe All Scan Output To Lock A New Target]  \E[1;34m"
 tput sgr0
 echo -e "\E[1;34m===\e[97m[0] \e[34mExit                  \e[97m[Exit ATAT]   \E[1;34m"
 tput sgr0
