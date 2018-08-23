@@ -6,7 +6,7 @@ Run all dependency checker options to install all necessary tools before submitt
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze (https://github.com/rand0m1ze/ezsploit). Durandal backdoor builder created by Travis Weathers (Skysploit).
 ShowMeCon 2018 talk - https://www.youtube.com/watch?v=9r8-WeryaN8
 
-v1.9.3.3
+v1.9.3.5
 Added support for parsing Nmap output to feed SSLScan
 Added Automated File Push and Exfiltration support
 Added support for Bloodhound
@@ -160,8 +160,10 @@ schtasks /create /sc onlogon /tn WindowsMgr /rl highest /tr \"%WINDIR%\System32\
 *NIX:
 ATAT creates a 'dbd' binary for *nix DBD builder option payloads and places it in the /var/www/html/ directory. 
 
-For post exploitation once you acquire sessions via ATAT,
+OPTION Listen:
+Select the chosen terminal emulator that your OS supports.
 
+For post exploitation once you acquire sessions via ATAT,
 METHOD 1: 
 Launch your listener with menu option 2. ATAT will intelligently detect the appropriate post modules to run against each session you receive.  However, due to a bug in the MSF AutoRunScript feature you must do the following: From your listener window, after all of your sessions are in (after your attacks have completed) hit enter to drop down to your msf expoit(multi/handler)> prompt and then enter the following command without double quotes: "resource '/root/ATAT/ATAT_multi_post.rc'" Check your loot files in /root/.msf4/loot/
 
@@ -197,3 +199,11 @@ hostapd_free_hapd_data: Interface wlan0 wasn't started
 OUTPUT FILES APPEND DATA DUE TO THE NATURE OF THESE LOOPED OPERATIONS; THEREFORE, ALL OUTPUT FILES MUST BE DELETED OR CLEANED OUT PERIODICALLY TO GET RID OF PREVIOUS OPERATION'S RESULTS
 6) Multi-Target John The Ripper Attack - Perform dictionary attack against all users captured by the HostAPD-WPE attack.
 7) WiFi Jammer - *This Attack Is ILLEGAL If Not Conducted In A Controlled Environment That Is Free Of Networks That Are Not In Scope!! Use Responsibly & With Great Caution!* This is a an automated deauth attack that detects all access points & clients in range. This attack will hold down the 'user defined number' of closest clients indefinitely. A Yagi is recommended for long range, more percise targeting.
+
+OPTION Data Exfiltration:
+1) Push File To Target with SCP - Creds Required - Creates SCP syntax for pushing files to a *nix machine you have valid credentials to.
+2) Data Exfiltration - Creates Meterpreter syntax for downloading files from a target
+3) Push File To Target with PSH / Meterpreter - Creates meterpreter and powershell syntax for pushing files up to a target. PSH method starts Apache and provides a powershell command to run on your target that will download whatever file specified from your attacker machine. MSF method creates meterpreter syntx for uploading a specified file to your target at whatever location you specify.
+4) Wireless Password Stealer - Creates powershell syntax to dump all wireless passwords in plaintext; admin rights required.
+5) Windows 64 bit Credenital & Loot Harvester - Uses an obfuscated version of the excellent LaZagne Project (https://github.com/AlessandroZ/LaZagne) to steal nearly every conceivable password/private key/etc. from a target machine.
+6) Windows 32 bit Credenital & Loot Harvester - Uses an obfuscated version of the excellent LaZagne Project (https://github.com/AlessandroZ/LaZagne) to steal nearly every conceivable password/private key/etc. from a target machine.
