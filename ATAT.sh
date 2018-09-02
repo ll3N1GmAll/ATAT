@@ -288,6 +288,7 @@ done
 echo -e "\E[1;34m::::: \e[97mCreate a Listener \E[1;34m:::::"
 echo ""
 echo -e "\E[1;34m::::: \e[97mChoose XTerm If You Are Not Sure Which Terminal You Have \E[1;34m:::::"
+echo -e "\E[1;34m::::: \e[97mDO NOT Use Ctrl-C to Close ATAT After Starting A Listener!!! \E[1;34m:::::"
 PS3='Enter your choice: ENTER=Options Menu | 6=Main Menu | 7=QUIT: '
 options=("XTerm" "Mate-Terminal" "Gnome-Terminal" "Xfce4" "LXTerminal" "Main Menu" "Quit")
 select opt in "${options[@]}"
