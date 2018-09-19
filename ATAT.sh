@@ -823,7 +823,7 @@ done
 echo -e "\E[1;34m::::: \e[97mScan All The Things!! \E[1;34m:::::"
 
 PS3='Enter your choice: ENTER=Options Menu | 11=Main Menu | 12=QUIT: '
-options=("Multi-Port Auxiliary" "Multi-Target Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target SSLScan - With Nmap Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Extract All IP:Port Combos From Nmap Output For SSLScan Processing" "Main Menu" "Quit")
+options=("Multi-Port Auxiliary" "Multi-Target/Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target SSLScan - With Nmap Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Extract All IP:Port Combos From Nmap Output For SSLScan Processing" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -840,23 +840,24 @@ do
 	run;\
 	exit" | tee -a ~/ATAT/Multi_Port_AUX_logs.txt
 	done
-            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Scanned \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Scanned; Output Is In ~/ATAT/Multi_Port_AUX_logs.txt \E[1;34m:::::"
             ;;
-    "Multi-Target Auxiliary")
+    "Multi-Target/Port Auxiliary")
 	echo -e "\E[1;34m::::: \e[97mBecause Sometimes You Need To Hit More Targets Than The MSF RHOSTS Option Can Handle \E[1;34m:::::"
-            
-            read -p 'Set MODULE_PATH: ' usermodule; read -p 'Set RPORT: ' userport;
-	inputfile=~/ATAT/MSF_targets.txt
-
-	for IP in $(cat $inputfile)
+   	echo -e "\E[1;34m::::: \e[97mRemember To Have Your Targets In ~/ATAT/MSF_targets.txt \E[1;34m:::::"
+        
+            read -p 'Set MODULE_PATH: ' usermodule;
+	inputfile=~/ATAT/MSF_AUX_target_ports.txt
+	targetfile=~/ATAT/MSF_targets.txt
+	for PORT in $(cat $inputfile)
 	do
 	msfconsole -x "use $usermodule;\
-	set RHOSTS $IP;\
-	set RPORT $userport;\
+	set RHOSTS file:$targetfile;\
+	set RPORT $PORT;\
 	run;\
-	exit" | tee -a ~/ATAT/Multi_Target_AUX_logs.txt
+	exit" | tee -a ~/ATAT/Multi_TargetPort_AUX_logs.txt
 	done
-            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Scanned \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Scanned; Output Is In ~/ATAT/Multi_TargetPort_AUX_logs.txt \E[1;34m:::::"
             ;;
     "Multi-Target SNMP Enumeration")
     echo -e "\E[1;34m::::: \e[97mDump All The SNMP!! \E[1;34m:::::"
