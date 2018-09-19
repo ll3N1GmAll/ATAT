@@ -822,8 +822,8 @@ done
          
 echo -e "\E[1;34m::::: \e[97mScan All The Things!! \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 10=Main Menu | 11=QUIT: '
-options=("Multi-Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target SSLScan - With Nmap Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Extract All IP:Port Combos From Nmap Output For SSLScan Processing" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 11=Main Menu | 12=QUIT: '
+options=("Multi-Port Auxiliary" "Multi-Target Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target SSLScan - With Nmap Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Extract All IP:Port Combos From Nmap Output For SSLScan Processing" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -837,6 +837,22 @@ do
 	msfconsole -x "use $usermodule;\
 	set RHOSTS $usertarget;\
 	set RPORT $PORT;\
+	run;\
+	exit"
+	done
+            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Scanned \E[1;34m:::::"
+            ;;
+    "Multi-Target Auxiliary")
+	echo -e "\E[1;34m::::: \e[97mBecause Sometimes You Need To Hit More Targets Than The MSF RHOSTS Option Can Handle \E[1;34m:::::"
+            
+            read -p 'Set MODULE_PATH: ' usermodule; read -p 'Set RPORT: ' userport;
+	inputfile=~/ATAT/MSF_targets.txt
+
+	for IP in $(cat $inputfile)
+	do
+	msfconsole -x "use $usermodule;\
+	set RHOSTS $IP;\
+	set RPORT $userport;\
 	run;\
 	exit"
 	done
@@ -1054,7 +1070,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk bloodhound libatk-adaptor libgail-common"
+	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
