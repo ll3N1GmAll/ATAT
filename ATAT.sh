@@ -822,8 +822,8 @@ done
          
 echo -e "\E[1;34m::::: \e[97mScan All The Things!! \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 11=Main Menu | 12=QUIT: '
-options=("Multi-Port Auxiliary" "Multi-Target/Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target SSLScan - With Nmap Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Extract All IP:Port Combos From Nmap Output For SSLScan Processing" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 12=Main Menu | 13=QUIT: '
+options=("Multi-Port Auxiliary" "Multi-Target/Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target SSLScan - With Nmap Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Extract All IP:Port Combos From Nmap Output For SSLScan Processing" "changeme - Default Credential Checker" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1025,6 +1025,15 @@ select opt in "${options[@]}"
 	rm ~nmap_results*.txt
             echo -e "\E[1;34m::::: \e[97mNmap Output Has Been Processed. Results Are In ~/ATAT/SSLScan_nmap_results.txt \E[1;34m:::::"
             ;;
+    "changeme - Default Credential Checker")
+     echo -e "\E[1;34m::::: \e[97mchangeme Default Password Checker WILL Attempt To Login To The Systems You Are Scanning. This Is NOT Passive. \E[1;34m:::::"
+			inputfile=~/ATAT/MSF_targets.txt
+     for IP in $(cat $inputfile)
+     do
+     python ~/changeme/changeme.py -a --timeout 5 $IP --fresh | tee -a ~/ATAT/Default_Creds.txt
+     done
+     echo -e "\E[1;34m::::: \e[97mAll Resylts Have Been Saved To ~/ATAT/Default_Creds.txt \E[1;34m:::::"
+           ;;
     "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
@@ -1042,8 +1051,8 @@ done
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies \E[1;34m:::::"
   echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!! \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
-options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "Apt Update Fix" "Main Menu" "Quit") #"HostAPD-WPE via Github"
+PS3='Enter your choice: ENTER=Options Menu | 8=Main Menu | 9=QUIT: '
+options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Main Menu" "Quit") #"HostAPD-WPE via Github"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1054,6 +1063,7 @@ do
 		cd ~/DeathStar && pip install -r requirements.txt && pip3 install -r requirements.txt
 		cd ..
 		echo -e "\e[1;34m[*] Install Of Powershell Empire & DeathStar Complete\e[0m\n"
+		echo -e "\e[1;34m[*] If You Get Errors About \"building cryptography\", then manually run /root/Empire/setup/install.sh & then /root/Empire/setup/reset.sh \e[0m\n"
 			;;
         "Dependencies")
 		clear
@@ -1071,7 +1081,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev"
+	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
@@ -1157,6 +1167,15 @@ do
 	pip install -r requirements.txt
 	chmod +x wifijammer.py && chmod +x wifijammer-ng.py
 	echo -e "\e[1;34m[*] Install Of WiFiJammer-ng Complete\e[0m\n"
+			;;
+		"changeme Install")
+	git clone https://github.com/ztgrace/changeme ~/changeme
+	cd ~/changeme
+	sudo pip install nmapparser
+	pip install tabulate
+	sudo pip install -r requirements.txt
+	chmod +x changeme.py
+	echo -e "\e[1;34m[*] Install Of changeme Complete\e[0m\n"
 			;;
 		"Apt Update Fix")
 	rm -rf /var/lib/apt/lists && apt-get update && apt-get install kali-archive-keyring -y --allow-unauthenticated && apt-get install dirmngr --install-recommends -y --allow-unauthenticated && apt-key adv --keyserver hkp://keys.gnupg.net --recv-keys 7D8D0BF6
