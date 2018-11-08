@@ -6,7 +6,8 @@ Run all dependency checker options to install all necessary tools before submitt
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze (https://github.com/rand0m1ze/ezsploit). Durandal backdoor builder created by Travis Weathers (Skysploit).
 ShowMeCon 2018 talk - https://www.youtube.com/watch?v=9r8-WeryaN8
 
-v1.9.3.5
+v1.9.3.6
+Added support for changeme Default Credential Checker
 Added support for parsing Nmap output to feed SSLScan
 Added Automated File Push and Exfiltration support
 Added support for Bloodhound
@@ -68,6 +69,9 @@ accessible by ATAT when it run as sudo. Then you simply run ATAT via sudo ./ATAT
 All targets and/or ports must be added into their respective TXT files in /root/ as referenced above and detailed below.
 Adding your targets/ports to the TXT files in ~/ATAT will not work under this setup
 *You can (and should) have the ATAT folder in /root only if you wish; and you can run it from there disregarding all of these instructions.*
+
+**ParrotOS Users (and any distros using the firejail sandbox):**
+You must navigate to /root/ATAT/ in a $ (non-root) terminal prompt. Then launch ATAT with "sudo ./ATAT.sh". Otherwise, firejail will break functionality. Launching in this manner resolves all firejail issues that I know of.
 
 usage:
 chmod +x ~/ATAT/ATAT.sh
@@ -207,3 +211,7 @@ OPTION Data Exfiltration:
 4) Wireless Password Stealer - Creates powershell syntax to dump all wireless passwords in plaintext; admin rights required.
 5) Windows 64 bit Credenital & Loot Harvester - Uses an obfuscated version of the excellent LaZagne Project (https://github.com/AlessandroZ/LaZagne) to steal nearly every conceivable password/private key/etc. from a target machine.
 6) Windows 32 bit Credenital & Loot Harvester - Uses an obfuscated version of the excellent LaZagne Project (https://github.com/AlessandroZ/LaZagne) to steal nearly every conceivable password/private key/etc. from a target machine.
+
+OPTION changeme Default Credential Checker:
+A default credential scanner by ztgrace (https://github.com/ztgrace/changeme)
+
