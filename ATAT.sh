@@ -1188,12 +1188,17 @@ do
 	export PATH=$PATH:~/.local/bin
 	python create-workspace.py -DG pupyw
 	export PATH=$PATH:~/.local/bin
+	echo -e "\E[1;34m::::: \e[97m[*] Install Of Pupy Complete\E[1;34m:::::"
 			;;
 		"BeRoot Install")
 	git clone https://github.com/AlessandroZ/BeRoot ~/BeRoot
 	cd ~/BeRoot/Windows
 	pip install -r requirements.txt
+	echo -e "\E[1;34m::::: \e[97m[*] Install Of BeRoot Complete\E[1;34m:::::"
 			;;
+		"Spray Install")
+	git clone https://github.com/SpiderLabs/Spray ~/Spray
+	echo -e "\E[1;34m::::: \e[97m[*] Install Of Spray Complete\E[1;34m:::::"
 		"Main Menu")
             ~/ATAT/ATAT.sh
             ;;
