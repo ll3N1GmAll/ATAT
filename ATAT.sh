@@ -830,7 +830,7 @@ Example: https://lyncweb.spiderlabs.com/Autodiscover/AutodiscoverService.svc/roo
 
 You may use IPs and/or URLs in the MSF_targets.txt file to accommodate your target type. 
 EOF
-            read -p 'Set PLATFORM: ' userplatform; read -p 'Set PLATFORM: ' userplatform; read -p 'Set Username List: ' usernames; read -p 'Set Password List: ' userpasswords; read -p 'Set Attempts Per Lockout (Example: 1): ' userattempts; read -p 'Set Lockout Period In Minutes (Example: 35): ' userlockout; read -p 'Set DOMAIN (SMB Mode Only): ' userdomain; read -p 'Set RequestsFile (OWA Mode Only): ' userrequestsfile;
+            read -p 'Set PLATFORM: ' userplatform; read -p 'Set Username List: ' usernames; read -p 'Set Password List: ' userpasswords; read -p 'Set Attempts Per Lockout (Example: 1): ' userattempts; read -p 'Set Lockout Period In Minutes (Example: 35): ' userlockout; read -p 'Set DOMAIN (SMB Mode Only): ' userdomain; read -p 'Set RequestsFile (OWA Mode Only): ' userrequestsfile;
 	inputfile=~/ATAT/MSF_targets.txt
 	outputfile=~/ATAT/Spray_output.txt
 	for IP in $(cat $inputfile)
