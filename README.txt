@@ -3,7 +3,10 @@
 Run all dependency checker options to install all necessary tools before submitting any issues!
 
 # ATAT
-Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze. Durandal backdoor builder created by Travis Weathers (Skysploit).
+Attack Team Automation Tool for automating penetration testing operations. 
+
+Interface and concept based on ezsploit by rand0m1ze. 
+Durandal backdoor builder created by Travis Weathers (Skysploit); C code updated by ll3N1GmAll for newer gcc-mingw-w64-i686 compiler compatibility.
 
 v1.9.3.7
 Added support for GhostPack C# tools from SpecterOps (tool acquisition and setup only; full usage and autiomation features coming soon..)
