@@ -6,6 +6,7 @@ Run all dependency checker options to install all necessary tools before submitt
 Attack Team Automation Tool for automating penetration testing operations. Based on ezsploit by rand0m1ze. Durandal backdoor builder created by Travis Weathers (Skysploit).
 
 v1.9.3.7
+Added support for GhostPack C# tools from SpecterOps (tool acquisition and setup only; full usage and autiomation features coming soon..)
 Added support for Powershell wireless credential dumper
 Added support for LaZagne credential harvester
 Added support for LinEnum *nix Privilege Escalation checks
