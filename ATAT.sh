@@ -1210,7 +1210,8 @@ do
 	git clone https://github.com/GhostPack/SafetyKatz ~/GhostPack/SafetyKatz
 	git clone https://github.com/GhostPack/SharpWMI ~/GhostPack/SharpWMI
 	echo -e "\E[1;34m::::: \e[97m[*] Download Of GhostPack Source Code Complete\E[1;34m:::::"
-	echo -e "\E[1;34m::::: \e[97m[*] Simply Open Up The Project's .sln File In Visual Studio 2015 Community Edition, choose \"Build\" Menu, and \"Build Solution\".\E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97m[*] Move GhostPack Folder To Windows Machine With Visual Studio 2015 Community Edition Installed\E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97m[*] Simply Open Up The Project's .sln File In Visual Studio 2015 Community Edition, choose \"Build\" Menu, then click \"Build Solution\".\E[1;34m:::::"
 	echo -e "\E[1;34m::::: \e[97m[*] Your EXE Will Be Located In drive:\<project_folder>\<project_name>\bin\Debug \E[1;34m:::::"
 	echo -e "\E[1;34m::::: \e[97m[*] Example D:\SafetyKatz\SafetyKatz\bin\Debug\SafetyKatz.exe \E[1;34m:::::"
 			;;
