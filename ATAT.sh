@@ -181,7 +181,7 @@ echo -e "\E[1;34m:::\e[97m[4] \e[95mPersistence          \e[97m [Create a Persis
 tput sgr0
 echo -e "\E[1;34m===\e[97m[5] \e[31mArmitage             \e[97m [Launch the Armitage GUI]  \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m:::\e[97m[6] \e[90mMulti-Target Exploit \e[97m [Fire 1 Exploit at Many Targets/Ports]   \E[1;34m"
+echo -e "\E[1;34m:::\e[97m[6] \e[90mMulti-Target Exploit \e[97m [Breach Defenses With Thermal Detonators]   \E[1;34m"
 tput sgr0                               # Reset attributes.
 echo -e "\E[1;34m===\e[97m[7] \e[32mAuxiliary & Scanning \e[97m [Run Aux Mods & Scans On Many Targets/Ports]  \E[1;34m"
 tput sgr0
@@ -1052,8 +1052,8 @@ done
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies \E[1;34m:::::"
   echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!! \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 10=Main Menu | 11=QUIT: '
-options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "Main Menu" "Quit") #"HostAPD-WPE via Github"
+PS3='Enter your choice: ENTER=Options Menu | 11=Main Menu | 12=QUIT: '
+options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Main Menu" "Quit") #"HostAPD-WPE via Github"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1199,6 +1199,21 @@ do
 		"Spray Install")
 	git clone https://github.com/SpiderLabs/Spray ~/Spray
 	echo -e "\E[1;34m::::: \e[97m[*] Install Of Spray Complete\E[1;34m:::::"
+			;;
+		"GhostPack Install")
+	git clone https://github.com/GhostPack/Rubeus ~/GhostPack/Rubeus
+	git clone https://github.com/GhostPack/Seatbelt ~/GhostPack/Seatbelt
+	git clone https://github.com/GhostPack/SharpRoast ~/GhostPack/SharpRoast
+	git clone https://github.com/GhostPack/SharpUp ~/GhostPack/SharpUp
+	git clone https://github.com/GhostPack/SharpDPAPI ~/GhostPack/SharpDPAPI
+	git clone https://github.com/GhostPack/SharpDump ~/GhostPack/SharpDump
+	git clone https://github.com/GhostPack/SafetyKatz ~/GhostPack/SafetyKatz
+	git clone https://github.com/GhostPack/SharpWMI ~/GhostPack/SharpWMI
+	echo -e "\E[1;34m::::: \e[97m[*] Download Of GhostPack Source Code Complete\E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97m[*] Simply Open Up The Project's .sln File In Visual Studio 2015 Community Edition, choose \"Build\" Menu, and \"Build Solution\".\E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97m[*] Your EXE Will Be Located In drive:\<project_folder>\<project_name>\bin\Debug \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97m[*] Example D:\SafetyKatz\SafetyKatz\bin\Debug\SafetyKatz.exe \E[1;34m:::::"
+			;;
 		"Main Menu")
             ~/ATAT/ATAT.sh
             ;;
