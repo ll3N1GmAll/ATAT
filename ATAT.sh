@@ -197,9 +197,9 @@ echo -e "\E[1;34m:::\e[97m[12]\e[32mMake Your Escape     \e[97m [Float Away...Wi
 tput sgr0
 echo -e "\E[1;34m===\e[97m[13]\e[34mPrivilege Escalation  \e[97m[PrivEsc Options & Techniques]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[00]\e[95mReset & Recharge      \e[97m[Wipe All Scan Output To Lock A New Target]  \E[1;34m"
+echo -e "\E[1;34m:::\e[97m[00]\e[95mReset & Recharge      \e[97m[Wipe All Scan Output To Lock A New Target]  \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m:::\e[97m[0] \e[31mExit                  \e[97m[Exit ATAT]   \E[1;34m"
+echo -e "\E[1;34m===\e[97m[0] \e[31mExit                  \e[97m[Exit ATAT]   \E[1;34m"
 tput sgr0
 
 echo -e "\E[1;34m::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
