@@ -22,7 +22,7 @@ Added support for parsing Nmap output to feed SSLScan
 Added Automated File Push and Exfiltration support
 Added support for Bloodhound
 Added support for HostAPD-WPE, Asleap, John the Ripper, & Airgeddon Integration,
-Added Powershell Empire & DeathStar Integration,
+Added Powershell Empire & DeathStar Integration, (PSE support downgraded to BETA until PSE 3 release integration)
 Added support for Apache Struts/Tomcat/Etc. exploits,
 Added support for Java JMX exploitation,
 Added support for Java RMI exploitation,
