@@ -218,3 +218,6 @@ OPTION Data Exfiltration:
 OPTION changeme Default Credential Checker:
 A default credential scanner by ztgrace (https://github.com/ztgrace/changeme)
 
+OPTION Imperial Research Laboratory:
+1) Weblogic Java Deserialization RCE - This proof of concept code will demonstrate the ability to run a ping command on the intended targets via exploitation of a Weblogic java deserialization remote code execution vulnerability. It will open a window with tcpdump running to receive the pings from each intended target. It will then open 1 window at a time for each target on your MSF_targets.txt list. These windows will attempt to ecploit the target and then close themselves once the attack has completed. Each target will be attacked in this manner. Any successful attacks will result in a ping from one of your targets showing up in the initial tcpdump window that opens and remains open. This is your indicator that the target is vulnerable. This attack should be run a few times to make sure the targets are not vunlerable. The exploit does not always trigger successfully the first couple of times.
+
