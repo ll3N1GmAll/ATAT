@@ -1294,7 +1294,7 @@ select opt in "${options[@]}"
      do
      python ~/changeme/changeme.py -a --timeout 5 $IP --fresh | tee -a ~/ATAT/Default_Creds.txt
      done
-     echo -e "\E[1;34m::::: \e[97mAll Resylts Have Been Saved To ~/ATAT/Default_Creds.txt \E[1;34m:::::"
+     echo -e "\E[1;34m::::: \e[97mAll Results Have Been Saved To ~/ATAT/Default_Creds.txt \E[1;34m:::::"
            ;;
     "Main Menu")
             ~/ATAT/ATAT.sh
