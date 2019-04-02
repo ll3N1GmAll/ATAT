@@ -1521,7 +1521,7 @@ do
 		"Start PSE Listener")
     pseauthtoken=~/ATAT/PSE_perm_token.txt
     read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Listener Name: ' userlname;
-		curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/listeners/http?token=$(cat $pseauthtoken) -X POST -d '{"Name":"$userlname"}'
+		curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/listeners/http?token=$(cat $pseauthtoken) -X POST -d '{"Name":"'$userlname'"}'
             echo -e "\E[1;34m::::: \e[97mPSE Listener Has Been Created \E[1;34m:::::"
 			;;
 		"Get PSE Stagers")
