@@ -197,11 +197,11 @@ echo -e "\E[1;34m:::\e[97m[12]\e[32mMake Your Escape     \e[97m [Float Away...Wi
 tput sgr0
 echo -e "\E[1;34m===\e[97m[13]\e[34mPrivilege Escalation  \e[97m[PrivEsc Options & Techniques]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[14]\e[95mImperial Research Lab \e[97m[Proof Of Concept Techniques]   \E[1;34m"
+echo -e "\E[1;34m:::\e[97m[14]\e[95mImperial Research Lab \e[97m[Proof Of Concept Techniques]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m:::\e[97m[00]\e[31mReset & Recharge      \e[97m[Wipe All Scan Output To Lock A New Target]  \E[1;34m"
+echo -e "\E[1;34m===\e[97m[00]\e[31mReset & Recharge      \e[97m[Wipe All Scan Output To Lock A New Target]  \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[0] \e[90mExit                  \e[97m[Exit ATAT]   \E[1;34m"
+echo -e "\E[1;34m:::\e[97m[0] \e[90mExit                  \e[97m[Exit ATAT]   \E[1;34m"
 tput sgr0
 
 echo -e "\E[1;34m::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
@@ -1313,8 +1313,8 @@ done
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies \E[1;34m:::::"
   echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!! \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 11=Main Menu | 12=QUIT: '
-options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Main Menu" "Quit") #"HostAPD-WPE via Github"
+PS3='Enter your choice: ENTER=Options Menu | 12=Main Menu | 13=QUIT: '
+options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Hashcat Install" "Main Menu" "Quit") #"HostAPD-WPE via Github"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1343,7 +1343,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap lbd masscan msfpc sslscan libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv"
+	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap lbd masscan msfpc sslscan libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv p7zip"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
@@ -1475,6 +1475,18 @@ do
 	echo -e "\E[1;34m::::: \e[97m[*] Simply Open Up The Project's .sln File In Visual Studio 2015 Community Edition, choose \"Build\" Menu, then click \"Build Solution\".\E[1;34m:::::"
 	echo -e "\E[1;34m::::: \e[97m[*] Your EXE Will Be Located In drive:\<project_folder>\<project_name>\bin\Debug \E[1;34m:::::"
 	echo -e "\E[1;34m::::: \e[97m[*] Example D:\SafetyKatz\SafetyKatz\bin\Debug\SafetyKatz.exe \E[1;34m:::::"
+			;;
+		"Hashcat Install")
+	wget https://hashcat.net/files/hashcat-5.1.0.7z
+	p7zip -d hashcat-5.1.0.7z
+	mv hashcat-5.1.0 ~/hashcat
+	cd ~/hashcat 
+	chmod +x hashcat64.bin
+	chmod +x hashcat32.bin
+	git clone https://github.com/NotSoSecure/password_cracking_rules ~/ORTRTA
+	cp ~/ORTRTA/OneRuleToRuleThemAll.rule ~/hashcat/rules
+	rm -rf ~/ORTRTA
+		echo -e "\E[1;34m::::: \e[97m[*] Download & Install Of Hashcat Complete\E[1;34m:::::"
 			;;
 		"Main Menu")
             ~/ATAT/ATAT.sh
@@ -1958,6 +1970,7 @@ do
     case $opt in
 		"Stop Running Services")	
 	service apache2 stop
+	  echo -e "\E[1;34m::::: \e[97mStopped Running Apache2 Service \E[1;34m:::::"
 		    ;;
 #		"Data Exfiltration")	
 #	read -p 'Enter Remote File On Target Including Full Path (C:\\\\\Users\\\\\Profile\\\\\filename.ext): ' remoteuserfile; read -p 'Enter File Destination Full Path on Local Machine for MSF (/root/file.ext): ' msflocaluserpath; #read -p 'Set LHOST IP or Domain Name & Port (if necessary i.e., 1.1.1.1 OR 1.1.1.1:8080): ' userhost; read -p 'Enter Local File Webserver Path (filename.ext): ' webuserfile; read -p 'Enter File Destination Full Path on Local Machine for PSH (%WINDIR%\\System32\\file.ext): ' pshuserpath;
@@ -1979,8 +1992,8 @@ done
 "13" | "13" )
   # Accept upper or lowercase input.
   echo -e "\E[1;34m::::: \e[97mPrivilege Escalation Methods \E[1;34m:::::"
-  PS3='Enter your choice: ENTER=Options Menu | 4=Main Menu | 5=QUIT: '
-options=("BeRoot Windows" "BeRoot Linux" "LinEnum" "Main Menu" "Quit" )
+  PS3='Enter your choice: ENTER=Options Menu | 5=Main Menu | 6=QUIT: '
+options=("BeRoot Windows" "BeRoot Linux" "LinEnum" "Hashcat Password Recovery" "Main Menu" "Quit" )
 select opt in "${options[@]}"
 do
     case $opt in
@@ -2003,6 +2016,86 @@ do
 	echo -e "\E[1;34m::::: \e[97mYour Completed LinEnum Report Can Be Found On Your Target Here: /tmp/report \E[1;34m:::::"
 	echo -e "\E[1;34m::::: \e[97mDon't Forget To Delete The Report On Your Target Once You're Done - \"rm /tmp/report\" \E[1;34m:::::"
 			;;
+		"Hashcat Password Recovery")
+cat << "EOF"
+<Common Hash Mode Numbers>:
+   + MD4 [900]
+   + MD5 [0]
+   + SHA1 [100]
+   + SHA2-256 [1400]
+   + SHA2-512 [1700]
+   + NetNTLMv2 [5600]
+   + phpBB3/WordPress/Joomla >= 2.5.18 (MD5) [400]
+   + PostgreSQL [12]
+   + MSSQL (2000) [131]
+   + MSSQL (2005) [132]
+   + MSSQL (2012, 2014) [1731]
+   + MySQL323 [200]
+   + MySQL4.1/MySQL5 [300]
+   + NTLM [1000]
+   + LM [3000]
+   + Domain Cached Credentials (DCC), MS Cache [1100]
+   + Domain Cached Credentials 2 (DCC2), MS Cache 2 [2100]
+   + bcrypt $2*$, Blowfish (Unix) [3200]
+   + sha256crypt $5$, SHA256 (Unix) [7400]
+   + sha512crypt $6$, SHA512 (Unix) [1800]
+   + macOS v10.4, MacOS v10.5, MacOS v10.6 [122]
+   + macOS v10.7 [1722]
+   + macOS v10.8+ (PBKDF2-SHA512) [7100]
+   + Samsung Android Password/PIN [5800]
+   + Windows Phone 8+ PIN/password [13800]
+   + WPA-EAPOL-PBKDF2 [2500]
+   + WPA-EAPOL-PMK [2501]
+   + WPA-PMKID-PBKDF2 [16800]
+   + WPA-PMKID-PMK [16801]
+
+ ::::::::::::::::::Hashcat GPU Cracking For Empire Worthy Hardware:::::::::::::::::::::::::::::
+ :::::::Crack w/ Hashes Only Option Whenever Possible For Greatly Increased Speed::::::::::::::
+ ::Usernames & Hashes Option Works For pwdump Type Output With Usernames Present In Dump File::
+ ::::::::Run The "Hashcat Install" From The Dependency Checker BEFORE Using This Option::::::::
+EOF
+
+echo ""
+
+PS3='Enter your choice: ENTER=Options Menu | 6=Main Menu | 7=QUIT: '
+options=("Brute-Force - Hashes Only" "Brute-Force - Usernames & Hashes" "Dictionary Rule Based Attack - Hashes Only" "Dictionary Rule Based Attack - Usernames & Hashes" "Resume Session" "Main Menu" "Quit")
+select opt in "${options[@]}"
+	do
+		case $opt in
+		"Brute-Force - Hashes Only")
+		read -p 'Enter Session Name: ' usersession; read -p 'Enter Hash Mode: ' usermode; read -p 'Enter Minimum Password Length: ' usermin; read -p 'Enter Maximum Password Length (26 max): ' usermax; read -p 'Enter Output File (Full Path w/ File Extension): ' userout; read -p 'Enter Hash File (Full Path w/ File Extension): ' userhashes;
+    ~/hashcat/hashcat64.bin --session $usersession -D 2 -a 3 -m $usermode --custom-charset1 ?a -i --increment-min=$usermin --increment-max=$usermax -o \'$userout\' \'$userhashes\' ?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a -O
+            echo -e "\E[1;34m::::: \e[97mRecovery Complete. All Results Can Be Found in" \'$userout\' "\E[1;34m:::::"
+            ;;
+        "Brute-Force - Usernames & Hashes")
+		read -p 'Enter Session Name: ' usersession; read -p 'Enter Hash Mode: ' usermode; read -p 'Enter Minimum Password Length: ' usermin; read -p 'Enter Maximum Password Length (26 max): ' usermax; read -p 'Enter Output File (Full Path w/ File Extension): ' userout; read -p 'Enter Hash File (Full Path w/ File Extension): ' userhashes;
+    ~/hashcat/hashcat64.bin --username --session $usersession -D 2 -a 3 -m $usermode --custom-charset1 ?a -i --increment-min=$usermin --increment-max=$usermax -o \'$userout\' \'$userhashes\' ?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a -O
+            echo -e "\E[1;34m::::: \e[97mRecovery Complete. All Results Can Be Found in" \'$userout\' "\E[1;34m:::::"
+            ;;
+        "Dictionary Rule Based Attack - Hashes Only")
+		read -p 'Enter Session Name: ' usersession; read -p 'Enter Hash Mode: ' usermode; read -p 'Enter Output File (Full Path w/ File Extension): ' userout; read -p 'Enter Hash File (Full Path w/ File Extension): ' userhashes; read -p 'Enter Dictionary File (Full Path w/ File Extension): ' userdic;
+    ~/hashcat/hashcat64.bin --session $usersession -D 2 -a 0 -m $usermode -o \'$userout\' \'$userhashes\' \'$userdic\' -r rules/OneRuleToRuleThemAll.rule -O
+            echo -e "\E[1;34m::::: \e[97mRecovery Complete. All Results Can Be Found in" \'$userout\' "\E[1;34m:::::"
+            ;;
+        "Dictionary Rule Based Attack - Usernames & Hashes")
+		read -p 'Enter Session Name: ' usersession; read -p 'Enter Hash Mode: ' usermode; read -p 'Enter Output File (Full Path w/ File Extension): ' userout; read -p 'Enter Hash File (Full Path w/ File Extension): ' userhashes; read -p 'Enter Dictionary File (Full Path w/ File Extension): ' userdic;
+    ~/hashcat/hashcat64.bin --username --session $usersession -D 2 -a 0 -m $usermode -o \'$userout\' \'$userhashes\' \'$userdic\' -r rules/OneRuleToRuleThemAll.rule -O
+            echo -e "\E[1;34m::::: \e[97mRecovery Complete. All Results Can Be Found in" \'$userout\' "\E[1;34m:::::"
+            ;;
+        "Resume Session")
+    	read -p 'Enter Session Name: ' usersession;
+    ~/hashcat/hashcat64.bin --session $usersession --restore
+			;;           
+        "Main Menu")
+            ~/ATAT/ATAT.sh
+            ;;
+        "Quit")
+            echo "Aufiederszehn" && exit 1
+            ;;
+        *) echo invalid option;;
+		esac
+	done
+	        ;;
 		"Main Menu")
             ~/ATAT/ATAT.sh
             ;;
