@@ -2064,22 +2064,22 @@ select opt in "${options[@]}"
 		case $opt in
 		"Brute-Force - Hashes Only")
 		read -p 'Enter Session Name: ' usersession; read -p 'Enter Hash Mode: ' usermode; read -p 'Enter Minimum Password Length: ' usermin; read -p 'Enter Maximum Password Length (26 max): ' usermax; read -p 'Enter Output File (Full Path w/ File Extension): ' userout; read -p 'Enter Hash File (Full Path w/ File Extension): ' userhashes;
-    ~/hashcat/hashcat64.bin --session $usersession -D 2 -a 3 -m $usermode --custom-charset1 ?a -i --increment-min=$usermin --increment-max=$usermax -o \'$userout\' \'$userhashes\' ?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a -O
+    ~/hashcat/hashcat64.bin --session $usersession -D 2 -a 3 -m $usermode --custom-charset1 ?a -i --increment-min=$usermin --increment-max=$usermax -o $userout $userhashes ?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a -O
             echo -e "\E[1;34m::::: \e[97mRecovery Complete. All Results Can Be Found in" \'$userout\' "\E[1;34m:::::"
             ;;
         "Brute-Force - Usernames & Hashes")
 		read -p 'Enter Session Name: ' usersession; read -p 'Enter Hash Mode: ' usermode; read -p 'Enter Minimum Password Length: ' usermin; read -p 'Enter Maximum Password Length (26 max): ' usermax; read -p 'Enter Output File (Full Path w/ File Extension): ' userout; read -p 'Enter Hash File (Full Path w/ File Extension): ' userhashes;
-    ~/hashcat/hashcat64.bin --username --session $usersession -D 2 -a 3 -m $usermode --custom-charset1 ?a -i --increment-min=$usermin --increment-max=$usermax -o \'$userout\' \'$userhashes\' ?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a -O
+    ~/hashcat/hashcat64.bin --username --session $usersession -D 2 -a 3 -m $usermode --custom-charset1 ?a -i --increment-min=$usermin --increment-max=$usermax -o $userout $userhashes ?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a -O
             echo -e "\E[1;34m::::: \e[97mRecovery Complete. All Results Can Be Found in" \'$userout\' "\E[1;34m:::::"
             ;;
         "Dictionary Rule Based Attack - Hashes Only")
 		read -p 'Enter Session Name: ' usersession; read -p 'Enter Hash Mode: ' usermode; read -p 'Enter Output File (Full Path w/ File Extension): ' userout; read -p 'Enter Hash File (Full Path w/ File Extension): ' userhashes; read -p 'Enter Dictionary File (Full Path w/ File Extension): ' userdic;
-    ~/hashcat/hashcat64.bin --session $usersession -D 2 -a 0 -m $usermode -o \'$userout\' \'$userhashes\' \'$userdic\' -r rules/OneRuleToRuleThemAll.rule -O
+    ~/hashcat/hashcat64.bin --session $usersession -D 2 -a 0 -m $usermode -o $userout $userhashes \'$userdic\' -r rules/OneRuleToRuleThemAll.rule -O
             echo -e "\E[1;34m::::: \e[97mRecovery Complete. All Results Can Be Found in" \'$userout\' "\E[1;34m:::::"
             ;;
         "Dictionary Rule Based Attack - Usernames & Hashes")
 		read -p 'Enter Session Name: ' usersession; read -p 'Enter Hash Mode: ' usermode; read -p 'Enter Output File (Full Path w/ File Extension): ' userout; read -p 'Enter Hash File (Full Path w/ File Extension): ' userhashes; read -p 'Enter Dictionary File (Full Path w/ File Extension): ' userdic;
-    ~/hashcat/hashcat64.bin --username --session $usersession -D 2 -a 0 -m $usermode -o \'$userout\' \'$userhashes\' \'$userdic\' -r rules/OneRuleToRuleThemAll.rule -O
+    ~/hashcat/hashcat64.bin --username --session $usersession -D 2 -a 0 -m $usermode -o $userout $userhashes \'$userdic\' -r rules/OneRuleToRuleThemAll.rule -O
             echo -e "\E[1;34m::::: \e[97mRecovery Complete. All Results Can Be Found in" \'$userout\' "\E[1;34m:::::"
             ;;
         "Resume Session")
