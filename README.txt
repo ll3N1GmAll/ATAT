@@ -8,7 +8,8 @@ Attack Team Automation Tool for automating penetration testing operations.
 Interface and concept based on ezsploit by rand0m1ze. 
 Durandal backdoor builder created by Travis Weathers (Skysploit); C code updated by ll3N1GmAll for newer gcc-mingw-w64-i686 compiler compatibility.
 
-v1.9.3.8
+v1.9.4
+Added support for Hashcat GPU cracking
 Added support for SpiderLabs' Spray password spray utility for SMB, OWA, Lync, Cisco VPN
 Added support for BeRoot (Installation only at present; automation coming soon...)
 Added support for GhostPack C# tools from SpecterOps (tool acquisition and setup only; full usage and autiomation features coming soon..)
@@ -221,3 +222,8 @@ A default credential scanner by ztgrace (https://github.com/ztgrace/changeme)
 OPTION Imperial Research Laboratory:
 1) Weblogic Java Deserialization RCE - This proof of concept code will demonstrate the ability to run a ping command on the intended targets via exploitation of a Weblogic java deserialization remote code execution vulnerability. It will open a window with tcpdump running to receive the pings from each intended target. It will then open 1 window at a time for each target on your MSF_targets.txt list. These windows will attempt to ecploit the target and then close themselves once the attack has completed. Each target will be attacked in this manner. Any successful attacks will result in a ping from one of your targets showing up in the initial tcpdump window that opens and remains open. This is your indicator that the target is vulnerable. This attack should be run a few times to make sure the targets are not vunlerable. The exploit does not always trigger successfully the first couple of times.
 
+OPTION Hashcat Password Recovery:
+This is for 64 bit machines only. The dictionary attacks automatically use the OneRuleToRuleThemAll rules set. There must be NO spaces in your file name & path when entering the full paths and file names in for your hash files, dictionary files, and output files.
+Run The "Hashcat Install" From The Dependency Checker BEFORE Using This Option!
+Usernames & Hashes Option Works For pwdump Type Output With Usernames Present In Dump File. 
+Crack with "Hashes Only" Options Whenever Possible For Greatly Increased Speed. 
