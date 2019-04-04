@@ -8,7 +8,7 @@ Attack Team Automation Tool for automating penetration testing operations.
 Interface and concept based on ezsploit by rand0m1ze. 
 Durandal backdoor builder created by Travis Weathers (Skysploit); C code updated by ll3N1GmAll for newer gcc-mingw-w64-i686 compiler compatibility.
 
-v1.9.4
+v1.9.5
 Added support for Hashcat GPU cracking
 Added support for SpiderLabs' Spray password spray utility for SMB, OWA, Lync, Cisco VPN
 Added support for BeRoot (Installation only at present; automation coming soon...)
@@ -34,7 +34,7 @@ Added support for Masscan of all TCP ports (informs SSLScan),
 Added Android persistent reverse Meterpreter APK builder,
 Added DBD persistent backdoor builder by Skysploit with enhanced persistence instructions,
 Added dependency checker by Skysploit,
-Added fully automated MSF Post Exploitation on all sessions acquired for the following post ex activities:
+Added fully automated cross-platform MSF Post Exploitation on all sessions acquired for the following post ex activities:
 - enumerate hosts
 - dump cached domain creds
 - verify if you are on a vm
@@ -70,6 +70,11 @@ Added fully automated MSF Post Exploitation on all sessions acquired for the fol
 - steal GPG credentials/certificates
 - grab the history of mounted USB devices
 - assess the target and suggest local exploits for privilege escalation or other operations
+- geolocate targets
+- grab credentials from just about anything imaginable including LastPass, Jenkins, Jboss, irssi, gpg, pgpass, pidgin, etc. etc. (the list grows constantly)
+- steal Bitcoin Wallet
+- Bitlocker Master Key (FVEK) Extraction
+- and a ton more!
 
 !!NOT RECOMMENDED!!--- INSTRUCTIONS TO RUN THIS FROM /home/<profile>/ instead of running as root (Doing this will break Empire & DeathStar functionality as well as some Wireless Attacks functionality)---
 The ATAT folder must be duplicated in /root & ~/ to run properly unless you are on Kali (logged in as root) or you are running
