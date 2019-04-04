@@ -198,7 +198,7 @@ else
 		'post/multi/gather/gpg_creds',
 		'post/multi/gather/ssh_creds',
 		'post/multi/gather/firefox_creds',
-		'post/multi/recon/local_exploit_suggester'
+		'post/multi/recon/local_exploit_suggester',
 		'post/multi/gather/apple_ios_backup',
 		'post/multi/gather/aws_ec2_instance_metadata',
 		'post/multi/gather/aws_keys',
