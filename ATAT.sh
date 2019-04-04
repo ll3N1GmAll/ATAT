@@ -2083,10 +2083,10 @@ do
 			;;
 		"LinEnum")
 	echo -e "\E[1;34m::::: \e[97mDownloading LinEnum Privilege Escalation Checking Script... \E[1;34m:::::"
-            wget https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh -O en.sh
-    echo -e "\E[1;34m::::: \e[97mMove \"en.sh\" To Target \E[1;34m:::::"
-    echo -e "\E[1;34m::::: \e[97mType \"./en.sh -r report -e /tmp/ \" To Launch A Quick LinEnum Scan \E[1;34m:::::" 
-	echo -e "\E[1;34m::::: \e[97mType \"./en.sh -r report -e /tmp/ -t\" To Launch A Thorough LinEnum Scan \E[1;34m:::::" 
+            git clone https://github.com/rebootuser/LinEnum ~/LinEnum/
+    echo -e "\E[1;34m::::: \e[97mMove \"~/LinEnum/LinEnum.sh\" To Target (rename it for some stealth if desired) \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mType \"./LinEnum.sh -r report -e /tmp/ \" To Launch A Quick LinEnum Scan \E[1;34m:::::" 
+	echo -e "\E[1;34m::::: \e[97mType \"./LinEnum.sh -r report -e /tmp/ -t\" To Launch A Thorough LinEnum Scan \E[1;34m:::::" 
 	echo -e "\E[1;34m::::: \e[97mYour Completed LinEnum Report Can Be Found On Your Target Here: /tmp/report \E[1;34m:::::"
 	echo -e "\E[1;34m::::: \e[97mDon't Forget To Delete The Report On Your Target Once You're Done - \"rm /tmp/report\" \E[1;34m:::::"
 			;;
