@@ -2045,9 +2045,6 @@ cat << "EOF"
    + Samsung Android Password/PIN [5800]
    + Windows Phone 8+ PIN/password [13800]
    + WPA-EAPOL-PBKDF2 [2500]
-   + WPA-EAPOL-PMK [2501]
-   + WPA-PMKID-PBKDF2 [16800]
-   + WPA-PMKID-PMK [16801]
 
  ::::::::::::::::::Hashcat GPU Cracking For Empire Worthy Hardware:::::::::::::::::::::::::::::
  :::::::Crack w/ Hashes Only Option Whenever Possible For Greatly Increased Speed::::::::::::::
@@ -2074,12 +2071,12 @@ select opt in "${options[@]}"
             ;;
         "Dictionary Rule Based Attack - Hashes Only")
 		read -p 'Enter Session Name: ' usersession; read -p 'Enter Hash Mode: ' usermode; read -p 'Enter Output File (Full Path w/ File Extension): ' userout; read -p 'Enter Hash File (Full Path w/ File Extension): ' userhashes; read -p 'Enter Dictionary File (Full Path w/ File Extension): ' userdic;
-    ~/hashcat/hashcat64.bin --session $usersession -D 2 -a 0 -m $usermode -o $userout $userhashes \'$userdic\' -r rules/OneRuleToRuleThemAll.rule -O
+    ~/hashcat/hashcat64.bin --session $usersession -D 2 -a 0 -m $usermode -o $userout $userhashes $userdic -r ~/hashcat/rules/OneRuleToRuleThemAll.rule -O
             echo -e "\E[1;34m::::: \e[97mRecovery Complete. All Results Can Be Found in" \'$userout\' "\E[1;34m:::::"
             ;;
         "Dictionary Rule Based Attack - Usernames & Hashes")
 		read -p 'Enter Session Name: ' usersession; read -p 'Enter Hash Mode: ' usermode; read -p 'Enter Output File (Full Path w/ File Extension): ' userout; read -p 'Enter Hash File (Full Path w/ File Extension): ' userhashes; read -p 'Enter Dictionary File (Full Path w/ File Extension): ' userdic;
-    ~/hashcat/hashcat64.bin --username --session $usersession -D 2 -a 0 -m $usermode -o $userout $userhashes \'$userdic\' -r rules/OneRuleToRuleThemAll.rule -O
+    ~/hashcat/hashcat64.bin --username --session $usersession -D 2 -a 0 -m $usermode -o $userout $userhashes $userdic -r ~/hashcat/rules/OneRuleToRuleThemAll.rule -O
             echo -e "\E[1;34m::::: \e[97mRecovery Complete. All Results Can Be Found in" \'$userout\' "\E[1;34m:::::"
             ;;
         "Resume Session")
