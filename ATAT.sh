@@ -1488,7 +1488,7 @@ do
 	rm -rf ~/ORTRTA
 		echo -e "\E[1;34m::::: \e[97m[*] Download & Install Of Hashcat Complete\E[1;34m:::::"
 			;;
-		"Non-Security Debian Distros-BETA"
+		"Non-Security Debian Distros-BETA")
 	echo -e "\E[1;34m::::: \e[97m[*] This is a BETA installer for core security tools found in distros like Kali, ParrotOS, etc. \E[1;34m:::::"
 	echo -e "\E[1;34m::::: \e[97m[*] It is HIGHLY recommended you use such security distributions instead of using this installer! \E[1;34m:::::"
 	echo -e "\E[1;34m::::: \e[97m[*] DO NOT use this BETA installer if you are on a distro like Kali, ParrotOS, etc. \E[1;34m:::::"
