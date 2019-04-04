@@ -1313,8 +1313,8 @@ done
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies \E[1;34m:::::"
   echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!! \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 12=Main Menu | 13=QUIT: '
-options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Hashcat Install" "Main Menu" "Quit") #"HostAPD-WPE via Github"
+PS3='Enter your choice: ENTER=Options Menu | 13=Main Menu | 14=QUIT: '
+options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Hashcat Install" "Non-Security Debian Distros-BETA" "Main Menu" "Quit") #"HostAPD-WPE via Github"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1343,7 +1343,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap lbd masscan msfpc sslscan libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv p7zip"
+	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap macchanger apache2 lbd masscan msfpc sslscan libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv p7zip"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
@@ -1351,7 +1351,7 @@ do
 				echo -e "\e[1;34m[-] It doesn't appear that $i is installed on your system. Installing it now...\e[0m"
 				echo ""
 			if [ ! -z $(apt-get install -y "$i" | grep -o "E: Couldn") ]; then
-				echo -e "\e[1;31m[-] I had a hard time installing $i from the Kali-Linux repository.\e[0m"
+				echo -e "\e[1;31m[-] I had a hard time installing $i from the repository.\e[0m"
 				touch /tmp/ATAT/$i-fail.txt
 			else
 				dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
@@ -1487,6 +1487,69 @@ do
 	cp ~/ORTRTA/OneRuleToRuleThemAll.rule ~/hashcat/rules
 	rm -rf ~/ORTRTA
 		echo -e "\E[1;34m::::: \e[97m[*] Download & Install Of Hashcat Complete\E[1;34m:::::"
+			;;
+		"Non-Security Debian Distros-BETA"
+	echo -e "\E[1;34m::::: \e[97m[*] This is a BETA installer for core security tools found in distros like Kali, ParrotOS, etc. \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97m[*] It is HIGHLY recommended you use such security distributions instead of using this installer! \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97m[*] DO NOT use this BETA installer if you are on a distro like Kali, ParrotOS, etc. \E[1;34m:::::"
+	echo ""
+	echo -e "\E[1;34m\e[97m \e[31m[*] Press CTRL+C to cancel if you are on a distro like Kali, ParrotOS, etc. or risk corrupting your installations\e[97m\E[1;34m"
+	echo ""
+	echo -e "\E[1;34m::::: \e[97m[*] You have been warned.. \E[1;34m:::::"
+	echo ""
+	read -p "Press Enter When Ready To Proceed"
+	echo ""
+	echo -e "\E[1;34m::::: \e[97m[*] Seriously, DO NOT use this BETA installer if you are on a distro like Kali, ParrotOS, etc. Didn't you hear me?!\E[1;34m:::::"
+	echo ""
+	read -p "Press Enter When Ready To Proceed"
+	echo ""
+		if [ ! -z $(cat /etc/*-release | grep DISTRIB_ID=*"Parrot"*) ]; then
+				echo -e "\e[1;31m[-] (╯°□°）╯︵ ┻━┻ Clearly someone isn't too bright. Didn't I warn you about running this on Parrot?! \e[0m"
+				sleep 15
+				~/ATAT/ATAT.sh
+			else 
+				if [ ! -z $(cat /etc/*-release | grep DISTRIB_ID=*"Kali"*) ]; then
+				echo -e "\e[1;31m[-] (╯°□°）╯︵ ┻━┻ Clearly someone isn't too bright. Didn't I warn you about running this on Kali?!\e[0m"
+				sleep 15
+				~/ATAT/ATAT.sh
+				else
+reqs="gcc gcc-mingw-w64-i686 curl jq bettercap macchanger metasploit-framework john nmap armitage apache2 lbd masscan msfpc sslscan libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv p7zip"
+	for i in $reqs; do
+		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
+		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
+		if [ ! -e /usr/bin/$i ] && [ ! -e /usr/sbin/$i ] && [ ! -e /usr/local/sbin/$i ] && [ ! -e /usr/local/bin/$i ] && [ -z "$isinstalled" ]; then
+				echo -e "\e[1;34m[-] It doesn't appear that $i is installed on your system. Installing it now...\e[0m"
+				echo ""
+			if [ ! -z $(apt-get install -y "$i" | grep -o "E: Couldn") ]; then
+				echo -e "\e[1;31m[-] I had a hard time installing $i from the repository.\e[0m"
+				touch /tmp/ATAT/$i-fail.txt
+			else
+				dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
+				isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")				
+				if [ ! -z "$isinstalled" ]; then
+					update=1
+					echo -e "\e[1;32m[+] Good news, $i installed without any issues.\e[0m"
+					echo ""
+					sleep 2
+				else
+					echo ""
+					echo -e "\e[1;31m[!] It doesn't appear that I will be able to install $i right now.\e[0m"
+					echo ""
+					sleep 2
+				fi
+			fi
+		else
+			echo -e "\e[1;32m[+] $i is already installed on your system, moving on...\e[0m"
+			echo ""
+			sleep 2
+		fi
+	done
+		rm -rf /tmp/ATAT/
+						echo ""
+						sleep 2
+				fi
+			fi
+	echo -e "\E[1;34m::::: \e[97mAll installs have, hopefully, completed successfully \E[1;34m:::::"
 			;;
 		"Main Menu")
             ~/ATAT/ATAT.sh
