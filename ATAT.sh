@@ -1524,7 +1524,7 @@ do
 #		updatedb
 		mkdir /tmp/ATAT/
 		echo ""
-reqs="gcc gcc-mingw-w64-i686 curl jq macchanger metasploit-framework john nmap armitage apache2 lbd masscan msfpc sslscan libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv p7zip"
+reqs="gcc gcc-mingw-w64-i686 libnl-dev xterm openjdk-8-jdk aircrack-ng ethtool ieee-data libutempter0 curl jq john nmap apache2 masscan sslscan libssl-dev libnl-genl-3-dev lynx hostapd lighttpd python-pip python-scapy gawk libatk-adaptor libgail-common libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv p7zip macchanger"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
@@ -2066,8 +2066,8 @@ done
 "13" | "13" )
   # Accept upper or lowercase input.
   echo -e "\E[1;34m::::: \e[97mPrivilege Escalation Methods \E[1;34m:::::"
-  PS3='Enter your choice: ENTER=Options Menu | 5=Main Menu | 6=QUIT: '
-options=("BeRoot Windows" "BeRoot Linux" "LinEnum" "Hashcat Password Recovery" "Main Menu" "Quit" )
+  PS3='Enter your choice: ENTER=Options Menu | 6=Main Menu | 7=QUIT: '
+options=("BeRoot Windows" "BeRoot Linux" "LinEnum" "Hashcat Password Recovery" "Kernelpop Privilege Escalation Automation" "Main Menu" "Quit" )
 select opt in "${options[@]}"
 do
     case $opt in
@@ -2167,6 +2167,15 @@ select opt in "${options[@]}"
 		esac
 	done
 	        ;;
+	    "Kernelpop Privilege Escalation Automation")
+    git clone https://github.com/spencerdodd/kernelpop ~/kernelpop
+	cd kernelpop
+	./create_executable.sh
+	./kernelpop
+    echo -e "\E[1;34m::::: \e[97mMove ~/kernelpop/kernelpop File To Target (rename it to fly cloaked) \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mchmod +x kernelpop (or renamed file name) On Target \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mRun ./kernelpop (or renamed file name) On Target & Follow Instructions for Privilege Escalation \E[1;34m:::::"
+    		;;
 		"Main Menu")
             ~/ATAT/ATAT.sh
             ;;
@@ -2192,8 +2201,8 @@ do
 	    echo -e "\E[1;34m::::: \e[97mThis Will Attempt To Exploit A Java Deserializatoin RCE Vulnerability In Weblogic \E[1;34m:::::"		
 	    echo -e "\E[1;34m::::: \e[97mIf Successful, A Ping Command Will Be Executed On The Target Machine \E[1;34m:::::"
 	    echo -e "\E[1;34m::::: \e[97mThis Will Result In IMCP Echo Packets Showing Up In Yout TCPDUMP Window From The Target IP \E[1;34m:::::" 
-	xterm -e tcpdump -nni eth0 -e icmp[icmptype] == 8 &
 	read -p 'Set PORT (usually 7001): ' userport;	
+	xterm -e tcpdump -nni eth0 -e icmp[icmptype] == 8 &
 	inputfile=~/ATAT/MSF_targets.txt
 	for IP in $(cat $inputfile)
 	do
