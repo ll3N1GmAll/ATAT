@@ -288,8 +288,82 @@ done
  ;;
 
   "2" | "2" )
+cat << "EOF"
+Common Payload Types:
+payload/android/meterpreter/reverse_http    Android Meterpreter, Android Reverse HTTP Stager
+payload/android/meterpreter/reverse_https   Android Meterpreter, Android Reverse HTTPS Stager
+payload/android/meterpreter/reverse_tcp     Android Meterpreter, Android Reverse TCP Stager
+payload/android/meterpreter_reverse_http    Android Meterpreter Shell, Reverse HTTP Inline
+payload/android/meterpreter_reverse_https   Android Meterpreter Shell, Reverse HTTPS Inline
+payload/android/meterpreter_reverse_tcp     Android Meterpreter Shell, Reverse TCP Inline
+payload/android/shell/reverse_http          Command Shell, Android Reverse HTTP Stager
+payload/android/shell/reverse_https         Command Shell, Android Reverse HTTPS Stager
+payload/android/shell/reverse_tcp           Command Shell, Android Reverse TCP Stager
+payload/java/jsp_shell_reverse_tcp          Java JSP Command Shell, Reverse TCP Inline
+payload/java/meterpreter/reverse_http       Java Meterpreter, Java Reverse HTTP Stager
+payload/java/meterpreter/reverse_https      Java Meterpreter, Java Reverse HTTPS Stager
+payload/java/meterpreter/reverse_tcp        Java Meterpreter, Java Reverse TCP Stager
+payload/java/shell/reverse_tcp              Command Shell, Java Reverse TCP Stager
+payload/java/shell_reverse_tcp              Java Command Shell, Reverse TCP Inline
+payload/linux/x64/meterpreter/reverse_tcp   Linux Mettle x64, Reverse TCP Stager
+payload/linux/x64/meterpreter_reverse_http  Linux Meterpreter, Reverse HTTP Inline
+payload/linux/x64/meterpreter_reverse_https Linux Meterpreter, Reverse HTTPS Inline
+payload/linux/x64/meterpreter_reverse_tcp   Linux Meterpreter, Reverse TCP Inline
+payload/linux/x86/meterpreter/reverse_tcp   Linux Mettle x86, Reverse TCP Stager
+payload/linux/x86/meterpreter_reverse_http  Linux Meterpreter, Reverse HTTP Inline
+payload/linux/x86/meterpreter_reverse_https Linux Meterpreter, Reverse HTTPS Inline
+payload/linux/x86/meterpreter_reverse_tcp   Linux Meterpreter, Reverse TCP Inline
+payload/linux/x86/shell/reverse_tcp         Linux Command Shell, Reverse TCP Stager
+payload/linux/x86/shell_reverse_tcp         Linux Command Shell, Reverse TCP Inline
+payload/multi/meterpreter/reverse_http      Arch-Independent Meterpreter Stage, Reverse HTTP Stager (Mulitple Architectures)
+payload/multi/meterpreter/reverse_https     Arch-Independent Meterpreter Stage, Reverse HTTPS Stager (Mulitple Architectures)
+payload/osx/x64/meterpreter/reverse_tcp     OSX Meterpreter, Reverse TCP Stager
+payload/osx/x64/meterpreter_reverse_http    OSX Meterpreter, Reverse HTTP Inline
+payload/osx/x64/meterpreter_reverse_https   OSX Meterpreter, Reverse HTTPS Inline
+payload/osx/x64/meterpreter_reverse_tcp     OSX Meterpreter, Reverse TCP Inline
+payload/osx/x64/shell_reverse_tcp           OS X x64 Shell Reverse TCP
+payload/osx/x86/bundleinject/reverse_tcp    Mac OS X Inject Mach-O Bundle, Reverse TCP Stager
+payload/osx/x86/shell_reverse_tcp           OS X Command Shell, Reverse TCP Inline
+payload/php/meterpreter/reverse_tcp         PHP Meterpreter, PHP Reverse TCP Stager
+payload/php/meterpreter_reverse_tcp         PHP Meterpreter, Reverse TCP Inline
+payload/python/meterpreter/reverse_http     Python Meterpreter, Python Reverse HTTP Stager
+payload/python/meterpreter/reverse_https    Python Meterpreter, Python Reverse HTTPS Stager
+payload/python/meterpreter/reverse_tcp      Python Meterpreter, Python Reverse TCP Stager
+payload/python/meterpreter/reverse_tcp_ssl  Python Meterpreter, Python Reverse TCP SSL Stager
+payload/python/meterpreter_reverse_http     Python Meterpreter Shell, Reverse HTTP Inline
+payload/python/meterpreter_reverse_https    Python Meterpreter Shell, Reverse HTTPS Inline
+payload/python/meterpreter_reverse_tcp      Python Meterpreter Shell, Reverse TCP Inline
+payload/python/shell_reverse_tcp            Command Shell, Reverse TCP (via python)
+payload/python/shell_reverse_tcp_ssl        Command Shell, Reverse TCP SSL (via python)
+payload/python/shell_reverse_udp            Command Shell, Reverse UDP (via python)
+payload/cmd/windows/powershell_reverse_tcp  Windows Interactive Powershell Session, Reverse TCP
+payload/cmd/windows/reverse_lua             Windows Command Shell, Reverse TCP (via Lua)
+payload/cmd/windows/reverse_perl            Windows Command, Double Reverse TCP Connection (via Perl)
+payload/cmd/windows/reverse_powershell      Windows Command Shell, Reverse TCP (via Powershell)
+payload/cmd/windows/reverse_ruby            Windows Command Shell, Reverse TCP (via Ruby)
+payload/windows/dllinject/reverse_tcp       Reflective DLL Injection, Reverse TCP Stager
+payload/windows/meterpreter/reverse_http    Windows Meterpreter (Reflective Injection), Windows Reverse HTTP Stager (wininet)
+payload/windows/meterpreter/reverse_https   Windows Meterpreter (Reflective Injection), Windows Reverse HTTPS Stager (wininet)
+payload/windows/meterpreter/reverse_tcp     Windows Meterpreter (Reflective Injection), Reverse TCP Stager
+payload/windows/meterpreter_reverse_http    Windows Meterpreter Shell, Reverse HTTP Inline
+payload/windows/meterpreter_reverse_https   Windows Meterpreter Shell, Reverse HTTPS Inline
+payload/windows/meterpreter_reverse_tcp     Windows Meterpreter Shell, Reverse TCP Inline
+payload/windows/powershell_reverse_tcp      Windows Interactive Powershell Session, Reverse TCP
+payload/windows/shell/reverse_tcp           Windows Command Shell, Reverse TCP Stager
+payload/windows/shell_reverse_tcp           Windows Command Shell, Reverse TCP Inline
+payload/windows/x64/meterpreter/reverse_https    Windows Meterpreter (Reflective Injection x64), Reverse HTTP Stager (wininet)
+payload/windows/x64/meterpreter/reverse_tcp      Windows Meterpreter (Reflective Injection x64), Reverse TCP Stager
+payload/windows/x64/meterpreter/reverse_winhttp  Windows Meterpreter (Reflective Injection x64), Reverse HTTP Stager (winhttp)
+payload/windows/x64/meterpreter/reverse_winhttps Windows Meterpreter (Reflective Injection x64) Reverse HTTPS Stager (winhttp)
+payload/windows/x64/meterpreter_reverse_http     Windows Meterpreter Shell, Reverse HTTP Inline (x64)
+payload/windows/x64/meterpreter_reverse_https    Windows Meterpreter Shell, Reverse HTTPS Inline (x64)
+payload/windows/x64/meterpreter_reverse_tcp      Windows Meterpreter Shell, Reverse TCP Inline x64
+payload/windows/x64/powershell_reverse_tcp       Windows Interactive Powershell Session, Reverse TCP
+payload/windows/x64/shell/reverse_tcp       Windows x64 Command Shell, Windows x64 Reverse TCP Stager
+payload/windows/x64/shell_reverse_tcp       Windows x64 Command Shell, Reverse TCP Inline
+EOF
 echo -e "\E[1;34m::::: \e[97mCreate a Listener \E[1;34m:::::"
-echo ""
+echo -e "\E[1;34m::::: \e[97mCommon Payload Types Listed Above For Reference \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mChoose XTerm If You Are Not Sure Which Terminal You Have \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mDO NOT Use Ctrl-C to Close ATAT After Starting A Listener!!! \E[1;34m:::::"
 PS3='Enter your choice: ENTER=Options Menu | 6=Main Menu | 7=QUIT: '
@@ -1314,7 +1388,7 @@ done
   echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!! \E[1;34m:::::"
 
 PS3='Enter your choice: ENTER=Options Menu | 13=Main Menu | 14=QUIT: '
-options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Hashcat Install" "Non-Security Debian Distros-BETA" "Main Menu" "Quit") #"HostAPD-WPE via Github"
+options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Hashcat Install" "Non-Security Debian Distros-BETA" "Main Menu" "Quit") #"HostAPD-WPE via Github" "Kernelpop Install"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1488,6 +1562,14 @@ do
 	rm -rf ~/ORTRTA
 		echo -e "\E[1;34m::::: \e[97m[*] Download & Install Of Hashcat Complete\E[1;34m:::::"
 			;;
+		#"Kernelpop Install")
+	#git clone https://github.com/spencerdodd/kernelpop ~/kernelpop
+	#cd kernelpop
+	#./create_executable.sh
+	#./kernelpop	
+	
+	#echo -e "\E[1;34m::::: \e[97mKernalpop Priv Esc Automation Tool Has Been Installed to ~/kernelpop \E[1;34m:::::"
+			#;;
 		"Non-Security Debian Distros-BETA")
 	echo -e "\E[1;34m::::: \e[97m[*] This is a BETA installer for core security tools found in distros like Kali, ParrotOS, etc. \E[1;34m:::::"
 	echo -e "\E[1;34m::::: \e[97m[*] It is HIGHLY recommended you use such security distributions instead of using this installer! \E[1;34m:::::"
@@ -2209,6 +2291,16 @@ do
         xterm -e python weblogic_LinuxPing.py $IP $userport &
         sleep 3
     done    
+	for IP in $(cat $inputfile)
+	do
+        xterm -e python weblogic_LinuxPing.py $IP $userport &
+        sleep 3
+    done 
+	for IP in $(cat $inputfile)
+	do
+        xterm -e python weblogic_LinuxPing.py $IP $userport &
+        sleep 3
+    done 
 			echo -e "\E[1;34m::::: \e[97mIF THIS FAILS TO GENERATE ICMP RESPONSES IN YOUR TCPDUMP WINDOW ON YOUR FIRST TRY, TRY AGAIN AT LEAST ONE OR TWO MORE TIMES! \E[1;34m:::::" 
 			echo -e "\E[1;34m::::: \e[97mThe command may need to be run several times until ping replies are seen in the first terminal window (the one that has tcpdump running). \E[1;34m:::::"
             echo -e "\E[1;34m::::: \e[97mTake screen shots of both terminal windows after successful RCE to demonstrate the exploitability of the vulnerability for your report. \E[1;34m:::::"
