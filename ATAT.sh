@@ -1651,7 +1651,148 @@ reqs="gcc gcc-mingw-w64-i686 libnl-dev xterm openjdk-8-jdk aircrack-ng ethtool i
 						sleep 2
 				fi
 			fi
+	#echo -e "\E[1;34m::::: \e[97mInstalling Metasploit-Framework Dependencies... \E[1;34m:::::"
+	#add-apt-repository -y ppa:webupd8team/java
+	#apt update
+	#apt -y install oracle-java8-installer
+	#apt-get -y install build-essential libreadline-dev libssl-dev libpq5 libpq-dev libreadline5 libsqlite3-dev libpcap-dev git-core autoconf postgresql pgadmin3 curl zlib1g-dev libxml2-dev libxslt1-dev libyaml-dev curl zlib1g-dev gawk bison libffi-dev libgdbm-dev libncurses5-dev libtool sqlite3 libgmp-dev gnupg2 dirmngr
+	#cd ~
+	#git clone git://github.com/sstephenson/rbenv.git .rbenv
+	#echo \'export PATH=\"$HOME/.rbenv/bin:$PATH\"\' >> ~/.bashrc
+	#echo \'eval \"$(rbenv init -)\"\' >> ~/.bashrc
+	#exec $SHELL
+	
+	#git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+	#echo \'export PATH=\"$HOME/.rbenv/plugins/ruby-build/bin:$PATH\"\' >> ~/.bashrc
+	
+	## sudo plugin so we can run Metasploit as root with "rbenv sudo msfconsole" 
+	#git clone git://github.com/dcarley/rbenv-sudo.git ~/.rbenv/plugins/rbenv-sudo
+	
+	#exec $SHELL
+	
+	#RUBYVERSION=$(wget https://raw.githubusercontent.com/rapid7/metasploit-framework/master/.ruby-version -q -O - )
+	#rbenv install $RUBYVERSION
+	#rbenv global $RUBYVERSION
+	#ruby -v
+	
+	echo -e "\E[1;34m::::: \e[97mInstalling Nmap... \E[1;34m:::::"
+
+	mkdir ~/Development
+	cd ~/Development
+	git clone https://github.com/nmap/nmap.git
+	cd nmap 
+	./configure
+	make
+	sudo make install
+	make clean
+	
+	#echo -e "\E[1;34m::::: \e[97mInstalling Metasploit-Framework... \E[1;34m:::::"
+
+	#cd /opt
+	#git clone https://github.com/rapid7/metasploit-framework.git
+	#chown -R `whoami` /opt/metasploit-framework
+	#cd metasploit-framework
+	
+##	cd metasploit-framework
+	#gem install bundler
+	#bundle install
+	
+##	cd metasploit-framework
+    #bash -c 'for MSF in $(ls msf*); do ln -s /opt/metasploit-framework/$MSF /usr/local/bin/$MSF;done'
+    
+	#echo "export PATH=$PATH:/usr/lib/postgresql/10/bin" >> ~/.bashrc
+	#. ~/.bashrc     
+	
+	#usermod -a -G postgres `whoami`
+    #su - `whoami`
+    
+    #echo -e "\E[1;34m::::: \e[97mWe now navigate to the Metasploit folder and initialize the database and REST API.  When you run the msfdb follow the instructions on the screen. \E[1;34m:::::"
+    
+    #cd /opt/metasploit-framework/
+	#./msfdb init
+	
+#<< "EOF"
+#If the service will be exposed to any network other than local do generate proper SSL keys for use of it in operations. For more information check Rapid7 documentation https://github.com/rapid7/metasploit-framework/wiki/Metasploit-Web-Service
+#EOF
+	#sleep 10
+	#echo ""
+#<< "EOF"
+#Now we are ready to run Metasploit for the first time. ATAT will run it first under the root user so the folders create under the root home directory with the proper permissions. The first time it runs it will create the entries needed by Metasploit in the database so it will take a while to load.
+#EOF
+	#xterm -e msfconsole &
+	
+	#echo -e "\E[1;34m::::: \e[97mMetasploit install has, hopefully, completed successfully \E[1;34m:::::"
+
+	echo -e "\E[1;34m::::: \e[97mInstalling Asleap... \E[1;34m:::::"
+	git clone https://github.com/joswr1ght/asleap ~/asleap
+	cd ~/asleep
+	make
+	PATH=$PATH:~/asleap
+	
+	echo -e "\E[1;34m::::: \e[97mAsleap install has, hopefully, completed successfully \E[1;34m:::::"
+
+	echo -e "\E[1;34m::::: \e[97mInstalling Hostapd-WPE... \E[1;34m:::::"
+
+	git clone https://github.com/OpenSecurityResearch/hostapd-wpe ~/hostapd-wpe
+        
+    wget http://hostap.epitest.fi/releases/hostapd-2.6.tar.gz
+    tar -zxf hostapd-2.6.tar.gz
+    cd hostapd-2.6
+    patch -p1 < ../hostapd-wpe/hostapd-wpe.patch 
+    cd hostapd
+    make
+
+#        I copied the certs directory and scripts from FreeRADIUS to ease that 
+#        portion of things. You should just be able to:
+
+    cd ../../hostapd-wpe/certs
+    ./bootstrap
+
+#        then finally just:
+        
+    cd ../../hostapd-2.6/hostapd
+    ./hostapd-wpe hostapd-wpe.conf
+        
+    PATH=$PATH:~/hostapd-wpe
+	
+	echo -e "\E[1;34m::::: \e[97mHostAPD-WPE install has, hopefully, completed successfully \E[1;34m:::::"
+
+	echo -e "\E[1;34m::::: \e[97mInstalling Metasploit Payload Creator (msfpc)... \E[1;34m:::::"
+
+	curl -k -L "https://raw.githubusercontent.com/g0tmi1k/mpc/master/msfpc.sh" > /usr/local/bin/msfpc
+	chmod 0755 /usr/local/bin/msfpc
+
+	echo -e "\E[1;34m::::: \e[97mMSFPC install has, hopefully, completed successfully \E[1;34m:::::"
+
+	echo -e "\E[1;34m::::: \e[97mInstalling Load Balance Detector (lbd)... \E[1;34m:::::"
+
+	mkdir ~/lbd
+	cd ~/lbd
+    wget https://raw.githubusercontent.com/craig/ge.mine.nu/master/lbd/lbd.sh
+    chmod +x lbd.sh
+    PATH=$PATH:~/lbd
+
+	echo -e "\E[1;34m::::: \e[97mLBD install has, hopefully, completed successfully \E[1;34m:::::"
+
+	echo -e "\E[1;34m::::: \e[97mInstalling Armitage... \E[1;34m:::::"
+
+	mkdir ~/armitage
+	cd ~/armitage
+	wget http://www.fastandeasyhacking.com/download/armitage150813.tgz
+	tar -zxvf armitage*.tgz
+	cd ~/armitage/armitage
+	chmod +x armitage
+    PATH=$PATH:~/armitage/armitage
+    rm ~/armitage/armitage*.tgz
+
+	echo -e "\E[1;34m::::: \e[97mArmitage install has, hopefully, completed successfully \E[1;34m:::::"
+	echo ""
+	sleep 5
 	echo -e "\E[1;34m::::: \e[97mAll installs have, hopefully, completed successfully \E[1;34m:::::"
+	echo ""
+	echo -e "\E[1;34m::::: \e[97mRun the \"Airgeddon Install Workaround\" Option Now \E[1;34m:::::"
+	echo ""
+	echo -e "\E[1;34m::::: \e[97mInstall Bloodhound via the instructions here: https://github.com/BloodHoundAD/BloodHound/wiki/Getting-started \E[1;34m:::::"
 			;;
 		"Main Menu")
             ~/ATAT/ATAT.sh
@@ -1978,6 +2119,7 @@ do
     echo ""
     airmon-ng start $usernic
     ~/wifiphisher/bin/wifiphisher
+    
 			;;
         "Main Menu")
             ~/ATAT/ATAT.sh
