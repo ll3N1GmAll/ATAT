@@ -1387,8 +1387,8 @@ done
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies \E[1;34m:::::"
   echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!! \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 13=Main Menu | 14=QUIT: '
-options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Hashcat Install" "Non-Security Debian Distros-BETA" "Main Menu" "Quit") #"HostAPD-WPE via Github" "Kernelpop Install"
+PS3='Enter your choice: ENTER=Options Menu | 14=Main Menu | 15=QUIT: '
+options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Hashcat Install" "Wifiphisher Install" "Non-Security Debian Distros-BETA" "Main Menu" "Quit") #"HostAPD-WPE via Github" "Kernelpop Install"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1561,6 +1561,15 @@ do
 	cp ~/ORTRTA/OneRuleToRuleThemAll.rule ~/hashcat/rules
 	rm -rf ~/ORTRTA
 		echo -e "\E[1;34m::::: \e[97m[*] Download & Install Of Hashcat Complete\E[1;34m:::::"
+			;;
+		"Wifiphisher Install")
+	git clone https://github.com/wifiphisher/wifiphisher ~/wifiphisher
+	git clone https://github.com/wifiphisher/roguehostapd ~/roguehostapd
+	cd ~/roguehostapd
+	python setup.py install
+	cd ~/wifiphisher
+	python setup.py install
+	echo -e "\E[1;34m::::: \e[97m[*] Install Of Wifiphisher & Roguehostapd Complete\E[1;34m:::::"
 			;;
 		#"Kernelpop Install")
 	#git clone https://github.com/spencerdodd/kernelpop ~/kernelpop
@@ -1878,8 +1887,8 @@ done
  echo -e "\E[1;34m::::: \e[97mOption 2 MUST Be Run AFTER Using The HostAPD-WPE Attack To Allow WLAN NIC To Function Normally\E[1;34m:::::"
  echo -e "\E[1;34m::::: \e[97m**WARNING** HostAPD-WPE Option Will *KILL ALL* Normal Network Connections For WLAN Interface Selected Until Option 2 Is Run!!\E[1;34m:::::"
  
-PS3='Enter your choice: ENTER=Options Menu | 8=Main Menu | 9=QUIT: '
-options=("Remove Wireless NIC from Network Manager" "Reset Wireless NIC for Network Manager Usage" "HostAPD-WPE Enterprise WiFi Fake RADIUS Server Attack" "Airgeddon" "Multi-Target Asleap Attack" "Multi-Target John The Ripper Attack" "WiFi Jammer" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 9=Main Menu | 10=QUIT: '
+options=("Remove Wireless NIC from Network Manager" "Reset Wireless NIC for Network Manager Usage" "HostAPD-WPE Enterprise WiFi Fake RADIUS Server Attack" "Airgeddon" "Multi-Target Asleap Attack" "Multi-Target John The Ripper Attack" "WiFi Jammer" "Wifiphisher" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1959,6 +1968,17 @@ do
     echo -e "\E[1;34m::::: \e[97mUse Ctrl+C In Jammer Window to Stop Attack \E[1;34m:::::"
 	python ~/wifijammer-ng/wifijammer.py -m $usertargets -p 15
             ;;                 
+        "Wifiphisher")
+    echo -e "\E[1;34m::::: \e[97mMake Sure You Put Your WLAN Card Into Monitor Mode FIRST!!! \E[1;34m:::::"
+    iwconfig
+    echo -e "\E[1;34m::::: \e[97mIdentify Your WLAN Interface Above (i.e., wlan0) \E[1;34m:::::"
+    echo ""
+    read -p 'Set WLAN Interface (wlan0, wlan1, etc.): ' usernic;
+    echo -e "\E[1;34m::::: \e[97mLeave This Blank & Hit ENTER If Your NIC Is Already In Monitor Mode) \E[1;34m:::::"
+    echo ""
+    airmon-ng start $usernic
+    ~/wifiphisher/bin/wifiphisher
+			;;
         "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
