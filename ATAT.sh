@@ -2545,14 +2545,14 @@ do
     echo -e "\E[1;34m::::: \e[97mEnter localhost:1337 (or C2IP:PORT) In Name Field Of Starkiller GUI \E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mEnter empireadmin In Username Field Of Starkiller GUI \E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mEnter Password123 In Password Field Of Starkiller GUI \E[1;34m:::::"
-    ./starkiller-1.2.2.AppImage --no-sandbox
+    /root/starkiller-1.2.2.AppImage --no-sandbox
        	    ;;
     	"Step 2b - Launch Starkiller GUI In Kali (Optional)")
     echo -e "\E[1;34m::::: \e[97mLaunching Starkiller GUI \E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mEnter localhost:1337 (or C2IP:PORT) In Name Field Of Starkiller GUI \E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mEnter empireadmin In Username Field Of Starkiller GUI \E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mEnter Password123 In Password Field Of Starkiller GUI \E[1;34m:::::"
-    ./starkiller-1.2.2.AppImage
+    /root/starkiller-1.2.2.AppImage
     	    ;;
     	"Step 3 - Acquire PSE REST API Permanent Token (DEPRECATED)")
     echo -e "\E[1;34m::::: \e[97mI'm Thinking The Permanent API Token Was Removed From The New Version \E[1;34m:::::"
