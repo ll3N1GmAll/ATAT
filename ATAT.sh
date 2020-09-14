@@ -1301,6 +1301,7 @@ select opt in "${options[@]}"
 	rm ~masscan_results*.txt
 	done
             echo -e "\E[1;34m::::: \e[97mAll TCP Ports Have Been Scanned! \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mOutput In ~SSLScan_masscan_results.txt \E[1;34m:::::"
             ;;
         "Options (enter manual targets for pause/resume support)")
 	outputfile=~masscan_results.txt
@@ -1313,6 +1314,7 @@ select opt in "${options[@]}"
 	sed "/ /s/ /""/g" ~masscan_results3.txt >> ~SSLScan_masscan_results.txt
 	rm ~masscan_results*.txt
             echo -e "\E[1;34m::::: \e[97mAll TCP Ports Have Been Scanned! \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mOutput In ~SSLScan_masscan_results.txt \E[1;34m:::::"
             ;;
         "Resume")
     masscan --resume paused.conf
@@ -1433,7 +1435,7 @@ do
 		mkdir /tmp/ATAT/
 		echo ""
 
-	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap macchanger apache2 lbd masscan msfpc sslscan libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python-virtualenv p7zip zlib1g-dev libpam0g-dev libcurl4-openssl-dev"
+	reqs="gcc gcc-mingw-w64-i686 curl jq bettercap macchanger apache2 lbd masscan msfpc sslscan libssl-dev libnl-genl-3-dev hostapd-wpe lynx airgeddon hostapd lighttpd asleap python-pip python-scapy gawk libatk-adaptor libgail-common bloodhound libxml2-dev libxslt1-dev unixodbc-dev git libssl1.0-dev libffi-dev python-dev tcpdump python3-scapy python-virtualenv python3-virtualenv p7zip zlib1g-dev libpam0g-dev libcurl4-openssl-dev"
 	for i in $reqs; do
 		dpkg -s "$i" &> /tmp/ATAT/$i-install.txt
 		isinstalled=$(cat /tmp/ATAT/$i-install.txt | grep -o "Status: install ok installed")
@@ -2525,8 +2527,8 @@ echo -e "\E[1;34m::::: \e[97mTHIS SECTION ONLY WORKS FROM THE /root/ CONTEXT!! \
 echo -e "\E[1;34m::::: \e[97mIF YOU'RE NOT LOGGED IN AS root, DO NOT USE THESE OPTIONS!! \E[1;34m:::::"
 echo -e "\E[1;34m::::: \e[97mAPI Features Are In BETA. Use Starkiller GUI! \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 24=Main Menu | 25=QUIT: '
-options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2a - Launch Starkiller GUI In Parrot (Optional)" "Step 2b - Launch Starkiller GUI In Kali (Optional)" "Step 3 - Acquire PSE REST API Permanent Token (DEPRECATED)" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Execute Bloodhound Data Collection - Local" "Windows Post-Exploitation" "Windows DC Hashdump" "Linux/OSX Post-Exploitation" "Get Post Ex Results From PSE Agent" "Get PSE Stored Credentials" "Windows Privilege Escalation" "Linux/OSX Privilege Escalation" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit") #"Execute Bloodhound Data Collection - Remote"
+PS3='Enter your choice: ENTER=Options Menu | 23=Main Menu | 24=QUIT: '
+options=("Step 1 - Launch Powershell Empire & RESTful API" "Step 2 - Launch Starkiller GUI In Parrot (Optional)" "Step 3 - Acquire PSE REST API Permanent Token (DEPRECATED)" "Start PSE Listener" "Get PSE Stagers" "Get PSE Agents" "Rename PSE Agent" "Generate PSE Stagers - Windows (mostly)" "Generate PSE Stagers - Windows/OSX/Linux" "Generate PSE Stagers - Windows Office File & CSharp Payload" "Execute Bloodhound Data Collection - Local" "Windows Post-Exploitation" "Windows DC Hashdump" "Linux/OSX Post-Exploitation" "Get Post Ex Results From PSE Agent" "Get PSE Stored Credentials" "Windows Privilege Escalation" "Linux/OSX Privilege Escalation" "Kill PSE Listener" "Kill All PSE Listeners" "Restart PSE RESTful API" "Shutdown PSE RESTful API" "Main Menu" "Quit") #"Execute Bloodhound Data Collection - Remote" "Step 2b - Launch Starkiller GUI In Kali (Optional)"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -2534,25 +2536,25 @@ do
     # Start the Empire console & RESTful API
 	echo -e "\E[1;34m::::: \e[97mLaunching Powershell Empire & RESTful API \E[1;34m:::::"
 	cd ~/Empire && python3 empire --rest --username empireadmin --password Password123
-	outputfile=~/ATAT/PSE_perm_token.txt
-    read -p 'Set PSE C2 (LHOST or localhost): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT or 1337): ' userport;
-    curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/admin/login -X POST -d '{"username":"'empireadmin'", "password":"'Password123'"}' | tee ~/ATAT/PSE_session_token_pre.txt
-	cat ~/ATAT/PSE_session_token_pre.txt | egrep -o '([a-zA-Z0-9]{40})' > $outputfile
-	rm ~/ATAT/PSE_session_token_pre.txt
+	#outputfile=~/ATAT/PSE_perm_token.txt
+    #read -p 'Set PSE C2 (LHOST or localhost): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT or 1337): ' userport;
+    #curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/admin/login -X POST -d '{"username":"'empireadmin'", "password":"'Password123'"}' | tee ~/ATAT/PSE_session_token_pre.txt
+	#cat ~/ATAT/PSE_session_token_pre.txt | egrep -o '([a-zA-Z0-9]{40})' > $outputfile
+	#rm ~/ATAT/PSE_session_token_pre.txt
 	        ;;
-        "Step 2a - Launch Starkiller GUI In Parrot (Optional)")
+        "Step 2 - Launch Starkiller GUI In Kali / Parrot (Optional)")
     echo -e "\E[1;34m::::: \e[97mLaunching Starkiller GUI \E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mEnter localhost:1337 (or C2IP:PORT) In Name Field Of Starkiller GUI \E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mEnter empireadmin In Username Field Of Starkiller GUI \E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mEnter Password123 In Password Field Of Starkiller GUI \E[1;34m:::::"
     /root/starkiller-1.2.2.AppImage --no-sandbox
        	    ;;
-    	"Step 2b - Launch Starkiller GUI In Kali (Optional)")
-    echo -e "\E[1;34m::::: \e[97mLaunching Starkiller GUI \E[1;34m:::::"
-    echo -e "\E[1;34m::::: \e[97mEnter localhost:1337 (or C2IP:PORT) In Name Field Of Starkiller GUI \E[1;34m:::::"
-    echo -e "\E[1;34m::::: \e[97mEnter empireadmin In Username Field Of Starkiller GUI \E[1;34m:::::"
-    echo -e "\E[1;34m::::: \e[97mEnter Password123 In Password Field Of Starkiller GUI \E[1;34m:::::"
-    /root/starkiller-1.2.2.AppImage
+    	#"Step 2b - Launch Starkiller GUI In Kali (Optional)")
+    #echo -e "\E[1;34m::::: \e[97mLaunching Starkiller GUI \E[1;34m:::::"
+    #echo -e "\E[1;34m::::: \e[97mEnter localhost:1337 (or C2IP:PORT) In Name Field Of Starkiller GUI \E[1;34m:::::"
+    #echo -e "\E[1;34m::::: \e[97mEnter empireadmin In Username Field Of Starkiller GUI \E[1;34m:::::"
+    #echo -e "\E[1;34m::::: \e[97mEnter Password123 In Password Field Of Starkiller GUI \E[1;34m:::::"
+    #/root/starkiller-1.2.2.AppImage
     	    ;;
     	"Step 3 - Acquire PSE REST API Permanent Token (DEPRECATED)")
     echo -e "\E[1;34m::::: \e[97mI'm Thinking The Permanent API Token Was Removed From The New Version \E[1;34m:::::"
